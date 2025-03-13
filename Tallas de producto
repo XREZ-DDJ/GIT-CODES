@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<head>
+    
+    <title>Tabla de Tallas de Productos</title>
+</head>
+<body>
+    <!-- Tabla de Tallas -->
+    <!-- SUPERIROR CABALLERO POLO -->
+    {% if product.tags contains 'superior caballero polo' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding">
+            <b>MEDIDAS DE CUERPO (cm)</b> 
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Si tu pecho mide...</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 52 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 55 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 57 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 60 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 62 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 65 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Hombre.png?v=1730411813" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- SUPERIOR DAMA POLO -->
+    {% if product.tags contains 'superior dama polo' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding">
+            <b>MEDIDAS DE CUERPO (cm)</b> 
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Si tu pecho mide...</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 43 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 45 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 47 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 49 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 51 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 53 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Hombre.png?v=1730411813" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--CABALLERO CHINO-->
+    {% if product.tags contains 'superior caballero chino' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding">
+            <b>MEDIDAS DE CUERPO (cm)</b> 
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Si tu pecho mide...</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 105 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 109 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 113 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 117 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 121 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Hombre.png?v=1730411813" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--INFERIOR CABALLERO CHINO-->
+    {% if product.tags contains 'inferior caballero chino' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding text-left">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>      
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div> 
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Ancho de cintura</th>
+                            <th class="table-header">Longitud de pierna</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 72 cms</td>
+                            <td class="table-cell">Hasta 103 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 76 cms</td>
+                            <td class="table-cell">Hasta 104 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 80 cms</td>
+                            <td class="table-cell">Hasta 105 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 84 cms</td>
+                            <td class="table-cell">Hasta 106 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 88 cms</td>
+                            <td class="table-cell">Hasta 108 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 92 cms</td>
+                            <td class="table-cell">Hasta 110 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>                      
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_CABALLERO.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--SUPERIOR CABALLERO CHINO2-->
+    {% if product.tags contains 'superior caballero chino2' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding">
+            <b>MEDIDAS DE CUERPO (cm)</b> 
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Si tu pecho mide...</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 97 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 105 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 109 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 113 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 117 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Hombre.png?v=1730411813" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--INFERIOR CABALLERO CHINO2-->
+    {% if product.tags contains 'inferior caballero chino2' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding left-text">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div> 
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Ancho de cintura</th>
+                            <th class="table-header">Longitud de pierna</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 66 cms</td>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 68 cms</td>
+                            <td class="table-cell">Hasta 102 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 71 cms</td>
+                            <td class="table-cell">Hasta 104 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 73 cms</td>
+                            <td class="table-cell">Hasta 105 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 76 cms</td>
+                            <td class="table-cell">Hasta 107 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 78 cms</td>
+                            <td class="table-cell">Hasta 108 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>                      
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_CABALLERO.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--INFERIOR CABALLERO CHINO3-->
+    {% if product.tags contains 'inferior caballero chino3' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding text-left">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div> 
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Ancho de cintura</th>
+                            <th class="table-header">Longitud de pierna</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 94 cms</td>
+                            <td class="table-cell">Hasta 100 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 98 cms</td>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 102 cms</td>
+                            <td class="table-cell">Hasta 102 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 106 cms</td>
+                            <td class="table-cell">Hasta 103 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 110 cms</td>
+                            <td class="table-cell">Hasta 104 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 104 cms</td>
+                            <td class="table-cell">Hasta 105 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>                      
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_CABALLERO.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--SUPERIOR DAMA CHINO-->
+    {% if product.tags contains 'superior dama chino' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding">
+            <b>MEDIDAS DE CUERPO (cm)</b> 
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Si tu pecho mide...</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>                
+                        <tr>
+                            <td class="table-cell">Hasta 85 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 89 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 93 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 97 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 105 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Mujer.png?v=1731079446" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--INFERIOR DAMA CHINO-->
+    {% if product.tags contains 'inferior dama chino' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding text-left">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Ancho de cintura</th>
+                            <th class="table-header">Longitud de pierna</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 60 cms</td>
+                            <td class="table-cell">Hasta 93 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 95 cms</td>
+                            <td class="table-cell">Hasta 95 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 96 cms</td>
+                            <td class="table-cell">Hasta 96 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 98 cms</td>
+                            <td class="table-cell">Hasta 98 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 99 cms</td>
+                            <td class="table-cell">Hasta 99 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_DAMA.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--INFERIOR DAMA CHINO2-->
+    {% if product.tags contains 'inferior dama chino2' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding text-left">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div> 
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Ancho de cintura</th>
+                            <th class="table-header">Longitud de pierna</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>                                    
+                        <tr>
+                            <td class="table-cell">Hasta 61 cms</td>
+                            <td class="table-cell">Hasta 96 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 64 cms</td>
+                            <td class="table-cell">Hasta 98 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 66 cms</td>
+                            <td class="table-cell">Hasta 100 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 69 cms</td>
+                            <td class="table-cell">Hasta 102 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 71 cms</td>
+                            <td class="table-cell">Hasta 104 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 74 cms</td>
+                            <td class="table-cell">Hasta 106 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_DAMA.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--INFERIOR DAMA CHINO3-->
+    {% if product.tags contains 'inferior dama chino3' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding text-left">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <br>
+            <b class="highlighted-text">"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual."</b>
+            <br>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div> 
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Ancho de cintura</th>
+                            <th class="table-header">Longitud de pierna</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>                                    
+                        <tr>
+                            <td class="table-cell">Hasta 90 cms</td>
+                            <td class="table-cell">Hasta 99 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 94 cms</td>
+                            <td class="table-cell">Hasta 100 cms</td>
+                            <td class="table-cell bold-text" >MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 98 cms</td>
+                            <td class="table-cell">Hasta 101 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 102 cms</td>
+                            <td class="table-cell">Hasta 102 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 106 cms</td>
+                            <td class="table-cell">Hasta 103 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 110 cms</td>
+                            <td class="table-cell">Hasta 104 cms</td>
+                            <td class="table-cell bold-text" >3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_DAMA.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- SUPERIOR CABALLERO -->
+    {% if product.tags contains 'superior caballero' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding">
+            <b>MEDIDAS DE CUERPO (cm)</b> 
+            <br>
+            <small>
+                La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Si tu pecho mide...</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 98 cms</td>
+                            <td class="table-cell bold-text">XC</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 103 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 108 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 113 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 118 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 123 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 128 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Hombre.png?v=1730411813" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- INFERIOR CABALLERO -->
+    {% if product.tags contains 'inferior caballero' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding-left">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div> 
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Contorno de cintura</th>
+                            <th class="table-header">Sugerencia de talla numerica</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 73 cms</td>
+                            <td class="table-cell">Talla 26-28</td>
+                            <td class="table-cell bold-text">XC</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 79 cms</td>
+                            <td class="table-cell">Talla 28-30</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 89 cms</td>
+                            <td class="table-cell">Talla 32-34</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 99 cms</td>
+                            <td class="table-cell">Talla 36-38</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 109 cms</td>
+                            <td class="table-cell">Talla 40-42</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 114 cms</td>
+                            <td class="table-cell">Talla 44</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 119 cms</td>
+                            <td class="table-cell">Talla 46</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 124 cms</td>
+                            <td class="table-cell">Talla 48</td>
+                            <td class="table-cell bold-text">4X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 129 cms</td>
+                            <td class="table-cell">Talla 50</td>
+                            <td class="table-cell bold-text">5X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_CABALLERO.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- SUPERIOR DAMA -->
+    {% if product.tags contains 'superior dama' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding">
+            <b>MEDIDAS DE CUERPO (cm)</b> 
+            <br>
+            <small>
+                La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.
+            </small>
+        </div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Si tu pecho mide...</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 99 cms</td>
+                            <td class="table-cell bold-text">XC</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 103 cms</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 107 cms</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 111 cms</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 114 cms</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 118 cms</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 122 cms</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Mujer.png?v=1731079446" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- INFERIOR DAMA -->
+    {% if product.tags contains 'inferior dama' %}
+    <section class="section-padding">
+        <div id="guiadetallas" class="div-padding text-left">
+            <b>MEDIDAS DE CUERPO (cm)</b>
+            <br>
+            <small>
+                Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura
+                <br>
+                <br>
+                Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado.
+                Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.
+            </small>
+        </div> 
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="measurement-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">Contorno de Cintura</th>
+                            <th class="table-header">Sugerencia de talla numerica</th>
+                            <th class="table-header">Eres talla...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">Hasta 73 cms</td>
+                            <td class="table-cell">Talla 5-7</td>
+                            <td class="table-cell bold-text">XC</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 78 cms</td>
+                            <td class="table-cell">Talla 8-9</td>
+                            <td class="table-cell bold-text">CH</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 83 cms</td>
+                            <td class="table-cell">Talla 10-11</td>
+                            <td class="table-cell bold-text">MD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 88 cms</td>
+                            <td class="table-cell">Talla 12-13</td>
+                            <td class="table-cell bold-text">GD</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 93 cms</td>
+                            <td class="table-cell">Talla 14-15</td>
+                            <td class="table-cell bold-text">XG</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 98 cms</td>
+                            <td class="table-cell">Talla 16-17</td>
+                            <td class="table-cell bold-text">2X</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">Hasta 103 cms</td>
+                            <td class="table-cell">Talla 18-19</td>
+                            <td class="table-cell bold-text">3X</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-container">
+                <img alt="Imagen de medidas de cuerpo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_DAMA.png?v=1738344602" class="body-image">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- Fin Tabla de Tallas -->
+
+    <style>
+    .section-padding {
+        padding: 20px;
+    }
+
+    .div-padding {
+        padding: 20px;
+    }
+
+    .highlighted-text {
+        color: #ff0000;
+    }
+
+
+    
+
+    .table-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 20px;
+    }
+
+    .table-wrapper {
+        flex: 1 1 300px;
+        padding: 10px;
+        overflow-x:auto;
+    }
+
+    .measurement-table {
+        font-size: 13px;
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-header {
+        
+        padding: 10px;
+        border: 1px solid #ddd;
+        background-color: red;
+        color: white;
+        text-align:center;
+    }
+
+    .table-cell {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    .bold-text {
+        font-weight: 900;
+    }
+
+    .image-container {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .body-image {
+        max-width: 250px;
+        height: auto;
+    }
+    @media (max-width: 768px) {
+        .table-container{
+        padding:0px;
+        }
+        .section-padding{
+        padding:0px;
+        }
+        .table-cell {
+            padding: 5px;
+            font-size: 11px;
+        }
+        .table-header{
+        font-size:9px;
+        }
+    }
+    </style>
+
+
+    
+</body>
+</html>
