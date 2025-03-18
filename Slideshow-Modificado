@@ -1,0 +1,223 @@
+{%- if section.blocks.size > 0 -%}
+  {%- assign carousel_id = 'carousel-' | append: section.id -%}
+
+  <slideshow-carousel id="{{ carousel_id }}" class="slideshow" allow-swipe {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %} cell-selector=".slideshow__slide">
+    {%- for block in section.blocks -%}
+      {%- capture slide -%}
+        <div class="content-over-media content-over-media--{{ section.settings.media_size }}" style="--content-over-media-content-max-width: {{ block.settings.content_max_width }}px; --content-over-media-background-color: {{ block.settings.background }}; --content-over-media-background-opacity: {{ block.settings.background_opacity }}%">
+          {%- comment -%}---------------- MEDIA ----------------{%- endcomment -%}
+          {%- if block.type == 'image' -%}
+            {%- if block.settings.image != blank -%}
+              {%- liquid
+                if forloop.first
+                  assign loading_strategy = nil
+                  assign fetch_priority = 'high'
+                else
+                  assign loading_strategy = 'lazy'
+                  assign fetch_priority = 'low'
+                endif
+              -%}
+
+              <picture>
+                {%- if block.settings.mobile_image != blank -%}
+                  <source
+                      media="(max-width: 699px)"
+                      srcset="{{ block.settings.mobile_image | image_url: width: '400x' }} 400w, {{ block.settings.mobile_image | image_url: width: '600x' }} 600w, {{ block.settings.mobile_image | image_url: width: '700x' }} 700w"
+                      width="{{ block.settings.mobile_image.width }}"
+                      height="{{ block.settings.mobile_image.height }}"
+                  >
+                {%- endif -%}
+
+                {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: loading_strategy, fetchpriority: fetch_priority, sizes: '100vw', widths: '300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000' -}}
+              </picture>
+            {%- else -%}
+              {%- capture placeholder_image -%}{% cycle 'placeholder': 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
+              {{- placeholder_image | placeholder_svg_tag: 'placeholder' | replace: '<svg', '<svg preserveAspectRatio="xMinYMin slice"' -}}
+            {%- endif -%}
+          {%- else -%}
+            {%- liquid
+              if section.settings.autoplay
+                assign loop_video = false
+              else
+                assign loop_video = true
+              endif
+
+              if block.settings.video != blank
+                if block.settings.mobile_video == blank
+                  render 'media', media: block.settings.video, autoplay: true, loop: loop_video, controls: false, preload: forloop.first
+                else
+                  render 'media', media: block.settings.video, autoplay: true, loop: loop_video, controls: false, preload: forloop.first, class: 'hidden sm:block'
+                  render 'media', media: block.settings.mobile_video, autoplay: true, loop: loop_video, controls: false, preload: forloop.first, class: 'sm:hidden'
+                endif
+              else
+                capture placeholder_image
+                  cycle 'placeholder': 'lifestyle-1', 'lifestyle-2'
+                endcapture
+
+                echo placeholder_image | placeholder_svg_tag: 'placeholder' | replace: '<svg', '<svg preserveAspectRatio="xMinYMin slice"'
+              endif
+            -%}
+          {%- endif -%}
+
+          {%- comment -%}---------------- CONTENT ----------------{%- endcomment -%}
+          {% liquid
+            assign is_boxed = false
+            assign has_background = false
+            assign has_border = false
+            assign has_inside_offset = false
+
+            if block.settings.background_opacity > 0 and block.settings.background != blank and block.settings.background != 'rgba(0,0,0,0)'
+              assign has_background = true
+            endif
+
+            if block.settings.border_color != blank and block.settings.border_color != 'rgba(0,0,0,0)'
+              assign has_border = true
+            endif
+
+            if has_background and has_border
+              assign has_inside_offset = true
+            endif
+
+            if has_background or has_border
+              assign is_boxed = true
+            endif
+          %}
+
+          <div class="slideshow__slide-content {% if is_boxed %}slideshow__slide-content--boxed{% endif %} {% if has_border %}slideshow__slide-content--with-border{% endif %} {% if has_inside_offset %}slideshow__slide-content--inside-offset{% endif %}">
+            <div class="prose">
+              {%- if block.settings.subheading != blank -%}
+                <p class="h6">{{ block.settings.subheading }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.title != blank -%}
+                <p class="h1">{{ block.settings.title }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.button_1_text != blank or block.settings.button_2_text != blank -%}
+                {%- assign button_mobile_position = block.settings.mobile_text_position | split: 'text-' | last -%}
+                {%- assign button_desktop_position = block.settings.desktop_text_position | split: 'text-' | last -%}
+
+                {%- if block.settings.button_1_style == 'link' or block.settings.button_2_style == 'link' or block.settings.button_1_text == blank or block.settings.button_2_text == blank -%}
+                  {%- capture button_wrapper_class -%}button-group justify-{{ button_mobile_position }} sm:justify-{{ button_desktop_position }}{%- endcapture -%}
+                {%- else -%}
+                  {%- capture button_wrapper_class -%}button-group button-group--same-width justify-{{ button_mobile_position }} sm:justify-{{ button_desktop_position }}{%- endcapture -%}
+                {%- endif -%}
+
+                <div class="{{ button_wrapper_class }}">
+                  {%- if block.settings.button_1_text != blank -%}
+                    {%- render 'button', href: block.settings.button_1_link, content: block.settings.button_1_text, style: block.settings.button_1_style, background: block.settings.button_1_background, text_color: block.settings.button_1_text_color -%}
+                  {%- endif -%}
+
+                  {%- if block.settings.button_2_text != blank -%}
+                    {%- render 'button', href: block.settings.button_2_link, content: block.settings.button_2_text, style: block.settings.button_2_style, background: block.settings.button_2_background, text_color: block.settings.button_2_text_color -%}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        {%- if block.type == 'video' and block.settings.video != blank and block.settings.allow_sound -%}
+          <div class="slideshow__volume-control" style="{% render 'surface', text_color: section.settings.controls_color %}">
+            <button data-action="unmute">
+              <span class="sr-only">{{ 'general.accessibility.unmute_video' | t }}</span>
+              {%- render 'icon' with 'unmute' -%}
+            </button>
+
+            <button data-action="mute" hidden>
+              <span class="sr-only">{{ 'general.accessibility.mute_video' | t }}</span>
+              {%- render 'icon' with 'mute' -%}
+            </button>
+          </div>
+        {%- endif -%}
+      {%- endcapture -%}
+
+      {%- if block.settings.button_1_link != blank and block.settings.button_1_text == blank and block.settings.button_2_text == blank -%}
+        <a href="{{ block.settings.button_1_link }}" class="slideshow__slide {% if forloop.first %}is-selected{% endif %}" media-type="{{ block.type }}" {% if forloop.first and section.settings.show_initial_transition %}reveal-on-scroll="true"{% endif %}>
+          {{- slide -}}
+        </a>
+      {%- else -%}
+        <div class="slideshow__slide {% if forloop.first %}is-selected{% endif %}" media-type="{{ block.type }}" {% if forloop.first and section.settings.show_initial_transition %}reveal-on-scroll="true"{% endif %}>
+          {{- slide -}}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if section.blocks.size > 1 -%}
+      <carousel-navigation aria-controls="{{ carousel_id }}" class="page-dots {% if section.settings.autoplay %}page-dots--autoplay{% endif %}" style="{% render 'surface', text_color: section.settings.controls_color %}">
+        {%- for i in (1..section.blocks.size) -%}
+          <button class="tap-area" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+            <span class="sr-only">{{ 'general.accessibility.go_to_item' | t: index: forloop.index }}</span>
+
+            {%- if section.settings.autoplay -%}
+              <svg class="circular-progress" height="8" width="8" viewBox="0 0 8 8" style="--stroke-dasharray: {{ 2 | times: 3.14159265359 | times: 3.25 }}">
+                <circle cx="50%" cy="50%" fill="none" stroke-width="1.5" r="3.25" stroke="currentColor" stroke-opacity="0.2"></circle>
+                <circle cx="50%" cy="50%" fill="none" stroke-width="1.5" r="3.25" stroke="currentColor" stroke-linecap="round"></circle>
+              </svg>
+            {%- endif -%}
+          </button>
+        {%- endfor -%}
+      </carousel-navigation>
+
+      <!-- Navigation Buttons -->
+      <div class="slideshow__navigation-buttons">
+        <button class="slideshow__navigation-button slideshow__navigation-button--prev" aria-label="Previous Slide">
+          {%- render 'icon' with 'chevron-left' -%}
+        </button>
+        <button class="slideshow__navigation-button slideshow__navigation-button--next" aria-label="Next Slide">
+          {%- render 'icon' with 'chevron-right' -%}
+        </button>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_next_section_button -%}
+      <button data-action="navigate-next" class="slideshow__next-section-button circle-button circle-button--lg hover:animate-icon-block">
+        <span class="sr-only">{{ 'general.accessibility.navigate_to_next_section' | t }}</span>
+        {%- render 'icon' with 'arrow-down' -%}
+      </button>
+    {%- endif -%}
+  </slideshow-carousel>
+
+  <style>
+    .slideshow__navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+    }
+    .slideshow__navigation-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const prevButton = document.querySelector('.slideshow__navigation-button--prev');
+      const nextButton = document.querySelector('.slideshow__navigation-button--next');
+      const dots = document.querySelectorAll('.page-dots .tap-area');
+
+      let currentIndex = 0;
+
+      function updateSlide(index) {
+        dots[currentIndex].removeAttribute('aria-current');
+        dots[index].setAttribute('aria-current', 'true');
+        dots[index].click();
+        currentIndex = index;
+      }
+
+      prevButton.addEventListener('click', function() {
+        const newIndex = (currentIndex > 0) ? currentIndex - 1 : dots.length - 1;
+        updateSlide(newIndex);
+      });
+
+      nextButton.addEventListener('click', function() {
+        const newIndex = (currentIndex < dots.length - 1) ? currentIndex + 1 : 0;
+        updateSlide(newIndex);
+      });
+    });
+  </script>
+{%- endif -%}
