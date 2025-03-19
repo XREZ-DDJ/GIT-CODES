@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+        .inicio {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            margin: 0;
+            background-color: #c0c0c0;
+        }
+        .nosotros{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            /*height: 100vh;*/
+            width: 100%;
+            margin: 0;
+            background-color: #8a8a8a;
+
+        }
+        .bravo_logo {
+            width: 500px;
+            height: auto;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 5px 0;
+        }
+        h2{
+            font-size: 55px;
+            font-weight: bold;
+            color: #fff;
+            grid-column: span 3;
+        }
+        h3{
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            
+        }
+        .grid-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            font-size: 1.2em;
+            max-width: 350px;
+            padding-left: 30px;
+            
+        }
+        .grid-item img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+        .grid-item.centrado {
+            flex-direction: column;
+            text-align: center;
+        }
+        .grid-item.centrado p {
+            text-align: center;
+            margin: 10px 0 0;
+        }
+        .text-simple{
+            font-size: 14px;
+        }
+        .text-simple.derecha{
+            text-align: end;
+
+        }
+        .text-simple.izquierda{
+            text-align: start;
+
+        }
+        .pie_pagina{
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 20px;
+            text-align: center;
+            grid-column: span 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="inicio">
+        <img alt="bravo_logo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Logo_bc6584fe-0c16-4df9-89ed-8e4b25bbae32.png?v=1673036781" class="bravo_logo">
+        <p>Vestimos el motor de <strong >México</strong></p>
+        <p>Donde los <strong >uniformes</strong> cuentan historias</p>
+    </div>
+    <div class="nosotros">
+        <h2>Lo que nos hace únicos</h2>
+
+        <div class="grid-item">
+            <p class="text-simple derecha"><strong>Uniformes con ADN de éxito:</strong> Estética, comodidad y resistencia en cada pieza.</p>        
+            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/dna.png?v=1742412436">
+        </div>
+            
+        <div class="grid-item centrado">
+            <h3>Mision</h3>
+            <p class="text-simple">Ofrecer soluciones a la medida para Grandes Empresas que buscan un socio confiable y estratégico en su gestión de uniformes.</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/construir.png?v=1742413270">
+            <p class="text-simple izquierda"><strong>Soluciones a la medida para medianas empresas.</strong> Adaptabilidad, flexibilidad y respaldo corporativo.</p>        
+        </div>
+        <div class="grid-item">
+            <p class="text-simple derecha"><strong>Generadores de orgullo.</strong> Uniformes que generan lealtad a tu marca.</p>        
+            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/unidad.png?v=1742413060">
+        </div>
+        <div class="grid-item centrado">
+            <h3>Vision</h3>
+            <p class="text-simple">Grandes en tamaño y grandes en visión, por lo que atendemos también a Micro, Pequeñas y Medianas Empresas, porque sabemos que son el verdadero motor de México.</p>
+        </div>
+        <div class="grid-item">
+            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/apreton-de-manos.png?v=1742413366">
+            <p class="text-simple izquierda "><strong>Compromiso real:</strong> Si hay un problema, lo resolvemos. Sin excusas.</p>        
+        </div>
+        <div class="grid-item">
+            <p class="text-simple derecha"><strong>Consultoría en imagen corporativa</strong> para tu empresa. Diseñamos la mejor versión de tu marca.</p>        
+            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/consultoria.png?v=1742413466">
+        </div>
+        <div class="grid-item centrado">
+            <h3>Historia</h3>
+            <p class="text-simple">Antes de que Bravo Business Wear existiera, ya estábamos en acción. Somos parte de un grupo industrial fundado hace 28 años - un titán en diseño, fabricación y distribución de uniformes.</p>
+        </div>
+        <div class="pie_pagina">
+            <p>
+                No somos otro proveedor de uniformes. Somos el socio estratégico que entiende lo que tu empresa necesita.
+            </p>
+
+        </div>
+        
+    </div>
+    
+</body>
+</html>
