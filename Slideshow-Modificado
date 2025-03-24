@@ -1,3 +1,9 @@
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+DEVELOPER NOTE: the slideshow is one of Prestige most complex sections due to the large number of settings it offers. We highly recommend you to not edit the code unless you have fully reviewed and understood all the code. A simple change may have important consequence on the section itself.
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
 {%- if section.blocks.size > 0 -%}
   {%- assign carousel_id = 'carousel-' | append: section.id -%}
 
@@ -180,48 +186,82 @@
 
   <style>
     .slideshow__navigation-buttons {
-      display: flex;
-      justify-content: space-between;
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      transform: translateY(-50%);
-    }
-    .slideshow__navigation-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Evita interferencias con clics fuera del botón */
+  }
+  
+  .slideshow__navigation-button {
+    background: rgba(128, 128, 128, 0.6); /* Gris con transparencia */
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    pointer-events: auto; 
+  }
+  
+  .slideshow__navigation-button svg {
+    width: 20px;
+  }
+  
+  /* Efecto hover */
+  .slideshow__navigation-button:hover {
+    background: rgba(128, 128, 128, 0.8); 
+  }
+  
+  
+  .slideshow__navigation-button--prev {
+    margin-left: 10px;
+  }
+  
+  .slideshow__navigation-button--next {
+    margin-right: 10px;
+  }
+
   </style>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const prevButton = document.querySelector('.slideshow__navigation-button--prev');
-      const nextButton = document.querySelector('.slideshow__navigation-button--next');
-      const dots = document.querySelectorAll('.page-dots .tap-area');
+    document.addEventListener('DOMContentLoaded', function () {
+  const carousel = document.getElementById('{{ carousel_id }}'); // Identificae este slideshow específico
+  console.log('ID del carousel:', carousel ? carousel.id : 'No encontrado');
+  const prevButton = carousel.querySelector('.slideshow__navigation-button--prev');
+  const nextButton = carousel.querySelector('.slideshow__navigation-button--next');
+  const dots = carousel.querySelectorAll('.page-dots .tap-area'); // Solo dots dentro de este slideshow
 
-      let currentIndex = 0;
+  let currentIndex = 0;
+  const totalSlides = dots.length; // Asegurae que el índice esté dentro del límite correcto
 
-      function updateSlide(index) {
-        dots[currentIndex].removeAttribute('aria-current');
-        dots[index].setAttribute('aria-current', 'true');
-        dots[index].click();
-        currentIndex = index;
-      }
+  function updateSlide(index) {
+    if (index >= 0 && index < totalSlides) { // Validación para que no salga del rango
+      dots[currentIndex].removeAttribute('aria-current');
+      dots[index].setAttribute('aria-current', 'true');
+      dots[index].click();
+      currentIndex = index;
+    }
+  }
 
-      prevButton.addEventListener('click', function() {
-        const newIndex = (currentIndex > 0) ? currentIndex - 1 : dots.length - 1;
-        updateSlide(newIndex);
-      });
+  prevButton.addEventListener('click', function () {
+    const newIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+    updateSlide(newIndex);
+  });
 
-      nextButton.addEventListener('click', function() {
-        const newIndex = (currentIndex < dots.length - 1) ? currentIndex + 1 : 0;
-        updateSlide(newIndex);
-      });
-    });
+  nextButton.addEventListener('click', function () {
+    const newIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+    updateSlide(newIndex);
+  });
+});
+
   </script>
 {%- endif -%}
-
 
 {% schema %}
 {
