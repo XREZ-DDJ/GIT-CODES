@@ -1,302 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title>About Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    
-
-    <style>
-        
-body {
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
-}
-.pag1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    margin: 0;
-    background-color: #c0c0c0;
-}
-.pag2{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    /*gap: 20px;*/
-    
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    margin: 0;
-    background-color: #8a8a8a;
-
-}
-.pag3 {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    margin: 0;
-    background-color: #757575;
-}
-.pag4 {
-    height: 100vh;
-    width: 100%;
-    background-color: #000000;
-    align-content: center;
-}
-.bravo_logo {
-    width: 500px;
-    height: auto;
-}
-.textSlogan{
-    font-size: 2.0em;
-    margin: 5px 0;
-    
-}
-.titulo2{
-
-    font-size: 25px;
-    font-weight: bold;
-    color: #fff;
-    margin-right: 400px;
-
-}
-h2{
-    font-size: 55px;
-    font-weight: bold;
-    color: #fff;
-    
-}
-.encabezado{
-
-    grid-column: span 3;
-
-}
-h3{
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
-    
-    
-}
-.grid-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
-    font-size: 1.2em;
-    max-width: 350px;
-    padding-left: 30px;
-    
-}
-.grid-item img {
-    width: 100px;
-    height: 100px;
-    margin-right: 10px;
-}
-.grid-item.centrado {
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: auto;
-}
-.grid-item.centrado p {
-    text-align: center;
-    margin: auto;
-}
-.text-simple{
-    font-size: 15px;
-}
-.text-simple.derecha{
-    text-align: end;
-    margin-right: 20px;
-
-}
-.text-simple.izquierda{
-    text-align: start;
-    margin-left: 20px;
-
-}
-.pie_pagina{
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
-    margin-top: 20px;
-    text-align: center;
-    grid-column: span 3;
-    margin-bottom: 7px;
-}
-
-.rosih{
-    font-weight: 900;
-    color: #ffffff;
-    font-size: 53px; 
-}
-.rosihI {
-    font-weight: 900;
-    color: #ffffff;
-    font-size: 53px;
-    padding-left: 8px;
-
-}
-.textAcrostico {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-}
-.textAcrostico p {
-    font-size: 35px;
-    margin-bottom: -15px;
-    margin-top: 0px;
-    color: #ffffff;
-}
-.titulo2Pag4 {
-    font-size: 50px;
-    color: #ffffff;
-    margin-right: 300px;
-    margin-bottom: 0px;
-}
-.titulo2Pag41 {
-    font-size: 50px;
-    color: #ffffff;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 400px;
-}
-
-.extra-text {
-    position: relative;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    white-space: nowrap;
-    color: #ffffff;
-    left: 60px;
-}
-.container:hover .extra-text {
-    opacity: 1;
-}
-.container{
-    font-weight: bold;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-.textValor{
-    font-size: 50px;
-    color: #ffffff;
-    padding-left: 100px;
-}
-    </style>
-    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="pag1">
-        <img alt="bravo_logo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Logo_bc6584fe-0c16-4df9-89ed-8e4b25bbae32.png?v=1673036781" class="bravo_logo">
+    <header class="pag1 parallax1">
+        <img alt="Bravo Business Wear Logo" src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Logo_bc6584fe-0c16-4df9-89ed-8e4b25bbae32.png?v=1673036781" class="bravo_logo">
         <p class="textSlogan">
-            Vestimos el motor de <strong >México</strong> <br> Donde los <strong>uniformes</strong> cuentan historias
+            Vestimos el motor de <strong>México</strong> <br> Donde los <strong>uniformes</strong> cuentan historias
         </p>
-    </div>
-    <div class="pag2">
-        <div class="encabezado">
-            <h2>Lo que nos hace únicos</h2>
-        </div>
-        <div class="grid-item">
-            <p class="text-simple derecha"><strong>Uniformes con ADN de éxito:</strong> Estética, comodidad y resistencia en cada pieza.</p>        
-            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/dna.png?v=1742412436">
-        </div>
-            
-        <div class="grid-item centrado">
-            <h3>Mision</h3>
-            <p class="text-simple">Ofrecer soluciones a la medida para Grandes Empresas que buscan un socio confiable y estratégico en su gestión de uniformes.</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/construir.png?v=1742413270">
-            <p class="text-simple izquierda"><strong>Soluciones a la medida para medianas empresas.</strong> Adaptabilidad, flexibilidad y respaldo corporativo.</p>        
-        </div>
-        <div class="grid-item">
-            <p class="text-simple derecha"><strong>Generadores de orgullo.</strong> Uniformes que generan lealtad a tu marca.</p>        
-            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/unidad.png?v=1742413060">
-        </div>
-        <div class="grid-item centrado">
-            <h3>Vision</h3>
-            <p class="text-simple">Grandes en tamaño y grandes en visión, por lo que atendemos también a Micro, Pequeñas y Medianas Empresas, porque sabemos que son el verdadero motor de México.</p>
-        </div>
-        <div class="grid-item">
-            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/apreton-de-manos.png?v=1742413366">
-            <p class="text-simple izquierda "><strong>Compromiso real:</strong> Si hay un problema, lo resolvemos. Sin excusas.</p>        
-        </div>
-        <div class="grid-item">
-            <p class="text-simple derecha"><strong>Consultoría en imagen corporativa</strong> para tu empresa. Diseñamos la mejor versión de tu marca.</p>        
-            <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/consultoria.png?v=1742413466">
-        </div>
-        <div class="grid-item centrado">
-            <h3>Historia</h3>
-            <p class="text-simple">Antes de que Bravo Business Wear existiera, ya estábamos en acción. Somos parte de un grupo industrial fundado hace 28 años - un titán en diseño, fabricación y distribución de uniformes.</p>
-        </div>
-        <div class="pie_pagina">
-            <h3>
-                No somos otro proveedor de uniformes. Somos el socio estratégico que entiende lo que tu empresa necesita.
-            </h3>
-        </div>
-    </div>
+    </header>
+    <main>
+        <section class="pag2 parallax2">
+            <div class="encabezado">
+                <h2>Lo que nos hace únicos</h2>
+            </div>
+            <div class="grid-item">
+                <p class="text-simple derecha txtHover"><strong>Uniformes con ADN de éxito:</strong> Estética, comodidad y resistencia en cada pieza.</p>        
+                <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/dna.png?v=1742584433" alt="ADN de éxito" class="imgHover">
+            </div>
+                
+            <div class="grid-item centrado">
+                <h3>Misión</h3>
+                <p class="text-simple">Ofrecer soluciones a la medida para Grandes Empresas que buscan un socio confiable y estratégico en su gestión de uniformes.</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/construir.png?v=1742413270" alt="Soluciones a medida" class="imgHover">
+                <p class="text-simple izquierda txtHover"><strong>Soluciones a la medida para medianas empresas.</strong> Adaptabilidad, flexibilidad y respaldo corporativo.</p>        
+            </div>
+            <div class="grid-item">
+                <p class="text-simple derecha txtHover"><strong>Generadores de orgullo.</strong> Uniformes que generan lealtad a tu marca.</p>        
+                <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/unidad.png?v=1742584470" alt="Generadores de orgullo" class="imgHover">
+            </div>
+            <div class="grid-item centrado">
+                <h3>Visión</h3>
+                <p class="text-simple">Grandes en tamaño y grandes en visión, por lo que atendemos también a Micro, Pequeñas y Medianas Empresas, porque sabemos que son el verdadero motor de México.</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/consultoria.png?v=1742584508" alt="Compromiso real" class="imgHover">
+                <p class="text-simple izquierda txtHover"><strong>Compromiso real:</strong> Si hay un problema, lo resolvemos. Sin excusas.</p>        
+            </div>
+            <div class="grid-item">
+                <p class="text-simple derecha txtHover"><strong>Consultoría en imagen corporativa</strong> para tu empresa. Diseñamos la mejor versión de tu marca.</p>        
+                <img src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/consultoria.png?v=1742413466" alt="Consultoría en imagen corporativa" class="imgHover">
+            </div>
+            <div class="grid-item centrado">
+                <h3>Historia</h3>
+                <p class="text-simple">Antes de que Bravo Business Wear existiera, ya estábamos en acción. Somos parte de un grupo industrial fundado hace 28 años - un titán en diseño, fabricación y...</p>
+            </div>
+            <div class="pie_pagina">
+                <h3>
+                    No somos otro proveedor de uniformes. Somos el socio estratégico que entiende lo que tu empresa necesita.
+                </h3>
+            </div>
+        </section>
 
-    <div class="pag3">
-        
-        <h2><strong>Vestimos</strong> a los <strong>mejores</strong> sectores donde <strong>dejamos huella</strong></h2>
-        
-        <p class="titulo2">
-            Porque en Bravo Business Wear, la calidad no es un extra. Es un estándar.
-        </p>
-        <div class="textAcrostico">
-            <p><span class="rosih">R</span>estaurantes</p>
-            <p><span class="rosih">O</span>ficinas</p>
-            <p><span class="rosih">S</span>alud y bienestar</p>
-            <p><span class="rosihI">I</span>ndustrial y mantenimiento</p>
-            <p><span class="rosih">H</span>oteleria</p>
-        </div>
-    </div>
-    <div class="pag4">
-        <p class="titulo2Pag4">Lo que nos mueve </p>
-        <p class="titulo2Pag41">y nos <strong style="font-weight: 900;">define</strong></p> 
-    
-        
-        <p>
-            <span class="container"><strong class="textValor">Pasión</strong>
-                <span class="extra-text">Nos entregamos por completo a las historias de nuestros clientes y colaboradores.</span>
-            </span>
-        </p>  
-        <p>
-            <span class="container"><strong class="textValor">Respeto</strong>
-                <span class="extra-text">Valoramos a cada persona que forma parte de nuestra comunidad.</span>
-            </span>
-        </p> 
-        <p>
-            <span class="container"><strong class="textValor">Innovacion</strong>
-                <span class="extra-text">Buscamos soluciones nuevas y efectivas para cada reto.</span>
-            </span>
-        </p>
-        <p>
-            <span class="container"><strong class="textValor">Compromiso</strong>
-                <span class="extra-text">Honramos nuestras promesas.</span>
-            </span>
-        </p> 
-        <p>
-            <span class="container"><strong class="textValor">Calidad y servicio</strong>
-                <span class="extra-text">Nos mantenemos siempre a la altura de las circunstancias.</span>
-            </span>
-        </p> 
-    </div>
-
-
+        <section class="pag3 parallax3">
+            <h2><strong>Vestimos</strong> a los <strong>mejores</strong> sectores donde <strong>dejamos huella</strong></h2>
+            <p class="titulo2">
+                Porque en Bravo Business Wear, la calidad no es un extra. Es un estándar.
+            </p>
+            <div class="textAcrostico">
+                <p><span class="rosih">R</span>estaurantes</p>
+                <p><span class="rosih">O</span>ficinas</p>
+                <p><span class="rosih">S</span>alud y bienestar</p>
+                <p><span class="rosihI">I</span>ndustrial y mantenimiento</p>
+                <p><span class="rosih">H</span>otelería</p>
+            </div>
+        </section>
+        <section class="pag4 parallax4">
+            <section class="carrusel">
+                <img src="https://us.123rf.com/450wm/cienpies/cienpies1205/cienpies120500024/13533854-me-encanta-el-texto-tech-house-en-el-archivo-de-la-comunicaci%C3%B3n-burbuja-de-ilustraci%C3%B3n-de-fondo-en.jpg" alt="imgCliente">
+                <img src="https://t4.ftcdn.net/jpg/06/43/79/23/360_F_643792398_ZrBcR5pq5lVAo8xsLP1ZzdZUhnryh234.jpg" alt="imgCliente">
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20220506/pngtree-club-montage-dancing-music-techno-photo-image_166197.jpg" alt="imgCliente">
+                <img src="https://us.123rf.com/450wm/viktorus/viktorus1407/viktorus140700011/30146722-estilos-techno-electronic-music-nube-de-la-palabra-burbuja-tag-%C3%A1rbol-sobre-fondo-azul.jpg" alt="imgCliente">
+                <img src="https://us.123rf.com/450wm/cienpies/cienpies1205/cienpies120500024/13533854-me-encanta-el-texto-tech-house-en-el-archivo-de-la-comunicaci%C3%B3n-burbuja-de-ilustraci%C3%B3n-de-fondo-en.jpg" alt="imgCliente">
+                <img src="https://t4.ftcdn.net/jpg/06/43/79/23/360_F_643792398_ZrBcR5pq5lVAo8xsLP1ZzdZUhnryh234.jpg" alt="imgCliente">
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20220506/pngtree-club-montage-dancing-music-techno-photo-image_166197.jpg" alt="imgCliente">
+                <img src="https://us.123rf.com/450wm/viktorus/viktorus1407/viktorus140700011/30146722-estilos-techno-electronic-music-nube-de-la-palabra-burbuja-tag-%C3%A1rbol-sobre-fondo-azul.jpg" alt="imgCliente">
+                <img src="https://e1.pxfuel.com/desktop-wallpaper/348/956/desktop-wallpaper-daft-punk-dubstep-electro-house-dance-disco-electronic-robot-cyborg-poster-tech-house.jpg" alt="imgCliente">
+                <img src="https://us.123rf.com/450wm/cienpies/cienpies1205/cienpies120500024/13533854-me-encanta-el-texto-tech-house-en-el-archivo-de-la-comunicaci%C3%B3n-burbuja-de-ilustraci%C3%B3n-de-fondo-en.jpg" alt="imgCliente">
+                <img src="https://t4.ftcdn.net/jpg/06/43/79/23/360_F_643792398_ZrBcR5pq5lVAo8xsLP1ZzdZUhnryh234.jpg" alt="imgCliente">
+                <img src="https://png.pngtree.com/thumb_back/fh260/background/20220506/pngtree-club-montage-dancing-music-techno-photo-image_166197.jpg" alt="imgCliente">
+                <img src="https://us.123rf.com/450wm/viktorus/viktorus1407/viktorus140700011/30146722-estilos-techno-electronic-music-nube-de-la-palabra-burbuja-tag-%C3%A1rbol-sobre-fondo-azul.jpg" alt="imgCliente">
+                <img src="https://e1.pxfuel.com/desktop-wallpaper/348/956/desktop-wallpaper-daft-punk-dubstep-electro-house-dance-disco-electronic-robot-cyborg-poster-tech-house.jpg" alt="imgCliente">
+                <img src="https://us.123rf.com/450wm/viktorus/viktorus1407/viktorus140700011/30146722-estilos-techno-electronic-music-nube-de-la-palabra-burbuja-tag-%C3%A1rbol-sobre-fondo-azul.jpg" alt="imgCliente">
+                <img src="https://e1.pxfuel.com/desktop-wallpaper/348/956/desktop-wallpaper-daft-punk-dubstep-electro-house-dance-disco-electronic-robot-cyborg-poster-tech-house.jpg" alt="imgCliente">
+            </section>
+            <p class="titulo2Pag4">Lo que nos mueve </p>
+            <p class="titulo2Pag41">y nos <strong style="font-weight: 900;">define</strong></p> 
+            <p>
+                <span class="container"><strong class="textValor">Pasión</strong>
+                    <span class="extra-text">Nos entregamos por completo a las historias de nuestros clientes y colaboradores.</span>
+                </span>
+            </p>  
+            <p>
+                <span class="container"><strong class="textValor">Respeto</strong>
+                    <span class="extra-text">Valoramos a cada persona que forma parte de nuestra comunidad.</span>
+                </span>
+            </p> 
+            <p>
+                <span class="container"><strong class="textValor">Innovación</strong>
+                    <span class="extra-text">Buscamos soluciones nuevas y efectivas para cada reto.</span>
+                </span>
+            </p>
+            <p>
+                <span class="container"><strong class="textValor">Compromiso</strong>
+                    <span class="extra-text">Honramos nuestras promesas.</span>
+                </span>
+            </p> 
+            <p>
+                <span class="container"><strong class="textValor">Calidad y servicio</strong>
+                    <span class="extra-text">Nos mantenemos siempre a la altura de las circunstancias.</span>
+                </span>
+            </p> 
+        </section>
+    </main>
 </body>
 </html>
+
