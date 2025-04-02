@@ -107,26 +107,106 @@ Blanco - Gris:#808080
   {% endfor %}
 </div>
 <!-- Fin Selector tallas -->
+<style>
+  .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index:100;
+  }
+  .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+  }
+
+  .modal-overlay.active .modal {
+      transform: scale(1);
+  }
+  .modal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: white;
+      width: 90%;
+      height: 85%;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+      top: 35px;
+
+  }
+  .container-bordar-img {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+  }
+
+  .bordar-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+  }
+</style>
 
 <!-- Boton colapso archivos -->
-<div class="accordion" style="padding-top:25px;">
-  <button
-    class="accordion-btn"
-    onclick="toggleAccordion()"
-    style="font-family: 'work sans'; font-weight:bold; text-align: center;"
-  >
-    ¿Desear bordar tu prenda?
-  </button>
-  <div class="accordion-content">
-    <p class="instructions">
-      El bordado será realizado en el color del que subas tu imagen. Si deseas otro color o tamaño, indícalo en los
-      comentarios en el carrito de compras. (Formatos permitidos: PDF, JPEG, PNG)
-    </p>
-    <div class="upload-container" id="upload-sections">
-      <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
+
+<button
+  id="openModal"
+  class="accordion-btn"
+  onclick="toggleAccordion()"
+  style="font-family: 'work sans'; font-weight:bold; text-align: center;"
+>
+  ¿Desear bordar tu prenda?
+</button>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="container-bordar-img">
+      <img
+        class="bordar-img"
+        src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/BORDADO_GU-04.jpg?v=1743452756"
+      >
     </div>
+    <div class="accordion-content">
+      <p class="instructions">
+        **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
+        grande**
+      </p>
+      <div class="upload-container" id="upload-sections">
+        <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
+      </div>
+    </div>
+    <button class="close-btn" id="closeModal">Cerrar</button>
   </div>
 </div>
+
+<script>
+  const openModal = document.getElementById("openModal");
+  const closeModal = document.getElementById("closeModal");
+  const modalOverlay = document.getElementById("modalOverlay");
+
+  openModal.addEventListener("click", () => {
+      modalOverlay.classList.add("active");
+  });
+
+  closeModal.addEventListener("click", () => {
+      modalOverlay.classList.remove("active");
+  });
+</script>
+
 <!-- Fin Boton colapso archivos -->
 
 <!-- Botón Agregar al Carrito -->
@@ -144,6 +224,7 @@ Blanco - Gris:#808080
    1) FUNCIONES GLOBALES (FUERA DEL DOM LOAD)
 ----------------------------------------- */
 // ✅ Acordeón sin Bootstrap
+  /*
 function toggleAccordion() {
   const accordion = document.querySelector(".accordion-content");
   const button = document.querySelector(".accordion-btn");
@@ -157,7 +238,7 @@ function toggleAccordion() {
     button.classList.add("open");
   }
 }
-
+*/
 // ✅ Autenticar usuario (Firebase anónimo)
 function authenticateUser() {
   return firebase.auth().signInAnonymously()
@@ -325,32 +406,54 @@ document.addEventListener("DOMContentLoaded", function () {
     "MANDIL": ["Frontal"]
   };
 
-  // 2.3) Generar dinámicamente los inputs de archivo según el tipo
-  const productType = "{{ product.type }}";
-  console.log("Tipo de producto detectado:", productType);
+// 2.3) Generar dinámicamente el selector de opciones según el tipo
+const productType = "{{ product.type }}";
+console.log("Tipo de producto detectado:", productType);
 
-  if (productTypes[productType]) {
-    productTypes[productType].forEach(position => {
-      const id = position.toLowerCase().replace(/\s+/g, "-");
-      const section = document.createElement("div");
-      section.classList.add("upload-section");
-      section.innerHTML = `
-        <label for="file-upload-${id}" class="upload-label">
-          <i class="bi bi-upload"></i> ${position}
-        </label>
-        <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
-        <div id="preview-${id}" class="preview"></div>
-      `;
-      uploadContainer.appendChild(section);
+if (productTypes[productType]) {
+  const select = document.createElement("select");
+  select.id = "bordado-select";
+  select.innerHTML = `<option value="">Selecciona una posición para el bordado</option>`;
+  
+  productTypes[productType].forEach(position => {
+    const id = position.toLowerCase().replace(/\s+/g, "-");
+    const option = document.createElement("option");
+    option.value = id;
+    option.textContent = position;
+    select.appendChild(option);
 
-      // Vincular el input a handleFileUpload
-      const fileInput = section.querySelector(`#file-upload-${id}`);
-      fileInput.addEventListener("change", function(){
-        handleFileUpload(id, this);
-        contarArchivosSubidos(); // recalcular en cada cambio
-      });
+    const section = document.createElement("div");
+    section.classList.add("upload-section");
+    section.id = `upload-section-${id}`;
+    section.style.display = "none"; // Ocultar por defecto
+    section.innerHTML = `
+      <label for="file-upload-${id}" class="upload-label">
+        Seleccionar archivo
+      </label>
+      <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
+      <div id="preview-${id}" class="preview"></div>
+    `;
+    uploadContainer.appendChild(section);
+
+    // Vincular el input a handleFileUpload
+    const fileInput = section.querySelector(`#file-upload-${id}`);
+    fileInput.addEventListener("change", function(){
+      handleFileUpload(id, this);
+      contarArchivosSubidos(); // recalcular en cada cambio
     });
-  }
+  });
+
+  // Agregar el selector al contenedor de carga
+  uploadContainer.insertBefore(select, uploadContainer.firstChild);
+
+  // Evento de cambio en el selector
+  select.addEventListener("change", function() {
+    const selectedId = this.value;
+    document.querySelectorAll(".upload-section").forEach(section => {
+      section.style.display = section.id === `upload-section-${selectedId}` ? "block" : "none";
+    });
+  });
+}
 
   // 2.4) Función para contar archivos subidos
   function contarArchivosSubidos() {
@@ -362,6 +465,7 @@ document.addEventListener("DOMContentLoaded", function () {
         archivosSubidos++;
       }
     });
+
     // Excluimos el primer archivo gratis
     cantidadBordado = (archivosSubidos > 1) ? (archivosSubidos - 1) : 0;
     console.log(`📁 Archivos subidos: ${archivosSubidos} | 🎨 Bordados a cobrar: ${cantidadBordado}`);
@@ -571,7 +675,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .accordion-content {
-    display: none;
+    display: block;
     padding: 10px;
     border: 1px solid #ccc;
     background: #f9f9f9;
