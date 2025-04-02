@@ -175,10 +175,13 @@ Blanco - Gris:#808080
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="container-bordar-img">
-      <img
-        class="bordar-img"
-        src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/BORDADO_GU-04.jpg?v=1743452756"
-      >
+      {% if product.title contains 'LYON' %}
+        <img
+          class="bordar-img"
+          src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/BORDADO_GU-04.jpg?v=1743452756"
+          alt="BORDADOS LYON"
+        >
+      {% endif %}
     </div>
     <div class="accordion-content">
       <p class="instructions">
