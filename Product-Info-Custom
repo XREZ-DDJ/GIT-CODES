@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
 <!-- Selector de Colores -->
 <p style="font-weight: bold;">COLOR</p>
 <div class="contenedor_colores">
@@ -166,6 +167,26 @@ Blanco - Gris:#808080
   .container-bordar-content p{
     font-size:17px;
   }
+   /* Estilos para resaltar las áreas del mapa de imagen cuando se hace clic */
+  area {
+    outline: none;
+  }
+
+  area:hover {
+    outline: 2px solid red; /* Cambia el color y grosor del borde a tu gusto */
+  }
+
+  /* Estilos adicionales para asegurar que la imagen y el mapa se alineen correctamente */
+  .bordar-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+  }
+
+  .container-bordar-img {
+    position: relative;
+  }
 </style>
 
 <!-- Boton colapso archivos -->
@@ -179,7 +200,7 @@ Blanco - Gris:#808080
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="container-bordar-img">
-      {% render 'product-bordados' %}
+      {% render 'product-bordados2' %}
     </div>
     <div class="container-bordar-content">
       <p class="instructions">
@@ -194,7 +215,6 @@ Blanco - Gris:#808080
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
 <script>
 
   //MODAL
@@ -249,7 +269,7 @@ Blanco - Gris:#808080
     });
   });
   
-  window.onload = function () {
+    window.onload = function () {
     imageMapResize(); // Hace que el mapa sea responsivo
   };
 </script>
