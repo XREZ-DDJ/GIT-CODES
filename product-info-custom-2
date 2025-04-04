@@ -160,12 +160,18 @@ Blanco - Gris:#808080
       object-fit: contain;
       display: block;
   }
+  .container-bordar-content{
+    padding:20px;
+  }
+  .container-bordar-content p{
+    font-size:17px;
+  }
 </style>
 
 <!-- Boton colapso archivos -->
 <button
   id="openModal"
-  class="accordion-btn"
+  class="bordar-btn"
   style="font-family: 'work sans'; font-weight:bold; text-align: center;"
 >
   ¿Desear bordar tu prenda?
@@ -175,7 +181,7 @@ Blanco - Gris:#808080
     <div class="container-bordar-img">
       {% render 'product-bordados' %}
     </div>
-    <div class="accordion-content">
+    <div class="container-bordar-content">
       <p class="instructions">
         **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
         grande**
@@ -699,11 +705,7 @@ if (productTypes[productType]) {
 
 <style>
     /* ✅ Estilos del acordeón */
-  .accordion {
-    margin-bottom: 15px;
-  }
-
-  .accordion-btn {
+  .bordar-btn {
     background-color: black;
     color: white;
     border: 1px solid #ccc;
@@ -714,16 +716,11 @@ if (productTypes[productType]) {
     transition: background 0.3s;
   }
 
-  .accordion-btn.open {
+  .bordar-btn.open {
     background-color: red;
   }
 
-  .accordion-content {
-    display: block;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-  }
+
 
   /* ✅ Contenedor de botones de carga */
   .upload-container {
@@ -964,10 +961,5 @@ if (productTypes[productType]) {
 
   .upload-label:hover {
     background-color: #000;
-  }
-
-  .preview {
-    margin-top: 10px;
-    font-size: 14px;
   }
 </style>
