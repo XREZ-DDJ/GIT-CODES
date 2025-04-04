@@ -1,0 +1,148 @@
+{% if product.title contains 'LYON' %}
+  <script>
+    window.areas = ["MANGA1", "MANGA2", "PECHO1", "PECHO2", "PECHO3", "PUÑO1", "PUÑO2", "CUELLO1", "CUELLOTRASERO1", "ESPALDA1"];
+  </script>
+
+  <img
+    class="bordar-img"
+    src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/BORDADO_GU-04.jpg?v=1743452756"
+    usemap="#mapa"
+    id="imagenMap"
+  >
+
+  <map name="mapa">
+    <area
+     
+      target=""
+      alt="MANGA1"
+      title="MANGA1"
+      href="#"
+      coords="537,1682,130"
+      shape="circle"
+      onclick="selectArea('MANGA1')"
+    >
+    <area
+     
+      target=""
+      alt="MANGA2"
+      title="MANGA2"
+      href="#"
+      coords="1565,1680,145"
+      shape="circle"
+      onclick="selectArea('MANGA2')"
+    >
+    <area
+      
+      target=""
+      alt="PECHO1"
+      title="PECHO1"
+      href="#"
+      coords="1332,1877,94"
+      shape="circle"
+      onclick="selectArea('PECHO1')"
+    >
+    <area
+      
+      target=""
+      alt="PECHO2"
+      title="PECHO2"
+      href="#"
+      coords="1048,1874,107"
+      shape="circle"
+      onclick="selectArea('PECHO2')"
+    >
+    <area
+      
+      target=""
+      alt="PECHO3"
+      title="PECHO3"
+      href="#"
+      coords="755,1872,84"
+      shape="circle"
+      onclick="selectArea('PECHO3')"
+    >
+    <area
+      
+      target=""
+      alt="PUÑO1"
+      title="PUÑO1"
+      href="#"
+      coords="425,2688,103"
+      shape="circle"
+      onclick="selectArea('PUÑO1')"
+    >
+    <area
+     
+      target=""
+      alt="PUÑO2"
+      title="PUÑO2"
+      href="#"
+      coords="1682,2700,114"
+      shape="circle"
+      onclick="selectArea('PUÑO2')"
+    >
+    <area
+     
+      target=""
+      alt="CUELLO1"
+      title="CUELLO1"
+      href="#"
+      coords="2307,917,107"
+      shape="circle"
+      onclick="selectArea('CUELLO1')"
+    >
+    <area
+      
+      target=""
+      alt="CUELLOTRASERO1"
+      title="CUELLO TRASERO1"
+      href="#"
+      coords="2301,1218,109"
+      shape="circle"
+      onclick="selectArea('CUELLOTRASERO1')"
+    >
+    <area
+    
+      target=""
+      alt="ESPALDA1"
+      title="ESPALDA1"
+      href="#"
+      coords="2300,1940,109"
+      shape="circle"
+      onclick="selectArea('ESPALDA1')"
+    >
+  </map>
+
+{% elsif product.title contains 'GINEBRA' %}
+  <script>
+    window.areas = ["MANGA1", "CINTURA"];
+  </script>
+
+  <img
+    class="bordar-img"
+    src="https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Imagen4.jpg?v=1743702481"
+    usemap="#mapa"
+    id="imagenMap"
+  >
+
+  <map name="mapa">
+    <area
+      target=""
+      alt="MANGA1"
+      title="MANGA1"
+      href="#"
+      coords="88,787,67"
+      shape="circle"
+      onclick="selectArea('MANGA1')"
+    >
+    <area
+      target=""
+      alt="CINTURA"
+      title="CINTURA"
+      href="#"
+      coords="492,677,88"
+      shape="circle"
+      onclick="selectArea('CINTURA')"
+    >
+  </map>
+{% endif %}
