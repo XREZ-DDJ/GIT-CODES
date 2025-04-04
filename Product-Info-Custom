@@ -182,7 +182,7 @@ Blanco - Gris:#808080
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="container-bordar-img">
-      {% render 'product-bordados2' %}
+      {% render 'product-bordados' %}
     </div>
     <div class="container-bordar-content">
       <p class="instructions">
