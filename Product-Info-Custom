@@ -158,30 +158,12 @@ Blanco - Gris:#808080
   .bordar-img {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain;
-      display: block;
   }
   .container-bordar-content{
     padding:20px;
   }
   .container-bordar-content p{
     font-size:17px;
-  }
-   /* Estilos para resaltar las áreas del mapa de imagen cuando se hace clic */
-  area {
-    outline: none;
-  }
-
-  area:hover {
-    outline: 2px solid red; /* Cambia el color y grosor del borde a tu gusto */
-  }
-
-  /* Estilos adicionales para asegurar que la imagen y el mapa se alineen correctamente */
-  .bordar-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    position: relative;
   }
 
   .container-bordar-img {
@@ -229,7 +211,8 @@ Blanco - Gris:#808080
   closeModal.addEventListener("click", () => {
       modalOverlay.classList.remove("active");
   });
-
+  //FIN MODAL
+  //SELECCION AREA
   function selectArea(area) {
     document.querySelectorAll('.upload-section').forEach(section => {
       section.style.display = 'none';
@@ -239,8 +222,21 @@ Blanco - Gris:#808080
     if (selectedSection) {
       selectedSection.style.display = 'block';
     }
+    highlightArea(area);
   }
-  //FIN MODAL
+
+  function highlightArea(area) {
+    document.querySelectorAll('area').forEach(a => {
+      a.style.outline = 'none';
+    });
+
+    const selectedArea = document.querySelector(`area[alt="${area}"]`);
+    if (selectedArea) {
+      selectedArea.style.outline = '2px solid red'; // Cambia el color y grosor del borde a tu gusto
+    }
+  }
+  //FIN SELECCION AREA
+
   
   // Inicializar upload sections
   const areas = window.areas || []; 
