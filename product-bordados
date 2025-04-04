@@ -12,8 +12,7 @@
 
   <map name="mapa">
     <area
-     
-      target=""
+      target="_top"
       alt="MANGA1"
       title="MANGA1"
       href="#"
@@ -22,7 +21,6 @@
       onclick="selectArea('MANGA1')"
     >
     <area
-     
       target=""
       alt="MANGA2"
       title="MANGA2"
@@ -32,7 +30,6 @@
       onclick="selectArea('MANGA2')"
     >
     <area
-      
       target=""
       alt="PECHO1"
       title="PECHO1"
@@ -42,7 +39,6 @@
       onclick="selectArea('PECHO1')"
     >
     <area
-      
       target=""
       alt="PECHO2"
       title="PECHO2"
@@ -52,7 +48,6 @@
       onclick="selectArea('PECHO2')"
     >
     <area
-      
       target=""
       alt="PECHO3"
       title="PECHO3"
@@ -62,7 +57,6 @@
       onclick="selectArea('PECHO3')"
     >
     <area
-      
       target=""
       alt="PUÑO1"
       title="PUÑO1"
@@ -72,7 +66,6 @@
       onclick="selectArea('PUÑO1')"
     >
     <area
-     
       target=""
       alt="PUÑO2"
       title="PUÑO2"
@@ -82,7 +75,6 @@
       onclick="selectArea('PUÑO2')"
     >
     <area
-     
       target=""
       alt="CUELLO1"
       title="CUELLO1"
@@ -92,7 +84,6 @@
       onclick="selectArea('CUELLO1')"
     >
     <area
-      
       target=""
       alt="CUELLOTRASERO1"
       title="CUELLO TRASERO1"
@@ -102,7 +93,6 @@
       onclick="selectArea('CUELLOTRASERO1')"
     >
     <area
-    
       target=""
       alt="ESPALDA1"
       title="ESPALDA1"
