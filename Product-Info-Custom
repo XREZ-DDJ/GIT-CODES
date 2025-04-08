@@ -108,66 +108,161 @@ Blanco - Gris:#808080
   {% endfor %}
 </div>
 <!-- Fin Selector tallas -->
+
 <style>
-  .modal-overlay {
-      position: fixed;
-      top: 0;
+  /*MODAL*/
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index:100;
+    }
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-overlay.active .modal {
+        transform: scale(1);
+    }
+    .modal {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: white;
+        width: 90%;
+        height: 85%;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+        top: 35px;
+
+    }
+  /*FIN MODAL*/
+    .container-bordar-img {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .bordar-img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .container-bordar-content{
+      padding:20px;
+    }
+    /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
+    .upload-container {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-around;
+    }
+    .upload-section{
+      justify-content: space-between;
+      align-items: center;
+      height: 110px;
+      gap: 30px;
+    }
+    .upload-label {
+      background-color: #f00;
+      color: #fff;
+      padding: 10px 10px;
+      border-radius: 5px;
+      max-height: 42px;
+      margin-right: 10px;
+      }
+
+    .upload-label:hover {
+      background-color: #000;
+    }
+
+    .container-bordar-content p{
+      font-size:13px;
+    }
+    /* ✅ Vista previa de archivos */
+    .preview {
+      font-size: 10px;
+      display: flex;
+      flex-direction: column;
+      height: 110px;
+      width: 110px;
+      align-items: center;
+    }
+
+    .medidas-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      text-align: center;
+      align-items: center;
+    }
+    .medidas-container p {
+      font-size: 11px;
+    }
+    .medidas-input {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      max-width: 120px;
+    }
+    .bordado-info{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      font-size: 10px;
+      margin-top: 15px;
+    }
+    .bordado-info p {
+      font-size: 10px;
+    }
+    .close-btn{
+      background-color: #f00;
+      border-radius: 5px;
+      width: 150px;
+      color: #ffffff;
+      margin: 15px;
+      position: absolute;
+      left: 65%;
+    }
+  @media (max-width: 767px){
+    .modal {
+      grid-template-columns: none;
+      grid-template-rows: 1fr 1fr;
+      overflow: overlay;
+    }
+    .container-bordar-img {
+      overflow: visible;
+    }
+    .upload-section{
+      flex-direction: column;
+      height:auto;
+    }
+    .medidas-container{
+      flex-direction: column;
+    }
+    .bordado-info{
+      align-items: center;
+    }
+    .close-btn{
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      z-index:100;
-  }
-  .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-  }
+      justify-self: anchor-center;
+    }
 
-  .modal-overlay.active .modal {
-      transform: scale(1);
-  }
-  .modal {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: white;
-      width: 90%;
-      height: 85%;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      transform: scale(0.8);
-      transition: transform 0.3s ease;
-      top: 35px;
-
-  }
-  .container-bordar-img {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-  }
-
-  .bordar-img {
-      max-width: 100%;
-      max-height: 100%;
-  }
-  .container-bordar-content{
-    padding:20px;
-  }
-  .container-bordar-content p{
-    font-size:17px;
-  }
-
-  .container-bordar-img {
-    position: relative;
   }
 </style>
 
@@ -185,15 +280,25 @@ Blanco - Gris:#808080
       {% render 'product-bordados' %}
     </div>
     <div class="container-bordar-content">
-      <p class="instructions">
-        **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
-        grande**
-      </p>
+      <p>Selecciona de la imagen el area que deseas bordar y carga tu imagen o pdf del bordado.</p>
       <div class="upload-container" id="upload-sections">
         <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
       </div>
+      <div class="medidas-container">
+        <p>
+          **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
+          grande**
+        </p>
+        <label for="ancho" class="medidas-label">Ancho (cm):</label>
+        <input type="number" id="ancho" class="medidas-input" min="0" placeholder="7">
+        <label for="alto" class="medidas-label">Alto (cm):</label>
+        <input type="number" id="alto" class="medidas-input" min="0" placeholder="7">
+      </div>
+      <div class="bordado-info">
+        {% render 'product-bordados-info' %}
+      </div>
+      <button class="close-btn" id="closeModal">Regresar</button>
     </div>
-    <button class="close-btn" id="closeModal">Cerrar</button>
   </div>
 </div>
 
@@ -220,7 +325,7 @@ Blanco - Gris:#808080
     
     const selectedSection = document.getElementById(`upload-section-${area.toLowerCase()}`);
     if (selectedSection) {
-      selectedSection.style.display = 'block';
+        selectedSection.style.display = 'flex';
     }
     highlightArea(area);
   }
@@ -286,22 +391,7 @@ Blanco - Gris:#808080
 /* -----------------------------------------
    1) FUNCIONES GLOBALES (FUERA DEL DOM LOAD)
 ----------------------------------------- */
-// ✅ Acordeón sin Bootstrap
-  /*
-function toggleAccordion() {
-  const accordion = document.querySelector(".accordion-content");
-  const button = document.querySelector(".accordion-btn");
-  if (accordion.style.display === "block") {
-    accordion.style.display = "none";
-    button.textContent = "¿Desear bordar tu prenda?";
-    button.classList.remove("open");
-  } else {
-    accordion.style.display = "block";
-    button.textContent = "No bordar";
-    button.classList.add("open");
-  }
-}
-*/
+
 // ✅ Autenticar usuario (Firebase anónimo)
 function authenticateUser() {
   return firebase.auth().signInAnonymously()
@@ -362,20 +452,20 @@ function handleFileUpload(position, input) {
             if (file.type.startsWith("image/")) {
               const img = document.createElement("img");
               img.src = downloadURL;
-              img.style.maxWidth = "100px";
-              img.style.marginTop = "10px";
+              img.style.maxWidth = "100%";
+              img.style.maxHeight = "100%";
               previewDiv.appendChild(img);
             } else if (file.type === "application/pdf") {
               previewDiv.innerHTML = `<a href="${downloadURL}" target="_blank">Ver PDF</a>`;
             }
+            /*
             // Enlace de descarga
             const downloadLink = document.createElement("a");
             downloadLink.href = downloadURL;
             downloadLink.textContent = "Descargar archivo";
             downloadLink.target = "_blank";
-            downloadLink.style.display = "block";
-            downloadLink.style.marginTop = "10px";
             previewDiv.appendChild(downloadLink);
+            */
           });
         }
       );
@@ -436,11 +526,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ID del producto BORDADO
   const bordadoId = 40551847821470;
-
+  const productType = "{{ product.type }}";
+  console.log("Tipo de producto detectado:", productType);
   // Para contar archivos subidos
   let archivosSubidos  = 0;
   let cantidadBordado  = 0;
-
+  
   // 2.4) Función para contar archivos subidos
   function contarArchivosSubidos() {
     // Capturamos todos los input[type='file'] que se generaron
@@ -500,7 +591,7 @@ document.addEventListener("DOMContentLoaded", function () {
       addToCartButton.setAttribute("data-selected-variant", variantId);
     });
   });
-
+3
   // Control stock y flechas
   sizeInputs.forEach(inp => {
     inp.addEventListener("input", function(){
@@ -540,12 +631,19 @@ document.addEventListener("DOMContentLoaded", function () {
     return total;
   }
 
+  function obtenerMedidas() {
+  const ancho = document.getElementById('ancho').value || 7;
+  const alto = document.getElementById('alto').value || 7;
+  return `Ancho: ${ancho} cm, Alto: ${alto} cm`;
+}
+
   // 2.6) Evento "Agregar al carrito"
   addToCartButton.addEventListener("click", function(){
     console.log("🟢 'Agregar al carrito' clickeado");
 
     // Recalcular archivos subidos
     contarArchivosSubidos();
+    
 
     // Construir array (items sin bordado)
     let newCart = [];
@@ -556,7 +654,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let item = {
           id: variantId,
           quantity: qty,
-          properties: {}
+          properties: {
+            Medidas: obtenerMedidas()
+          }
         };
 
         // Opcional: Incluir propiedades de archivos en cada prenda
@@ -658,45 +758,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  /* ✅ Contenedor de botones de carga */
-  .upload-container {
-    display: flex;
-    flex-wrap: wrap; /* Evita que los elementos se vayan a otra línea */
-    gap: 15px; /* Espaciado entre los botones */
-    justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: center; /* Alineación vertical */
-    overflow-x: auto; /* Permite desplazamiento horizontal si hay muchos botones */
-  }
-
-  .upload-section {
-    flex: 0 1 auto; /* Ajusta el tamaño de cada sección */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 120px; /* Ancho mínimo de cada botón */
-  }
-
-  /* ✅ Botón de carga de archivos */
-  .upload-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-
-    text-align: center;
-    white-space: nowrap; /* Evita que el texto se divida */
-  }
-
-  .upload-label:hover {
-    background-color: #000;
-  }
-
-  /* ✅ Vista previa de archivos */
-  .preview {
-    margin-top: 10px;
-    font-size: 14px;
-  }
-
     /* 📌 CONTENEDOR DE COLORES */
   * Contenedor del swatch (mantenemos .color-item) */
     .swatch {
@@ -752,16 +813,16 @@ document.addEventListener("DOMContentLoaded", function () {
     cursor: pointer;
   }
 
-    .color-option {
-      padding: 5px 10px;
-      max-width:80px;
-      border: 1px solid black;
-    }
-    .color-option:hover {
-      border: 1px solid white;
-      color: white;
-      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    }
+  .color-option {
+    padding: 5px 10px;
+    max-width:80px;
+    border: 1px solid black;
+  }
+  .color-option:hover {
+    border: 1px solid white;
+    color: white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  }
 
   input[type="radio"].color-option {
     display: none;
@@ -875,27 +936,5 @@ document.addEventListener("DOMContentLoaded", function () {
   .add-to-cart-btn:disabled {
     background-color: gray;
     cursor: not-allowed;
-  }
-
-  /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
-  .upload-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 15px;
-    flex-wrap: wrap;
-  }
-
-  .upload-label {
-    background-color: #f00;
-    color: #fff;
-    padding: 10px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-  .upload-label:hover {
-    background-color: #000;
   }
 </style>
