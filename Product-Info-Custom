@@ -156,6 +156,7 @@ Blanco - Gris:#808080
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        position:relative;
     }
 
     .bordar-img {
@@ -317,6 +318,8 @@ Blanco - Gris:#808080
       modalOverlay.classList.remove("active");
   });
   //FIN MODAL
+
+  
   //SELECCION AREA
   function selectArea(area) {
     document.querySelectorAll('.upload-section').forEach(section => {
@@ -329,18 +332,74 @@ Blanco - Gris:#808080
     }
     highlightArea(area);
   }
-
-  function highlightArea(area) {
-    document.querySelectorAll('area').forEach(a => {
-      a.style.outline = 'none';
-    });
-
-    const selectedArea = document.querySelector(`area[alt="${area}"]`);
-    if (selectedArea) {
-      selectedArea.style.outline = '2px solid red'; // Cambia el color y grosor del borde a tu gusto
-    }
-  }
   //FIN SELECCION AREA
+
+  
+  function highlightArea(area) {
+    // Contenedor principal donde está la imagen
+    const container = document.querySelector('.container-bordar-img');
+    if (!container) {
+      console.error("No se encontró el contenedor para el área resaltada.");
+      return;
+    }
+  
+    // Imagen dentro del contenedor
+    const image = container.querySelector('img');
+    if (!image) {
+      console.error("No se encontró la imagen dentro del contenedor.");
+      return;
+    }
+  
+    // Buscar el área seleccionada
+    const selectedArea = document.querySelector(`area[alt="${area}"]`);
+    if (!selectedArea) {
+      console.warn(`No se encontró un área con el atributo alt="${area}".`);
+      return;
+    }
+  
+    // Obtener las coordenadas del área (x, y, r)
+    const coords = selectedArea.coords.split(',').map(Number);
+    if (coords.length !== 3) {
+      console.error("Las coordenadas del área no son válidas para un círculo:", coords);
+      return;
+    }
+  
+    const [x, y, r] = coords;
+  
+    // Obtener el desplazamiento (offset) de la imagen
+    const imageRect = image.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    
+    const offsetX = imageRect.left - containerRect.left;
+    const offsetY = imageRect.top - containerRect.top;
+  
+    console.log("Offset calculado: ", { offsetX, offsetY });
+  
+    // Crea o reutiliza un elemento para el resaltado
+    let highlightDiv = container.querySelector('#highlight-area');
+    if (!highlightDiv) {
+      highlightDiv = document.createElement('div');
+      highlightDiv.id = 'highlight-area';
+      highlightDiv.style.position = 'absolute';
+      highlightDiv.style.border = '2px solid red';
+      highlightDiv.style.pointerEvents = 'none'; // No interferir con clics
+      highlightDiv.style.borderRadius = '50%'; // Hacer el resaltado circular
+      container.appendChild(highlightDiv);
+    }
+  
+    // Ajusta las dimensiones y posición del contenedor
+    highlightDiv.style.left = `${x - r + offsetX}px`;
+    highlightDiv.style.top = `${y - r + offsetY}px`;
+    highlightDiv.style.width = `${2 * r}px`;
+    highlightDiv.style.height = `${2 * r}px`;
+  
+    console.log("Resaltado aplicado: ", {
+      left: highlightDiv.style.left,
+      top: highlightDiv.style.top,
+      width: highlightDiv.style.width,
+      height: highlightDiv.style.height,
+    });
+  }
 
   
   // Inicializar upload sections
