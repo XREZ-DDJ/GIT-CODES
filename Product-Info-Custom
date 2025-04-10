@@ -5,27 +5,27 @@
   <!-- Diccionario de color: "NombreEspañol:#HEX" -->
   {% assign color_map = '
     Negro:#000000|
-Azul:#005BD3|
-Blanco:#FFFFFF|
-Gris:#808080|
-Gris Oxford:#5B5D5F|
-Oro rosa:#B76E79|
-Púrpura:#A54DCF|
-Amarillo:#FFE500|
-Naranja:#FF8A00|
-Rosa:#FFC0CB|
-Cafe:#A67907|
-AZUL CIELO:#099399|
-Beige:#EAD8AB|
-Azul marino:#282099|
-Verde:#05AA3D|
-Marrón:#9A5630|
-Vino:#440122|
-Rojo:#F61F1F|
-Blanco / Durazno:#E8D9CE|
-Blanco - Dorado:#D49A06|
-Blanco - Gris:#808080
-  '
+    Azul:#005BD3|
+    Blanco:#FFFFFF|
+    Gris:#808080|
+    Gris Oxford:#5B5D5F|
+    Oro rosa:#B76E79|
+    Púrpura:#A54DCF|
+    Amarillo:#FFE500|
+    Naranja:#FF8A00|
+    Rosa:#FFC0CB|
+    Cafe:#A67907|
+    AZUL CIELO:#099399|
+    Beige:#EAD8AB|
+    Azul marino:#282099|
+    Verde:#05AA3D|
+    Marrón:#9A5630|
+    Vino:#440122|
+    Rojo:#F61F1F|
+    Blanco / Durazno:#E8D9CE|
+    Blanco - Dorado:#D49A06|
+    Blanco - Gris:#808080
+      '
     | strip
   %}
 
@@ -164,7 +164,7 @@ Blanco - Gris:#808080
         max-height: 100%;
     }
     .container-bordar-content{
-      padding:20px;
+      padding:10px;
     }
     /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
     .upload-container {
@@ -173,10 +173,11 @@ Blanco - Gris:#808080
       justify-content: space-around;
     }
     .upload-section{
-      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: space-around;
       align-items: center;
-      height: 110px;
-      gap: 30px;
+      gap: 20px;
+
     }
     .upload-label {
       background-color: #f00;
@@ -203,13 +204,18 @@ Blanco - Gris:#808080
       width: 110px;
       align-items: center;
     }
+    .preview img {
+      max-width: 100px;
+      max-height: 100px;
+    }
 
     .medidas-container {
       display: flex;
-      gap: 10px;
-      margin-top: 15px;
+      gap: 8px;
       text-align: center;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .medidas-container p {
       font-size: 11px;
@@ -236,7 +242,7 @@ Blanco - Gris:#808080
       border-radius: 5px;
       width: 150px;
       color: #ffffff;
-      margin: 15px;
+      margin-top: 10px;
       position: absolute;
       left: 65%;
     }
@@ -262,6 +268,7 @@ Blanco - Gris:#808080
     .close-btn{
       left: 0;
       justify-self: anchor-center;
+      margin-top:0px;
     }
 
   }
@@ -285,15 +292,13 @@ Blanco - Gris:#808080
       <div class="upload-container" id="upload-sections">
         <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
       </div>
-      <div class="medidas-container">
-        <p>
-          **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
-          grande**
-        </p>
-        <label for="ancho" class="medidas-label">Ancho (cm):</label>
-        <input type="number" id="ancho" class="medidas-input" min="0" placeholder="7">
-        <label for="alto" class="medidas-label">Alto (cm):</label>
-        <input type="number" id="alto" class="medidas-input" min="0" placeholder="7">
+      <div class="medidas-container" id="medidas-sections">
+        <!--
+          <p>
+            **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
+            grande**
+          </p>
+        -->
       </div>
       <div class="bordado-info">
         {% render 'product-bordados-info' %}
@@ -407,19 +412,29 @@ Blanco - Gris:#808080
   const uploadContainer = document.getElementById("upload-sections");
   uploadContainer.innerHTML = "";
   areas.forEach(area => {
-    const id = area.toLowerCase().replace(/\s+/g, "-");
-    const section = document.createElement("div");
-    section.classList.add("upload-section");
-    section.id = `upload-section-${id}`;
-    section.style.display = "none"; // Ocultar por defecto
-    section.innerHTML = `
-      <label for="file-upload-${id}" class="upload-label">
-        Seleccionar archivo para ${area}
-      </label>
-      <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
-      <div id="preview-${id}" class="preview"></div>
-    `;
-    uploadContainer.appendChild(section);
+  const id = area.toLowerCase().replace(/\s+/g, "-");
+  const section = document.createElement("div");
+  section.classList.add("upload-section");
+  section.id = `upload-section-${id}`;
+  section.style.display = "none"; // Ocultar por defecto
+  section.innerHTML = `
+    <label for="file-upload-${id}" class="upload-label">
+      Seleccionar archivo para ${area}
+    </label>
+    <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
+    <div id="preview-${id}" class="preview"></div>
+    <div class="medidas-container">
+      <p>
+        **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
+        grande**
+      </p>
+      <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
+      <input type="number" id="ancho-${id}" class="medidas-input" min="0" placeholder="7">
+      <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
+      <input type="number" id="alto-${id}" class="medidas-input" min="0" placeholder="7">
+    </div>
+  `;
+  uploadContainer.appendChild(section);
 
     // Vincular el input a handleFileUpload
     const fileInput = section.querySelector(`#file-upload-${id}`);
@@ -511,8 +526,6 @@ function handleFileUpload(position, input) {
             if (file.type.startsWith("image/")) {
               const img = document.createElement("img");
               img.src = downloadURL;
-              img.style.maxWidth = "100%";
-              img.style.maxHeight = "100%";
               previewDiv.appendChild(img);
             } else if (file.type === "application/pdf") {
               previewDiv.innerHTML = `<a href="${downloadURL}" target="_blank">Ver PDF</a>`;
@@ -525,6 +538,7 @@ function handleFileUpload(position, input) {
             downloadLink.target = "_blank";
             previewDiv.appendChild(downloadLink);
             */
+            
           });
         }
       );
@@ -690,11 +704,18 @@ document.addEventListener("DOMContentLoaded", function () {
     return total;
   }
 
-  function obtenerMedidas() {
-  const ancho = document.getElementById('ancho').value || 7;
-  const alto = document.getElementById('alto').value || 7;
-  return `Ancho: ${ancho} cm, Alto: ${alto} cm`;
-}
+
+  function obtenerMedidasPorArea() {
+    const medidas = {};
+    const areas = document.querySelectorAll(".upload-section");
+    areas.forEach(area => {
+      const id = area.id.replace("upload-section-", "");
+      const ancho = document.getElementById(`ancho-${id}`)?.value || 7; // Valor predeterminado
+      const alto = document.getElementById(`alto-${id}`)?.value || 7;
+      medidas[id] = { ancho, alto };
+    });
+    return medidas;
+  }
 
   // 2.6) Evento "Agregar al carrito"
   addToCartButton.addEventListener("click", function(){
@@ -702,6 +723,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Recalcular archivos subidos
     contarArchivosSubidos();
+    // Obtener medidas personalizadas
+    const medidasPorArea = obtenerMedidasPorArea();
     
 
     // Construir array (items sin bordado)
@@ -713,9 +736,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let item = {
           id: variantId,
           quantity: qty,
-          properties: {
-            Medidas: obtenerMedidas()
-          }
+          properties: {}
         };
 
         // Opcional: Incluir propiedades de archivos en cada prenda
@@ -726,10 +747,15 @@ document.addEventListener("DOMContentLoaded", function () {
             item.properties[`Archivo - ${pos}`] = fi.files[0].name;
             // Recuperar URL
             let prevDiv = document.getElementById(`preview-${pos}`);
-            let linkEl  = prevDiv.querySelector("a");
+            let linkEl  = prevDiv.querySelector("img");
             if (linkEl) {
-              item.properties[`URL - ${pos}`] = linkEl.href;
+              item.properties[`URL - ${pos}`] = linkEl.src;
             }
+            // Asociar medidas específicas de esta área
+            
+              item.properties[`Archivo - ${pos}`] = fi.files[0].name;
+              item.properties[`Medidas - ${pos}`] = `Ancho: ${medidasPorArea[pos].ancho} cm, Alto: ${medidasPorArea[pos].alto} cm`;
+            
           }
         });
 
