@@ -323,6 +323,8 @@
   });
   //FIN MODAL
 
+
+  
   
   //SELECCION AREA
  // Función para manejar la selección de un área
@@ -447,9 +449,9 @@ function highlightArea(area, defaultColor = 'red') {
         grande**
       </p>
       <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
-      <input type="number" id="ancho-${id}" class="medidas-input" min="0" placeholder="7">
+      <input type="number" id="ancho-${id}" class="medidas-input" min="1" placeholder="7">
       <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
-      <input type="number" id="alto-${id}" class="medidas-input" min="0" placeholder="7">
+      <input type="number" id="alto-${id}" class="medidas-input" min="1" placeholder="7">
     </div>
   `;
   uploadContainer.appendChild(section);
@@ -604,6 +606,93 @@ function filterGalleryByColor(selectedColor) {
   });
 }
 
+
+
+
+
+
+
+
+
+  // Definir límites máximos para cada área de bordado
+const limitesMedidas = {
+  "M-I": { ancho: 7, alto: 7 },
+  "M-D": { ancho: 7, alto: 7 },
+  "F-I": { ancho: 7, alto: 7 },
+  "F-C": { ancho: 7, alto: 7 },
+  "F-D": { ancho: 7, alto: 7 },
+  "P-I": { ancho: 5, alto: 5 },
+  "P-D": { ancho: 5, alto: 5 },
+  "C-F": { ancho: 7, alto: 2 },
+  "C-A": { ancho: 7, alto: 2 },
+  "E-C": { ancho: 20, alto: 20 },
+};
+
+// Función para validar las medidas ingresadas
+function validarMedidasPersonalizadas(areaId, inputAncho, inputAlto) {
+  // Obtener los límites máximos de la zona actual
+  const limites = limitesMedidas[areaId];
+  if (!limites) {
+    console.warn(`No se encontraron límites para el área: ${areaId}`);
+    return;
+  }
+
+  // Validar ancho
+  const ancho = parseFloat(inputAncho.value) || 0;
+  if (ancho > limites.ancho) {
+    alert(`El ancho máximo permitido para ${areaId} es ${limites.ancho} cm.`);
+    inputAncho.value = limites.ancho; // Ajustar al máximo permitido
+  }
+
+  // Validar alto
+  const alto = parseFloat(inputAlto.value) || 0;
+  if (alto > limites.alto) {
+    alert(`El alto máximo permitido para ${areaId} es ${limites.alto} cm.`);
+    inputAlto.value = limites.alto; // Ajustar al máximo permitido
+  }
+}
+
+// Función para inicializar los valores predeterminados y placeholders
+function inicializarMedidas() {
+  document.querySelectorAll(".upload-section").forEach((section) => {
+    const areaId = section.id.replace("upload-section-", ""); // Obtener el ID del área
+    const inputAncho = section.querySelector(`#ancho-${areaId}`);
+    const inputAlto = section.querySelector(`#alto-${areaId}`);
+
+    if (inputAncho && inputAlto) {
+      const limites = limitesMedidas[areaId];
+      if (limites) {
+        // Configurar el placeholder y valor predeterminado
+        inputAncho.placeholder = limites.ancho;
+        inputAlto.placeholder = limites.alto;
+        inputAncho.value = limites.ancho;
+        inputAlto.value = limites.alto;
+
+        // Validar en el evento input
+        inputAncho.addEventListener("input", () => validarMedidasPersonalizadas(areaId, inputAncho, inputAlto));
+        inputAlto.addEventListener("input", () => validarMedidasPersonalizadas(areaId, inputAncho, inputAlto));
+      }
+    }
+  });
+}
+
+// Llamar a la función de inicialización cuando el DOM esté listo
+document.addEventListener("DOMContentLoaded", inicializarMedidas);
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
 /* -----------------------------------------
    2) DOMContentLoaded: LÓGICA PRINCIPAL
 ----------------------------------------- */
@@ -730,8 +819,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const areas = document.querySelectorAll(".upload-section");
     areas.forEach(area => {
       const id = area.id.replace("upload-section-", "");
-      const ancho = document.getElementById(`ancho-${id}`)?.value || 7; // Valor predeterminado
-      const alto = document.getElementById(`alto-${id}`)?.value || 7;
+      const ancho = document.getElementById(`ancho-${id}`)?.value; 
+      const alto = document.getElementById(`alto-${id}`)?.value7;
       medidas[id] = { ancho, alto };
     });
     return medidas;
