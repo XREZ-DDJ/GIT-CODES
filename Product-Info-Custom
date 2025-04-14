@@ -270,7 +270,6 @@
       justify-self: anchor-center;
       margin-top:0px;
     }
-
   }
 </style>
 
@@ -326,85 +325,104 @@
 
   
   //SELECCION AREA
-  function selectArea(area) {
-    document.querySelectorAll('.upload-section').forEach(section => {
-      section.style.display = 'none';
-    });
-    
-    const selectedSection = document.getElementById(`upload-section-${area}`);
-    if (selectedSection) {
-        selectedSection.style.display = 'flex';
-    }
-    highlightArea(area);
+ // Función para manejar la selección de un área
+function selectArea(area) {
+  // Actualizar el área seleccionada
+  areaSeleccionada = area;
+
+  // Resaltar todas las áreas según su estado
+  document.querySelectorAll('.upload-section').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  const selectedSection = document.getElementById(`upload-section-${area}`);
+  if (selectedSection) {
+    selectedSection.style.display = 'flex';
   }
-  //FIN SELECCION AREA
+
+  // Actualizar el resaltado de todas las áreas
+  document.querySelectorAll('area').forEach(areaElement => {
+    const areaAlt = areaElement.getAttribute('alt');
+    highlightArea(areaAlt, areaAlt === areaSeleccionada ? 'red' : 'transparent');
+  });
+}
 
   
-  function highlightArea(area) {
-    // Contenedor principal donde está la imagen
-    const container = document.querySelector('.container-bordar-img');
-    if (!container) {
-      console.error("No se encontró el contenedor para el área resaltada.");
-      return;
-    }
-  
-    // Imagen dentro del contenedor
-    const image = container.querySelector('img');
-    if (!image) {
-      console.error("No se encontró la imagen dentro del contenedor.");
-      return;
-    }
-  
-    // Buscar el área seleccionada
-    const selectedArea = document.querySelector(`area[alt="${area}"]`);
-    if (!selectedArea) {
-      console.warn(`No se encontró un área con el atributo alt="${area}".`);
-      return;
-    }
-  
-    // Obtener las coordenadas del área (x, y, r)
-    const coords = selectedArea.coords.split(',').map(Number);
-    if (coords.length !== 3) {
-      console.error("Las coordenadas del área no son válidas para un círculo:", coords);
-      return;
-    }
-  
-    const [x, y, r] = coords;
-  
-    // Obtener el desplazamiento (offset) de la imagen
-    const imageRect = image.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    
-    const offsetX = imageRect.left - containerRect.left;
-    const offsetY = imageRect.top - containerRect.top;
-  
-    console.log("Offset calculado: ", { offsetX, offsetY });
-  
-    // Crea o reutiliza un elemento para el resaltado
-    let highlightDiv = container.querySelector('#highlight-area');
-    if (!highlightDiv) {
-      highlightDiv = document.createElement('div');
-      highlightDiv.id = 'highlight-area';
-      highlightDiv.style.position = 'absolute';
-      highlightDiv.style.border = '2px solid red';
-      highlightDiv.style.pointerEvents = 'none'; // No interferir con clics
-      highlightDiv.style.borderRadius = '50%'; // Hacer el resaltado circular
-      container.appendChild(highlightDiv);
-    }
-  
-    // Ajusta las dimensiones y posición del contenedor
-    highlightDiv.style.left = `${x - r + offsetX}px`;
-    highlightDiv.style.top = `${y - r + offsetY}px`;
-    highlightDiv.style.width = `${2 * r}px`;
-    highlightDiv.style.height = `${2 * r}px`;
-  
-    console.log("Resaltado aplicado: ", {
-      left: highlightDiv.style.left,
-      top: highlightDiv.style.top,
-      width: highlightDiv.style.width,
-      height: highlightDiv.style.height,
-    });
+  //FIN SELECCION AREA
+
+// Estado global para rastrear las áreas con archivos cargados
+const areasConArchivos = {}; // Objeto para rastrear las áreas con archivos cargados
+let areaSeleccionada = null; // Variable global para rastrear el área actualmente seleccionada
+
+// Función para resaltar un área
+function highlightArea(area, defaultColor = 'red') {
+  // Determinar el color basado en el estado global y selección actual
+  const color = areasConArchivos[area] ? 'green' : defaultColor;
+
+  // Contenedor principal donde está la imagen
+  const container = document.querySelector('.container-bordar-img');
+  if (!container) {
+    console.error("No se encontró el contenedor para el área resaltada.");
+    return;
   }
+
+  // Imagen dentro del contenedor
+  const image = container.querySelector('img');
+  if (!image) {
+    console.error("No se encontró la imagen dentro del contenedor.");
+    return;
+  }
+
+  // Buscar el área seleccionada
+  const selectedArea = document.querySelector(`area[alt="${area}"]`);
+  if (!selectedArea) {
+    console.warn(`No se encontró un área con el atributo alt="${area}".`);
+    return;
+  }
+
+  // Obtener las coordenadas del área (x, y, r)
+  const coords = selectedArea.coords.split(',').map(Number);
+  if (coords.length !== 3) {
+    console.error("Las coordenadas del área no son válidas para un círculo:", coords);
+    return;
+  }
+
+  const [x, y, r] = coords;
+
+  // Obtener el desplazamiento (offset) de la imagen
+  const imageRect = image.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
+  const offsetX = imageRect.left - containerRect.left;
+  const offsetY = imageRect.top - containerRect.top;
+
+  // Crea o reutiliza un elemento para el resaltado
+  let highlightDiv = container.querySelector(`#highlight-area-${area}`);
+  if (!highlightDiv) {
+    highlightDiv = document.createElement('div');
+    highlightDiv.id = `highlight-area-${area}`;
+    highlightDiv.style.position = 'absolute';
+    highlightDiv.style.pointerEvents = 'none'; // No interferir con clics
+    highlightDiv.style.borderRadius = '50%'; // Hacer el resaltado circular
+    container.appendChild(highlightDiv);
+  }
+
+  // Ajusta las dimensiones, posición y color del contenedor
+  highlightDiv.style.left = `${x - r + offsetX}px`;
+  highlightDiv.style.top = `${y - r + offsetY}px`;
+  highlightDiv.style.width = `${2 * r}px`;
+  highlightDiv.style.height = `${2 * r}px`;
+  highlightDiv.style.border = `2px solid ${color}`; // Usar el color determinado
+
+  // Asegurar que solo el área seleccionada o cargada sea visible
+  if (!areasConArchivos[area] && area !== areaSeleccionada) {
+    highlightDiv.style.display = 'none'; // Ocultar si no está seleccionada ni tiene archivo
+  } else {
+    highlightDiv.style.display = 'block'; // Mostrar si está seleccionada o tiene archivo
+  }
+}
+
+
 
   
   // Inicializar upload sections
@@ -466,6 +484,7 @@
    1) FUNCIONES GLOBALES (FUERA DEL DOM LOAD)
 ----------------------------------------- */
 
+  
 // ✅ Autenticar usuario (Firebase anónimo)
 function authenticateUser() {
   return firebase.auth().signInAnonymously()
@@ -481,6 +500,7 @@ function authenticateUser() {
 }
 
 // ✅ Subir archivo a Firebase
+// Función para manejar la carga de archivos
 function handleFileUpload(position, input) {
   const previewDiv = document.getElementById(`preview-${position}`);
   previewDiv.innerHTML = ""; // Limpiar previsualización anterior
@@ -496,10 +516,10 @@ function handleFileUpload(position, input) {
     }
 
     if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
-  alert("🚨 Solo se permiten imágenes y archivos PDF.");
-  input.value = "";
-  return;
-}
+      alert("🚨 Solo se permiten imágenes y archivos PDF.");
+      input.value = "";
+      return;
+    }
 
     // Subir a Firebase
     authenticateUser().then(() => {
@@ -507,7 +527,8 @@ function handleFileUpload(position, input) {
       const storageRef = storage.ref(`bordados/${position}/${file.name}`);
       const uploadTask = storageRef.put(file);
 
-      uploadTask.on("state_changed",
+      uploadTask.on(
+        "state_changed",
         function (snapshot) {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(`Subiendo ${position}: ${progress}%`);
@@ -530,19 +551,18 @@ function handleFileUpload(position, input) {
             } else if (file.type === "application/pdf") {
               previewDiv.innerHTML = `<a href="${downloadURL}" target="_blank">Ver PDF</a>`;
             }
-            /*
-            // Enlace de descarga
-            const downloadLink = document.createElement("a");
-            downloadLink.href = downloadURL;
-            downloadLink.textContent = "Descargar archivo";
-            downloadLink.target = "_blank";
-            previewDiv.appendChild(downloadLink);
-            */
-            
+
+            // Actualizar estado global y cambiar el resaltado a verde
+            areasConArchivos[position] = true;
+            highlightArea(position, 'green');
           });
         }
       );
     });
+  } else {
+    // Si no hay archivo, eliminar el estado de área cargada
+    delete areasConArchivos[position];
+    highlightArea(position, 'red');
   }
 }
 
