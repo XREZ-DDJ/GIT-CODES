@@ -148,6 +148,32 @@
         top: 35px;
 
     }
+    /* Estilo para la "X" de cierre */
+    .close-btn-x {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: transparent;
+      color: black;
+      font-size: 24px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      z-index: 4;
+      
+    }
+  
+    .close-btn-x:hover {
+      color: red;
+    }
+  
+    @media (max-width: 767px) {
+      .close-btn-x {
+        font-size: 20px; /* Ajustamos tamaño en dispositivos móviles */
+      }
+    }
+
+  
   /*FIN MODAL*/
     .container-bordar-img {
         width: 100%;
@@ -163,8 +189,11 @@
         max-width: 100%;
         max-height: 100%;
     }
-    .container-bordar-content{
-      padding:10px;
+    .container-bordar-content {
+      display: flex;
+      padding: 10px;
+      flex-direction: column;
+      align-items: center;
     }
     /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
     .upload-container {
@@ -237,14 +266,12 @@
     .bordado-info p {
       font-size: 10px;
     }
-    .close-btn{
+    .close-btn {
       background-color: #f00;
       border-radius: 5px;
       width: 150px;
       color: #ffffff;
       margin-top: 10px;
-      position: absolute;
-      left: 65%;
     }
   @media (max-width: 767px){
     .modal {
@@ -266,7 +293,7 @@
       align-items: center;
     }
     .close-btn{
-      left: 0;
+      
       justify-self: anchor-center;
       margin-top:0px;
     }
@@ -283,6 +310,8 @@
 </button>
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
+    <!-- Botón de cierre "X" -->
+    <button class="close-btn-x" id="closeModalX">&times;</button>
     <div class="container-bordar-img">
       {% render 'product-bordados' %}
     </div>
@@ -313,14 +342,20 @@
   const openModal = document.getElementById("openModal");
   const closeModal = document.getElementById("closeModal");
   const modalOverlay = document.getElementById("modalOverlay");
+  const closeModalX = document.getElementById("closeModalX");
 
   openModal.addEventListener("click", () => {
       modalOverlay.classList.add("active");
+  });
+  
+  closeModalX.addEventListener("click", () => {
+    modalOverlay.classList.remove("active");
   });
 
   closeModal.addEventListener("click", () => {
       modalOverlay.classList.remove("active");
   });
+
   //FIN MODAL
 
 
@@ -449,9 +484,9 @@ function highlightArea(area, defaultColor = 'red') {
         grande**
       </p>
       <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
-      <input type="number" id="ancho-${id}" class="medidas-input" min="1" placeholder="7">
+      <input type="number" id="ancho-${id}" class="medidas-input" min="1">
       <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
-      <input type="number" id="alto-${id}" class="medidas-input" min="1" placeholder="7">
+      <input type="number" id="alto-${id}" class="medidas-input" min="1">
     </div>
   `;
   uploadContainer.appendChild(section);
@@ -463,10 +498,12 @@ function highlightArea(area, defaultColor = 'red') {
       contarArchivosSubidos(); // recalcular en cada cambio
     });
   });
-  
-    window.onload = function () {
-    imageMapResize(); // Hace que el mapa sea responsivo
-  };
+  /*
+      window.onload = function () {
+          console.log('Ejecutando imageMapResize...');
+          imageMapResize();
+      };
+  */
 </script>
 
 <!-- Fin Boton colapso archivos -->
@@ -550,9 +587,7 @@ function handleFileUpload(position, input) {
               const img = document.createElement("img");
               img.src = downloadURL;
               previewDiv.appendChild(img);
-            } else if (file.type === "application/pdf") {
-              previewDiv.innerHTML = `<a href="${downloadURL}" target="_blank">Ver PDF</a>`;
-            }
+            } 
 
             // Actualizar estado global y cambiar el resaltado a verde
             areasConArchivos[position] = true;
@@ -613,8 +648,9 @@ function filterGalleryByColor(selectedColor) {
 
 
 
-
+const limitesMedidas = window.limitesMedidas || []; 
   // Definir límites máximos para cada área de bordado
+  /*
 const limitesMedidas = {
   "M-I": { ancho: 7, alto: 7 },
   "M-D": { ancho: 7, alto: 7 },
@@ -623,11 +659,12 @@ const limitesMedidas = {
   "F-D": { ancho: 7, alto: 7 },
   "P-I": { ancho: 5, alto: 5 },
   "P-D": { ancho: 5, alto: 5 },
-  "C-F": { ancho: 7, alto: 2 },
+  "C-I": { ancho: 7, alto: 2 },
+  "C-D": { ancho: 7, alto: 2 },
   "C-A": { ancho: 7, alto: 2 },
   "E-C": { ancho: 20, alto: 20 },
 };
-
+*/
 // Función para validar las medidas ingresadas
 function validarMedidasPersonalizadas(areaId, inputAncho, inputAlto) {
   // Obtener los límites máximos de la zona actual
@@ -676,28 +713,28 @@ function inicializarMedidas() {
   });
 }
 
-// Llamar a la función de inicialización cuando el DOM esté listo
+// LLAMAR A INICIALIZAR MEDIDAS CUANDO EL DOM ESTE CARGADO 
 document.addEventListener("DOMContentLoaded", inicializarMedidas);
 
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 
 /* -----------------------------------------
    2) DOMContentLoaded: LÓGICA PRINCIPAL
 ----------------------------------------- */
+
+
 document.addEventListener("DOMContentLoaded", function () {
   console.log("🚀 DOMContentLoaded: Iniciando todo...");
+//EJECUTAR ImageMapResize EN EL DOOM
+  try {
+      if (typeof imageMapResize === 'function') {
+        console.log('!!!Ejecutando imageMapResize desde DOMContentLoaded...');
+        imageMapResize(); // Hace que el mapa sea responsivo
+      } else {
+        console.error('imageMapResize no está disponible. Verifica la carga del script.');
+      }
+    } catch (error) {
+      console.error('Error al ejecutar imageMapResize:', error);
+    }
 
   // 2.1) Variables principales
   const addToCartButton = document.getElementById("add-to-cart-btn");
@@ -813,14 +850,14 @@ document.addEventListener("DOMContentLoaded", function () {
     return total;
   }
 
-
+  //OBTENER LAS MEDIDAS POR CADA ZONA DE BORDADO DE LOS INPUTS
   function obtenerMedidasPorArea() {
     const medidas = {};
     const areas = document.querySelectorAll(".upload-section");
     areas.forEach(area => {
       const id = area.id.replace("upload-section-", "");
       const ancho = document.getElementById(`ancho-${id}`)?.value; 
-      const alto = document.getElementById(`alto-${id}`)?.value7;
+      const alto = document.getElementById(`alto-${id}`)?.value;
       medidas[id] = { ancho, alto };
     });
     return medidas;
@@ -860,7 +897,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (linkEl) {
               item.properties[`URL - ${pos}`] = linkEl.src;
             }
-            // Asociar medidas específicas de esta área
+            // AGREGAR LAS MEDIDAS DE CADA AREA ESPECIFICA
             
               item.properties[`Archivo - ${pos}`] = fi.files[0].name;
               item.properties[`Medidas - ${pos}`] = `Ancho: ${medidasPorArea[pos].ancho} cm, Alto: ${medidasPorArea[pos].alto} cm`;
