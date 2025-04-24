@@ -112,19 +112,19 @@
 <style>
   /*MODAL*/
     .modal-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
         z-index:100;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
     .modal-overlay.active {
         opacity: 1;
@@ -148,7 +148,7 @@
         top: 35px;
 
     }
-    /* Estilo para la "X" de cierre */
+    
     .close-btn-x {
       position: absolute;
       top: 10px;
@@ -169,7 +169,7 @@
   
     @media (max-width: 767px) {
       .close-btn-x {
-        font-size: 20px; /* Ajustamos tamaño en dispositivos móviles */
+        font-size: 20px; 
       }
     }
 
@@ -189,6 +189,11 @@
         max-width: 100%;
         max-height: 100%;
     }
+    .txtInfo {
+        font-size: 18px;
+        font-weight: bold;
+        text-align:center;
+    }
     .container-bordar-content {
       display: flex;
       padding: 10px;
@@ -197,7 +202,7 @@
     }
     /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
     .upload-container {
-      margin-top: 15px;
+      
       display: flex;
       justify-content: space-around;
     }
@@ -219,10 +224,6 @@
 
     .upload-label:hover {
       background-color: #000;
-    }
-
-    .container-bordar-content p{
-      font-size:13px;
     }
     /* ✅ Vista previa de archivos */
     .preview {
@@ -259,7 +260,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
       font-size: 10px;
       margin-top: 15px;
     }
@@ -313,11 +313,16 @@
     <!-- Botón de cierre "X" -->
     <button class="close-btn-x" id="closeModalX">&times;</button>
     <div class="container-bordar-img">
-      {% render 'product-bordados' %}
+      {% render 'bordados-areas' %}
     </div>
     <div class="container-bordar-content">
-      <p>Selecciona de la imagen el area que deseas bordar y carga tu imagen o pdf del bordado.</p>
+      {% if product.metafields.custom.product_modulo_bordado %}
+        <p class="txtInfo" id= "txtInfo" >Selecciona de la imagen el area que deseas bordar y carga tu imagen o pdf del bordado.</p>
+        {% endif %}
+      
+      
       <div class="upload-container" id="upload-sections">
+        
         <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
       </div>
       <div class="medidas-container" id="medidas-sections">
@@ -329,7 +334,7 @@
         -->
       </div>
       <div class="bordado-info">
-        {% render 'product-bordados-info' %}
+        {% render 'bordados-info' %}
       </div>
       <button class="close-btn" id="closeModal">Regresar</button>
     </div>
@@ -382,7 +387,11 @@ function selectArea(area) {
     const areaAlt = areaElement.getAttribute('alt');
     highlightArea(areaAlt, areaAlt === areaSeleccionada ? 'red' : 'transparent');
   });
+  const txtInfo = document.getElementById("txtInfo");
+  txtInfo.style.display="none";
 }
+
+  
 
   
   //FIN SELECCION AREA
@@ -483,10 +492,10 @@ function highlightArea(area, defaultColor = 'red') {
         **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
         grande**
       </p>
-      <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
-      <input type="number" id="ancho-${id}" class="medidas-input" min="1">
       <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
       <input type="number" id="alto-${id}" class="medidas-input" min="1">
+      <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
+      <input type="number" id="ancho-${id}" class="medidas-input" min="1">
     </div>
   `;
   uploadContainer.appendChild(section);
@@ -680,12 +689,20 @@ function validarMedidasPersonalizadas(areaId, inputAncho, inputAlto) {
     alert(`El ancho máximo permitido para ${areaId} es ${limites.ancho} cm.`);
     inputAncho.value = limites.ancho; // Ajustar al máximo permitido
   }
+  if(ancho<1){
+    alert(`La medida debe ser mayor a cero`)
+    inputAncho.value = limites.ancho;
+  }
 
   // Validar alto
   const alto = parseFloat(inputAlto.value) || 0;
   if (alto > limites.alto) {
     alert(`El alto máximo permitido para ${areaId} es ${limites.alto} cm.`);
     inputAlto.value = limites.alto; // Ajustar al máximo permitido
+  }
+  if(alto<1){
+    alert(`La medida debe ser mayor a cero`)
+    inputAlto.value = limites.alto;
   }
 }
 
@@ -841,7 +858,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 🔹 Función para calcular total de piezas
+  // 🐀𐄹𘁆unción para calcular total de piezas
   function getTotalPiezas(items) {
     let total = 0;
     items.forEach(i => {
@@ -890,17 +907,15 @@ document.addEventListener("DOMContentLoaded", function () {
         allFileInputs.forEach(fi => {
           if (fi.files.length > 0) {
             let pos = fi.id.replace("file-upload-", "");
-            item.properties[`Archivo - ${pos}`] = fi.files[0].name;
+            item.properties[`Archivo = ${pos}`] = fi.files[0].name;
             // Recuperar URL
             let prevDiv = document.getElementById(`preview-${pos}`);
             let linkEl  = prevDiv.querySelector("img");
             if (linkEl) {
-              item.properties[`URL - ${pos}`] = linkEl.src;
+              item.properties[`URL = ${pos}`] = linkEl.src;
             }
             // AGREGAR LAS MEDIDAS DE CADA AREA ESPECIFICA
-            
-              item.properties[`Archivo - ${pos}`] = fi.files[0].name;
-              item.properties[`Medidas - ${pos}`] = `Ancho: ${medidasPorArea[pos].ancho} cm, Alto: ${medidasPorArea[pos].alto} cm`;
+              item.properties[`Medidas = ${pos}`] = `Alto: ${medidasPorArea[pos].alto} cm, Ancho: ${medidasPorArea[pos].ancho} cm`;
             
           }
         });
