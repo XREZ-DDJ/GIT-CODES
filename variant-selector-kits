@@ -1,23 +1,6 @@
 <!-- Selector de Variantes Agrupados para Productos KIT -->
 <p style="font-weight: bold; font-family: 'work sans';">Selecciona las opciones de tu KIT</p>
 
-<!-- Selector de Talla Superior -->
-<p style="font-weight: bold;">Talla Superior</p>
-<div id="kit-top-size" class="kit-options-group">
-  {% for option in product.options_with_values[0].values %}
-    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
-  {% endfor %}
-</div>
-
-<!-- Selector de Talla Inferior -->
-<p style="font-weight: bold;">Talla Inferior</p>
-<div id="kit-bottom-size" class="kit-options-group">
-  {% for option in product.options_with_values[1].values %}
-    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
-    
-  {% endfor %}
-</div>
-
 <!-- Selector de Género -->
 <p style="font-weight: bold;">Género</p>
 <div id="kit-gender" class="kit-options-group">
@@ -25,6 +8,25 @@
     <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
   {% endfor %}
 </div>
+
+<!-- Selector de Talla Superior -->
+<p style="font-weight: bold;">Talla Superior</p>
+<div id="kit-top-size" class="kit-options-group">
+  {% for option in product.options_with_values[0].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }} {{ option.variant.inventory_quantity }}pz</button>
+    
+  {% endfor %}
+</div>
+
+<!-- Selector de Talla Inferior -->
+<p style="font-weight: bold;">Talla Inferior</p>
+<div id="kit-bottom-size" class="kit-options-group">
+  {% for option in product.options_with_values[1].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }} {{ option.variant.inventory_quantity }}pz</button>
+  {% endfor %}
+</div>
+
+
 
 <!-- Selector de Cantidad -->
 <label class="size-label">
