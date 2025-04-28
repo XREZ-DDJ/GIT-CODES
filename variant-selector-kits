@@ -1,0 +1,247 @@
+<!-- Selector de Variantes Agrupados para Productos KIT -->
+<p style="font-weight: bold; font-family: 'work sans';">Selecciona las opciones de tu KIT</p>
+
+<!-- Selector de Talla Superior -->
+<p style="font-weight: bold;">Talla Superior</p>
+<div id="kit-top-size" class="kit-options-group">
+  {% for option in product.options_with_values[0].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
+  {% endfor %}
+</div>
+
+<!-- Selector de Talla Inferior -->
+<p style="font-weight: bold;">Talla Inferior</p>
+<div id="kit-bottom-size" class="kit-options-group">
+  {% for option in product.options_with_values[1].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
+    
+  {% endfor %}
+</div>
+
+<!-- Selector de Género -->
+<p style="font-weight: bold;">Género</p>
+<div id="kit-gender" class="kit-options-group">
+  {% for option in product.options_with_values[2].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
+  {% endfor %}
+</div>
+
+<!-- Selector de Cantidad -->
+<label class="size-label">
+  <p class="size-name">Cantidad</p>
+  <div class="quantity-wrapper">  
+    <button type="button" id="quantity-increase" class="qty-btn up">▲</button>
+    <input type="number" id="kit-quantity" min="1" value="1" class="size-option">   
+    <button type="button" id="quantity-decrease" class="qty-btn down">▼</button>
+  </div>
+</label>
+
+<!-- Botón Agregar al Carrito -->
+<button id="add-to-cart-btn-kit" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const addToCartButton = document.getElementById("add-to-cart-btn-kit");
+    const selectors = document.querySelectorAll(".kit-option-btn");
+    const quantityInput = document.getElementById("kit-quantity");
+    const quantityDecrease = document.getElementById("quantity-decrease");
+    const quantityIncrease = document.getElementById("quantity-increase");
+
+    const selections = {
+      topSize: null,
+      bottomSize: null,
+      gender: null,
+    };
+
+    // Función para actualizar la selección activa
+    function updateSelection(groupId, value) {
+      const group = document.getElementById(groupId);
+      Array.from(group.children).forEach(button => button.classList.remove("selected"));
+      const selectedButton = Array.from(group.children).find(button => button.dataset.value === value);
+      if (selectedButton) selectedButton.classList.add("selected");
+
+      // Actualizar el objeto de selección
+      if (groupId === "kit-top-size") selections.topSize = value;
+      if (groupId === "kit-bottom-size") selections.bottomSize = value;
+      if (groupId === "kit-gender") selections.gender = value;
+
+      // Habilitar el botón "Agregar al carrito" si todas las opciones están seleccionadas
+      const allSelected = Object.values(selections).every(selection => selection !== null);
+      addToCartButton.disabled = !allSelected;
+    }
+
+    // Manejar clics en botones de opciones
+    selectors.forEach(button => {
+      button.addEventListener("click", function () {
+        const groupId = this.parentElement.id;
+        const value = this.dataset.value;
+        updateSelection(groupId, value);
+      });
+    });
+
+    // Manejar el incremento y decremento de la cantidad
+    quantityIncrease.addEventListener("click", () => {
+      quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+    });
+
+    quantityDecrease.addEventListener("click", () => {
+      const currentValue = parseInt(quantityInput.value, 10);
+      if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+      }
+    });
+
+    // Lógica para agregar la variante seleccionada al carrito
+    addToCartButton.addEventListener("click", function () {
+      console.log("🟢 'Agregar al carrito' clickeado para KIT");
+
+      // Buscar la variante específica que coincide con las selecciones
+      const selectedVariant = Array.from({{ product.variants | json }}).find(variant =>
+        variant.option1 === selections.topSize &&
+        variant.option2 === selections.bottomSize &&
+        variant.option3 === selections.gender
+      );
+
+      if (!selectedVariant) {
+        alert("La combinación seleccionada no está disponible. Intenta con otra combinación.");
+        return;
+      }
+
+      // Obtener la cantidad seleccionada
+      const quantity = parseInt(quantityInput.value, 10);
+
+      // Construir el objeto del carrito
+      const itemToAdd = {
+        id: selectedVariant.id,
+        quantity: quantity
+      };
+
+      console.log("🛍 Agregando al carrito...", itemToAdd);
+
+      // Agregar al carrito mediante la API de Shopify
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: [itemToAdd] }),
+      })
+        .then(response => {
+          if (!response.ok) throw new Error("Error al agregar al carrito");
+          return response.json();
+        })
+        .then(resp => {
+          console.log("✅ Variante agregada con éxito", resp);
+          window.location.href = window.location.pathname + '?openCartDrawer=true';
+        })
+        .catch(err => {
+          console.error("❌ Error al agregar al carrito", err);
+          alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
+        });
+    });
+  });
+</script>
+
+<style>
+  .kit-options-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .kit-option-btn {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .kit-option-btn.selected {
+    background-color: black;
+    color: white;
+    border-color: black;
+  }
+
+  .kit-option-btn:hover:not(.selected) {
+    background-color: #f0f0f0;
+  }
+
+  .size-label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 5px;
+    padding: 5px;
+    width: 75px;
+    color: #333;
+  }
+  
+  .quantity-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .size-name{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    
+  }
+
+  .qty-btn {
+    width: 100%;
+    height: 15px;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+  }
+  .qty-btn.down{
+    border-radius: 0 0 4px 4px;
+  }
+  .qty-btn.up{
+    border-radius: 4px 4px 0 0;
+  }
+  .size-option{
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .size-option::-webkit-inner-spin-button,
+  .size-option::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  .add-to-cart-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-to-cart-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+
+  .add-to-cart-btn:hover:not(:disabled) {
+    background-color: #333;
+  }
+</style>
