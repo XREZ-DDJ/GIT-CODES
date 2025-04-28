@@ -13,8 +13,7 @@
 <p style="font-weight: bold;">Talla Superior</p>
 <div id="kit-top-size" class="kit-options-group">
   {% for option in product.options_with_values[0].values %}
-    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }} {{ option.variant.inventory_quantity }}pz</button>
-    
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
   {% endfor %}
 </div>
 
@@ -22,10 +21,9 @@
 <p style="font-weight: bold;">Talla Inferior</p>
 <div id="kit-bottom-size" class="kit-options-group">
   {% for option in product.options_with_values[1].values %}
-    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }} {{ option.variant.inventory_quantity }}pz</button>
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
   {% endfor %}
 </div>
-
 
 
 <!-- Selector de Cantidad -->
@@ -115,7 +113,12 @@
       // Construir el objeto del carrito
       const itemToAdd = {
         id: selectedVariant.id,
-        quantity: quantity
+        quantity: quantity,
+        properties: {
+          "Género": selections.gender,
+          "Talla Superior": selections.topSize,
+          "Talla Inferior": selections.bottomSize
+        }
       };
 
       console.log("🛍 Agregando al carrito...", itemToAdd);
@@ -139,6 +142,17 @@
           alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
         });
     });
+
+    //  Manejo openCartDrawer
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('openCartDrawer') === 'true') {
+      const cartDrawer = document.getElementById('cart-drawer');
+      if (cartDrawer) {
+        cartDrawer.setAttribute('open', '');
+      }
+      // Limpia el parámetro de la URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
   });
 </script>
 
@@ -150,18 +164,19 @@
   }
 
   .kit-option-btn {
-    padding: 8px 12px;
+    padding: 8px 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
     color: black;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    min-width: 55px;
   }
 
   .kit-option-btn.selected {
-    background-color: black;
+    background-color: red;
     color: white;
     border-color: black;
   }
@@ -193,7 +208,6 @@
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 3px;
-    
   }
 
   .qty-btn {
@@ -229,13 +243,14 @@
   }
 
   .add-to-cart-btn {
-    background-color: black;
+    background-color: #ff0000;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 15px 30px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%;
   }
 
   .add-to-cart-btn:disabled {
