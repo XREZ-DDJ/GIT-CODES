@@ -93,55 +93,72 @@
 
     // Lógica para agregar la variante seleccionada al carrito
     addToCartButton.addEventListener("click", function () {
-      console.log("🟢 'Agregar al carrito' clickeado para KIT");
+  console.log("🟢 'Agregar al carrito' clickeado para KIT");
 
-      // Buscar la variante específica que coincide con las selecciones
-      const selectedVariant = Array.from({{ product.variants | json }}).find(variant =>
-        variant.option1 === selections.topSize &&
-        variant.option2 === selections.bottomSize &&
-        variant.option3 === selections.gender
-      );
+  const selectedVariant = Array.from({{ product.variants | json }}).find(variant =>
+    variant.option1 === selections.topSize &&
+    variant.option2 === selections.bottomSize &&
+    variant.option3 === selections.gender
+  );
 
-      if (!selectedVariant) {
-        alert("La combinación seleccionada no está disponible. Intenta con otra combinación.");
-        return;
+  if (!selectedVariant) {
+    alert("La combinación seleccionada no está disponible. Intenta con otra combinación.");
+    return;
+  }
+
+  const quantity = parseInt(quantityInput.value, 10);
+
+  // OBTENER ID DEL METACAMPO
+
+  
+      
+  const giftVariantId = {{ product.metafields.custom.giftkit.value | json }};
+
+  const itemsToAdd = [
+    {
+      id: selectedVariant.id,
+      quantity: quantity,
+      properties: {
+        "Género": selections.gender,
+        "Talla Superior": selections.topSize,
+        "Talla Inferior": selections.bottomSize
       }
+    }
+  ];
 
-      // Obtener la cantidad seleccionada
-      const quantity = parseInt(quantityInput.value, 10);
+  if (giftVariantId) {
+    console.log("🎁 Agregando regalo con variant_id:", giftVariantId);
 
-      // Construir el objeto del carrito
-      const itemToAdd = {
-        id: selectedVariant.id,
-        quantity: quantity,
-        properties: {
-          "Género": selections.gender,
-          "Talla Superior": selections.topSize,
-          "Talla Inferior": selections.bottomSize
-        }
-      };
-
-      console.log("🛍 Agregando al carrito...", itemToAdd);
-
-      // Agregar al carrito mediante la API de Shopify
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: [itemToAdd] }),
-      })
-        .then(response => {
-          if (!response.ok) throw new Error("Error al agregar al carrito");
-          return response.json();
-        })
-        .then(resp => {
-          console.log("✅ Variante agregada con éxito", resp);
-          window.location.href = window.location.pathname + '?openCartDrawer=true';
-        })
-        .catch(err => {
-          console.error("❌ Error al agregar al carrito", err);
-          alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
-        });
+    itemsToAdd.push({
+      id: 42155914526954,
+      quantity: quantity, // o 1, depende de tu regla
+      properties: {
+        "_gift_for_kit": selectedVariant.id
+      }
     });
+  }
+
+  console.log("🛍 Agregando al carrito...", itemsToAdd);
+
+  fetch("/cart/add.js", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ items: itemsToAdd }),
+  })
+    .then(response => {
+      if (!response.ok) throw new Error("Error al agregar al carrito");
+      return response.json();
+    })
+    .then(resp => {
+      console.log("✅ Variantes agregadas con éxito", resp);
+      window.location.href = window.location.pathname + '?openCartDrawer=true';
+    })
+    .catch(err => {
+      console.error("❌ Error al agregar al carrito", err);
+      alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
+    });
+});
+
 
     //  Manejo openCartDrawer
     const params = new URLSearchParams(window.location.search);
