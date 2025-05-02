@@ -22,10 +22,14 @@
     Marrón:#9A5630|
     Vino:#440122|
     Rojo:#F61F1F|
-    Blanco / Durazno:#E8D9CE|
-    Blanco - Dorado:#D49A06|
-    Blanco - Gris:#808080
-      '
+    Blanco / Rojo : repeating-linear-gradient(90deg, rgb(246 31 31), rgb(246 31 31) 4px, white 3px, white 7px)|
+    Blanco / Azul : repeating-linear-gradient(90deg, rgba(27, 34, 63, 1), rgba(27, 34, 63, 1) 4px, white 3px, white 7px)|
+    Blanco / Durazno: linear-gradient(90deg,rgba(232, 217, 206, 1) 50%, rgba(255, 255, 255, 1) 0%)|
+    Blanco - Dorado: linear-gradient(90deg,rgba(212, 154, 6, 1) 50%, rgba(255, 255, 255, 1) 0%)|
+    Blanco - Gris: linear-gradient(90deg,rgba(130, 130, 130, 1) 50%, rgba(255, 255, 255, 1) 50%)|
+    Rayado: repeating-linear-gradient(90deg, #000000, #000000 4px, #ffffff 3px, #ffffff 6px)|
+    Rayado Gris / Rojo: linear-gradient(90deg, #808080 0%, #808080 40%, #cd0000 40%, #cd0000 70%, #ffffff 70%, #ffffff 100%)
+    '
     | strip
   %}
 
@@ -37,7 +41,7 @@
     {% assign displayed_colors = displayed_colors | append: variant.option2 | append: ',' %}
 
     <!-- Valor por defecto si no hay match en el diccionario -->
-    {% assign color_hex = '#000000' %}
+    {% assign color_hex = '#A54DCF' %}
 
     <!-- Buscar el código hex según variant.option2 -->
     {% assign pairs = color_map | split: '|' %}
@@ -71,7 +75,7 @@
       <label
         for="color-{{ variant.id }}"
         class="swatch-label"
-        style="background-color: {{ color_hex }};"
+        style="background: {{ color_hex }};"
       >
       </label>
     </div>
@@ -858,7 +862,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 🐀𐄹𘁆unción para calcular total de piezas
+  // Función para calcular total de piezas
   function getTotalPiezas(items) {
     let total = 0;
     items.forEach(i => {
@@ -907,19 +911,18 @@ document.addEventListener("DOMContentLoaded", function () {
         allFileInputs.forEach(fi => {
           if (fi.files.length > 0) {
             let pos = fi.id.replace("file-upload-", "");
-            item.properties[`Archivo = ${pos}`] = fi.files[0].name;
             // Recuperar URL
             let prevDiv = document.getElementById(`preview-${pos}`);
             let linkEl  = prevDiv.querySelector("img");
             if (linkEl) {
-              item.properties[`URL = ${pos}`] = linkEl.src;
+              item.properties[`Bordado ${pos}`] = linkEl.src;
             }
             // AGREGAR LAS MEDIDAS DE CADA AREA ESPECIFICA
-              item.properties[`Medidas = ${pos}`] = `Alto: ${medidasPorArea[pos].alto} cm, Ancho: ${medidasPorArea[pos].ancho} cm`;
+              item.properties[`Medidas`] = `Alto: ${medidasPorArea[pos].alto} cm, Ancho: ${medidasPorArea[pos].ancho} cm`;
             
           }
         });
-
+    
         newCart.push(item);
       }
     });
