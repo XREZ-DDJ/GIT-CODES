@@ -109,10 +109,7 @@
   const quantity = parseInt(quantityInput.value, 10);
 
   // OBTENER ID DEL METACAMPO
-
-  
-      
-  const giftVariantId = {{ product.metafields.custom.giftkit.value | json }};
+  {% assign giftkit = product.metafields.custom.giftkit.value %};
 
   const itemsToAdd = [
     {
@@ -126,17 +123,15 @@
     }
   ];
 
-  if (giftVariantId) {
-    console.log("🎁 Agregando regalo con variant_id:", giftVariantId);
 
-    itemsToAdd.push({
-      id: 42155914526954,
-      quantity: quantity, // o 1, depende de tu regla
-      properties: {
-        "_gift_for_kit": selectedVariant.id
-      }
-    });
-  }
+  console.log("🎁 Agregando regalo con variant_id:", {{giftkit.id}});
+  //42155914526954
+  itemsToAdd.push({
+    id: {{ giftkit.id }},
+    quantity: quantity, // o 1, depende de tu regla
+    properties: {
+    }
+  });
 
   console.log("🛍 Agregando al carrito...", itemsToAdd);
 
