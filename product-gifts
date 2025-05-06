@@ -1,0 +1,218 @@
+<div id="look-slider" class="look-slider">
+  <!-- Slide 1 -->
+  <div class="slide" id="slide-1">
+    <div class="product-grid">
+      {% assign gifts_collection = collections['gifts'] %}
+      {% for product in gifts_collection.products %}
+        <div class="product-card" data-handle="{{ product.handle }}" data-variant-id="{{ product.variants.first.id }}" data-slide="1">
+          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+          <h3>{{ product.title }}</h3>
+          <button onclick="selectProduct(event, this, 1)">Seleccionar</button>
+          <button onclick="showComplementsFromHandles(this.parentElement)">Ver combinaciones</button>
+        </div>
+
+        <!-- Hidden related products -->
+        <div class="related-products" id="related-{{ product.handle }}" style="display: none;">
+          {% for related_product in product.metafields.custom.completatulook.value %}
+            <div class="product-card" data-variant-id="{{ related_product.variants.first.id }}" data-slide="2">
+              <img src="{{ related_product.featured_image | img_url: 'medium' }}" alt="{{ related_product.title }}">
+              <h3>{{ related_product.title }}</h3>
+              <button onclick="selectProduct(event, this, 2)">Seleccionar</button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide" id="slide-2">
+    <div id="complementary-look" class="product-grid">
+      <!-- Se llena dinámicamente -->
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide" id="slide-3">
+    <div class="final-selection">
+      <p>Haz clic en el botón para agregar los productos seleccionados al carrito.</p>
+      <div id="selected-summary" class="product-grid"></div>
+      <button onclick="addToCart()">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div class="navigation-dots">
+    <span class="dot active" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="validateBeforeSlide3()"></span>
+  </div>
+</div>
+
+<style>
+  .look-slider { position: relative; overflow: hidden; }
+  .slide { display: none; padding: 20px; }
+  .slide.active { display: block; }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 16px;
+  }
+  .product-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .product-card.selected {
+    border-color: #4caf50;
+  }
+  .product-card button { margin: 5px; }
+  .navigation-dots { text-align: center; margin-top: 20px; }
+  .dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .dot.active { background-color: #333; }
+</style>
+
+<script>
+  let currentSlide = 1;
+  let selectedSlide1Variant = null;
+  let selectedSlide2Variant = null;
+
+  function goToSlide(slideNumber) {
+    document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+    document.querySelector(`#slide-${slideNumber}`).classList.add('active');
+
+    document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+    document.querySelectorAll('.dot')[slideNumber - 1].classList.add('active');
+
+    currentSlide = slideNumber;
+  }
+
+  function selectProduct(event, button, slideNumber) {
+    event.stopPropagation();
+    const card = button.closest('.product-card');
+    const variantId = card.dataset.variantId;
+    if (!variantId) return;
+
+    // Deseleccionar todas las tarjetas de ese slide
+    document.querySelectorAll(`.product-card[data-slide='${slideNumber}']`).forEach(c => {
+      c.classList.remove("selected");
+      const btn = c.querySelector("button");
+      if (btn) btn.textContent = "Seleccionar";
+    });
+
+    card.classList.add("selected");
+    button.textContent = "Seleccionado";
+
+    if (slideNumber === 1) {
+      selectedSlide1Variant = variantId;
+
+      // Limpiar selección del Slide 2
+      selectedSlide2Variant = null;
+      document.querySelectorAll(`.product-card[data-slide='2']`).forEach(c => {
+        c.classList.remove("selected");
+        const btn = c.querySelector("button");
+        if (btn) btn.textContent = "Seleccionar";
+      });
+    } else if (slideNumber === 2) {
+      selectedSlide2Variant = variantId;
+    }
+  }
+
+  function showComplementsFromHandles(element) {
+    const productHandle = element.dataset.handle;
+    const relatedContainer = document.getElementById(`related-${productHandle}`);
+    const target = document.getElementById('complementary-look');
+    target.innerHTML = "";
+
+    Array.from(relatedContainer.children).forEach(child => {
+      const clone = child.cloneNode(true);
+      const button = clone.querySelector('button');
+      const variantId = clone.dataset.variantId;
+
+      if (selectedSlide2Variant === variantId) {
+        clone.classList.add("selected");
+        if (button) button.textContent = "Seleccionado";
+      } else {
+        if (button) button.textContent = "Seleccionar";
+      }
+
+      if (button) {
+        button.addEventListener('click', (event) => selectProduct(event, button, 2));
+      }
+
+      target.appendChild(clone);
+    });
+
+    goToSlide(2);
+  }
+
+  function validateBeforeSlide3() {
+    if (!selectedSlide1Variant || !selectedSlide2Variant) {
+      alert("Debes seleccionar un producto del slide 1 y otro del slide 2 antes de continuar.");
+      return;
+    }
+    goToSlide(3);
+    showSummary();
+  }
+
+  function addToCart() {
+    const itemsToAdd = [];
+    if (selectedSlide1Variant) {
+      itemsToAdd.push({ id: parseInt(selectedSlide1Variant), quantity: 1 });
+    }
+    if (selectedSlide2Variant) {
+      itemsToAdd.push({ id: parseInt(selectedSlide2Variant), quantity: 1 });
+    }
+
+    if (itemsToAdd.length === 0) {
+      alert("No has seleccionado ningún producto.");
+      return;
+    }
+
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: itemsToAdd })
+    })
+      .then(response => {
+        if (!response.ok) throw new Error("Error al agregar al carrito");
+        return response.json();
+      })
+      .then(resp => {
+        console.log("✅ Productos agregados con éxito", resp);
+        window.location.href = "/cart";
+      })
+      .catch(err => {
+        console.error("❌ Error al agregar al carrito", err);
+        alert("Hubo un problema al agregar al carrito. Intenta de nuevo.");
+      });
+  }
+
+  function showSummary() {
+    const summaryContainer = document.getElementById("selected-summary");
+    summaryContainer.innerHTML = "";
+
+    [selectedSlide1Variant, selectedSlide2Variant].forEach(variantId => {
+      if (!variantId) return;
+      const card = document.querySelector(`[data-variant-id='${variantId}']`);
+      if (card) {
+        const clone = card.cloneNode(true);
+        const button = clone.querySelector("button");
+        if (button) button.remove();
+        summaryContainer.appendChild(clone);
+      }
+    });
+  }
+
+  goToSlide(1);
+</script>
