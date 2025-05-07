@@ -693,20 +693,13 @@ function validarMedidasPersonalizadas(areaId, inputAncho, inputAlto) {
     alert(`El ancho máximo permitido para ${areaId} es ${limites.ancho} cm.`);
     inputAncho.value = limites.ancho; // Ajustar al máximo permitido
   }
-  if(ancho<1){
-    alert(`La medida debe ser mayor a cero`)
-    inputAncho.value = limites.ancho;
-  }
+
 
   // Validar alto
   const alto = parseFloat(inputAlto.value) || 0;
   if (alto > limites.alto) {
     alert(`El alto máximo permitido para ${areaId} es ${limites.alto} cm.`);
     inputAlto.value = limites.alto; // Ajustar al máximo permitido
-  }
-  if(alto<1){
-    alert(`La medida debe ser mayor a cero`)
-    inputAlto.value = limites.alto;
   }
 }
 
