@@ -4,22 +4,9 @@
     <div class="product-grid">
       {% assign gifts_collection = collections['gifts'] %}
       {% for product in gifts_collection.products %}
-        <div class="product-card" data-handle="{{ product.handle }}" data-variant-id="{{ product.variants.first.id }}" data-slide="1">
+        <div class="product-card" data-handle="{{ product.handle }}" data-variant-id="{{ product.variants.first.id }}" data-slide="1" onclick="handleCardClick(event, this)">
           <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
           <h3>{{ product.title }}</h3>
-          <button onclick="selectProduct(event, this, 1)">Seleccionar</button>
-          <button onclick="showComplementsFromHandles(this.parentElement)">Ver combinaciones</button>
-        </div>
-
-        <!-- Hidden related products -->
-        <div class="related-products" id="related-{{ product.handle }}" style="display: none;">
-          {% for related_product in product.metafields.custom.completatulook.value %}
-            <div class="product-card" data-variant-id="{{ related_product.variants.first.id }}" data-slide="2">
-              <img src="{{ related_product.featured_image | img_url: 'medium' }}" alt="{{ related_product.title }}">
-              <h3>{{ related_product.title }}</h3>
-              <button onclick="selectProduct(event, this, 2)">Seleccionar</button>
-            </div>
-          {% endfor %}
         </div>
       {% endfor %}
     </div>
@@ -27,16 +14,26 @@
 
   <!-- Slide 2 -->
   <div class="slide" id="slide-2">
-    <div id="complementary-look" class="product-grid">
-      <!-- Se llena dinámicamente -->
-    </div>
+    {% for product in collections['gifts'].products %}
+      <div class="complementary-group" id="complementary-{{ product.handle }}" style="display: none;">
+        <div class="product-grid">
+          {% for related_product in product.metafields.custom.completatulook.value %}
+            <div class="product-card" data-variant-id="{{ related_product.variants.first.id }}" data-product-handle="{{ related_product.handle }}" data-slide="2" onclick="handleCardClick(event, this)">
+              <img src="{{ related_product.featured_image | img_url: 'medium' }}" alt="{{ related_product.title }}">
+              <h3>{{ related_product.title }}</h3>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
   </div>
 
   <!-- Slide 3 -->
   <div class="slide" id="slide-3">
     <div class="final-selection">
       <p>Haz clic en el botón para agregar los productos seleccionados al carrito.</p>
-      <div id="selected-summary" class="product-grid"></div>
+      <div id="selected-summary" class="product-grid">
+      </div>
       <button onclick="addToCart()">Agregar al carrito</button>
     </div>
   </div>
@@ -64,11 +61,11 @@
     padding: 10px;
     text-align: center;
     transition: border-color 0.3s;
+    cursor: pointer;
   }
   .product-card.selected {
     border-color: #4caf50;
   }
-  .product-card button { margin: 5px; }
   .navigation-dots { text-align: center; margin-top: 20px; }
   .dot {
     height: 12px;
@@ -88,6 +85,10 @@
   let selectedSlide2Variant = null;
 
   function goToSlide(slideNumber) {
+    if (slideNumber === 2 && !selectedSlide1Variant) {
+      alert("Primero debes seleccionar un producto del Slide 1.");
+      return;
+    }
     document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
     document.querySelector(`#slide-${slideNumber}`).classList.add('active');
 
@@ -97,63 +98,31 @@
     currentSlide = slideNumber;
   }
 
-  function selectProduct(event, button, slideNumber) {
-    event.stopPropagation();
-    const card = button.closest('.product-card');
+  function handleCardClick(event, card) {
+    const slideNumber = parseInt(card.dataset.slide);
     const variantId = card.dataset.variantId;
+
     if (!variantId) return;
 
-    // Deseleccionar todas las tarjetas de ese slide
-    document.querySelectorAll(`.product-card[data-slide='${slideNumber}']`).forEach(c => {
-      c.classList.remove("selected");
-      const btn = c.querySelector("button");
-      if (btn) btn.textContent = "Seleccionar";
-    });
-
+    document.querySelectorAll(`.product-card[data-slide='${slideNumber}']`).forEach(c => c.classList.remove("selected"));
     card.classList.add("selected");
-    button.textContent = "Seleccionado";
 
     if (slideNumber === 1) {
       selectedSlide1Variant = variantId;
-
-      // Limpiar selección del Slide 2
       selectedSlide2Variant = null;
-      document.querySelectorAll(`.product-card[data-slide='2']`).forEach(c => {
-        c.classList.remove("selected");
-        const btn = c.querySelector("button");
-        if (btn) btn.textContent = "Seleccionar";
-      });
+      document.querySelectorAll(`.product-card[data-slide='2']`).forEach(c => c.classList.remove("selected"));
+
+      const handle = card.dataset.handle;
+      document.querySelectorAll('.complementary-group').forEach(group => group.style.display = 'none');
+      const relatedGroup = document.getElementById(`complementary-${handle}`);
+      if (relatedGroup) relatedGroup.style.display = 'block';
+
+      goToSlide(2);
     } else if (slideNumber === 2) {
       selectedSlide2Variant = variantId;
+      goToSlide(3);
+      showSummary();
     }
-  }
-
-  function showComplementsFromHandles(element) {
-    const productHandle = element.dataset.handle;
-    const relatedContainer = document.getElementById(`related-${productHandle}`);
-    const target = document.getElementById('complementary-look');
-    target.innerHTML = "";
-
-    Array.from(relatedContainer.children).forEach(child => {
-      const clone = child.cloneNode(true);
-      const button = clone.querySelector('button');
-      const variantId = clone.dataset.variantId;
-
-      if (selectedSlide2Variant === variantId) {
-        clone.classList.add("selected");
-        if (button) button.textContent = "Seleccionado";
-      } else {
-        if (button) button.textContent = "Seleccionar";
-      }
-
-      if (button) {
-        button.addEventListener('click', (event) => selectProduct(event, button, 2));
-      }
-
-      target.appendChild(clone);
-    });
-
-    goToSlide(2);
   }
 
   function validateBeforeSlide3() {
@@ -167,12 +136,15 @@
 
   function addToCart() {
     const itemsToAdd = [];
-    if (selectedSlide1Variant) {
-      itemsToAdd.push({ id: parseInt(selectedSlide1Variant), quantity: 1 });
-    }
-    if (selectedSlide2Variant) {
-      itemsToAdd.push({ id: parseInt(selectedSlide2Variant), quantity: 1 });
-    }
+    const formGroups = document.querySelectorAll(".variant-select-group");
+    formGroups.forEach(group => {
+      const colorSelect = group.querySelector(".color-select");
+      const sizeSelect = group.querySelector(".size-select");
+      const variantId = sizeSelect.value;
+      if (variantId) {
+        itemsToAdd.push({ id: parseInt(variantId), quantity: 1 });
+      }
+    });
 
     if (itemsToAdd.length === 0) {
       alert("No has seleccionado ningún producto.");
@@ -189,11 +161,9 @@
         return response.json();
       })
       .then(resp => {
-        console.log("✅ Productos agregados con éxito", resp);
         window.location.href = "/cart";
       })
       .catch(err => {
-        console.error("❌ Error al agregar al carrito", err);
         alert("Hubo un problema al agregar al carrito. Intenta de nuevo.");
       });
   }
@@ -206,13 +176,99 @@
       if (!variantId) return;
       const card = document.querySelector(`[data-variant-id='${variantId}']`);
       if (card) {
-        const clone = card.cloneNode(true);
-        const button = clone.querySelector("button");
-        if (button) button.remove();
-        summaryContainer.appendChild(clone);
+        const handle = card.dataset.handle || card.dataset.productHandle;
+        const product = Shopify.productData[handle];
+        if (product) {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("product-card");
+
+          const image = document.createElement("img");
+          image.src = product.featured_image;
+          image.alt = product.title;
+          wrapper.appendChild(image);
+
+          const title = document.createElement("h3");
+          title.innerText = product.title;
+          wrapper.appendChild(title);
+
+          const variantGroup = document.createElement("div");
+          variantGroup.classList.add("variant-select-group");
+
+          const option1Values = [...new Set(product.variants.map(v => v.title.split(" / ")[0]))];
+          const option2Values = [...new Set(product.variants.map(v => v.title.split(" / ")[1]))];
+
+          const colorSelect = document.createElement("select");
+          colorSelect.classList.add("color-select");
+          option1Values.forEach(color => {
+            const option = document.createElement("option");
+            option.value = color;
+            option.innerText = color;
+            colorSelect.appendChild(option);
+          });
+
+          const sizeSelect = document.createElement("select");
+          sizeSelect.classList.add("size-select");
+          option2Values.forEach(size => {
+            const matchedVariant = product.variants.find(v => v.title.includes(colorSelect.value + " / " + size));
+            if (matchedVariant) {
+              const option = document.createElement("option");
+              option.value = matchedVariant.id;
+              option.innerText = size;
+              sizeSelect.appendChild(option);
+            }
+          });
+
+          colorSelect.addEventListener("change", () => {
+            const selectedColor = colorSelect.value;
+            sizeSelect.innerHTML = "";
+            option2Values.forEach(size => {
+              const matchedVariant = product.variants.find(v => v.title === `${selectedColor} / ${size}`);
+              if (matchedVariant) {
+                const option = document.createElement("option");
+                option.value = matchedVariant.id;
+                option.innerText = size;
+                sizeSelect.appendChild(option);
+              }
+            });
+          });
+
+          variantGroup.appendChild(colorSelect);
+          variantGroup.appendChild(sizeSelect);
+          wrapper.appendChild(variantGroup);
+
+          summaryContainer.appendChild(wrapper);
+        }
       }
     });
   }
 
   goToSlide(1);
+</script>
+
+<script>
+  window.Shopify = window.Shopify || {};
+  Shopify.productData = {};
+  {% assign all_handles = '' %}
+  {% for product in collections['gifts'].products %}
+    {% assign all_handles = all_handles | append: product.handle | append: ',' %}
+    {% for related in product.metafields.custom.completatulook.value %}
+      {% assign all_handles = all_handles | append: related.handle | append: ',' %}
+    {% endfor %}
+  {% endfor %}
+  {% assign all_handles_array = all_handles | split: ',' | uniq %}
+  {% for handle in all_handles_array %}
+    {% assign p = all_products[handle] %}
+    Shopify.productData['{{ handle }}'] = {
+      title: {{ p.title | json }},
+      featured_image: {{ p.featured_image | img_url: 'medium' | json }},
+      variants: [
+        {% for v in p.variants %}
+          {
+            id: {{ v.id }},
+            title: {{ v.title | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    };
+  {% endfor %}
 </script>
