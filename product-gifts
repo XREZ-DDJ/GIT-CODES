@@ -4,9 +4,9 @@
     <div class="product-grid">
       {% assign gifts_collection = collections['gifts'] %}
       {% for product in gifts_collection.products %}
-        <div class="product-card" data-handle="{{ product.handle }}" data-variant-id="{{ product.variants.first.id }}" data-slide="1" onclick="handleCardClick(event, this)">
+        <div class="product-card2" data-handle="{{ product.handle }}" data-variant-id="{{ product.variants.first.id }}" data-slide="1" onclick="handleCardClick(event, this)">
           <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-          <h3>{{ product.title }}</h3>
+          <p class="h6">{{ product.title }}</p>
         </div>
       {% endfor %}
     </div>
@@ -18,9 +18,9 @@
       <div class="complementary-group" id="complementary-{{ product.handle }}" style="display: none;">
         <div class="product-grid">
           {% for related_product in product.metafields.custom.completatulook.value %}
-            <div class="product-card" data-variant-id="{{ related_product.variants.first.id }}" data-product-handle="{{ related_product.handle }}" data-slide="2" onclick="handleCardClick(event, this)">
+            <div class="product-card2" data-variant-id="{{ related_product.variants.first.id }}" data-product-handle="{{ related_product.handle }}" data-slide="2" onclick="handleCardClick(event, this)">
               <img src="{{ related_product.featured_image | img_url: 'medium' }}" alt="{{ related_product.title }}">
-              <h3>{{ related_product.title }}</h3>
+               <p class="h6">{{ related_product.title }}</p>
             </div>
           {% endfor %}
         </div>
@@ -31,11 +31,10 @@
   <!-- Slide 3 -->
   <div class="slide" id="slide-3">
     <div class="final-selection">
-      <p>Haz clic en el botón para agregar los productos seleccionados al carrito.</p>
-      <div id="selected-summary" class="product-grid">
+      <div id="selected-summary" class="product-grid2">
 
       </div>
-      <button onclick="addToCart()">Agregar al carrito</button>
+      <button class="button btn-comprar" onclick="addToCart()">COMPRAR</button>
     </div>
   </div>
 
@@ -57,16 +56,28 @@
     grid-template-rows: repeat(2, auto);
     gap: 16px;
   }
-  .product-card {
+  .product-grid2{
+    justify-self: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 16px;
+  }
+  
+  .product-card2 {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
     transition: border-color 0.3s;
     cursor: pointer;
+    display: grid;
+    grid-template-rows: repeat(2, 0fr);
+    justify-items: center;
   }
-  .product-card.selected {
+  .product-card2.selected {
     border-color: #4caf50;
   }
+  
   .navigation-dots { text-align: center; margin-top: 20px; }
   .dot {
     height: 12px;
@@ -79,26 +90,54 @@
   }
   .dot.active { background-color: #333; }
 
+  /*BOTONES*/
+  
+  .color-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .color-button {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     display: inline-block;
     margin: 4px;
     cursor: pointer;
     border: 1px solid rgb(207 207 207);
   }
-  .color-button.selected {
+
+  .color-button.active {
     outline: 1px solid #000;
     outline-offset: 2px;
   }
+
+  .variant-select-group {
+    margin-top: 10px;
+  }
+
+  .size-select {
+    margin-top: 10px;
+    padding: 6px;
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px, solid, rgba(28, 28, 28, 1);
+  }
+  .btn-comprar {
+      --initial-gradient: linear-gradient(rgb(255 0 0), rgb(255 0 0));
+  }
+  
+
+
 </style>
 
 <script>
   let currentSlide = 1;
   let selectedSlide1Variant = null;
   let selectedSlide2Variant = null;
-
   const colorDictionary = {
     "Negro": "#000000",
     "Azul": "#005BD3",
@@ -148,13 +187,13 @@
 
     if (!variantId) return;
 
-    document.querySelectorAll(`.product-card[data-slide='${slideNumber}']`).forEach(c => c.classList.remove("selected"));
+    document.querySelectorAll(`.product-card2[data-slide='${slideNumber}']`).forEach(c => c.classList.remove("selected"));
     card.classList.add("selected");
 
     if (slideNumber === 1) {
       selectedSlide1Variant = variantId;
       selectedSlide2Variant = null;
-      document.querySelectorAll(`.product-card[data-slide='2']`).forEach(c => c.classList.remove("selected"));
+      document.querySelectorAll(`.product-card2[data-slide='2']`).forEach(c => c.classList.remove("selected"));
 
       const handle = card.dataset.handle;
       document.querySelectorAll('.complementary-group').forEach(group => group.style.display = 'none');
@@ -218,73 +257,93 @@
 
     [selectedSlide1Variant, selectedSlide2Variant].forEach(variantId => {
       if (!variantId) return;
+
       const card = document.querySelector(`[data-variant-id='${variantId}']`);
       if (card) {
         const handle = card.dataset.handle || card.dataset.productHandle;
         const product = Shopify.productData[handle];
+
         if (product) {
           const wrapper = document.createElement("div");
-          wrapper.classList.add("product-card");
+          wrapper.classList.add("product-card2");
 
           const image = document.createElement("img");
           image.src = product.featured_image;
           image.alt = product.title;
           wrapper.appendChild(image);
 
-          const title = document.createElement("h3");
+          const title = document.createElement("p");
           title.innerText = product.title;
+          title.classList.add("h6");
           wrapper.appendChild(title);
 
           const variantGroup = document.createElement("div");
           variantGroup.classList.add("variant-select-group");
 
-          // Extraer correctamente las tallas y colores
-          const sizeValues = [...new Set(product.variants.map(v => v.title.split(" / ")[0]))]; // Tallas
-          const colorValues = [...new Set(product.variants.map(v => v.title.split(" / ")[1]))]; // Colores
+          const sizeValues = [...new Set(product.variants.map(v => v.title.split(" / ")[0]))];
+          const colorValues = [...new Set(product.variants.map(v => v.title.split(" / ")[1]))];
 
-          // Crear el contenedor para botones de color
-          const colorButtonGroup = document.createElement("div");
-          colorButtonGroup.classList.add("color-button-group");
-
-          colorValues.forEach(color => {
-            const colorButton = document.createElement("button");
-            colorButton.classList.add("color-button");
-            colorButton.setAttribute("type", "button");
-            colorButton.setAttribute("title", color); // Tooltip
-
-            // Estilo circular y fondo dinámico
-            const colorCode = colorDictionary[color] || "#ccc"; // Color por defecto si no está en el diccionario
-            colorButton.style.background = colorCode;
-
-            // Evento de selección de color
-            colorButton.addEventListener("click", () => {
-              const buttons = colorButtonGroup.querySelectorAll("button");
-              buttons.forEach(btn => btn.classList.remove("selected"));
-              colorButton.classList.add("selected");
-            });
-
-            colorButtonGroup.appendChild(colorButton);
-          });
-
-          // Crear el select para tallas
+          // Crear el select para Tallas
           const sizeSelect = document.createElement("select");
           sizeSelect.classList.add("size-select");
-          sizeValues.forEach(size => {
-            const option = document.createElement("option");
-            option.value = size;
-            option.innerText = size;
-            sizeSelect.appendChild(option);
+
+          // Contenedor de botones de color
+          const colorContainer = document.createElement("div");
+          colorContainer.classList.add("color-buttons");
+
+          let selectedColor = colorValues[0]; // color por defecto
+
+          // Función para actualizar las tallas según el color
+          function updateSizeOptions(selectedColor) {
+            sizeSelect.innerHTML = "";
+            sizeValues.forEach(size => {
+              const matchedVariant = product.variants.find(v => v.title === `${size} / ${selectedColor}`);
+              if (matchedVariant) {
+                const option = document.createElement("option");
+                option.value = matchedVariant.id;
+                option.innerText = size;
+                sizeSelect.appendChild(option);
+              }
+            });
+          }
+
+          // Crear botones de color
+          colorValues.forEach(color => {
+            const button = document.createElement("button");
+            button.type = "button";
+            //button.innerText = color;
+            button.classList.add("color-button");//clase para botones circulares
+            button.setAttribute("title", color); // Tooltip
+            const colorCode = colorDictionary[color] || "#ccc"; // Color por defecto si no está en el diccionario
+            button.style.background = colorCode;
+            if (color === selectedColor) button.classList.add("active");
+
+            button.addEventListener("click", () => {
+              selectedColor = color;
+
+              // Actualizar botones activos
+              colorContainer.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+              button.classList.add("active");
+
+              updateSizeOptions(selectedColor);
+            });
+
+            colorContainer.appendChild(button);
           });
 
-          variantGroup.appendChild(colorButtonGroup);
+          // Inicializar tallas con el color por defecto
+          updateSizeOptions(selectedColor);
+
+          // Añadir elementos al grupo y al wrapper
+          variantGroup.appendChild(colorContainer);
           variantGroup.appendChild(sizeSelect);
           wrapper.appendChild(variantGroup);
-
           summaryContainer.appendChild(wrapper);
         }
       }
     });
   }
+
 
   goToSlide(1);
 </script>
