@@ -33,6 +33,7 @@
     <div class="final-selection">
       <p>Haz clic en el botón para agregar los productos seleccionados al carrito.</p>
       <div id="selected-summary" class="product-grid">
+
       </div>
       <button onclick="addToCart()">Agregar al carrito</button>
     </div>
@@ -77,12 +78,55 @@
     cursor: pointer;
   }
   .dot.active { background-color: #333; }
+
+  .color-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 4px;
+    cursor: pointer;
+    border: 1px solid rgb(207 207 207);
+  }
+  .color-button.selected {
+    outline: 1px solid #000;
+    outline-offset: 2px;
+  }
 </style>
 
 <script>
   let currentSlide = 1;
   let selectedSlide1Variant = null;
   let selectedSlide2Variant = null;
+
+  const colorDictionary = {
+    "Negro": "#000000",
+    "Azul": "#005BD3",
+    "Blanco": "#FFFFFF",
+    "Gris": "#808080",
+    "Gris Oxford": "#5B5D5F",
+    "Oro rosa": "#B76E79",
+    "Púrpura": "#A54DCF",
+    "Amarillo": "#FFE500",
+    "Naranja": "#FF8A00",
+    "Rosa": "#FFC0CB",
+    "Cafe": "#A67907",
+    "Azul cielo": "#099399",
+    "Beige": "#EAD8AB",
+    "Azul marino": "#282099",
+    "Verde": "#05AA3D",
+    "Marrón": "#9A5630",
+    "Vino": "#440122",
+    "Rojo": "#F61F1F",
+    "Blanco / Rojo": "repeating-linear-gradient(90deg, rgb(246 31 31), rgb(246 31 31) 4px, white 3px, white 7px)",
+    "Blanco / Azul": "repeating-linear-gradient(90deg, rgba(27, 34, 63, 1), rgba(27, 34, 63, 1) 4px, white 3px, white 7px)",
+    "Blanco / Durazno": "linear-gradient(90deg,rgba(232, 217, 206, 1) 50%, rgba(255, 255, 255, 1) 0%)",
+    "Blanco - Dorado": "linear-gradient(90deg,rgba(212, 154, 6, 1) 50%, rgba(255, 255, 255, 1) 0%)",
+    "Blanco - Gris": "linear-gradient(90deg,rgba(130, 130, 130, 1) 50%, rgba(255, 255, 255, 1) 50%)",
+    "Rayado": "repeating-linear-gradient(90deg, #000000, #000000 4px, #ffffff 3px, #ffffff 6px)",
+    "Rayado Gris / Rojo": "linear-gradient(90deg, #808080 0%, #808080 40%, #cd0000 40%, #cd0000 70%, #ffffff 70%, #ffffff 100%)",
+    
+  };
 
   function goToSlide(slideNumber) {
     if (slideNumber === 2 && !selectedSlide1Variant) {
@@ -194,45 +238,45 @@
           const variantGroup = document.createElement("div");
           variantGroup.classList.add("variant-select-group");
 
-          const option1Values = [...new Set(product.variants.map(v => v.title.split(" / ")[0]))];
-          const option2Values = [...new Set(product.variants.map(v => v.title.split(" / ")[1]))];
+          // Extraer correctamente las tallas y colores
+          const sizeValues = [...new Set(product.variants.map(v => v.title.split(" / ")[0]))]; // Tallas
+          const colorValues = [...new Set(product.variants.map(v => v.title.split(" / ")[1]))]; // Colores
 
-          const colorSelect = document.createElement("select");
-          colorSelect.classList.add("color-select");
-          option1Values.forEach(color => {
-            const option = document.createElement("option");
-            option.value = color;
-            option.innerText = color;
-            colorSelect.appendChild(option);
+          // Crear el contenedor para botones de color
+          const colorButtonGroup = document.createElement("div");
+          colorButtonGroup.classList.add("color-button-group");
+
+          colorValues.forEach(color => {
+            const colorButton = document.createElement("button");
+            colorButton.classList.add("color-button");
+            colorButton.setAttribute("type", "button");
+            colorButton.setAttribute("title", color); // Tooltip
+
+            // Estilo circular y fondo dinámico
+            const colorCode = colorDictionary[color] || "#ccc"; // Color por defecto si no está en el diccionario
+            colorButton.style.background = colorCode;
+
+            // Evento de selección de color
+            colorButton.addEventListener("click", () => {
+              const buttons = colorButtonGroup.querySelectorAll("button");
+              buttons.forEach(btn => btn.classList.remove("selected"));
+              colorButton.classList.add("selected");
+            });
+
+            colorButtonGroup.appendChild(colorButton);
           });
 
+          // Crear el select para tallas
           const sizeSelect = document.createElement("select");
           sizeSelect.classList.add("size-select");
-          option2Values.forEach(size => {
-            const matchedVariant = product.variants.find(v => v.title.includes(colorSelect.value + " / " + size));
-            if (matchedVariant) {
-              const option = document.createElement("option");
-              option.value = matchedVariant.id;
-              option.innerText = size;
-              sizeSelect.appendChild(option);
-            }
+          sizeValues.forEach(size => {
+            const option = document.createElement("option");
+            option.value = size;
+            option.innerText = size;
+            sizeSelect.appendChild(option);
           });
 
-          colorSelect.addEventListener("change", () => {
-            const selectedColor = colorSelect.value;
-            sizeSelect.innerHTML = "";
-            option2Values.forEach(size => {
-              const matchedVariant = product.variants.find(v => v.title === `${selectedColor} / ${size}`);
-              if (matchedVariant) {
-                const option = document.createElement("option");
-                option.value = matchedVariant.id;
-                option.innerText = size;
-                sizeSelect.appendChild(option);
-              }
-            });
-          });
-
-          variantGroup.appendChild(colorSelect);
+          variantGroup.appendChild(colorButtonGroup);
           variantGroup.appendChild(sizeSelect);
           wrapper.appendChild(variantGroup);
 
