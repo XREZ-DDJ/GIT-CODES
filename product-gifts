@@ -73,6 +73,7 @@
     display: grid;
     grid-template-rows: repeat(2, 0fr);
     justify-items: center;
+    gap:20px;
   }
   .product-card2.selected {
     border-color: #4caf50;
@@ -297,7 +298,7 @@
           function updateSizeOptions(selectedColor) {
             sizeSelect.innerHTML = "";
             sizeValues.forEach(size => {
-              const matchedVariant = product.variants.find(v => v.title === `${size} / ${selectedColor}`);
+              const matchedVariant = product.variants.find(v => v.title === `${size} / ${selectedColor}` && v.available);
               if (matchedVariant) {
                 const option = document.createElement("option");
                 option.value = matchedVariant.id;
@@ -305,31 +306,59 @@
                 sizeSelect.appendChild(option);
               }
             });
+          
+            // Opcional: deshabilitar el dropdown si no hay opciones
+            if (sizeSelect.options.length === 0) {
+              const option = document.createElement("option");
+              option.disabled = true;
+              option.innerText = "Sin stock";
+              sizeSelect.appendChild(option);
+              sizeSelect.disabled = true;
+            } else {
+              sizeSelect.disabled = false;
+            }
           }
+
 
           // Crear botones de color
           colorValues.forEach(color => {
+            // Verifica si hay al menos una variante disponible para este color
+            const hasStock = product.variants.some(v => {
+              const [size, variantColor] = v.title.split(" / ");
+              return variantColor === color && v.available;
+            });
+          
+            if (!hasStock) return; // No crear el botón si no hay stock
+          
             const button = document.createElement("button");
             button.type = "button";
-            //button.innerText = color;
-            button.classList.add("color-button");//clase para botones circulares
+            button.classList.add("color-button");
             button.setAttribute("title", color); // Tooltip
-            const colorCode = colorDictionary[color] || "#ccc"; // Color por defecto si no está en el diccionario
+            const colorCode = colorDictionary[color] || "#ccc";
             button.style.background = colorCode;
+          
             if (color === selectedColor) button.classList.add("active");
-
+          
             button.addEventListener("click", () => {
               selectedColor = color;
-
+            
               // Actualizar botones activos
               colorContainer.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
               button.classList.add("active");
-
+            
+              // Actualizar imagen a la de la variante correspondiente al color
+              const variantWithImage = product.variants.find(v => v.title.includes(` / ${color}`) && v.image);
+              if (variantWithImage && variantWithImage.image) {
+                image.src = variantWithImage.image;
+              }
+            
               updateSizeOptions(selectedColor);
             });
 
+          
             colorContainer.appendChild(button);
           });
+
 
           // Inicializar tallas con el color por defecto
           updateSizeOptions(selectedColor);
@@ -362,16 +391,22 @@
   {% for handle in all_handles_array %}
     {% assign p = all_products[handle] %}
     Shopify.productData['{{ handle }}'] = {
-      title: {{ p.title | json }},
-      featured_image: {{ p.featured_image | img_url: 'medium' | json }},
-      variants: [
-        {% for v in p.variants %}
-          {
-            id: {{ v.id }},
-            title: {{ v.title | json }}
-          }{% unless forloop.last %},{% endunless %}
-        {% endfor %}
-      ]
-    };
+  title: {{ p.title | json }},
+  featured_image: {{ p.featured_image | img_url: 'medium' | json }},
+  variants: [
+    {% for v in p.variants %}
+      {
+        id: {{ v.id }},
+        title: {{ v.title | json }},
+        available: {{ v.available | json }},
+        image: {{ v.featured_image | img_url: 'medium' | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+};
+
   {% endfor %}
+
+
+  
 </script>
