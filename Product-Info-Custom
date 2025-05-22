@@ -17,7 +17,7 @@
     Cafe:#A67907|
     AZUL CIELO:#099399|
     Beige:#EAD8AB|
-    Azul marino:#282099|
+    Azul marino:#295780|
     Verde:#05AA3D|
     Marrón:#9A5630|
     Vino:#440122|
@@ -194,7 +194,7 @@
         max-height: 100%;
     }
     .txtInfo {
-        font-size: 18px;
+        font-size: 13px;
         font-weight: bold;
         text-align:center;
     }
@@ -391,8 +391,9 @@ function selectArea(area) {
     const areaAlt = areaElement.getAttribute('alt');
     highlightArea(areaAlt, areaAlt === areaSeleccionada ? 'red' : 'transparent');
   });
-  const txtInfo = document.getElementById("txtInfo");
+  /*const txtInfo = document.getElementById("txtInfo");
   txtInfo.style.display="none";
+  */
 }
 
   
@@ -496,10 +497,10 @@ function highlightArea(area, defaultColor = 'red') {
         **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
         grande**
       </p>
-      <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
-      <input type="number" id="alto-${id}" class="medidas-input" min="1">
       <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
       <input type="number" id="ancho-${id}" class="medidas-input" min="1">
+      <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
+      <input type="number" id="alto-${id}" class="medidas-input" min="1">
     </div>
   `;
   uploadContainer.appendChild(section);
@@ -877,89 +878,124 @@ document.addEventListener("DOMContentLoaded", function () {
     return medidas;
   }
 
-  // 2.6) Evento "Agregar al carrito"
-  addToCartButton.addEventListener("click", function(){
-    console.log("🟢 'Agregar al carrito' clickeado");
+// 2.6) Evento "Agregar al carrito"
+addToCartButton.addEventListener("click", function() {
+  console.log("🟢 'Agregar al carrito' clickeado");
 
-    // Recalcular archivos subidos
-    contarArchivosSubidos();
-    // Obtener medidas personalizadas
-    const medidasPorArea = obtenerMedidasPorArea();
-    
+  // Recalcular archivos subidos
+  contarArchivosSubidos();
+  // Obtener medidas personalizadas
+  const medidasPorArea = obtenerMedidasPorArea();
 
-    // Construir array (items sin bordado)
-    let newCart = [];
-    sizeInputs.forEach(inpt => {
-      let qty = parseInt(inpt.value, 10);
-      if (qty > 0) {
-        let variantId = inpt.getAttribute("data-variant-id");
-        let item = {
-          id: variantId,
-          quantity: qty,
-          properties: {}
-        };
+  // Construir array (items sin bordado)
+  let newCart = [];
+  sizeInputs.forEach(inpt => {
+    let qty = parseInt(inpt.value, 10);
+    if (qty > 0) {
+      let variantId = inpt.getAttribute("data-variant-id");
+      let item = {
+        id: variantId,
+        quantity: qty,
+        properties: {}
+      };
 
-        // Opcional: Incluir propiedades de archivos en cada prenda
-        const allFileInputs = document.querySelectorAll(".upload-container input[type='file']");
-        allFileInputs.forEach(fi => {
-          if (fi.files.length > 0) {
-            let pos = fi.id.replace("file-upload-", "");
-            // Recuperar URL
-            let prevDiv = document.getElementById(`preview-${pos}`);
-            let linkEl  = prevDiv.querySelector("img");
-            if (linkEl) {
-              item.properties[`Bordado ${pos}`] = linkEl.src;
-            }
-            // AGREGAR LAS MEDIDAS DE CADA AREA ESPECIFICA
-              item.properties[`Medidas`] = `Alto: ${medidasPorArea[pos].alto} cm, Ancho: ${medidasPorArea[pos].ancho} cm`;
-            
+      // Opcional: Incluir propiedades de archivos en cada prenda
+      const allFileInputs = document.querySelectorAll(".upload-container input[type='file']");
+      allFileInputs.forEach(fi => {
+        if (fi.files.length > 0) {
+          let pos = fi.id.replace("file-upload-", "");
+          // Recuperar URL
+          let prevDiv = document.getElementById(`preview-${pos}`);
+          let linkEl = prevDiv.querySelector("img");
+          if (linkEl) {
+            item.properties[`Bordado ${pos}`] = linkEl.src;
           }
-        });
+          // AGREGAR LAS MEDIDAS DE CADA AREA ESPECIFICA
+          item.properties[`Medidas`] = `Ancho: ${medidasPorArea[pos].ancho} cm, Alto: ${medidasPorArea[pos].alto} cm,`;
+        }
+      });
+
+      newCart.push(item);
+    }
+  });
+
+  if (newCart.length === 0) {
+    alert("Selecciona al menos una prenda antes de agregar al carrito.");
+    return;
+  }
+
+  // Calcular total de prendas
+  let totalPiezas = getTotalPiezas(newCart);
+  console.log("🧮 Total de prendas:", totalPiezas);
+
+  // Multiplicar bordados x el total de prendas
+  let bordadosExtras = cantidadBordado * totalPiezas;
+  if (bordadosExtras > 0) {
+    newCart.push({
+      id: bordadoId,
+      quantity: bordadosExtras
+    });
+    console.log(`➕ Bordado agregado: ${bordadosExtras} (porque subieron ${archivosSubidos} archivos y se seleccionó ${totalPiezas} prendas)`);
+  }
+
+  console.log("🛍 Enviando productos al carrito...", newCart);
+  
+  fetch("/cart/add.js", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ items: newCart })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error("Error al agregar al carrito");
+    return response.json();
+  })
+  .then(resp => {
+    console.log("✅ Productos agregados con éxito", resp);
     
-        newCart.push(item);
+    // ==============================================
+    // NUEVA SECCIÓN: CONSTRUIR NOTA DEL PEDIDO
+    // ==============================================
+    let orderNote = "📋 Detalles de personalización:\n\n";
+    
+    // Recorrer todos los file inputs para obtener los valores directamente
+    const allFileInputs = document.querySelectorAll(".upload-container input[type='file']");
+    allFileInputs.forEach(fi => {
+      if (fi.files.length > 0) {
+        let pos = fi.id.replace("file-upload-", "");
+        let prevDiv = document.getElementById(`preview-${pos}`);
+        let linkEl = prevDiv.querySelector("img");
+        
+        if (linkEl) {
+          // 1. Agregar URL de la imagen del bordado
+          orderNote += `• Imagen de bordado: ${linkEl.src}\n`;
+          
+          // 2. Agregar medidas específicas (si existen)
+          if (medidasPorArea[pos]) {
+            orderNote += `• Medidas: ${medidasPorArea[pos].alto} cm (alto) × ${medidasPorArea[pos].ancho} cm (ancho)\n\n`;
+          }
+        }
       }
     });
-
-    if (newCart.length === 0) {
-      alert("Selecciona al menos una prenda antes de agregar al carrito.");
-      return;
-    }
-
-    // Calcular total de prendas
-    let totalPiezas = getTotalPiezas(newCart);
-    console.log("🧮 Total de prendas:", totalPiezas);
-
-    // Multiplicar bordados x el total de prendas
-    let bordadosExtras = cantidadBordado * totalPiezas;
-    if (bordadosExtras > 0) {
-      newCart.push({
-        id: bordadoId,
-        quantity: bordadosExtras
-      });
-      console.log(`➕ Bordado agregado: ${bordadosExtras} (porque subieron ${archivosSubidos} archivos y se seleccionó ${totalPiezas} prendas)`);
-    }
-
-    console.log("🛍 Enviando productos al carrito...", newCart);
-    fetch("/cart/add.js", {
+    
+    // Actualizar la nota del carrito
+    return fetch("/cart/update.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: newCart })
-    })
-    .then(response => {
-      if (!response.ok) throw new Error("Error al agregar al carrito");
-      return response.json();
-    })
-    .then(resp => {
-      console.log("✅ Productos agregados con éxito", resp);
-      // 🔽🔽🔽 AQUÍ EL CAMBIO 🔽🔽🔽
-      // En lugar de location.assign("/cart"), recargamos con ?openCartDrawer=true
-      window.location.href = window.location.pathname + '?openCartDrawer=true';
-    })
-    .catch(err => {
-      console.error("❌ Error al agregar productos al carrito", err);
-      alert("Hubo un problema al agregar los productos. Inténtalo de nuevo.");
+      body: JSON.stringify({ note: orderNote })
     });
+    // ==============================================
+    // FIN DE NUEVA SECCIÓN
+    // ==============================================
+  })
+  .then(() => {
+    // Redireccionar después de actualizar la nota
+    window.location.href = window.location.pathname + '?openCartDrawer=true';
+  })
+  .catch(err => {
+    console.error("❌ Error en el proceso", err);
+    alert("Hubo un problema al agregar los productos. Inténtalo de nuevo.");
   });
+});
 
   // 2.7) Manejo openCartDrawer
   const params = new URLSearchParams(window.location.search);
