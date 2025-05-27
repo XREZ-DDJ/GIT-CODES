@@ -1,0 +1,234 @@
+<script>
+  
+  
+  /*
+    ============================================
+           SCRIPT : QUICK BUY
+    ============================================
+  */
+  // Quick buy
+
+  console.log("Producto Info Custom snippet cargado.");
+
+  // Función principal que encapsula toda la lógica de product-info-custom
+
+  // --------------------------------------
+  //  Handler para “Notificarme” (campanita)
+  // --------------------------------------
+  function onNotifyClick(e) {
+    console.log('🔥 onNotifyClick disparado sobre:', e.target);
+    const btn = e.target.closest('.notify-btn');
+    if (!btn) return;
+    const container = btn.closest('.size-item');
+    if (!container) return;
+    const { variantId, inventoryItemId, size, color } = container.dataset;
+    abrirModalNotificacion(variantId, inventoryItemId, size, color);
+  }
+
+  
+  function initProductInfoCustom() {
+    try {
+      console.log("Iniciando product-info-custom");
+
+      // Elementos principales: asegúrate de que existan en el HTML
+      const colorOptions = document.querySelectorAll('.color-item');
+      const sizeOptions = document.querySelectorAll('.size-item');
+      const addToCartButton = document.getElementById("add-to-cart-btn");
+
+      if (!colorOptions.length) {
+        console.warn("No se encontraron elementos con clase 'color-item'.");
+      }
+      if (!sizeOptions.length) {
+        console.warn("No se encontraron elementos con clase 'size-item'.");
+      }
+      if (!addToCartButton) {
+        console.warn("No se encontró el botón de agregar al carrito (#add-to-cart-btn).");
+      }
+
+      // Función para actualizar el estado del botón "Agregar al carrito"
+      function updateAddToCartButtonState() {
+        const sizeInputs = document.querySelectorAll('.size-option');
+        let totalSelected = 0;
+        sizeInputs.forEach(inp => {
+          totalSelected += parseInt(inp.value, 10) || 0;
+        });
+        if (addToCartButton) {
+          addToCartButton.disabled = (totalSelected <= 0);
+          console.log("Total prendas seleccionadas:", totalSelected, "Botón disabled:", addToCartButton.disabled);
+        }
+      }
+
+      // Función para validar que el valor ingresado en cada input de tallas no supere el stock máximo
+      function validateStock() {
+        const sizeInputs = document.querySelectorAll('.size-option');
+        sizeInputs.forEach(inp => {
+          inp.addEventListener("input", function() {
+            const maxStock = parseInt(this.getAttribute("data-stock"), 10);
+            let currentVal = parseInt(this.value, 10) || 0;
+            if (currentVal > maxStock) {
+              console.log(`Valor ingresado (${currentVal}) supera stock máximo (${maxStock}). Ajustando...`);
+              this.value = maxStock;
+            }
+            updateAddToCartButtonState();
+          });
+        });
+      }
+
+      // Función para seleccionar un color y mostrar las tallas asociadas
+      function selectColorAndSize(colorItem) {
+        const selectedColor = colorItem.getAttribute("data-color");
+        console.log("Color seleccionado:", selectedColor);
+        // Quitar clase de selección de todos y agregarla al elemento clicado
+        colorOptions.forEach(opt => opt.classList.remove("color-selected"));
+        colorItem.classList.add("color-selected");
+
+        // Mostrar solo las tallas correspondientes al color seleccionado
+        sizeOptions.forEach(s => {
+          s.style.display = (s.getAttribute("data-color") === selectedColor) ? "flex" : "none";
+        });
+
+        // Seleccionar automáticamente la primera talla disponible del color seleccionado
+        const firstAvailable = document.querySelector(`.size-item[data-color="${selectedColor}"] input`);
+        if (firstAvailable) {
+          firstAvailable.checked = true;
+          if (addToCartButton) {
+            addToCartButton.setAttribute("data-selected-variant", firstAvailable.getAttribute("data-variant-id"));
+          }
+        }
+        updateAddToCartButtonState();
+
+        // Si tienes una función para filtrar la galería por color, se puede llamar aquí:
+        if (typeof filterGalleryByColor === "function") {
+          filterGalleryByColor(selectedColor);
+        }
+      }
+
+      // Inicializar la selección de color: se selecciona el primero por defecto y se asignan eventos
+      if (colorOptions.length > 0) {
+        selectColorAndSize(colorOptions[0]);
+        colorOptions.forEach(opt => {
+          opt.addEventListener("click", function() {
+            selectColorAndSize(this);
+          });
+        });
+      }
+
+      // Asignar evento "change" a cada input de tallas para actualizar la selección y el botón
+      const sizeInputs = document.querySelectorAll('.size-option');
+      sizeInputs.forEach(inp => {
+        inp.addEventListener("change", function() {
+          const variantId = this.getAttribute("data-variant-id");
+          console.log("Talla seleccionada, variante:", variantId);
+          if (addToCartButton) {
+            addToCartButton.setAttribute("data-selected-variant", variantId);
+          }
+          updateAddToCartButtonState();
+        });
+      });
+
+      // Validar stock en los inputs de tallas
+      validateStock();
+
+      // Evento para el botón "Agregar al carrito"
+      if (addToCartButton) {
+        addToCartButton.addEventListener("click", function() {
+          updateAddToCartButtonState();
+          const totalSelected = Array.from(document.querySelectorAll('.size-option')).reduce(
+            (acc, inp) => acc + (parseInt(inp.value, 10) || 0), 0
+          );
+          if (totalSelected <= 0) {
+            alert("Selecciona al menos una prenda antes de agregar al carrito.");
+            return;
+          }
+          const selectedVariant = this.getAttribute("data-selected-variant");
+          console.log("Agregar al carrito clickeado. Variant seleccionado:", selectedVariant);
+          // Aquí coloca la lógica para agregar el producto al carrito, por ejemplo:
+          // fetch("/cart/add.js", { method: "POST", body: JSON.stringify({ id: selectedVariant, quantity: totalSelected }) });
+        });
+      }
+
+      // Función para generar los botones dinámicos de bordado
+      function generateEmbroideryButtons() {
+        // Mapeo de tipos de producto a posiciones para bordado. Agrega más tipos según necesites.
+        const productTypes = {
+          "CAMISA": ["Frontal Izquierdo", "Frontal Derecho", "Espalda"],
+          "PLAYERA": ["Frontal Izquierdo", "Frontal Derecho", "Manga Izquierda", "Manga Derecha", "Espalda"]
+        };
+
+        // Se espera que inyectes el tipo de producto en el body, por ejemplo:
+        // <body data-product-type="{{ product.type }}">
+        const productType = document.body.getAttribute("data-product-type") || "";
+        const uploadContainer = document.getElementById("upload-sections");
+        if (!uploadContainer) {
+          console.warn("No se encontró el contenedor 'upload-sections' para bordado.");
+          return;
+        }
+        uploadContainer.innerHTML = ""; // Limpiar contenido previo
+
+        if (productTypes[productType]) {
+          productTypes[productType].forEach(position => {
+            const id = position.toLowerCase().replace(/\s+/g, "-");
+            const section = document.createElement("div");
+            section.classList.add("upload-section");
+            section.innerHTML = `
+              <label for="file-upload-${id}" class="upload-label">
+                <i class="bi bi-upload"></i> ${position}
+              </label>
+              <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
+              <div id="preview-${id}" class="preview"></div>
+            `;
+            uploadContainer.appendChild(section);
+            const fileInput = section.querySelector(`#file-upload-${id}`);
+            fileInput.addEventListener("change", function() {
+              console.log("Archivo seleccionado para:", position);
+              // Aquí coloca tu lógica para manejar la carga de archivos (por ejemplo, a Firebase)
+            });
+          });
+        } else {
+          console.log("No se generaron botones de bordado para el tipo de producto:", productType);
+        }
+      }
+
+      // Ejecutar la generación de botones dinámicos de bordado
+      generateEmbroideryButtons();
+
+    // ————— Enlazo NOTIFY-BTN dentro del Quick-Buy —————
+    const qbContainer = document.querySelector('#quick-buy-modal-content .contenedor_selectores');
+console.log('qbContainer encontrado en Quick-Buy:', qbContainer);
+if (qbContainer) {
+  qbContainer.removeEventListener('click', onNotifyClick);
+  qbContainer.addEventListener('click', onNotifyClick);
+  console.log("qbContainer encontrado en Quick-Buy:", qbContainer);
+} else {
+  console.warn('No se encontró .contenedor_selectores dentro de #quick-buy-modal-content');
+}
+
+    } catch (error) {
+      console.error("Error en initProductInfoCustom:", error);
+    }
+  }
+
+  // Utilizamos un MutationObserver para detectar cuando se carga el contenido dinámico (quick-buy-modal-content)
+  const observer = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      for (const node of m.addedNodes) {
+        if (
+          node.nodeType === 1 &&
+          (node.id === 'quick-buy-modal-content' ||
+           node.querySelector('#quick-buy-modal-content'))
+        ) {
+          console.log("Quick-Buy abierto, inicializando lógica…");
+          initProductInfoCustom();
+          return; // dejamos vivo el observer
+        }
+      }
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  setTimeout(function() {
+    console.warn("Después de 5 segundos no se encontró 'quick-buy-modal-content'. Verifica que el ID sea correcto.");
+  }, 5000);
+  
+  
+</script>
