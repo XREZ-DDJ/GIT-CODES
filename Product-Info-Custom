@@ -1,4 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
 <!-- Selector de Colores -->
 <p style="font-weight: bold;">COLOR</p>
 <div class="contenedor_colores">
@@ -15,10 +14,13 @@
     Naranja:#FF8A00|
     Rosa:#FFC0CB|
     Cafe:#A67907|
-    AZUL CIELO:#099399|
+    AZUL CIELO: #099399|
+    Azul Celeste: #6fafc8|
+    Azul Jaspe: #7793bb|
     Beige:#EAD8AB|
     Azul marino:#295780|
     Verde:#05AA3D|
+    Verde Oliva: #443e1e|
     Marrón:#9A5630|
     Vino:#440122|
     Rojo:#F61F1F|
@@ -84,460 +86,157 @@
 <!-- Fin Selector de Colores -->
 
 <!-- Selector tallas -->
-<p style="font-weight: bold; font-family: 'work sans';">¿CUÁNTAS PRENDAS POR TALLA NECESITAS?</p>
+<p style="font-weight: bold; font-family: 'work sans';">
+  ¿CUÁNTAS PRENDAS POR TALLA NECESITAS?
+</p>
+
 <div class="contenedor_selectores">
-  {% for variant in product.variants %}
-    <div class="size-item" data-color="{{ variant.option2 }}" data-variant-id="{{ variant.id }}" style="display: none;">
+{% for variant in product.variants %}
+  {% assign stock = variant.inventory_quantity %}
+  <div
+    class="size-item"
+    data-variant-id="{{ variant.id }}"
+    data-inventory-item-id="{{ variant.inventory_item_id }}"
+    data-size="{{ variant.option1 }}"
+    data-color="{{ variant.option2 }}"
+    style="display: none;"
+  >
       <label class="size-label">
         <span class="size-name">{{ variant.option1 }}</span>
-        <div class="quantity-wrapper">
-          <button type="button" class="qty-btn down" data-variant-id="{{ variant.id }}">&#9650;</button>
-          <!-- Flecha arriba -->
-          <input
-            type="number"
-            name="selected-size"
-            class="size-option"
-            data-variant-id="{{ variant.id }}"
-            data-stock="{{ variant.inventory_quantity }}"
-            min="0"
-            max="{{ variant.inventory_quantity }}"
-            value="0"
+
+        {% if variant.available %}
+          <!-- Variante con stock: tu selector numérico -->
+          <div class="quantity-wrapper">
+            <button type="button" class="qty-btn down" data-variant-id="{{ variant.id }}">&#9650;</button>
+            <input 
+              type="number"
+              name="selected-size"
+              class="size-option"
+              data-variant-id="{{ variant.id }}"
+              data-stock="{{ variant.inventory_quantity }}"
+              min="0"
+              max="{{ variant.inventory_quantity }}"
+              value="0"
+            >
+            <button type="button" class="qty-btn up" data-variant-id="{{ variant.id }}">&#9660;</button>
+          </div>
+          <span class="stock-info">{{ variant.inventory_quantity }} pz.</span>
+        {% else %}
+          <!-- Variante agotada: botón de notificar -->
+          <button
+            type="button"
+            class="notify-btn"
+            aria-label="Avísame cuando repongan talla {{ variant.option1 }}"
           >
-          <button type="button" class="qty-btn up" data-variant-id="{{ variant.id }}">&#9660;</button>
-          <!-- Flecha abajo -->
-        </div>
-        <span class="stock-info">{{ variant.inventory_quantity }}pz.</span>
+            <span class="material-symbols-outlined">notification_add</span>
+          </button>
+
+        {% endif %}
+
       </label>
     </div>
   {% endfor %}
 </div>
+{%- comment -%}
+  Mostrar instrucción solo si hay variantes sin stock
+{%- endcomment -%}
+{% assign sold_out_variants = product.variants | where: "available", false %}
+{% if sold_out_variants.size > 0 %}
+  <p class="notify-instruction" style="margin-top:12px; font-size:14px; color:#555;">
+    Pulsa la campanita y te avisamos al reponer stock.
+  </p>
+{% endif %}
+
+
 <!-- Fin Selector tallas -->
 
-<style>
-  /*MODAL*/
-    .modal-overlay {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        z-index:100;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    .modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .modal-overlay.active .modal {
-        transform: scale(1);
-    }
-    .modal {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        background: white;
-        width: 90%;
-        height: 85%;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        transform: scale(0.8);
-        transition: transform 0.3s ease;
-        top: 35px;
-
-    }
-    
-    .close-btn-x {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: transparent;
-      color: black;
-      font-size: 24px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      z-index: 4;
-      
-    }
-  
-    .close-btn-x:hover {
-      color: red;
-    }
-  
-    @media (max-width: 767px) {
-      .close-btn-x {
-        font-size: 20px; 
-      }
-    }
-
-  
-  /*FIN MODAL*/
-    .container-bordar-img {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        position:relative;
-    }
-
-    .bordar-img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-    .txtInfo {
-        font-size: 13px;
-        font-weight: bold;
-        text-align:center;
-    }
-    .container-bordar-content {
-      display: flex;
-      padding: 10px;
-      flex-direction: column;
-      align-items: center;
-    }
-    /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
-    .upload-container {
-      
-      display: flex;
-      justify-content: space-around;
-    }
-    .upload-section{
-      flex-wrap: wrap;
-      justify-content: space-around;
-      align-items: center;
-      gap: 20px;
-
-    }
-    .upload-label {
-      background-color: #f00;
-      color: #fff;
-      padding: 10px 10px;
-      border-radius: 5px;
-      max-height: 42px;
-      margin-right: 10px;
-      }
-
-    .upload-label:hover {
-      background-color: #000;
-    }
-    /* ✅ Vista previa de archivos */
-    .preview {
-      font-size: 10px;
-      display: flex;
-      flex-direction: column;
-      height: 110px;
-      width: 110px;
-      align-items: center;
-    }
-    .preview img {
-      max-width: 100px;
-      max-height: 100px;
-    }
-
-    .medidas-container {
-      display: flex;
-      gap: 8px;
-      text-align: center;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .medidas-container p {
-      font-size: 11px;
-    }
-    .medidas-input {
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      max-width: 120px;
-    }
-    .bordado-info{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 10px;
-      margin-top: 15px;
-    }
-    .bordado-info p {
-      font-size: 10px;
-    }
-    .close-btn {
-      background-color: #f00;
-      border-radius: 5px;
-      width: 150px;
-      color: #ffffff;
-      margin-top: 10px;
-    }
-  @media (max-width: 767px){
-    .modal {
-      grid-template-columns: none;
-      grid-template-rows: 1fr 1fr;
-      overflow: overlay;
-    }
-    .container-bordar-img {
-      overflow: visible;
-    }
-    .upload-section{
-      flex-direction: column;
-      height:auto;
-    }
-    .medidas-container{
-      flex-direction: column;
-    }
-    .bordado-info{
-      align-items: center;
-    }
-    .close-btn{
-      
-      justify-self: anchor-center;
-      margin-top:0px;
-    }
-  }
-</style>
 
 <!-- Boton colapso archivos -->
-<button
-  id="openModal"
-  class="bordar-btn"
-  style="font-family: 'work sans'; font-weight:bold; text-align: center;"
->
-  ¿Desear bordar tu prenda?
-</button>
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
-    <!-- Botón de cierre "X" -->
-    <button class="close-btn-x" id="closeModalX">&times;</button>
-    <div class="container-bordar-img">
-      {% render 'bordados-areas' %}
-    </div>
-    <div class="container-bordar-content">
-      {% if product.metafields.custom.product_modulo_bordado %}
-        <p class="txtInfo" id= "txtInfo" >Selecciona de la imagen el area que deseas bordar y carga tu imagen o pdf del bordado.</p>
-        {% endif %}
-      
-      
-      <div class="upload-container" id="upload-sections">
-        
-        <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
-      </div>
-      <div class="medidas-container" id="medidas-sections">
-        <!--
-          <p>
-            **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
-            grande**
-          </p>
-        -->
-      </div>
-      <div class="bordado-info">
-        {% render 'bordados-info' %}
-      </div>
-      <button class="close-btn" id="closeModal">Regresar</button>
+{% if context != 'quick_buy' %}
+<div class="accordion" style="padding-top:25px;">
+  <button class="accordion-btn" onclick="toggleAccordion()" style="font-family: 'work sans'; font-weight:bold; text-align: center;">¿Desear bordar tu prenda?</button>
+  <div class="accordion-content">
+    <p class="instructions">
+      El bordado será realizado en el color del que subas tu imagen. Si deseas otro color o tamaño, 
+      indícalo en los comentarios en el carrito de compras. (Formatos permitidos: PDF, JPEG, PNG)
+    </p>
+    <div class="upload-container" id="upload-sections">
+      <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
     </div>
   </div>
 </div>
-
-<script>
-
-  //MODAL
-  const openModal = document.getElementById("openModal");
-  const closeModal = document.getElementById("closeModal");
-  const modalOverlay = document.getElementById("modalOverlay");
-  const closeModalX = document.getElementById("closeModalX");
-
-  openModal.addEventListener("click", () => {
-      modalOverlay.classList.add("active");
-  });
-  
-  closeModalX.addEventListener("click", () => {
-    modalOverlay.classList.remove("active");
-  });
-
-  closeModal.addEventListener("click", () => {
-      modalOverlay.classList.remove("active");
-  });
-
-  //FIN MODAL
-
-
-  
-  
-  //SELECCION AREA
- // Función para manejar la selección de un área
-function selectArea(area) {
-  // Actualizar el área seleccionada
-  areaSeleccionada = area;
-
-  // Resaltar todas las áreas según su estado
-  document.querySelectorAll('.upload-section').forEach(section => {
-    section.style.display = 'none';
-  });
-
-  const selectedSection = document.getElementById(`upload-section-${area}`);
-  if (selectedSection) {
-    selectedSection.style.display = 'flex';
-  }
-
-  // Actualizar el resaltado de todas las áreas
-  document.querySelectorAll('area').forEach(areaElement => {
-    const areaAlt = areaElement.getAttribute('alt');
-    highlightArea(areaAlt, areaAlt === areaSeleccionada ? 'red' : 'transparent');
-  });
-  /*const txtInfo = document.getElementById("txtInfo");
-  txtInfo.style.display="none";
-  */
-}
-
-  
-
-  
-  //FIN SELECCION AREA
-
-// Estado global para rastrear las áreas con archivos cargados
-const areasConArchivos = {}; // Objeto para rastrear las áreas con archivos cargados
-let areaSeleccionada = null; // Variable global para rastrear el área actualmente seleccionada
-
-// Función para resaltar un área
-function highlightArea(area, defaultColor = 'red') {
-  // Determinar el color basado en el estado global y selección actual
-  const color = areasConArchivos[area] ? 'green' : defaultColor;
-
-  // Contenedor principal donde está la imagen
-  const container = document.querySelector('.container-bordar-img');
-  if (!container) {
-    console.error("No se encontró el contenedor para el área resaltada.");
-    return;
-  }
-
-  // Imagen dentro del contenedor
-  const image = container.querySelector('img');
-  if (!image) {
-    console.error("No se encontró la imagen dentro del contenedor.");
-    return;
-  }
-
-  // Buscar el área seleccionada
-  const selectedArea = document.querySelector(`area[alt="${area}"]`);
-  if (!selectedArea) {
-    console.warn(`No se encontró un área con el atributo alt="${area}".`);
-    return;
-  }
-
-  // Obtener las coordenadas del área (x, y, r)
-  const coords = selectedArea.coords.split(',').map(Number);
-  if (coords.length !== 3) {
-    console.error("Las coordenadas del área no son válidas para un círculo:", coords);
-    return;
-  }
-
-  const [x, y, r] = coords;
-
-  // Obtener el desplazamiento (offset) de la imagen
-  const imageRect = image.getBoundingClientRect();
-  const containerRect = container.getBoundingClientRect();
-
-  const offsetX = imageRect.left - containerRect.left;
-  const offsetY = imageRect.top - containerRect.top;
-
-  // Crea o reutiliza un elemento para el resaltado
-  let highlightDiv = container.querySelector(`#highlight-area-${area}`);
-  if (!highlightDiv) {
-    highlightDiv = document.createElement('div');
-    highlightDiv.id = `highlight-area-${area}`;
-    highlightDiv.style.position = 'absolute';
-    highlightDiv.style.pointerEvents = 'none'; // No interferir con clics
-    highlightDiv.style.borderRadius = '50%'; // Hacer el resaltado circular
-    container.appendChild(highlightDiv);
-  }
-
-  // Ajusta las dimensiones, posición y color del contenedor
-  highlightDiv.style.left = `${x - r + offsetX}px`;
-  highlightDiv.style.top = `${y - r + offsetY}px`;
-  highlightDiv.style.width = `${2 * r}px`;
-  highlightDiv.style.height = `${2 * r}px`;
-  highlightDiv.style.border = `2px solid ${color}`; // Usar el color determinado
-
-  // Asegurar que solo el área seleccionada o cargada sea visible
-  if (!areasConArchivos[area] && area !== areaSeleccionada) {
-    highlightDiv.style.display = 'none'; // Ocultar si no está seleccionada ni tiene archivo
-  } else {
-    highlightDiv.style.display = 'block'; // Mostrar si está seleccionada o tiene archivo
-  }
-}
-
-
-
-  
-  // Inicializar upload sections
-  const areas = window.areas || []; 
-  const uploadContainer = document.getElementById("upload-sections");
-  uploadContainer.innerHTML = "";
-  areas.forEach(area => {
-  const id = area;
-  const section = document.createElement("div");
-  section.classList.add("upload-section");
-  section.id = `upload-section-${id}`;
-  section.style.display = "none"; // Ocultar por defecto
-  section.innerHTML = `
-    <label for="file-upload-${id}" class="upload-label">
-      Seleccionar archivo 
-    </label>
-    <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
-    <div id="preview-${id}" class="preview"></div>
-    <div class="medidas-container">
-      <p>
-        **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
-        grande**
-      </p>
-      <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
-      <input type="number" id="ancho-${id}" class="medidas-input" min="1">
-      <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
-      <input type="number" id="alto-${id}" class="medidas-input" min="1">
-    </div>
-  `;
-  uploadContainer.appendChild(section);
-
-    // Vincular el input a handleFileUpload
-    const fileInput = section.querySelector(`#file-upload-${id}`);
-    fileInput.addEventListener("change", function(){
-      handleFileUpload(id, this);
-      contarArchivosSubidos(); // recalcular en cada cambio
-    });
-  });
-  /*
-      window.onload = function () {
-          console.log('Ejecutando imageMapResize...');
-          imageMapResize();
-      };
-  */
-</script>
-
 <!-- Fin Boton colapso archivos -->
+  {% endif %}
 
 <!-- Botón Agregar al Carrito -->
-<button id="add-to-cart-btn" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+<button id="add-to-cart-btn" class="add-to-cart-btn" disabled> 
+  Agregar al carrito
+</button>
 <!-- Fin Botón Agregar al Carrito -->
 
-<!--
-  ============================================
-         SCRIPT ÚNICO: LÓGICA UNIFICADA
-  ============================================
--->
+
+<!-- Formulario oculto para actualizar tags de cliente -->
+<form
+  id="update-tags-form"
+  action="/account"
+  method="post"
+  style="display:none;"
+>
+  <input type="hidden" name="form_type" value="customer_update" />
+  <input type="hidden" name="utf8" value="✓" />
+
+  <!-- Campos obligatorios del cliente -->
+  <input
+    type="hidden"
+    name="customer[email]"
+    value="{{ customer.email }}"
+  />
+  <input
+    type="hidden"
+    name="customer[first_name]"
+    value="{{ customer.first_name }}"
+  />
+  <input
+    type="hidden"
+    name="customer[last_name]"
+    value="{{ customer.last_name }}"
+  />
+
+  <!-- Aquí pondremos la lista de tags -->
+  <input
+    type="hidden"
+    name="customer[tags]"
+    id="customer-tags-input"
+  />
+</form>
+
+
+
+<!-- ============================================
+       SCRIPT ÚNICO: LÓGICA UNIFICADA
+============================================ -->
+
+
 <script>
 
 /* -----------------------------------------
    1) FUNCIONES GLOBALES (FUERA DEL DOM LOAD)
 ----------------------------------------- */
+// ✅ Acordeón sin Bootstrap
+function toggleAccordion() {
+  const accordion = document.querySelector(".accordion-content");
+  const button = document.querySelector(".accordion-btn");
+  if (accordion.style.display === "block") {
+    accordion.style.display = "none";
+    button.textContent = "¿Desear bordar tu prenda?";
+    button.classList.remove("open");
+  } else {
+    accordion.style.display = "block";
+    button.textContent = "No bordar";
+    button.classList.add("open");
+  }
+}
 
-  
 // ✅ Autenticar usuario (Firebase anónimo)
 function authenticateUser() {
   return firebase.auth().signInAnonymously()
@@ -553,8 +252,7 @@ function authenticateUser() {
 }
 
 // ✅ Subir archivo a Firebase
-// Función para manejar la carga de archivos
-function handleFileUpload(position, input) {
+function handleFileUpload(position, input, dataName) {
   const previewDiv = document.getElementById(`preview-${position}`);
   previewDiv.innerHTML = ""; // Limpiar previsualización anterior
 
@@ -569,10 +267,10 @@ function handleFileUpload(position, input) {
     }
 
     if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
-      alert("🚨 Solo se permiten imágenes y archivos PDF.");
-      input.value = "";
-      return;
-    }
+  alert("🚨 Solo se permiten imágenes y archivos PDF.");
+  input.value = "";
+  return;
+}
 
     // Subir a Firebase
     authenticateUser().then(() => {
@@ -580,8 +278,7 @@ function handleFileUpload(position, input) {
       const storageRef = storage.ref(`bordados/${position}/${file.name}`);
       const uploadTask = storageRef.put(file);
 
-      uploadTask.on(
-        "state_changed",
+      uploadTask.on("state_changed",
         function (snapshot) {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(`Subiendo ${position}: ${progress}%`);
@@ -600,22 +297,139 @@ function handleFileUpload(position, input) {
             if (file.type.startsWith("image/")) {
               const img = document.createElement("img");
               img.src = downloadURL;
+              img.style.maxWidth = "100px";
+              img.style.marginTop = "10px";
               previewDiv.appendChild(img);
-            } 
+            } else if (file.type === "application/pdf") {
+              previewDiv.innerHTML = `<a href="${downloadURL}" target="_blank">Ver PDF</a>`;
+            }
+            // Enlace de descarga
+            const downloadLink = document.createElement("a");
+            downloadLink.href = downloadURL;
+            downloadLink.textContent = "Descargar archivo";
+            downloadLink.target = "_blank";
+            downloadLink.style.display = "block";
+            downloadLink.style.marginTop = "10px";
+            previewDiv.appendChild(downloadLink);
 
-            // Actualizar estado global y cambiar el resaltado a verde
-            areasConArchivos[position] = true;
-            highlightArea(position, 'green');
+            // Actualizar variable hayPersonalizacion a true si se sube un archivo
+            hayPersonalizacion = true;
+
+                        // Generar propiedades con formato {name, value} incluyendo "Bordado"
+            let properties = [
+              {
+                "name": "Personalización",
+                "value": hayPersonalizacion ? "Sí" : "No" // Si hay archivo, "Sí", si no, "No"
+              }
+            ];
+
+            // Agregar propiedad de bordado con "Bordado" al principio del data-name
+            if (dataName) {
+              properties.push({
+                "name": `Bordado ${dataName}`, // Concatenamos "Bordado" antes del nombre
+                "value": downloadURL // La URL del archivo cargado
+              });
+            }
+
+            // Aquí agregarías el JSON de las propiedades al carrito o lo que necesites
+            console.log("Propiedades generadas:", properties);
+            // Ejemplo de cómo añadir al carrito:
+            item.properties = properties; // Aquí agregamos las propiedades generadas al objeto del producto
+            
           });
         }
       );
     });
-  } else {
-    // Si no hay archivo, eliminar el estado de área cargada
-    delete areasConArchivos[position];
-    highlightArea(position, 'red');
   }
 }
+
+  // --------------------------------------
+//  Funciones globales de “Notificarme”
+// --------------------------------------
+
+  
+// 1) Abre el modal de notificación
+function abrirModalNotificacion(variantId, inventoryItemId, size, color) {
+    const customerId = window.customer?.id
+                    || window.ShopifyAnalytics?.meta?.page?.customerId;
+    if (!customerId) {
+      alert("Debes iniciar sesión para solicitar notificaciones.");
+      return;
+    }
+
+    // Evita duplicar el modal
+    if (document.getElementById("notify-modal")) return;
+    const modal = document.createElement("div");
+    modal.id = "notify-modal";
+    modal.innerHTML = `
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Te avisaremos cuando repongan stock</h2>
+        <p><strong>Producto:</strong> ${productTitle}</p>
+        <p><strong>Color:</strong> ${color}</p>
+        <p><strong>Talla:</strong> ${size}</p>
+        <button id="notify-submit">Confirmar notificación</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Cerrar al click en backdrop
+    modal.addEventListener("click", (ev) => {
+      if (ev.target.id === "notify-modal"
+       || ev.target.classList.contains("modal-backdrop")) {
+        modal.remove();
+      }
+    });
+
+    // Enviar a Make
+    modal.querySelector("#notify-submit").onclick = () => {
+      const payload = {
+        customerId,
+        inventoryItemId,
+        variantId,
+        size,
+        color,
+        productName: productTitle
+      };
+      console.log("🚀 Enviando payload:", payload);
+
+      // Construye la URL con query-params
+      const url = new URL("https://hook.us2.make.com/tw839hw3c7e8ovjv158s3tty939licxd");
+      Object.entries(payload).forEach(([k, v]) =>
+        url.searchParams.append(k, v)
+      );
+
+      // GET sin CORS
+      fetch(url, { method: "GET", mode: "no-cors" })
+        .then(() => {
+          modal.querySelector(".modal-content").innerHTML =
+            "<p>¡Listo! Te avisaremos en cuanto repongan stock.</p>";
+        })
+        .catch((err) => {
+          console.error("❌ Error al notificar:", err);
+          alert("No se pudo enviar tu solicitud. Intenta de nuevo más tarde.");
+        });
+    };
+  }
+
+// 2) Delegación global para capturar cualquier click en una campanita,
+//    tanto en la página normal como dentro del Quick-Buy.
+document.body.addEventListener("click", function(e) {
+  const btn = e.target.closest(
+    "#quick-buy-modal-content .notify-btn, .contenedor_selectores .notify-btn"
+  );
+  if (!btn) return;
+
+  const container = btn.closest(".size-item");
+  if (!container) return;
+
+  abrirModalNotificacion(
+    container.dataset.variantId,
+    container.dataset.inventoryItemId,
+    container.dataset.size,
+    container.dataset.color
+  );
+});
 
 /* -----------------------------------------
    FUNCIÓN PARA FILTRAR GALERÍA POR COLOR
@@ -655,101 +469,13 @@ function filterGalleryByColor(selectedColor) {
   });
 }
 
-
-
-
-
-
-
-
-const limitesMedidas = window.limitesMedidas || []; 
-  // Definir límites máximos para cada área de bordado
-  /*
-const limitesMedidas = {
-  "M-I": { ancho: 7, alto: 7 },
-  "M-D": { ancho: 7, alto: 7 },
-  "F-I": { ancho: 7, alto: 7 },
-  "F-C": { ancho: 7, alto: 7 },
-  "F-D": { ancho: 7, alto: 7 },
-  "P-I": { ancho: 5, alto: 5 },
-  "P-D": { ancho: 5, alto: 5 },
-  "C-I": { ancho: 7, alto: 2 },
-  "C-D": { ancho: 7, alto: 2 },
-  "C-A": { ancho: 7, alto: 2 },
-  "E-C": { ancho: 20, alto: 20 },
-};
-*/
-// Función para validar las medidas ingresadas
-function validarMedidasPersonalizadas(areaId, inputAncho, inputAlto) {
-  // Obtener los límites máximos de la zona actual
-  const limites = limitesMedidas[areaId];
-  if (!limites) {
-    console.warn(`No se encontraron límites para el área: ${areaId}`);
-    return;
-  }
-
-  // Validar ancho
-  const ancho = parseFloat(inputAncho.value) || 0;
-  if (ancho > limites.ancho) {
-    alert(`El ancho máximo permitido para ${areaId} es ${limites.ancho} cm.`);
-    inputAncho.value = limites.ancho; // Ajustar al máximo permitido
-  }
-
-
-  // Validar alto
-  const alto = parseFloat(inputAlto.value) || 0;
-  if (alto > limites.alto) {
-    alert(`El alto máximo permitido para ${areaId} es ${limites.alto} cm.`);
-    inputAlto.value = limites.alto; // Ajustar al máximo permitido
-  }
-}
-
-// Función para inicializar los valores predeterminados y placeholders
-function inicializarMedidas() {
-  document.querySelectorAll(".upload-section").forEach((section) => {
-    const areaId = section.id.replace("upload-section-", ""); // Obtener el ID del área
-    const inputAncho = section.querySelector(`#ancho-${areaId}`);
-    const inputAlto = section.querySelector(`#alto-${areaId}`);
-
-    if (inputAncho && inputAlto) {
-      const limites = limitesMedidas[areaId];
-      if (limites) {
-        // Configurar el placeholder y valor predeterminado
-        inputAncho.placeholder = limites.ancho;
-        inputAlto.placeholder = limites.alto;
-        inputAncho.value = limites.ancho;
-        inputAlto.value = limites.alto;
-
-        // Validar en el evento input
-        inputAncho.addEventListener("input", () => validarMedidasPersonalizadas(areaId, inputAncho, inputAlto));
-        inputAlto.addEventListener("input", () => validarMedidasPersonalizadas(areaId, inputAncho, inputAlto));
-      }
-    }
-  });
-}
-
-// LLAMAR A INICIALIZAR MEDIDAS CUANDO EL DOM ESTE CARGADO 
-document.addEventListener("DOMContentLoaded", inicializarMedidas);
-
-
+const productTitle = "{{ product.title | escape }}";
+  
 /* -----------------------------------------
    2) DOMContentLoaded: LÓGICA PRINCIPAL
 ----------------------------------------- */
-
-
 document.addEventListener("DOMContentLoaded", function () {
   console.log("🚀 DOMContentLoaded: Iniciando todo...");
-//EJECUTAR ImageMapResize EN EL DOOM
-  try {
-      if (typeof imageMapResize === 'function') {
-        console.log('!!!Ejecutando imageMapResize desde DOMContentLoaded...');
-        imageMapResize(); // Hace que el mapa sea responsivo
-      } else {
-        console.error('imageMapResize no está disponible. Verifica la carga del script.');
-      }
-    } catch (error) {
-      console.error('Error al ejecutar imageMapResize:', error);
-    }
 
   // 2.1) Variables principales
   const addToCartButton = document.getElementById("add-to-cart-btn");
@@ -760,12 +486,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ID del producto BORDADO
   const bordadoId = 40551847821470;
-  const productType = "{{ product.type }}";
-  console.log("Tipo de producto detectado:", productType);
+
   // Para contar archivos subidos
   let archivosSubidos  = 0;
   let cantidadBordado  = 0;
-  
+
+  // 2.2) Lista de tipos de producto y posiciones
+  const productTypes = {
+    "CAMISA": ["Frontal Izquierdo", "Frontal Derecho", "Espalda"],
+    "superior": ["Frontal Izquierdo", "Frontal Derecho", "Espalda"],
+    "BATA DOCTOR": ["Frontal Izquierdo", "Frontal Derecho", "Espalda"],
+    "PLAYERA": ["Frontal Izquierdo", "Frontal Derecho", "Manga Izquierda", "Manga Derecha", "Espalda"],
+    "SUDADERA": ["Frontal Izquierdo", "Frontal Derecho", "Manga Izquierda", "Manga Derecha", "Espalda"],
+    "POLO": ["Frontal Izquierdo", "Frontal Derecho", "Manga Izquierda", "Manga Derecha", "Espalda"],
+    "CHAMARRA EJECUTIVA": ["Frontal Izquierdo", "Frontal Derecho", "Manga Izquierda", "Manga Derecha", "Espalda"],
+    "CHAMARRA CASUAL": ["Frontal Izquierdo", "Frontal Derecho", "Manga Izquierda", "Manga Derecha", "Espalda"],
+    "FILIPINA DOCTOR": ["Frontal Izquierdo", "Frontal Derecho"],
+    "FILIPINA CAMARISTA": ["Frontal Izquierdo", "Frontal Derecho"],
+    "FILIPINA LIMPIEZA": ["Frontal Izquierdo", "Frontal Derecho"],
+    "inferior": ["Trasero Izquierdo", "Trasero Derecho"],
+    "PANTALON EJECUTIVO": ["Trasero Izquierdo", "Trasero Derecho"],
+    "BERMUDAS": ["Trasero Izquierdo", "Trasero Derecho"],
+    "PANTALON INDUSTRIAL": ["Trasero Izquierdo", "Trasero Derecho"],
+    "PANTALON CASUAL": ["Trasero Izquierdo", "Trasero Derecho"],
+    "PANTALON CHEF": ["Trasero Izquierdo", "Trasero Derecho"],
+    "PANTALON DOCTOR": ["Trasero Izquierdo", "Trasero Derecho"],
+    "PANTALON CAMARISTA": ["Trasero Izquierdo", "Trasero Derecho"],
+    "PANTALON LIMPIEZA": ["Trasero Izquierdo", "Trasero Derecho"],
+    "FILIPINA CHEF": ["Cuello Izquierdo", "Cuello Derecho", "Frontal"],
+    "ACCESORIO": ["Frontal"],
+    "individual": ["Frontal"],
+    "MANDIL": ["Frontal"]
+  };
+
+  // 2.3) Generar dinámicamente los inputs de archivo según el tipo
+  const productType = "{{ product.type }}";
+  console.log("Tipo de producto detectado:", productType);
+
+  // Variable para verificar si hay personalización
+  let hayPersonalizacion = false;
+
+  if (productTypes[productType]) {
+    productTypes[productType].forEach(position => {
+      const id = position.toLowerCase().replace(/\s+/g, "-");
+      const section = document.createElement("div");
+      section.classList.add("upload-section");
+
+          // Crear el input y el label con el 'data-name'
+    section.innerHTML = `
+      <label for="file-upload-${id}" class="upload-label" data-name="${position}">
+        <i class="bi bi-upload"></i> ${position}
+      </label>
+      <input type="file" id="file-upload-${id}" accept=".png,.jpg,.jpeg,.pdf,image/png,image/jpeg" style="display: none;">
+      <div id="preview-${id}" class="preview"></div>
+    `;
+    uploadContainer.appendChild(section);
+
+      // Vincular el input a handleFileUpload
+      const fileInput = section.querySelector(`#file-upload-${id}`);
+      const label = section.querySelector("label");
+      fileInput.addEventListener("change", function(){
+        handleFileUpload(id, this, label.getAttribute('data-name'));
+        contarArchivosSubidos(); // recalcular en cada cambio
+      });
+    });
+  }
+
   // 2.4) Función para contar archivos subidos
   function contarArchivosSubidos() {
     // Capturamos todos los input[type='file'] que se generaron
@@ -776,7 +562,6 @@ document.addEventListener("DOMContentLoaded", function () {
         archivosSubidos++;
       }
     });
-
     // Excluimos el primer archivo gratis
     cantidadBordado = (archivosSubidos > 1) ? (archivosSubidos - 1) : 0;
     console.log(`📁 Archivos subidos: ${archivosSubidos} | 🎨 Bordados a cobrar: ${cantidadBordado}`);
@@ -825,7 +610,7 @@ document.addEventListener("DOMContentLoaded", function () {
       addToCartButton.setAttribute("data-selected-variant", variantId);
     });
   });
-3
+
   // Control stock y flechas
   sizeInputs.forEach(inp => {
     inp.addEventListener("input", function(){
@@ -856,7 +641,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Función para calcular total de piezas
+  // 🔹 Función para calcular total de piezas
   function getTotalPiezas(items) {
     let total = 0;
     items.forEach(i => {
@@ -865,137 +650,172 @@ document.addEventListener("DOMContentLoaded", function () {
     return total;
   }
 
-  //OBTENER LAS MEDIDAS POR CADA ZONA DE BORDADO DE LOS INPUTS
-  function obtenerMedidasPorArea() {
-    const medidas = {};
-    const areas = document.querySelectorAll(".upload-section");
-    areas.forEach(area => {
-      const id = area.id.replace("upload-section-", "");
-      const ancho = document.getElementById(`ancho-${id}`)?.value; 
-      const alto = document.getElementById(`alto-${id}`)?.value;
-      medidas[id] = { ancho, alto };
-    });
-    return medidas;
-  }
+  // 2.5.1) Delegación para “Notificarme” cuando stock = 0
+document.querySelector('.contenedor_selectores')
+  .addEventListener('click', e => {
+    const btn = e.target.closest('.notify-btn');
+    if (!btn) return;
 
-// 2.6) Evento "Agregar al carrito"
-addToCartButton.addEventListener("click", function() {
-  console.log("🟢 'Agregar al carrito' clickeado");
+    // 1) Busca el DIV .size-item más cercano
+    const container = btn.closest('.size-item');
+    if (!container) return; // seguridad
 
-  // Recalcular archivos subidos
-  contarArchivosSubidos();
-  // Obtener medidas personalizadas
-  const medidasPorArea = obtenerMedidasPorArea();
+    // 2) Ahora sí, lee tu atributo
+    const inventoryItemId = container.dataset.inventoryItemId || "";
+    const variantId       = container.dataset.variantId;
+    const size            = container.dataset.size;
+    const color           = container.dataset.color;
 
-  // Construir array (items sin bordado)
-  let newCart = [];
-  sizeInputs.forEach(inpt => {
-    let qty = parseInt(inpt.value, 10);
-    if (qty > 0) {
-      let variantId = inpt.getAttribute("data-variant-id");
-      let item = {
-        id: variantId,
-        quantity: qty,
-        properties: {}
-      };
-
-      // Opcional: Incluir propiedades de archivos en cada prenda
-      const allFileInputs = document.querySelectorAll(".upload-container input[type='file']");
-      allFileInputs.forEach(fi => {
-        if (fi.files.length > 0) {
-          let pos = fi.id.replace("file-upload-", "");
-          // Recuperar URL
-          let prevDiv = document.getElementById(`preview-${pos}`);
-          let linkEl = prevDiv.querySelector("img");
-          if (linkEl) {
-            item.properties[`Bordado ${pos}`] = linkEl.src;
-          }
-          // AGREGAR LAS MEDIDAS DE CADA AREA ESPECIFICA
-          item.properties[`Medidas`] = `Ancho: ${medidasPorArea[pos].ancho} cm, Alto: ${medidasPorArea[pos].alto} cm,`;
-        }
-      });
-
-      newCart.push(item);
-    }
+    console.log({ variantId, inventoryItemId, size, color });
+    abrirModalNotificacion(variantId, inventoryItemId, size, color);
   });
 
-  if (newCart.length === 0) {
-    alert("Selecciona al menos una prenda antes de agregar al carrito.");
-    return;
-  }
 
-  // Calcular total de prendas
-  let totalPiezas = getTotalPiezas(newCart);
-  console.log("🧮 Total de prendas:", totalPiezas);
+// Función que abre el modal de suscripción
+function abrirModalNotificacion(variantId, inventoryItemId, size, color) {
+    const customerId = window.customer?.id
+                    || window.ShopifyAnalytics?.meta?.page?.customerId;
+    if (!customerId) {
+      alert("Debes iniciar sesión para solicitar notificaciones.");
+      return;
+    }
 
-  // Multiplicar bordados x el total de prendas
-  let bordadosExtras = cantidadBordado * totalPiezas;
-  if (bordadosExtras > 0) {
-    newCart.push({
-      id: bordadoId,
-      quantity: bordadosExtras
-    });
-    console.log(`➕ Bordado agregado: ${bordadosExtras} (porque subieron ${archivosSubidos} archivos y se seleccionó ${totalPiezas} prendas)`);
-  }
+    // Evita duplicar el modal
+    if (document.getElementById("notify-modal")) return;
+    const modal = document.createElement("div");
+    modal.id = "notify-modal";
+    modal.innerHTML = `
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Te avisaremos cuando repongan stock</h2>
+        <p><strong>Producto:</strong> ${productTitle}</p>
+        <p><strong>Color:</strong> ${color}</p>
+        <p><strong>Talla:</strong> ${size}</p>
+        <button id="notify-submit">Confirmar notificación</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
 
-  console.log("🛍 Enviando productos al carrito...", newCart);
-  
-  fetch("/cart/add.js", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items: newCart })
-  })
-  .then(response => {
-    if (!response.ok) throw new Error("Error al agregar al carrito");
-    return response.json();
-  })
-  .then(resp => {
-    console.log("✅ Productos agregados con éxito", resp);
-    
-    // ==============================================
-    // NUEVA SECCIÓN: CONSTRUIR NOTA DEL PEDIDO
-    // ==============================================
-    let orderNote = "📋 Detalles de personalización:\n\n";
-    
-    // Recorrer todos los file inputs para obtener los valores directamente
-    const allFileInputs = document.querySelectorAll(".upload-container input[type='file']");
-    allFileInputs.forEach(fi => {
-      if (fi.files.length > 0) {
-        let pos = fi.id.replace("file-upload-", "");
-        let prevDiv = document.getElementById(`preview-${pos}`);
-        let linkEl = prevDiv.querySelector("img");
-        
-        if (linkEl) {
-          // 1. Agregar URL de la imagen del bordado
-          orderNote += `• Imagen de bordado: ${linkEl.src}\n`;
-          
-          // 2. Agregar medidas específicas (si existen)
-          if (medidasPorArea[pos]) {
-            orderNote += `• Medidas: ${medidasPorArea[pos].alto} cm (alto) × ${medidasPorArea[pos].ancho} cm (ancho)\n\n`;
-          }
-        }
+    // Cerrar al click en backdrop
+    modal.addEventListener("click", (ev) => {
+      if (ev.target.id === "notify-modal"
+       || ev.target.classList.contains("modal-backdrop")) {
+        modal.remove();
       }
     });
-    
-    // Actualizar la nota del carrito
-    return fetch("/cart/update.js", {
+
+    // Enviar a Make
+    modal.querySelector("#notify-submit").onclick = () => {
+      const payload = {
+        customerId,
+        inventoryItemId,
+        variantId,
+        size,
+        color,
+        productName: productTitle
+      };
+      console.log("🚀 Enviando payload:", payload);
+
+      // Construye la URL con query-params
+      const url = new URL("https://hook.us2.make.com/tw839hw3c7e8ovjv158s3tty939licxd");
+      Object.entries(payload).forEach(([k, v]) =>
+        url.searchParams.append(k, v)
+      );
+
+      // GET sin CORS
+      fetch(url, { method: "GET", mode: "no-cors" })
+        .then(() => {
+          modal.querySelector(".modal-content").innerHTML =
+            "<p>¡Listo! Te avisaremos en cuanto repongan stock.</p>";
+        })
+        .catch((err) => {
+          console.error("❌ Error al notificar:", err);
+          alert("No se pudo enviar tu solicitud. Intenta de nuevo más tarde.");
+        });
+    };
+  }
+
+
+
+  // 2.6) Evento "Agregar al carrito"
+  addToCartButton.addEventListener("click", function(){
+    console.log("🟢 'Agregar al carrito' clickeado");
+
+    // Recalcular archivos subidos
+    contarArchivosSubidos();
+
+    // Construir array (items sin bordado)
+    let newCart = [];
+    sizeInputs.forEach(inpt => {
+      let qty = parseInt(inpt.value, 10);
+      if (qty > 0) {
+        let variantId = inpt.getAttribute("data-variant-id");
+        let item = {
+          id: variantId,
+          quantity: qty,
+          properties: {}
+        };
+
+        // Opcional: Incluir propiedades de archivos en cada prenda
+        const allFileInputs = document.querySelectorAll(".upload-container input[type='file']");
+        allFileInputs.forEach(fi => {
+          if (fi.files.length > 0) {
+            let pos = fi.id.replace("file-upload-", "");
+
+            // Recuperar URL del archivo subido
+            let prevDiv = document.getElementById(`preview-${pos}`);
+            let linkEl = prevDiv.querySelector("a");
+            if (linkEl) {
+            // Solo agregamos la URL al objeto properties usando la posición como clave
+            item.properties[`Bordado ${pos}`] = linkEl.href;
+            }
+          }
+        });
+
+        newCart.push(item);
+      }
+    });
+
+    if (newCart.length === 0) {
+      alert("Selecciona al menos una prenda antes de agregar al carrito.");
+      return;
+    }
+
+    // Calcular total de prendas
+    let totalPiezas = getTotalPiezas(newCart);
+    console.log("🧮 Total de prendas:", totalPiezas);
+
+    // Multiplicar bordados x el total de prendas
+    let bordadosExtras = cantidadBordado * totalPiezas;
+    if (bordadosExtras > 0) {
+      newCart.push({
+        id: bordadoId,
+        quantity: bordadosExtras
+      });
+      console.log(`➕ Bordado agregado: ${bordadosExtras} (porque subieron ${archivosSubidos} archivos y se seleccionó ${totalPiezas} prendas)`);
+    }
+
+    console.log("🛍 Enviando productos al carrito...", newCart);
+    fetch("/cart/add.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ note: orderNote })
+      body: JSON.stringify({ items: newCart })
+    })
+    .then(response => {
+      if (!response.ok) throw new Error("Error al agregar al carrito");
+      return response.json();
+    })
+    .then(resp => {
+      console.log("✅ Productos agregados con éxito", resp);
+      // 🔽🔽🔽 AQUÍ EL CAMBIO 🔽🔽🔽
+      // En lugar de location.assign("/cart"), recargamos con ?openCartDrawer=true
+      window.location.href = window.location.pathname + '?openCartDrawer=true';
+    })
+    .catch(err => {
+      console.error("❌ Error al agregar productos al carrito", err);
+      alert("Hubo un problema al agregar los productos. Inténtalo de nuevo.");
     });
-    // ==============================================
-    // FIN DE NUEVA SECCIÓN
-    // ==============================================
-  })
-  .then(() => {
-    // Redireccionar después de actualizar la nota
-    window.location.href = window.location.pathname + '?openCartDrawer=true';
-  })
-  .catch(err => {
-    console.error("❌ Error en el proceso", err);
-    alert("Hubo un problema al agregar los productos. Inténtalo de nuevo.");
   });
-});
 
   // 2.7) Manejo openCartDrawer
   const params = new URLSearchParams(window.location.search);
@@ -1009,87 +829,450 @@ addToCartButton.addEventListener("click", function() {
   }
 
 });
+
+  // Quick buy
+
+  console.log("Producto Info Custom snippet cargado.");
+
+  // Función principal que encapsula toda la lógica de product-info-custom
+
+// --------------------------------------
+//  Handler para “Notificarme” (campanita)
+// --------------------------------------
+  function onNotifyClick(e) {
+  console.log('🔥 onNotifyClick disparado sobre:', e.target);
+  const btn = e.target.closest('.notify-btn');
+  if (!btn) return;
+  const container = btn.closest('.size-item');
+  if (!container) return;
+  const { variantId, inventoryItemId, size, color } = container.dataset;
+  abrirModalNotificacion(variantId, inventoryItemId, size, color);
+}
+
+  
+  function initProductInfoCustom() {
+    try {
+      console.log("Iniciando product-info-custom");
+
+      // Elementos principales: asegúrate de que existan en el HTML
+      const colorOptions = document.querySelectorAll('.color-item');
+      const sizeOptions = document.querySelectorAll('.size-item');
+      const addToCartButton = document.getElementById("add-to-cart-btn");
+
+      if (!colorOptions.length) {
+        console.warn("No se encontraron elementos con clase 'color-item'.");
+      }
+      if (!sizeOptions.length) {
+        console.warn("No se encontraron elementos con clase 'size-item'.");
+      }
+      if (!addToCartButton) {
+        console.warn("No se encontró el botón de agregar al carrito (#add-to-cart-btn).");
+      }
+
+      // Función para actualizar el estado del botón "Agregar al carrito"
+      function updateAddToCartButtonState() {
+        const sizeInputs = document.querySelectorAll('.size-option');
+        let totalSelected = 0;
+        sizeInputs.forEach(inp => {
+          totalSelected += parseInt(inp.value, 10) || 0;
+        });
+        if (addToCartButton) {
+          addToCartButton.disabled = (totalSelected <= 0);
+          console.log("Total prendas seleccionadas:", totalSelected, "Botón disabled:", addToCartButton.disabled);
+        }
+      }
+
+      // Función para validar que el valor ingresado en cada input de tallas no supere el stock máximo
+      function validateStock() {
+        const sizeInputs = document.querySelectorAll('.size-option');
+        sizeInputs.forEach(inp => {
+          inp.addEventListener("input", function() {
+            const maxStock = parseInt(this.getAttribute("data-stock"), 10);
+            let currentVal = parseInt(this.value, 10) || 0;
+            if (currentVal > maxStock) {
+              console.log(`Valor ingresado (${currentVal}) supera stock máximo (${maxStock}). Ajustando...`);
+              this.value = maxStock;
+            }
+            updateAddToCartButtonState();
+          });
+        });
+      }
+
+      // Función para seleccionar un color y mostrar las tallas asociadas
+      function selectColorAndSize(colorItem) {
+        const selectedColor = colorItem.getAttribute("data-color");
+        console.log("Color seleccionado:", selectedColor);
+        // Quitar clase de selección de todos y agregarla al elemento clicado
+        colorOptions.forEach(opt => opt.classList.remove("color-selected"));
+        colorItem.classList.add("color-selected");
+
+        // Mostrar solo las tallas correspondientes al color seleccionado
+        sizeOptions.forEach(s => {
+          s.style.display = (s.getAttribute("data-color") === selectedColor) ? "flex" : "none";
+        });
+
+        // Seleccionar automáticamente la primera talla disponible del color seleccionado
+        const firstAvailable = document.querySelector(`.size-item[data-color="${selectedColor}"] input`);
+        if (firstAvailable) {
+          firstAvailable.checked = true;
+          if (addToCartButton) {
+            addToCartButton.setAttribute("data-selected-variant", firstAvailable.getAttribute("data-variant-id"));
+          }
+        }
+        updateAddToCartButtonState();
+
+        // Si tienes una función para filtrar la galería por color, se puede llamar aquí:
+        if (typeof filterGalleryByColor === "function") {
+          filterGalleryByColor(selectedColor);
+        }
+      }
+
+      // Inicializar la selección de color: se selecciona el primero por defecto y se asignan eventos
+      if (colorOptions.length > 0) {
+        selectColorAndSize(colorOptions[0]);
+        colorOptions.forEach(opt => {
+          opt.addEventListener("click", function() {
+            selectColorAndSize(this);
+          });
+        });
+      }
+
+      // Asignar evento "change" a cada input de tallas para actualizar la selección y el botón
+      const sizeInputs = document.querySelectorAll('.size-option');
+      sizeInputs.forEach(inp => {
+        inp.addEventListener("change", function() {
+          const variantId = this.getAttribute("data-variant-id");
+          console.log("Talla seleccionada, variante:", variantId);
+          if (addToCartButton) {
+            addToCartButton.setAttribute("data-selected-variant", variantId);
+          }
+          updateAddToCartButtonState();
+        });
+      });
+
+      // Validar stock en los inputs de tallas
+      validateStock();
+
+      // Evento para el botón "Agregar al carrito"
+      if (addToCartButton) {
+        addToCartButton.addEventListener("click", function() {
+          updateAddToCartButtonState();
+          const totalSelected = Array.from(document.querySelectorAll('.size-option')).reduce(
+            (acc, inp) => acc + (parseInt(inp.value, 10) || 0), 0
+          );
+          if (totalSelected <= 0) {
+            alert("Selecciona al menos una prenda antes de agregar al carrito.");
+            return;
+          }
+          const selectedVariant = this.getAttribute("data-selected-variant");
+          console.log("Agregar al carrito clickeado. Variant seleccionado:", selectedVariant);
+          // Aquí coloca la lógica para agregar el producto al carrito, por ejemplo:
+          // fetch("/cart/add.js", { method: "POST", body: JSON.stringify({ id: selectedVariant, quantity: totalSelected }) });
+        });
+      }
+
+      // Función para generar los botones dinámicos de bordado
+      function generateEmbroideryButtons() {
+        // Mapeo de tipos de producto a posiciones para bordado. Agrega más tipos según necesites.
+        const productTypes = {
+          "CAMISA": ["Frontal Izquierdo", "Frontal Derecho", "Espalda"],
+          "PLAYERA": ["Frontal Izquierdo", "Frontal Derecho", "Manga Izquierda", "Manga Derecha", "Espalda"]
+        };
+
+        // Se espera que inyectes el tipo de producto en el body, por ejemplo:
+        // <body data-product-type="{{ product.type }}">
+        const productType = document.body.getAttribute("data-product-type") || "";
+        const uploadContainer = document.getElementById("upload-sections");
+        if (!uploadContainer) {
+          console.warn("No se encontró el contenedor 'upload-sections' para bordado.");
+          return;
+        }
+        uploadContainer.innerHTML = ""; // Limpiar contenido previo
+
+        if (productTypes[productType]) {
+          productTypes[productType].forEach(position => {
+            const id = position.toLowerCase().replace(/\s+/g, "-");
+            const section = document.createElement("div");
+            section.classList.add("upload-section");
+            section.innerHTML = `
+              <label for="file-upload-${id}" class="upload-label">
+                <i class="bi bi-upload"></i> ${position}
+              </label>
+              <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
+              <div id="preview-${id}" class="preview"></div>
+            `;
+            uploadContainer.appendChild(section);
+            const fileInput = section.querySelector(`#file-upload-${id}`);
+            fileInput.addEventListener("change", function() {
+              console.log("Archivo seleccionado para:", position);
+              // Aquí coloca tu lógica para manejar la carga de archivos (por ejemplo, a Firebase)
+            });
+          });
+        } else {
+          console.log("No se generaron botones de bordado para el tipo de producto:", productType);
+        }
+      }
+
+      // Ejecutar la generación de botones dinámicos de bordado
+      generateEmbroideryButtons();
+
+    // ————— Enlazo NOTIFY-BTN dentro del Quick-Buy —————
+    const qbContainer = document.querySelector('#quick-buy-modal-content .contenedor_selectores');
+console.log('qbContainer encontrado en Quick-Buy:', qbContainer);
+if (qbContainer) {
+  qbContainer.removeEventListener('click', onNotifyClick);
+  qbContainer.addEventListener('click', onNotifyClick);
+  console.log("qbContainer encontrado en Quick-Buy:", qbContainer);
+} else {
+  console.warn('No se encontró .contenedor_selectores dentro de #quick-buy-modal-content');
+}
+
+    } catch (error) {
+      console.error("Error en initProductInfoCustom:", error);
+    }
+  }
+
+  // Utilizamos un MutationObserver para detectar cuando se carga el contenido dinámico (quick-buy-modal-content)
+const observer = new MutationObserver((mutations) => {
+  for (const m of mutations) {
+    for (const node of m.addedNodes) {
+      if (
+        node.nodeType === 1 &&
+        (node.id === 'quick-buy-modal-content' ||
+         node.querySelector('#quick-buy-modal-content'))
+      ) {
+        console.log("Quick-Buy abierto, inicializando lógica…");
+        initProductInfoCustom();
+        return; // dejamos vivo el observer
+      }
+    }
+  }
+});
+observer.observe(document.body, { childList: true, subtree: true });
+
+  setTimeout(function() {
+    console.warn("Después de 5 segundos no se encontró 'quick-buy-modal-content'. Verifica que el ID sea correcto.");
+  }, 5000);
+
+
+
+  
 </script>
 
-<!--
-  ============================================
-         TUS ESTILOS (MANTÉN IGUAL)
-  ============================================
--->
+
+<!-- ============================================
+       TUS ESTILOS (MANTÉN IGUAL)
+============================================ -->
 
 <style>
-    /* ✅ Estilos del acordeón */
-  .bordar-btn {
-    background-color: black;
-    color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    transition: background 0.3s;
+  /* ✅ Estilos del acordeón */
+
+.notify-btn span:hover {
+  color: red;
+}
+
+/* Contenedor principal del modal */
+#notify-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10010;
+  font-family: 'work sans', sans-serif;
+}
+
+
+/* Fondo semi-transparente */
+#notify-modal .modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Caja del contenido */
+#notify-modal .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Título */
+#notify-modal .modal-content h2 {
+  margin: 0 0 15px;
+  font-size: 1.25em;
+  color: #333;
+}
+
+/* Texto descriptivo */
+#notify-modal .modal-content p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Input de correo */
+#notify-modal #notify-email {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+/* Botones */
+#notify-modal button {
+  margin: 8px 4px 0;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Botón Enviar */
+#notify-modal #notify-submit {
+  background-color: #000;
+  color: #fff;
+    border:1px solid black;
+
+}
+#notify-modal #notify-submit:hover {
+  background-color: #fff;
+  border:1px solid black;
+  color: #000;
+}
+
+/* Botón Cancelar */
+#notify-modal #notify-close {
+  color: #dc3545;
+}
+  
+.accordion {
+  margin-bottom: 15px;
+}
+
+.accordion-btn {
+  background-color: black;
+  color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.accordion-btn.open {
+  background-color: red;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+/* ✅ Contenedor de botones de carga */
+.upload-container {
+  display: flex;
+  flex-wrap: wrap; /* Evita que los elementos se vayan a otra línea */
+  gap: 15px; /* Espaciado entre los botones */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center; /* Alineación vertical */
+  overflow-x: auto; /* Permite desplazamiento horizontal si hay muchos botones */
+}
+
+.upload-section {
+  flex: 0 1 auto; /* Ajusta el tamaño de cada sección */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px; /* Ancho mínimo de cada botón */
+}
+
+/* ✅ Botón de carga de archivos */
+.upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  
+  text-align: center;
+  white-space: nowrap; /* Evita que el texto se divida */
+}
+
+.upload-label:hover {
+  background-color: #000;
+}
+
+/* ✅ Vista previa de archivos */
+.preview {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+  /* 📌 CONTENEDOR DE COLORES */
+* Contenedor del swatch (mantenemos .color-item) */
+  .swatch {
+    display: inline-block;
+    position: relative;
+    margin: 5px;
   }
 
-  .bordar-btn.open {
-    background-color: red;
-  }
-
-
-
-    /* 📌 CONTENEDOR DE COLORES */
-  * Contenedor del swatch (mantenemos .color-item) */
-    .swatch {
-      display: inline-block;
-      position: relative;
-      margin: 5px;
-    }
-
-    /* Círculo de color */
-    .swatch-label {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%; /* círculo */
-      display: inline-block;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: border 0.2s, transform 0.2s;
-    }
-
-    /* Efecto hover */
-    .swatch-label:hover {
-      border-color: #ccc;
-      transform: scale(1.05);
-    }
-
-    /* Resaltar el swatch si el radio está checked */
-    .color-option:checked + .swatch-label {
-      border-color: #bcbcbc;
-      transform: scale(1.1);
-      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
-    }
-
-  .contenedor_colores {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 25px;
-  }
-
-  .color-item {
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
-  }
-
-  .color-preview {
+  /* Círculo de color */
+  .swatch-label {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: 50%; /* círculo */
     display: inline-block;
-    border: 2px solid #ddd;
+    border: 2px solid transparent;
     cursor: pointer;
+    transition: border 0.2s, transform 0.2s;
   }
+
+  /* Efecto hover */
+  .swatch-label:hover {
+    border-color: #ccc;
+    transform: scale(1.05);
+  }
+
+  /* Resaltar el swatch si el radio está checked */
+  .color-option:checked + .swatch-label {
+    border-color: #bcbcbc;
+    transform: scale(1.1);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  
+.contenedor_colores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.color-item {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.color-preview {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid #ddd;
+  cursor: pointer;
+}
 
   .color-option {
     padding: 5px 10px;
@@ -1102,117 +1285,144 @@ addToCartButton.addEventListener("click", function() {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   }
 
-  input[type="radio"].color-option {
-    display: none;
-  }
+input[type="radio"].color-option {
+  display: none;
+}
 
-  input[type="radio"].color-option:checked + .color-preview {
-    border: 2px solid black;
-  }
+input[type="radio"].color-option:checked + .color-preview {
+  border: 2px solid black;
+}
 
-  /* 📌 CONTENEDOR DE SELECTORES DE TALLA */
-  .contenedor_selectores {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+/* 📌 CONTENEDOR DE SELECTORES DE TALLA */
+.contenedor_selectores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 
-  .size-item {
-    display: none; /* Se activará con JS */
-  }
+.size-item {
+  display: none; /* Se activará con JS */
+}
 
-  .size-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #f5f5f5;
-    border-radius: 5px;
-    padding: 5px;
-    width: 60px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-  }
+.size-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #f5f5f5;
+  border-radius: 5px;
+  padding: 5px;
+  width: 60px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
 
-  .size-name {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 3px;
-  }
+.size-name {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
 
-  /* 📌 CONTENEDOR DE INPUT + BOTONES UP/DOWN */
-  .quantity-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
+/* 📌 CONTENEDOR DE INPUT + BOTONES UP/DOWN */
+.quantity-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
 
-  .size-option {
-    width: 40px;
-    height: 30px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    appearance: textfield;
-  }
+.size-option {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  appearance: textfield;
+}
 
-  .qty-btn {
-    width: 100%;
-    height: 15px;
-    background: #ddd;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    line-height: 12px;
-    text-align: center;
-  }
+.qty-btn {
+  width: 100%;
+  height: 15px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 12px;
+  text-align: center;
+}
 
-  .qty-btn.up {
-    border-radius: 0 0 4px 4px;
-  }
+.qty-btn.up {
+  border-radius: 0 0 4px 4px;
+}
 
-  .qty-btn.down {
-    border-radius: 4px 4px 0 0;
-  }
+.qty-btn.down {
+  border-radius: 4px 4px 0 0;
+}
 
-  .size-option::-webkit-inner-spin-button,
-  .size-option::-webkit-outer-spin-button {
-    appearance: none;
-    margin: 0;
-  }
+.size-option::-webkit-inner-spin-button,
+.size-option::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
 
-  .stock-info {
-    font-size: 12px;
-    color: #666;
-    margin-top: 3px;
-  }
+.stock-info {
+  font-size: 12px;
+  color: #666;
+  margin-top: 3px;
+}
 
-  /* 📌 BOTÓN AGREGAR AL CARRITO */
-  .add-to-cart-btn {
-    background-color: #f00;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-  }
+/* 📌 BOTÓN AGREGAR AL CARRITO */
+.add-to-cart-btn {
+  background-color: #f00;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
 
-  .add-to-cart-btn:hover {
-    background-color: #000;
-    color: #fff;
-  }
+.add-to-cart-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
 
-  .add-to-cart-btn:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-  }
+.add-to-cart-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+/* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
+.upload-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.upload-label {
+  background-color: #f00;
+  color: #fff;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.upload-label:hover {
+  background-color: #000;
+}
+
+.preview {
+  margin-top: 10px;
+  font-size: 14px;
+}
 </style>
