@@ -146,9 +146,10 @@
 {% endif %}
 <!-- Fin Selector tallas -->
 
+{% if context != 'quick_buy' %}
 <style>
   /*MODAL*/
-    .modal-overlay {
+    .bordado-modal-overlay {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -163,15 +164,15 @@
         z-index:100;
         transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    .modal-overlay.active {
+    .bordado-modal-overlay.active {
         opacity: 1;
         visibility: visible;
     }
 
-    .modal-overlay.active .modal {
+    .bordado-modal-overlay.active .bordado-modal {
         transform: scale(1);
     }
-    .modal {
+    .bordado-modal {
         display: grid;
         grid-template-columns: 1fr 1fr;
         background: white;
@@ -186,7 +187,7 @@
 
     }
     
-    .close-btn-x {
+    .bordado-close-btn-x {
       position: absolute;
       top: 10px;
       left: 10px;
@@ -200,12 +201,12 @@
       
     }
   
-    .close-btn-x:hover {
+    .bordado-close-btn-x:hover {
       color: red;
     }
   
     @media (max-width: 767px) {
-      .close-btn-x {
+      .bordado-close-btn-x {
         font-size: 20px; 
       }
     }
@@ -303,7 +304,7 @@
     .bordado-info p {
       font-size: 10px;
     }
-    .close-btn {
+    .bordado-close-btn {
       background-color: #f00;
       border-radius: 5px;
       width: 150px;
@@ -311,7 +312,7 @@
       margin-top: 10px;
     }
   @media (max-width: 767px){
-    .modal {
+    .bordado-modal {
       grid-template-columns: none;
       grid-template-rows: 1fr 1fr;
       overflow: overlay;
@@ -329,52 +330,40 @@
     .bordado-info{
       align-items: center;
     }
-    .close-btn{
+    .bordado-close-btn{
       
       justify-self: anchor-center;
       margin-top:0px;
     }
   }
 </style>
-{% if context != 'quick_buy' %}
 <!-- Boton MODULO BORDADO -->
 <button
-  id="openModal"
+  id="openBordadoModal"
   class="bordar-btn"
   style="font-family: 'work sans'; font-weight:bold; text-align: center;"
 >
   ¿Desear bordar tu prenda?
 </button>
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
+<div class="bordado-modal-overlay" id="bordado-modal-overlay">
+  <div class="bordado-modal">
     <!-- Botón de cierre "X" -->
-    <button class="close-btn-x" id="closeModalX">&times;</button>
+    <button class="bordado-close-btn-x" id="closeBordadoModalX">&times;</button>
     <div class="container-bordar-img">
       {% render 'bordados-areas' %}
     </div>
     <div class="container-bordar-content">
-      
-      <p class="txtInfo" id= "txtInfo" >Selecciona de la imagen el area que deseas bordar y carga tu imagen o pdf del bordado.</p>
-      <div class="upload-container" id="upload-sections">
-        
-        <!-- Aquí se crearán dinámicamente los inputs de carga de archivos -->
-      </div>
-      <div class="medidas-container" id="medidas-sections">
-        <!--
-          <p>
-            **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
-            grande**
-          </p>
-        -->
-      </div>
+      <p class="txtInfo" id="txtInfo">Selecciona de la imagen el area que deseas bordar y carga tu imagen o pdf del bordado.</p>
+      <div class="upload-container" id="upload-sections"></div>
+      <div class="medidas-container" id="medidas-sections"></div>
       <div class="bordado-info">
         {% render 'bordados-info' %}
       </div>
-      <button class="close-btn" id="closeModal">Guardar</button>
+      <button class="bordado-close-btn" id="closeBordadoModal">Guardar</button>
     </div>
   </div>
 </div>
-  {% endif %}
+{% endif %}
 <!-- Botón Agregar al Carrito -->
 <button id="add-to-cart-btn" class="add-to-cart-btn" disabled>Agregar al carrito</button>
 <!-- Fin Botón Agregar al Carrito -->
@@ -423,21 +412,21 @@
   */
 
   //MODAL
-  const openModal = document.getElementById("openModal");
-  const closeModal = document.getElementById("closeModal");
-  const modalOverlay = document.getElementById("modalOverlay");
-  const closeModalX = document.getElementById("closeModalX");
+  const openModal = document.getElementById("openBordadoModal");
+  const closeModal = document.getElementById("closeBordadoModal");
+  const modalOverlay = document.getElementById("bordado-modal-overlay");
+  const closeModalX = document.getElementById("closeBordadoModalX");
 
   openModal.addEventListener("click", () => {
-      modalOverlay.classList.add("active");
-  });
-  
-  closeModalX.addEventListener("click", () => {
-    modalOverlay.classList.remove("active");
-  });
+    modalOverlay.classList.add("active");
+});
 
-  closeModal.addEventListener("click", () => {
-      modalOverlay.classList.remove("active");
+closeModalX.addEventListener("click", () => {
+  modalOverlay.classList.remove("active");
+});
+
+closeModal.addEventListener("click", () => {
+    modalOverlay.classList.remove("active");
   });
 
   //FIN MODAL
@@ -968,7 +957,6 @@ document.addEventListener("DOMContentLoaded", function () {
       addToCartButton.setAttribute("data-selected-variant", variantId);
     });
   });
-3
   // Control stock y flechas
   sizeInputs.forEach(inp => {
     inp.addEventListener("input", function(){
