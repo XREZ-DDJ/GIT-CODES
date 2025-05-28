@@ -164,7 +164,7 @@
       {% render 'bordados-areas' %}
     </div>
     <div class="container-bordar-content">
-      <p class="txtInfo" id="txtInfo">Selecciona de la imagen el area que deseas bordar y carga tu imagen o pdf del bordado.</p>
+      <p class="txtInfo" id="txtInfo">Selecciona tu zona de bordado en la imagen.</p>
       <div class="upload-container" id="upload-sections"></div>
       <div class="medidas-container" id="medidas-sections"></div>
       <div class="bordado-info">
@@ -266,8 +266,6 @@ function selectArea(area) {
     const areaAlt = areaElement.getAttribute('alt');
     highlightArea(areaAlt, areaAlt === areaSeleccionada ? 'red' : 'transparent');
   });
-  const txtInfo = document.getElementById("txtInfo");
-  txtInfo.style.display="none";
 }
 
   
@@ -362,14 +360,14 @@ function highlightArea(area, defaultColor = 'red') {
   section.style.display = "none"; // Ocultar por defecto
   section.innerHTML = `
     <label for="file-upload-${id}" class="upload-label">
-      Seleccionar archivo 
+      Subir imagen
     </label>
     <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
     <div id="preview-${id}" class="preview"></div>
     <div class="medidas-container">
       <p>
-        **Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
-        grande**
+        <strong>**Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
+        grande**</strong>
       </p>
       <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
       <input type="number" id="ancho-${id}" class="medidas-input" min="1">
@@ -1176,7 +1174,7 @@ document.addEventListener("DOMContentLoaded", function () {
             section.classList.add("upload-section");
             section.innerHTML = `
               <label for="file-upload-${id}" class="upload-label">
-                <i class="bi bi-upload"></i> ${position}
+                
               </label>
               <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
               <div id="preview-${id}" class="preview"></div>
@@ -1342,7 +1340,6 @@ if (qbContainer) {
     padding: 10px 10px;
     border-radius: 5px;
     max-height: 42px;
-    margin-right: 10px;
     }
 
   .upload-label:hover {
