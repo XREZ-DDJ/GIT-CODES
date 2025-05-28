@@ -147,6 +147,7 @@
 <!-- Fin Selector tallas -->
 
 {% if context != 'quick_buy' %}
+
 <!-- Boton MODULO BORDADO -->
 <button
   id="openBordadoModal"
@@ -1236,170 +1237,455 @@ if (qbContainer) {
   
 </script>
 
-
 <style>
-  /* --- MODAL BORDADO --- */
+  
+  /*MODAL*/
   .bordado-modal-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0; visibility: hidden;
-    z-index: 100;
-    transition: opacity 0.3s, visibility 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      z-index:100;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
   }
   .bordado-modal-overlay.active {
-    opacity: 1; visibility: visible;
+      opacity: 1;
+      visibility: visible;
   }
+
   .bordado-modal-overlay.active .bordado-modal {
-    transform: scale(1);
+      transform: scale(1);
   }
   .bordado-modal {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: white;
-    width: 90%; height: 85%;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transform: scale(0.8);
-    transition: transform 0.3s;
-    top: 40px;
-  }
-  .bordado-close-btn-x {
-    position: absolute; top: 10px; left: 10px;
-    background: transparent; color: black;
-    font-size: 24px; font-weight: bold;
-    border: none; cursor: pointer; z-index: 4;
-  }
-  .bordado-close-btn-x:hover { color: red; }
-  @media (max-width: 767px) {
-    .bordado-close-btn-x { font-size: 20px; }
-    .bordado-modal { grid-template-columns: none; grid-template-rows: 1fr 1fr; overflow: overlay; }
-    .container-bordar-img { overflow: visible; }
-    .upload-section { flex-direction: column; height: auto; }
-    .medidas-container { flex-direction: column; }
-    .bordado-info { align-items: center; }
-    .bordado-close-btn { margin-top: 0; }
-  }
-  .container-bordar-img { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
-  .bordar-img { max-width: 100%; max-height: 100%; }
-  .txtInfo { font-size: 18px; font-weight: bold; text-align: center; }
-  .container-bordar-content { display: flex; padding: 10px; flex-direction: column; align-items: center; }
-  .upload-container { display: flex; justify-content: space-around; }
-  .upload-section { flex-wrap: wrap; justify-content: space-around; align-items: center; gap: 20px; }
-  .upload-label { background: #f00; color: #fff; padding: 10px; border-radius: 5px; max-height: 42px; margin-right: 10px; }
-  .upload-label:hover { background: #000; }
-  .preview { font-size: 10px; display: flex; flex-direction: column; height: 110px; width: 110px; align-items: center; }
-  .preview img { max-width: 100px; max-height: 100px; }
-  .medidas-container { display: flex; gap: 8px; text-align: center; align-items: center; flex-wrap: wrap; justify-content: center; }
-  .medidas-container p { font-size: 11px; }
-  .medidas-input { padding: 5px; border: 1px solid #ccc; border-radius: 4px; max-width: 120px; }
-  .bordado-info { display: flex; flex-direction: column; align-items: center; font-size: 10px; margin-top: 15px; }
-  .bordado-info p { font-size: 10px; }
-  .bordado-close-btn { background: #f00; border-radius: 5px; width: 150px; color: #fff; margin-top: 10px; }
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: white;
+      width: 90%;
+      height: 85%;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+      top: 40px;
 
-  /* --- MODAL NOTIFICACIÓN --- */
+  }
+  
+  .bordado-close-btn-x {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: transparent;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    z-index: 4;
+    
+  }
+
+  .bordado-close-btn-x:hover {
+    color: red;
+  }
+
+
+  .container-bordar-img {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position:relative;
+  }
+
+  .bordar-img {
+      max-width: 100%;
+      max-height: 100%;
+  }
+  .txtInfo {
+      font-size: 18px;
+      font-weight: bold;
+      text-align:center;
+  }
+  .container-bordar-content {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
+  .upload-container {
+    
+    display: flex;
+    justify-content: space-around;
+  }
+  .upload-section{
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+
+  }
+  .upload-label {
+    background-color: #f00;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    max-height: 42px;
+    margin-right: 10px;
+    }
+
+  .upload-label:hover {
+    background-color: #000;
+  }
+  /* ✅ Vista previa de archivos */
+  .preview {
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 110px;
+    width: 110px;
+    align-items: center;
+  }
+  .preview img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .medidas-container {
+    display: flex;
+    gap: 8px;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .medidas-container p {
+    font-size: 11px;
+  }
+  .medidas-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 120px;
+  }
+  .bordado-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+    margin-top: 15px;
+  }
+  .bordado-info p {
+    font-size: 10px;
+  }
+  .bordado-close-btn {
+    background-color: #f00;
+    border-radius: 5px;
+    width: 150px;
+    color: #ffffff;
+    margin-top: 10px;
+  }
+  @media (max-width: 767px){
+    .bordado-modal {
+      grid-template-columns: none;
+      grid-template-rows: 1fr 1fr;
+      overflow: overlay;
+    }
+    .bordado-close-btn-x {
+        font-size: 20px; 
+      }
+    .container-bordar-img {
+      overflow: visible;
+    }
+    .upload-section{
+      flex-direction: column;
+      height:auto;
+    }
+    .medidas-container{
+      flex-direction: column;
+    }
+    .bordado-info{
+      align-items: center;
+    }
+    .bordado-close-btn{
+      
+      justify-self: anchor-center;
+      margin-top:0px;
+    }
+  }
+/*FIN MODAL BORDADO*/
+  
+/* --- MODAL NOTIFICACIÓN --- */
   #notify-modal {
-    position: fixed; inset: 0; z-index: 10010;
+    position: fixed;
+    inset: 0;
+    z-index: 10010;
     font-family: 'work sans', sans-serif;
   }
   #notify-modal .modal-backdrop {
-    position: absolute; inset: 0; background: rgba(0,0,0,0.5);
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
   }
   #notify-modal .modal-content {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: #fff; width: 90%; max-width: 400px; padding: 20px;
-    border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
   }
-  #notify-modal .modal-content h2 { margin: 0 0 15px; font-size: 1.25em; color: #333; }
-  #notify-modal .modal-content p { margin: 5px 0; color: #555; }
+  #notify-modal .modal-content h2 {
+    margin: 0 0 15px;
+    font-size: 1.25em;
+    color: #333;
+  }
+  #notify-modal .modal-content p {
+    margin: 5px 0;
+    color: #555;
+  }
   #notify-modal #notify-email {
-    width: 100%; padding: 8px 10px; margin: 12px 0;
-    border: 1px solid #ccc; border-radius: 4px; font-size: 1em;
+    width: 100%;
+    padding: 8px 10px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
   }
   #notify-modal button {
-    margin: 8px 4px 0; padding: 8px 12px; border: none; border-radius: 4px;
-    font-size: 0.95em; cursor: pointer; transition: background 0.2s;
+    margin: 8px 4px 0;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background 0.2s;
   }
   #notify-modal #notify-submit {
-    background: #000; color: #fff; border: 1px solid black;
+    background-color: #000;
+    color: #fff;
+      border:1px solid black;
+  
   }
   #notify-modal #notify-submit:hover {
-    background: #fff; border: 1px solid black; color: #000;
+    background-color: #fff;
+    border:1px solid black;
+    color: #000;
   }
-  #notify-modal #notify-close { color: #dc3545; }
-  .notify-btn span:hover { color: red; }
-
-  /* --- BOTÓN BORDAR --- */
+  #notify-modal #notify-close {
+    color: #dc3545;
+  }
+  .notify-btn span:hover {
+    color: red;
+  }
+/* --- BOTÓN BORDAR --- */
   .bordar-btn {
-    background: black; color: white; border: 1px solid #ccc;
-    padding: 10px; width: 100%; text-align: left; cursor: pointer;
+    background-color: black;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
     transition: background 0.3s;
   }
-  .bordar-btn.open { background: red; }
 
-  /* --- SWATCHES Y COLORES --- */
-  .swatch { display: inline-block; position: relative; margin: 5px; }
+  .bordar-btn.open {
+    background-color: red;
+  }
+/* --- SWATCHES Y COLORES --- */
+  .swatch {
+    display: inline-block;
+    position: relative;
+    margin: 5px;
+  }
+
+  /* Círculo de color */
   .swatch-label {
-    width: 30px; height: 30px; border-radius: 50%; display: inline-block;
-    border: 2px solid transparent; cursor: pointer; transition: border 0.2s, transform 0.2s;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* círculo */
+    display: inline-block;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border 0.2s, transform 0.2s;
   }
-  .swatch-label:hover { border-color: #ccc; transform: scale(1.05); }
+
+  /* Efecto hover */
+  .swatch-label:hover {
+    border-color: #ccc;
+    transform: scale(1.05);
+  }
+
+  /* Resaltar el swatch si el radio está checked */
   .color-option:checked + .swatch-label {
-    border-color: #bcbcbc; transform: scale(1.1); box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+    border-color: #bcbcbc;
+    transform: scale(1.1);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
   }
-  .contenedor_colores { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
-  .color-item { display: flex; flex-direction: column; cursor: pointer; transition: background-color 0.3s; }
+
+  .contenedor_colores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+
+  .color-item {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+  }
+
   .color-preview {
-    width: 30px; height: 30px; border-radius: 50%; display: inline-block;
-    border: 2px solid #ddd; cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid #ddd;
+    cursor: pointer;
   }
+
   .color-option {
-    padding: 5px 10px; max-width: 80px; border: 1px solid black;
+    padding: 5px 10px;
+    max-width:80px;
+    border: 1px solid black;
   }
   .color-option:hover {
-    border: 1px solid white; color: white;
-    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
+    border: 1px solid white;
+    color: white;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   }
-  input[type="radio"].color-option { display: none; }
-  input[type="radio"].color-option:checked + .color-preview { border: 2px solid black; }
 
-  /* --- SELECTOR DE TALLAS --- */
-  .contenedor_selectores { display: flex; flex-wrap: wrap; gap: 8px; }
-  .size-item { display: none; }
-  .size-label {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; background: #f5f5f5; border-radius: 5px; padding: 5px;
-    width: 60px; font-size: 14px; font-weight: bold; color: #333;
+  input[type="radio"].color-option {
+    display: none;
   }
-  .size-name { font-size: 12px; font-weight: bold; margin-bottom: 3px; }
-  .quantity-wrapper { display: flex; flex-direction: column; align-items: center; position: relative; }
+
+  input[type="radio"].color-option:checked + .color-preview {
+    border: 2px solid black;
+  }
+
+/* --- SELECTOR DE TALLAS --- */
+  .contenedor_selectores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .size-item {
+    display: none; /* Se activará con JS */
+  }
+
+  .size-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 5px;
+    padding: 5px;
+    width: 60px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .size-name {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
+
+  /* 📌 CONTENEDOR DE INPUT + BOTONES UP/DOWN */
+  .quantity-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
   .size-option {
-    width: 40px; height: 30px; text-align: center; border: 1px solid #ccc;
-    border-radius: 4px; background: #fff; font-size: 16px; font-weight: bold;
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: bold;
     appearance: textfield;
   }
-  .qty-btn {
-    width: 100%; height: 15px; background: #ddd; border: none; cursor: pointer;
-    font-size: 12px; line-height: 12px; text-align: center;
-  }
-  .qty-btn.up { border-radius: 0 0 4px 4px; }
-  .qty-btn.down { border-radius: 4px 4px 0 0; }
-  .size-option::-webkit-inner-spin-button,
-  .size-option::-webkit-outer-spin-button { appearance: none; margin: 0; }
-  .stock-info { font-size: 12px; color: #666; margin-top: 3px; }
 
-  /* --- BOTÓN AGREGAR AL CARRITO --- */
-  .add-to-cart-btn {
-    background: #f00; color: #fff; padding: 15px 30px; border: none;
-    font-size: 16px; font-weight: bold; cursor: pointer;
-    transition: all 0.3s; width: 100%;
+  .qty-btn {
+    width: 100%;
+    height: 15px;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
   }
-  .add-to-cart-btn:hover { background: #000; color: #fff; }
-  .add-to-cart-btn:disabled { background: gray; cursor: not-allowed; }
+
+  .qty-btn.up {
+    border-radius: 0 0 4px 4px;
+  }
+
+  .qty-btn.down {
+    border-radius: 4px 4px 0 0;
+  }
+
+  .size-option::-webkit-inner-spin-button,
+  .size-option::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  .stock-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 3px;
+  }
+
+/* --- BOTÓN AGREGAR AL CARRITO --- */
+  .add-to-cart-btn {
+    background-color: #f00;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .add-to-cart-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
 </style>
 
