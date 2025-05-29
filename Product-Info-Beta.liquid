@@ -323,6 +323,7 @@ function highlightArea(area, defaultColor = 'red') {
   let highlightDiv = container.querySelector(`#highlight-area-${area}`);
   if (!highlightDiv) {
     highlightDiv = document.createElement('div');
+    highlightDiv.className =`highlight-areas`;
     highlightDiv.id = `highlight-area-${area}`;
     highlightDiv.style.position = 'absolute';
     highlightDiv.style.pointerEvents = 'none'; // No interferir con clics
@@ -1519,7 +1520,7 @@ if (qbContainer) {
     height: 30px;
     border-radius: 50%; /* círculo */
     display: inline-block;
-    border: 2px solid transparent;
+    border: 2px solid #cccccc;
     cursor: pointer;
     transition: border 0.2s, transform 0.2s;
   }
@@ -1683,6 +1684,11 @@ if (qbContainer) {
   .add-to-cart-btn:disabled {
     background-color: gray;
     cursor: not-allowed;
+  }
+/*AREAS*/
+  .highlight-areas:hover{
+
+    border-color:black;
   }
 </style>
 
