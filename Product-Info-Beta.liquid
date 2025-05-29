@@ -228,11 +228,20 @@
   const modalOverlay = document.getElementById("bordado-modal-overlay");
   const closeModalX = document.getElementById("closeBordadoModalX");
 
+  let modalAbiertoPorPrimeraVez = false;
+
   openModal.addEventListener("click", () => {
     modalOverlay.classList.add("active");
-});
+    if (!modalAbiertoPorPrimeraVez) {
+      const txtInfo = document.getElementById("txtInfo");
+      if (txtInfo) {
+        txtInfo.textContent = "Paso 1: Selecciona tu zona de bordado en la imagen.";
+      }
+      modalAbiertoPorPrimeraVez = true;
+    }
+  });
 
-closeModalX.addEventListener("click", () => {
+  closeModalX.addEventListener("click", () => {
   modalOverlay.classList.remove("active");
 });
 
@@ -250,6 +259,12 @@ closeModal.addEventListener("click", () => {
 function selectArea(area) {
   // Actualizar el área seleccionada
   areaSeleccionada = area;
+
+  // Cambiar el texto de instrucciones a Paso 2
+  const txtInfo = document.getElementById("txtInfo");
+  if (txtInfo) {
+    txtInfo.textContent = "Paso 2: Carga la imagen de tu bordado";
+  }
 
   // Resaltar todas las áreas según su estado
   document.querySelectorAll('.upload-section').forEach(section => {
@@ -366,10 +381,7 @@ function highlightArea(area, defaultColor = 'red') {
     <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
     <div id="preview-${id}" class="preview"></div>
     <div class="medidas-container">
-      <p>
-        <strong>**Si necesitas otras medidas mas pequeñas, colocalas aqui. Se redimensionara tomando en cuenta tu dato mas
-        grande**</strong>
-      </p>
+      
       <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
       <input type="number" id="ancho-${id}" class="medidas-input" min="1">
       <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
@@ -460,6 +472,15 @@ function handleFileUpload(position, input) {
               img.src = downloadURL;
               previewDiv.appendChild(img);
             } 
+
+            // Agregar el <p> de medidas solo si no existe ya
+            const medidasContainer = document.querySelector(`#upload-section-${position} .medidas-container`);
+            if (medidasContainer && !medidasContainer.querySelector('.medidas-info')) {
+              const p = document.createElement('p');
+              p.className = 'medidas-info';
+              p.innerHTML = `<strong>**Si necesitas otras medidas más pequeñas, colócalas aquí. Se redimensionará tomando en cuenta tu dato más grande**</strong>`;
+              medidasContainer.insertBefore(p, medidasContainer.firstChild);
+            }
 
             // Actualizar estado global y cambiar el resaltado a verde
             areasConArchivos[position] = true;
