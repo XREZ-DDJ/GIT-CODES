@@ -398,13 +398,12 @@ document.addEventListener("DOMContentLoaded", function() {
   section.id = `upload-section-${id}`;
   section.style.display = "none"; // Ocultar por defecto
   section.innerHTML = `
-    <label for="file-upload-${id}" class="upload-label">
-      Subir imagen
-    </label>
-    <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
-    <div id="preview-${id}" class="preview"></div>
+  
+    <div id="preview-${id}" class="preview">
+    <label for="file-upload-${id}" class="upload-label">Subir imagen</label>
+    <input type="file" id="file-upload-${id}"accept="image/*,.pdf" style="display: none;">
+    </div>
     <div id= "medidas-container-${id}" class="medidas-container" style="display: none;">
-      
       <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
       <input type="number" id="ancho-${id}" class="medidas-input" min="1">
       <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
@@ -449,7 +448,12 @@ function authenticateUser() {
 // Función para manejar la carga de archivos
 function handleFileUpload(position, input) {
   const previewDiv = document.getElementById(`preview-${position}`);
-  previewDiv.innerHTML = ""; // Limpiar previsualización anterior
+
+  // Elimina solo la imagen previa y el ícono de borrar, NO el label ni el input
+  const prevImg = previewDiv.querySelector("img");
+  if (prevImg) prevImg.remove();
+  const prevDelete = previewDiv.querySelector(".delete-preview");
+  if (prevDelete) prevDelete.remove();
 
   // Ocultar el contenedor de medidas al iniciar
   const medidasDiv = document.getElementById(`medidas-container-${position}`);
@@ -491,10 +495,6 @@ function handleFileUpload(position, input) {
         },
         function () {
           uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-            console.log(`Archivo disponible en: ${downloadURL}`);
-
-            // Limpiar mensaje
-            previewDiv.innerHTML = "";
             // Mostrar previsualización
             if (file.type.startsWith("image/")) {
               const img = document.createElement("img");
@@ -503,6 +503,7 @@ function handleFileUpload(position, input) {
 
               // Crear el icono de borrar
               const deleteIcon = document.createElement("span");
+              deleteIcon.className = "delete-preview";
               deleteIcon.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`;
               deleteIcon.title = "Eliminar imagen";
               deleteIcon.style.cursor = "pointer";
@@ -512,28 +513,23 @@ function handleFileUpload(position, input) {
 
               // Evento para borrar la imagen
               deleteIcon.onclick = function() {
-                // Limpiar el input y el preview
+                // Elimina solo la imagen y el ícono de borrar
+                if (img) img.remove();
+                deleteIcon.remove();
                 input.value = "";
-                previewDiv.innerHTML = "";
-                // Eliminar el estado de área cargada y actualizar el borde
                 delete areasConArchivos[position];
                 highlightArea(position, 'red');
                 txtInfo.textContent = "Paso 2: Carga la imagen de tu bordado";
-                // Ocultar el contenedor de medidas al borrar la imagen
                 if (medidasDiv) {
                   medidasDiv.style.display = "none";
                 }
-                
-                // Recalcular archivos subidos
                 contarArchivosSubidos();
               };
               previewDiv.appendChild(deleteIcon);
-            } 
-            // Actualizar estado global y cambiar el resaltado a verde
+            }
             areasConArchivos[position] = true;
             highlightArea(position, 'green');
             txtInfo.textContent = "Paso 3: Ajusta las medidas si requieres un menor tamaño ** Se redimensionara para ajustar el diseño **";
-            // Mostrar el contenedor de medidas solo después de subir la imagen
             if (medidasDiv) {
               medidasDiv.style.display = "flex";
             }
@@ -542,10 +538,8 @@ function handleFileUpload(position, input) {
       );
     });
   } else {
-    // Si no hay archivo, eliminar el estado de área cargada
     delete areasConArchivos[position];
     highlightArea(position, 'red');
-    // Ocultar el contenedor de medidas si no hay archivo
     if (medidasDiv) {
       medidasDiv.style.display = "none";
     }
@@ -1399,17 +1393,11 @@ if (qbContainer) {
     flex-direction: column;
     align-items: center;
   }
-  /* 📌 ESTILOS PARA CARGA DE ARCHIVOS */
-  .upload-container {
-    
-    display: flex;
-    justify-content: space-around;
-  }
   .upload-section{
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 20px;
 
   }
   .upload-label {
@@ -1425,10 +1413,9 @@ if (qbContainer) {
   }
   /* ✅ Vista previa de archivos */
   .preview {
-    font-size: 10px;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
   }
   .preview img {
     max-width: 100px;
@@ -1436,13 +1423,9 @@ if (qbContainer) {
   }
 
   .medidas-container {
-    display: flex;
-    gap: 8px;
-    text-align: center;
+    gap: 15px;
     align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 85%;
+    flex-direction: row;
   }
   .medidas-container p {
     font-size: 16px;
@@ -1472,12 +1455,15 @@ if (qbContainer) {
   }
   .p-bordados-guardados {
     display: none;
+    color: green;
+    font-size: 13px;
+
   }
   
   @media (max-width: 767px){
     .bordado-modal {
       grid-template-columns: none;
-      grid-template-rows: 1fr 1fr;
+      grid-template-rows: 1fr minmax(0, 1fr);
       overflow: overlay;
     }
     .bordado-close-btn-x {
@@ -1486,9 +1472,16 @@ if (qbContainer) {
     .container-bordar-img {
       overflow: visible;
     }
+    .txtInfo{
+      font-size:13px;
+    }
     .upload-section{
       flex-direction: column;
       height:auto;
+    }
+    .preview{
+      gap: 5px;
+      flex-direction: column;
     }
     .medidas-container{
       flex-direction: column;
@@ -1497,7 +1490,6 @@ if (qbContainer) {
       align-items: center;
     }
     .bordado-close-btn{
-      
       justify-self: anchor-center;
       margin-top:0px;
     }
