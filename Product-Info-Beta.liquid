@@ -69,14 +69,14 @@
       <input
         type="radio"
         name="selected-color"
-        id="color-{{ variant.id }}"
+        id="colorRadio-{{ variant.id }}"
         class="color-option"
         value="{{ variant.option2 }}"
         hidden
       >
       <!-- Label con el fondo de color -->
       <label
-        for="color-{{ variant.id }}"
+        for="colorRadio-{{ variant.id }}"
         class="swatch-label"
         style="background: {{ color_hex }}"
       >
@@ -150,39 +150,39 @@
 
 <!-- Boton MODULO BORDADO -->
 <button
-  id="openBordadoModal"
+  id="abrirModalBordadoBtn"
   class="bordar-btn"
   style="font-family: 'work sans'; font-weight:bold; text-align: center;"
 >
-  ¿Desear bordar tu prenda?
+  BORDA AQUÍ
 </button>
-<div class="bordado-modal-overlay" id="bordado-modal-overlay">
+<div class="bordado-modal-overlay" id="superposicionModalBordado">
   <div class="bordado-modal">
     <!-- Botón de cierre "X" -->
-    <button class="bordado-close-btn-x" id="closeBordadoModalX">&times;</button>
+    <button class="bordado-close-btn-x" id="cerrarModalBordadoXBtn">&times;</button>
     <div class="container-bordar-img">
       {% render 'bordados-areas' %}
     </div>
     <div class="container-bordar-content">
       <p class="txtInfo" id="txtInfo">Paso 1: Selecciona tu zona de bordado en la imagen.</p>
-      <div class="upload-container" id="upload-sections"></div>
-      <div class="medidas-container" id="medidas-sections"></div>
+      <div class="upload-container" id="seccionesSubidaBordado"></div>
+      <div class="medidas-container" id="seccionesMedidasBordado"></div>
       <div class="bordado-info">
         {% render 'bordados-info' %}
       </div>
-      <button class="bordado-close-btn" id="closeBordadoModal">Guardar</button>
+      <button class="bordado-close-btn" id="guardarModalBordadoBtn">Guardar</button>
       <p class= "p-bordados-guardados">Diseños guardados. Puedes agregar mas bordados por $25</p>
     </div>
   </div>
 </div>
 {% endif %}
 <!-- Botón Agregar al Carrito -->
-<button id="add-to-cart-btn" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+<button id="btnAgregarCarrito" class="add-to-cart-btn" disabled>Agregar al carrito</button>
 <!-- Fin Botón Agregar al Carrito -->
 
 <!-- Formulario oculto para actualizar tags de cliente -->
 <form
-  id="update-tags-form"
+  id="formularioActualizarEtiquetas"
   action="/account"
   method="post"
   style="display:none;"
@@ -211,7 +211,7 @@
   <input
     type="hidden"
     name="customer[tags]"
-    id="customer-tags-input"
+    id="inputEtiquetasCliente"
   />
 </form>
 <!--SCRIPT : MANEJO DE MODAL, SELECCION DE AREAS Y CREACION DE INPUTS-->
@@ -224,10 +224,10 @@
   */
 
   //MODAL
-  const openModal = document.getElementById("openBordadoModal");
-  const closeModal = document.getElementById("closeBordadoModal");
-  const modalOverlay = document.getElementById("bordado-modal-overlay");
-  const closeModalX = document.getElementById("closeBordadoModalX");
+  const openModal = document.getElementById("abrirModalBordadoBtn");
+  const closeModal = document.getElementById("guardarModalBordadoBtn");
+  const modalOverlay = document.getElementById("superposicionModalBordado");
+  const closeModalX = document.getElementById("cerrarModalBordadoXBtn");
 
   let modalAbiertoPorPrimeraVez = false;
 
@@ -267,7 +267,7 @@ function selectArea(area) {
     section.style.display = 'none';
   });
 
-  const selectedSection = document.getElementById(`upload-section-${area}`);
+  const selectedSection = document.getElementById(`seccionSubidaBordado-${area}`);
   if (selectedSection) {
     selectedSection.style.display = 'flex';
   }
@@ -334,11 +334,11 @@ function highlightArea(area, defaultColor = 'red', forceShow = false) {
   const offsetY = imageRect.top - containerRect.top;
 
   // Crea o reutiliza un elemento para el resaltado
-  let highlightDiv = container.querySelector(`#highlight-area-${area}`);
+  let highlightDiv = container.querySelector(`#resaltarAreaBordado-${area}`);
   if (!highlightDiv) {
     highlightDiv = document.createElement('div');
     highlightDiv.className =`highlight-areas`;
-    highlightDiv.id = `highlight-area-${area}`;
+    highlightDiv.id = `resaltarAreaBordado-${area}`;
     highlightDiv.style.position = 'absolute';
     highlightDiv.style.pointerEvents = 'none'; // No interferir con clics
     highlightDiv.style.borderRadius = '50%'; // Hacer el resaltado circular
@@ -389,34 +389,34 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Inicializar upload sections
   const areas = window.areas || []; 
-  const uploadContainer = document.getElementById("upload-sections");
+  const uploadContainer = document.getElementById("seccionesSubidaBordado");
   uploadContainer.innerHTML = "";
   areas.forEach(area => {
   const id = area;
   const section = document.createElement("div");
   section.classList.add("upload-section");
-  section.id = `upload-section-${id}`;
+  section.id = `seccionSubidaBordado-${id}`;
   section.style.display = "none"; // Ocultar por defecto
   section.innerHTML = `
   
-    <div id="preview-${id}" class="preview">
-    <label for="file-upload-${id}" class="upload-label">Subir imagen</label>
-    <input type="file" id="file-upload-${id}"accept="image/*,.pdf" style="display: none;">
+    <div id="vistaPreviaBordado-${id}" class="preview">
+    <label for="subirArchivoBordado-${id}" class="upload-label">Subir imagen</label>
+    <input type="file" id="subirArchivoBordado-${id}"accept="image/*,.pdf" style="display: none;">
     </div>
-    <div id= "medidas-container-${id}" class="medidas-container" style="display: none;">
-      <label for="ancho-${id}" class="medidas-label">Ancho (cm):</label>
-      <input type="number" id="ancho-${id}" class="medidas-input" min="1">
-      <label for="alto-${id}" class="medidas-label">Alto (cm):</label>
-      <input type="number" id="alto-${id}" class="medidas-input" min="1">
+    <div id= "contenedorMedidasBordado-${id}" class="medidas-container" style="display: none;">
+      <label for="inputAnchoBordado-${id}" class="medidas-label">Ancho (cm):</label>
+      <input type="number" id="inputAnchoBordado-${id}" class="medidas-input" min="1">
+      <label for="inputAltoBordado-${id}" class="medidas-label">Alto (cm):</label>
+      <input type="number" id="inputAltoBordado-${id}" class="medidas-input" min="1">
     </div>
   `;
   uploadContainer.appendChild(section);
 
     // Vincular el input a handleFileUpload
-    const fileInput = section.querySelector(`#file-upload-${id}`);
+    const fileInput = section.querySelector(`#subirArchivoBordado-${id}`);
     fileInput.addEventListener("change", function(){
-      handleFileUpload(id, this);
-      contarArchivosSubidos(); // recalcular en cada cambio
+      handleBordadoFileUpload(id, this);
+      contarArchivosSubidos();
     });
   });
 </script>
@@ -443,11 +443,13 @@ function authenticateUser() {
       throw error;
     });
 }
+  
+
 
 // ✅ Subir archivo a Firebase
 // Función para manejar la carga de archivos
-function handleFileUpload(position, input) {
-  const previewDiv = document.getElementById(`preview-${position}`);
+function handleBordadoFileUpload(position, input) {
+  const previewDiv = document.getElementById(`vistaPreviaBordado-${position}`);
 
   // Elimina solo la imagen previa y el ícono de borrar, NO el label ni el input
   const prevImg = previewDiv.querySelector("img");
@@ -456,7 +458,7 @@ function handleFileUpload(position, input) {
   if (prevDelete) prevDelete.remove();
 
   // Ocultar el contenedor de medidas al iniciar
-  const medidasDiv = document.getElementById(`medidas-container-${position}`);
+  const medidasDiv = document.getElementById(`contenedorMedidasBordado-${position}`);
   if (medidasDiv) {
     medidasDiv.style.display = "none";
   }
@@ -565,9 +567,9 @@ function handleFileUpload(position, input) {
     }
 
     // Evita duplicar el modal
-    if (document.getElementById("notify-modal")) return;
+    if (document.getElementById("modalNotificacionStock")) return;
     const modal = document.createElement("div");
-    modal.id = "notify-modal";
+    modal.id = "modalNotificacionStock";
     modal.innerHTML = `
       <div class="modal-backdrop"></div>
       <div class="modal-content">
@@ -575,21 +577,21 @@ function handleFileUpload(position, input) {
         <p><strong>Producto:</strong> ${productTitle}</p>
         <p><strong>Color:</strong> ${color}</p>
         <p><strong>Talla:</strong> ${size}</p>
-        <button id="notify-submit">Confirmar notificación</button>
+        <button id="btnConfirmarNotificacion">Confirmar notificación</button>
       </div>
     `;
     document.body.appendChild(modal);
 
     // Cerrar al click en backdrop
     modal.addEventListener("click", (ev) => {
-      if (ev.target.id === "notify-modal"
+      if (ev.target.id === "modalNotificacionStock"
        || ev.target.classList.contains("modal-backdrop")) {
         modal.remove();
       }
     });
 
     // Enviar a Make
-    modal.querySelector("#notify-submit").onclick = () => {
+    modal.querySelector("#btnConfirmarNotificacion").onclick = () => {
       const payload = {
         customerId,
         inventoryItemId,
@@ -716,9 +718,9 @@ function validarMedidasPersonalizadas(areaId, inputAncho, inputAlto) {
 // Función para inicializar los valores predeterminados y placeholders
 function inicializarMedidas() {
   document.querySelectorAll(".upload-section").forEach((section) => {
-    const areaId = section.id.replace("upload-section-", ""); // Obtener el ID del área
-    const inputAncho = section.querySelector(`#ancho-${areaId}`);
-    const inputAlto = section.querySelector(`#alto-${areaId}`);
+    const areaId = section.id.replace("seccionSubidaBordado-", ""); // Obtener el ID del área
+    const inputAncho = section.querySelector(`#inputAnchoBordado-${areaId}`);
+    const inputAlto = section.querySelector(`#inputAltoBordado-${areaId}`);
 
     if (inputAncho && inputAlto) {
       const limites = limitesMedidas[areaId];
@@ -765,8 +767,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   // 2.1) Variables principales
-  const addToCartButton = document.getElementById("add-to-cart-btn");
-  const uploadContainer = document.getElementById("upload-sections");
+  const addToCartButton = document.getElementById("btnAgregarCarrito");
+  const uploadContainer = document.getElementById("seccionesSubidaBordado");
   const colorOptions     = document.querySelectorAll(".color-item");
   const sizeOptions      = document.querySelectorAll(".size-item");
   const sizeInputs       = document.querySelectorAll(".size-option");
@@ -908,9 +910,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Evita duplicar el modal
-    if (document.getElementById("notify-modal")) return;
+    if (document.getElementById("modalNotificacionStock")) return;
     const modal = document.createElement("div");
-    modal.id = "notify-modal";
+    modal.id = "modalNotificacionStock";
     modal.innerHTML = `
       <div class="modal-backdrop"></div>
       <div class="modal-content">
@@ -918,21 +920,21 @@ document.addEventListener("DOMContentLoaded", function () {
         <p><strong>Producto:</strong> ${productTitle}</p>
         <p><strong>Color:</strong> ${color}</p>
         <p><strong>Talla:</strong> ${size}</p>
-        <button id="notify-submit">Confirmar notificación</button>
+        <button id="btnConfirmarNotificacion">Confirmar notificación</button>
       </div>
     `;
     document.body.appendChild(modal);
 
     // Cerrar al click en backdrop
     modal.addEventListener("click", (ev) => {
-      if (ev.target.id === "notify-modal"
+      if (ev.target.id === "modalNotificacionStock"
        || ev.target.classList.contains("modal-backdrop")) {
         modal.remove();
       }
     });
 
     // Enviar a Make
-    modal.querySelector("#notify-submit").onclick = () => {
+    modal.querySelector("#btnConfirmarNotificacion").onclick = () => {
       const payload = {
         customerId,
         inventoryItemId,
@@ -967,9 +969,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const medidas = {};
     const areas = document.querySelectorAll(".upload-section");
     areas.forEach(area => {
-      const id = area.id.replace("upload-section-", "");
-      const ancho = document.getElementById(`ancho-${id}`)?.value; 
-      const alto = document.getElementById(`alto-${id}`)?.value;
+      const id = area.id.replace("seccionSubidaBordado-", "");
+      const ancho = document.getElementById(`inputAnchoBordado-${id}`)?.value; 
+      const alto = document.getElementById(`inputAltoBordado-${id}`)?.value;
       medidas[id] = { ancho, alto };
     });
     return medidas;
@@ -1001,10 +1003,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const allFileInputs = document.querySelectorAll(".upload-container input[type='file']");
         allFileInputs.forEach(fi => {
           if (fi.files.length > 0) {
-            let pos = fi.id.replace("file-upload-", "");
+            let pos = fi.id.replace("subirArchivoBordado-", "");
             
             // Recuperar URL
-            let prevDiv = document.getElementById(`preview-${pos}`);
+            let prevDiv = document.getElementById(`vistaPreviaBordado-${pos}`);
             let linkEl  = prevDiv.querySelector("img");
             if (linkEl) {
               item.properties[`Bordado ${pos}`] = linkEl.src;
@@ -1107,7 +1109,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Elementos principales: asegúrate de que existan en el HTML
       const colorOptions = document.querySelectorAll('.color-item');
       const sizeOptions = document.querySelectorAll('.size-item');
-      const addToCartButton = document.getElementById("add-to-cart-btn");
+      const addToCartButton = document.getElementById("btnAgregarCarrito");
 
       if (!colorOptions.length) {
         console.warn("No se encontraron elementos con clase 'color-item'.");
@@ -1116,7 +1118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn("No se encontraron elementos con clase 'size-item'.");
       }
       if (!addToCartButton) {
-        console.warn("No se encontró el botón de agregar al carrito (#add-to-cart-btn).");
+        console.warn("No se encontró el botón de agregar al carrito (#btnAgregarCarrito).");
       }
 
       // Función para actualizar el estado del botón "Agregar al carrito"
@@ -1232,9 +1234,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Se espera que inyectes el tipo de producto en el body, por ejemplo:
         // <body data-product-type="{{ product.type }}">
         const productType = document.body.getAttribute("data-product-type") || "";
-        const uploadContainer = document.getElementById("upload-sections");
+        const uploadContainer = document.getElementById("seccionesSubidaBordado");
         if (!uploadContainer) {
-          console.warn("No se encontró el contenedor 'upload-sections' para bordado.");
+          console.warn("No se encontró el contenedor 'seccionesSubidaBordado' para bordado.");
           return;
         }
         uploadContainer.innerHTML = ""; // Limpiar contenido previo
@@ -1245,14 +1247,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const section = document.createElement("div");
             section.classList.add("upload-section");
             section.innerHTML = `
-              <label for="file-upload-${id}" class="upload-label">
+              <label for="subirArchivoBordado-${id}" class="upload-label">
                 
               </label>
-              <input type="file" id="file-upload-${id}" accept="image/*,.pdf" style="display: none;">
-              <div id="preview-${id}" class="preview"></div>
+              <input type="file" id="subirArchivoBordado-${id}" accept="image/*,.pdf" style="display: none;">
+              <div id="vistaPreviaBordado-${id}" class="preview"></div>
             `;
             uploadContainer.appendChild(section);
-            const fileInput = section.querySelector(`#file-upload-${id}`);
+            const fileInput = section.querySelector(`#subirArchivoBordado-${id}`);
             fileInput.addEventListener("change", function() {
               console.log("Archivo seleccionado para:", position);
               // Aquí coloca tu lógica para manejar la carga de archivos (por ejemplo, a Firebase)
@@ -1498,18 +1500,18 @@ if (qbContainer) {
 /*FIN MODAL BORDADO*/
   
 /* --- MODAL NOTIFICACIÓN --- */
-  #notify-modal {
+  #modalNotificacionStock {
     position: fixed;
     inset: 0;
     z-index: 10010;
     font-family: 'work sans', sans-serif;
   }
-  #notify-modal .modal-backdrop {
+  #modalNotificacionStock .modal-backdrop {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
   }
-  #notify-modal .modal-content {
+  #modalNotificacionStock .modal-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1522,16 +1524,16 @@ if (qbContainer) {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     text-align: center;
   }
-  #notify-modal .modal-content h2 {
+  #modalNotificacionStock .modal-content h2 {
     margin: 0 0 15px;
     font-size: 1.25em;
     color: #333;
   }
-  #notify-modal .modal-content p {
+  #modalNotificacionStock .modal-content p {
     margin: 5px 0;
     color: #555;
   }
-  #notify-modal #notify-email {
+  #modalNotificacionStock #notify-email {
     width: 100%;
     padding: 8px 10px;
     margin: 12px 0;
@@ -1539,7 +1541,7 @@ if (qbContainer) {
     border-radius: 4px;
     font-size: 1em;
   }
-  #notify-modal button {
+  #modalNotificacionStock button {
     margin: 8px 4px 0;
     padding: 8px 12px;
     border: none;
@@ -1548,18 +1550,18 @@ if (qbContainer) {
     cursor: pointer;
     transition: background 0.2s;
   }
-  #notify-modal #notify-submit {
+  #modalNotificacionStock #btnConfirmarNotificacion {
     background-color: #000;
     color: #fff;
       border:1px solid black;
   
   }
-  #notify-modal #notify-submit:hover {
+  #modalNotificacionStock #btnConfirmarNotificacion:hover {
     background-color: #fff;
     border:1px solid black;
     color: #000;
   }
-  #notify-modal #notify-close {
+  #modalNotificacionStock #notify-close {
     color: #dc3545;
   }
   .notify-btn span:hover {
