@@ -170,7 +170,7 @@
       <div class="bordado-info">
         {% render 'bordados-info' %}
       </div>
-      <button class="bordado-close-btn" id="guardarModalBordadoBtn">Guardar</button>
+      <button class="bordado-guardar-btn" id="guardarModalBordadoBtn">Guardar</button>
       <p class= "p-bordados-guardados">Diseños guardados. Puedes agregar mas bordados por $25</p>
     </div>
   </div>
@@ -1420,8 +1420,8 @@ if (qbContainer) {
     gap: 20px;
   }
   .preview img {
-    max-width: 25%;
-    max-height: 25%;
+    max-width: 130px;
+    max-height: 130px;
   }
 
   .medidas-container {
@@ -1448,12 +1448,13 @@ if (qbContainer) {
   .bordado-info p {
     font-size: 13px;
   }
-  .bordado-close-btn {
+  .bordado-guardar-btn {
     background-color: #f00;
     border-radius: 5px;
-    width: 150px;
+    width: 160px;
     color: #ffffff;
     margin-top: 10px;
+    min-height: 30px;
   }
   .p-bordados-guardados {
     display: none;
@@ -1492,7 +1493,7 @@ if (qbContainer) {
     .bordado-info{
       align-items: center;
     }
-    .bordado-close-btn{
+    .bordado-guardar-btn{
       justify-self: anchor-center;
       margin-top:0px;
     }
