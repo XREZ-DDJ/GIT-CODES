@@ -1767,3 +1767,13 @@ if (qbContainer) {
     border-color:black;
   }
 </style>
+<script>
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const modalOverlay = document.getElementById("superposicionModalBordado");
+    if (modalOverlay && modalOverlay.classList.contains("active")) {
+      modalOverlay.classList.remove("active");
+    }
+  }
+});
+</script>
