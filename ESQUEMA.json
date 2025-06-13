@@ -1,0 +1,138 @@
+{
+  "product_name": "MILAN HOMBRE Y MUJER",
+  "image": "",
+  "areas": [
+    {
+      "name": "Manga izquierda",
+      "alt": "M-I",
+      "coordinates": {
+        "coords": "1262,688,85",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "7 cm",
+        "height": "7 cm"
+      }
+    },
+    {
+      "name": "Manga derecha",
+      "alt": "M-D",
+      "coordinates": {
+        "coords": "467,733,80",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "9 cm",
+        "height": "9 cm"
+      }
+    },
+    {
+      "name": "Frente izquierdo",
+      "alt": "F-I",
+      "coordinates": {
+        "coords": "1118,790,74",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "7 cm",
+        "height": "7 cm"
+      }
+    },
+    {
+      "name": "Frente derecho",
+      "alt": "F-D",
+      "coordinates": {
+        "coords": "647,789,84",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "7 cm",
+        "height": "7 cm"
+      }
+    },
+    {
+      "name": "Frente centro",
+      "alt": "F-C",
+      "coordinates": {
+        "coords": "872,725,78",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "7 cm",
+        "height": "7 cm"
+      }
+    },
+    {
+      "name": "Puño izquierdo",
+      "alt": "P-I",
+      "coordinates": {
+        "coords": "1584,1236,126",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "5 cm",
+        "height": "5 cm"
+      }
+    },
+    {
+      "name": "Puño derecho",
+      "alt": "P-D",
+      "coordinates": {
+        "coords": "164,1241,117",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "5 cm",
+        "height": "5 cm"
+      }
+    },
+    {
+      "name": "Cuello izquierdo",
+      "alt": "C-I",
+      "coordinates": {
+        "coords": "2155,667,73",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "7 cm",
+        "height": "2 cm"
+      }
+    },
+    {
+      "name": "Cuello derecho",
+      "alt": "C-D",
+      "coordinates": {
+        "coords": "1937,659,71",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "7 cm",
+        "height": "2 cm"
+      }
+    },
+    {
+      "name": "Cuello atras",
+      "alt": "C-A",
+      "coordinates": {
+        "coords": "2048,1044,84",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "7 cm",
+        "height": "2 cm"
+      }
+    },
+    {
+      "name": "Espalda centro",
+      "alt": "E-C",
+      "coordinates": {
+        "coords": "2053,1340,126",
+        "shape": "circle"
+      },
+      "dimensions": {
+        "width": "20 cm",
+        "height": "20 cm"
+      }
+    }
+  ]
+}
