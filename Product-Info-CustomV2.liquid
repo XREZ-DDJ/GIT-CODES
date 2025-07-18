@@ -35,6 +35,7 @@
     '
     | strip
   %}
+  
 
   {% assign displayed_colors = '' %}
   {% for variant in product.variants %}
@@ -42,6 +43,7 @@
       {% continue %}
     {% endif %}
     {% assign displayed_colors = displayed_colors | append: variant.option2 | append: ',' %}
+  
 
     <!-- Valor por defecto si no hay match en el diccionario -->
     {% assign color_hex = '#A54DCF' %}
@@ -159,7 +161,7 @@
 <div class="bordado-modal-overlay" id="superposicionModalBordado">
   <div class="bordado-modal">
     <!-- Botón de cierre "X" -->
-    <button class="bordado-close-btn-x" id="cerrarModalBordadoXBtn">&times;</button>
+    <button class="bordado-close-btn-x" id="btnCloseModalBordadoX">&times;</button>
     <div class="container-bordar-img">
       {% render 'bordados-areas' %}
     </div>
@@ -170,8 +172,15 @@
       <div class="bordado-info">
         {% render 'bordados-info' %}
       </div>
-      <button class="bordado-guardar-btn" id="guardarModalBordadoBtn">Guardar</button>
-      <p class= "p-bordados-guardados">Diseños guardados. Puedes agregar mas bordados por $25</p>
+      <div class="btnsSection">
+        <button class="btnModuloBordado button" id="btnNextSelection">Agrega otro bordado por $25</button>
+        <button class="btnModuloBordado button" id="btnCloseModalBordado">Terminar</button>
+      </div>
+      <a class="bordado-info-B" href="https://bravo.store/pages/bordados-personalizados-para-uniformes">¿Listo para bordar? Te decimos cómo en 3 pasos.</a>
+      <!-- 
+      
+      <p class= "p-bordados-guardados">Diseños guardados. Puedes </p>
+      -->
     </div>
   </div>
 </div>
@@ -225,9 +234,10 @@
 
   //MODAL
   const openModal = document.getElementById("abrirModalBordadoBtn");
-  const closeModal = document.getElementById("guardarModalBordadoBtn");
+  const nextSelection = document.getElementById("btnNextSelection");
   const modalOverlay = document.getElementById("superposicionModalBordado");
-  const closeModalX = document.getElementById("cerrarModalBordadoXBtn");
+  const closeModal = document.getElementById("btnCloseModalBordado");
+  const closeModalX = document.getElementById("btnCloseModalBordadoX");
 
   let modalAbiertoPorPrimeraVez = false;
 
@@ -235,16 +245,33 @@
     modalOverlay.classList.add("active");
   });
 
-  closeModalX.addEventListener("click", () => {
-  modalOverlay.classList.remove("active");
-});
-
-closeModal.addEventListener("click", () => {
-    const pDisenos = document.querySelector(".p-bordados-guardados");
-    if (pDisenos) {
-      pDisenos.style.display = "block";
-    }
+  closeModal.addEventListener("click", () => {
+    modalOverlay.classList.remove("active");
   });
+  closeModalX.addEventListener("click", () => {
+    modalOverlay.classList.remove("active");
+  });
+
+nextSelection.addEventListener("click", () => {
+  const pDisenos = document.querySelector(".p-bordados-guardados");
+  if (pDisenos) {
+    pDisenos.style.display = "block";
+  }
+  if (window.areas && areaSeleccionada) {
+    const idx = window.areas.indexOf(areaSeleccionada);
+    if (idx !== -1) {
+      let siguienteArea;
+      if (idx < window.areas.length - 1) {
+        // Selecciona la siguiente área
+        siguienteArea = window.areas[idx + 1];
+      } else {
+        // Si es la última, regresa a la primera
+        siguienteArea = window.areas[0];
+      }
+      selectArea(siguienteArea);
+    }
+  }
+});
 
   //FIN MODAL
 
@@ -400,7 +427,7 @@ document.addEventListener("DOMContentLoaded", function() {
   section.innerHTML = `
   
     <div id="vistaPreviaBordado-${id}" class="preview">
-    <label for="subirArchivoBordado-${id}" class="upload-label">Subir imagen</label>
+    <label for="subirArchivoBordado-${id}" class="upload-label button">Subir imagen</label>
     <input type="file" id="subirArchivoBordado-${id}"accept="image/*,.pdf" style="display: none;">
     </div>
     <div id= "contenedorMedidasBordado-${id}" class="medidas-container" style="display: none;">
@@ -1393,6 +1420,7 @@ if (qbContainer) {
     padding: 10px;
     flex-direction: column;
     align-items: center;
+    gap:15px;
   }
   .upload-section{
     flex-direction: column;
@@ -1402,16 +1430,20 @@ if (qbContainer) {
 
   }
   .upload-label {
+    /*
     background-color: #f00;
     color: #fff;
-    padding: 10px 10px;
     border-radius: 5px;
+    */
+    padding: 10px 10px;
     max-height: 42px;
+    font-size:10px;
     }
-
+/*
   .upload-label:hover {
     background-color: #000;
   }
+*/
   /* ✅ Vista previa de archivos */
   .preview {
     display: flex;
@@ -1442,19 +1474,30 @@ if (qbContainer) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 11px;
-    margin-top: 15px;
+    font-size: 13px;
+    /*margin-top: 15px;*/
   }
   .bordado-info p {
-    font-size: 13px;
+    font-size: 15px;
   }
-  .bordado-guardar-btn {
-    background-color: #f00;
+  .btnModuloBordado {
+    /*background-color: #f00;
     border-radius: 5px;
-    width: 160px;
-    color: #ffffff;
-    margin-top: 10px;
+    color: #ffffff;*/
+    padding: 10px;
+    /*margin-top: 10px;*/
     min-height: 30px;
+    font-size:10px;
+  }
+  .btnsSection{
+    display:flex;
+    flex-direction:row;
+    gap:20px;
+  }
+  .bordado-info-B{
+    text-align: center;
+    color: red;
+    font-size: 15px;
   }
   .p-bordados-guardados {
     display: none;
@@ -1492,9 +1535,20 @@ if (qbContainer) {
     }
     .bordado-info{
       align-items: center;
+      font-size:11px;
     }
-    .bordado-guardar-btn{
-      justify-self: anchor-center;
+    .bordado-info p {
+      font-size:13px;
+    }
+    .btnsSection{
+      flex-direction: column;
+      align-items: center; 
+    }
+    .bordado-info-B{
+      font-size: 13px;
+    }
+    
+    .btnModuloBordado{
       margin-top:0px;
     }
   }

@@ -104,9 +104,11 @@
     </div>
   {%- else -%}
     <div class="container container--sm">
-      <div class= "section-map-address-description">  
-        <p class="text-subdued">Selecciona tu dirección exacta en el mapa o haz clic para marcar el punto donde deseas recibir tu pedido.</p>
-        <p class="text-subdued">También puedes buscar tu dirección en el campo de búsqueda o usar el botón para localizar tu ubicación automáticamente.</p>
+      <div class="section-map-address-description">
+        <p class="text-subdued">Selecciona tu dirección exacta en el mapa o haz clic para marcar el punto donde deseas
+          recibir tu pedido.</p>
+        <p class="text-subdued">También puedes buscar tu dirección en el campo de búsqueda o usar el botón para localizar tu
+          ubicación automáticamente.</p>
       </div>
       <br>
       <div class="section-map-address">
@@ -126,65 +128,27 @@
               <input type="hidden" name="return_to" value="/cart">
               <div class="fieldset">
                 <div class="form-control">
-                  <input
-                    id="address-line1"
-                    class="input"
-                    type="text"
-                    name="address[address1]"
-                    placeholder="Línea 1 de dirección"
-                    autocomplete="address-line1"
-                  >
-                  <label
-                    for="address-line1"
-                    class="floating-label text-xs"
-                    >Línea 1 de dirección</label
-                  >
+                  <input id="address-line1" class="input" type="text" name="address[address1]"
+                    placeholder="Línea 1 de dirección" autocomplete="address-line1">
+                  <label for="address-line1" class="floating-label text-xs">Línea 1 de dirección</label>
                 </div>
                 <div class="fieldset-row">
                   <div class="form-control">
-                    <input
-                      id="address-city"
-                      class="input"
-                      type="text"
-                      name="address[city]"
-                      placeholder="Ciudad"
-                      autocomplete="address-level2"
-                    >
-                    <label
-                      for="address-city"
-                      class="floating-label text-xs"
-                      >Ciudad</label
-                    >
+                    <input id="address-city" class="input" type="text" name="address[city]" placeholder="Ciudad"
+                      autocomplete="address-level2">
+                    <label for="address-city" class="floating-label text-xs">Ciudad</label>
                   </div>
                   <div class="form-control">
-                    <input
-                      id="address-zip"
-                      class="input"
-                      type="text"
-                      name="address[zip]"
-                      placeholder="Código postal"
-                      autocomplete="postal-code"
-                      autocapitalize="characters"
-                    >
-                    <label
-                      for="address-zip"
-                      class="floating-label text-xs"
-                      >Código postal</label
-                    >
+                    <input id="address-zip" class="input" type="text" name="address[zip]" placeholder="Código postal"
+                      autocomplete="postal-code" autocapitalize="characters">
+                    <label for="address-zip" class="floating-label text-xs">Código postal</label>
                   </div>
                 </div>
                 <country-selector class="contents" country="" province="">
                   <div class="form-control">
-                    <select
-                      id="address-country"
-                      class="select"
-                      name="address[country]"
-                      autocomplete="country"
-                    >
-                      <option
-                        value="Mexico"
-                        data-provinces="[[&quot;Aguascalientes&quot;,&quot;Aguascalientes&quot;],[&quot;Baja California&quot;,&quot;Baja California&quot;],[&quot;Baja California Sur&quot;,&quot;Baja California Sur&quot;],[&quot;Campeche&quot;,&quot;Campeche&quot;],[&quot;Chiapas&quot;,&quot;Chiapas&quot;],[&quot;Chihuahua&quot;,&quot;Chihuahua&quot;],[&quot;Ciudad de México&quot;,&quot;Ciudad de México&quot;],[&quot;Coahuila&quot;,&quot;Coahuila de Zaragoza&quot;],[&quot;Colima&quot;,&quot;Colima&quot;],[&quot;Durango&quot;,&quot;Durango&quot;],[&quot;Guanajuato&quot;,&quot;Guanajuato&quot;],[&quot;Guerrero&quot;,&quot;Estado de Guerrero&quot;],[&quot;Hidalgo&quot;,&quot;Estado de Hidalgo&quot;],[&quot;Jalisco&quot;,&quot;Jalisco&quot;],[&quot;Michoacán&quot;,&quot;Michoacán&quot;],[&quot;Morelos&quot;,&quot;Morelos&quot;],[&quot;México&quot;,&quot;Estado de México&quot;],[&quot;Nayarit&quot;,&quot;Nayarit&quot;],[&quot;Nuevo León&quot;,&quot;Nuevo León&quot;],[&quot;Oaxaca&quot;,&quot;Oaxaca&quot;],[&quot;Puebla&quot;,&quot;Puebla&quot;],[&quot;Querétaro&quot;,&quot;Querétaro&quot;],[&quot;Quintana Roo&quot;,&quot;Quintana Roo&quot;],[&quot;San Luis Potosí&quot;,&quot;San Luis Potosí&quot;],[&quot;Sinaloa&quot;,&quot;Sinaloa&quot;],[&quot;Sonora&quot;,&quot;Sonora&quot;],[&quot;Tabasco&quot;,&quot;Tabasco&quot;],[&quot;Tamaulipas&quot;,&quot;Tamaulipas&quot;],[&quot;Tlaxcala&quot;,&quot;Tlaxcala&quot;],[&quot;Veracruz&quot;,&quot;Veracruz&quot;],[&quot;Yucatán&quot;,&quot;Yucatán&quot;],[&quot;Zacatecas&quot;,&quot;Zacatecas&quot;]]"
-                      >
+                    <select id="address-country" class="select" name="address[country]" autocomplete="country">
+                      <option value="Mexico"
+                        data-provinces="[[&quot;Aguascalientes&quot;,&quot;Aguascalientes&quot;],[&quot;Baja California&quot;,&quot;Baja California&quot;],[&quot;Baja California Sur&quot;,&quot;Baja California Sur&quot;],[&quot;Campeche&quot;,&quot;Campeche&quot;],[&quot;Chiapas&quot;,&quot;Chiapas&quot;],[&quot;Chihuahua&quot;,&quot;Chihuahua&quot;],[&quot;Ciudad de México&quot;,&quot;Ciudad de México&quot;],[&quot;Coahuila&quot;,&quot;Coahuila de Zaragoza&quot;],[&quot;Colima&quot;,&quot;Colima&quot;],[&quot;Durango&quot;,&quot;Durango&quot;],[&quot;Guanajuato&quot;,&quot;Guanajuato&quot;],[&quot;Guerrero&quot;,&quot;Estado de Guerrero&quot;],[&quot;Hidalgo&quot;,&quot;Estado de Hidalgo&quot;],[&quot;Jalisco&quot;,&quot;Jalisco&quot;],[&quot;Michoacán&quot;,&quot;Michoacán&quot;],[&quot;Morelos&quot;,&quot;Morelos&quot;],[&quot;México&quot;,&quot;Estado de México&quot;],[&quot;Nayarit&quot;,&quot;Nayarit&quot;],[&quot;Nuevo León&quot;,&quot;Nuevo León&quot;],[&quot;Oaxaca&quot;,&quot;Oaxaca&quot;],[&quot;Puebla&quot;,&quot;Puebla&quot;],[&quot;Querétaro&quot;,&quot;Querétaro&quot;],[&quot;Quintana Roo&quot;,&quot;Quintana Roo&quot;],[&quot;San Luis Potosí&quot;,&quot;San Luis Potosí&quot;],[&quot;Sinaloa&quot;,&quot;Sinaloa&quot;],[&quot;Sonora&quot;,&quot;Sonora&quot;],[&quot;Tabasco&quot;,&quot;Tabasco&quot;],[&quot;Tamaulipas&quot;,&quot;Tamaulipas&quot;],[&quot;Tlaxcala&quot;,&quot;Tlaxcala&quot;],[&quot;Veracruz&quot;,&quot;Veracruz&quot;],[&quot;Yucatán&quot;,&quot;Yucatán&quot;],[&quot;Zacatecas&quot;,&quot;Zacatecas&quot;]]">
                         México
                       </option>
                       <option value="---" data-provinces="[]">---</option>
@@ -197,18 +161,14 @@
                       <option value="Antigua And Barbuda" data-provinces="[]">Antigua y Barbuda</option>
                       <option value="Saudi Arabia" data-provinces="[]">Arabia Saudí</option>
                       <option value="Algeria" data-provinces="[]">Argelia</option>
-                      <option
-                        value="Argentina"
-                        data-provinces="[[&quot;Buenos Aires&quot;,&quot;Buenos Aires (provincia)&quot;],[&quot;Catamarca&quot;,&quot;Catamarca&quot;],[&quot;Chaco&quot;,&quot;Chaco&quot;],[&quot;Chubut&quot;,&quot;Chubut&quot;],[&quot;Ciudad Autónoma de Buenos Aires&quot;,&quot;Ciudad Autónoma de Buenos Aires&quot;],[&quot;Corrientes&quot;,&quot;Corrientes&quot;],[&quot;Córdoba&quot;,&quot;Córdoba&quot;],[&quot;Entre Ríos&quot;,&quot;Entre Ríos&quot;],[&quot;Formosa&quot;,&quot;Formosa&quot;],[&quot;Jujuy&quot;,&quot;Jujuy&quot;],[&quot;La Pampa&quot;,&quot;La Pampa&quot;],[&quot;La Rioja&quot;,&quot;La Rioja&quot;],[&quot;Mendoza&quot;,&quot;Mendoza&quot;],[&quot;Misiones&quot;,&quot;Misiones&quot;],[&quot;Neuquén&quot;,&quot;Neuquén&quot;],[&quot;Río Negro&quot;,&quot;Río Negro&quot;],[&quot;Salta&quot;,&quot;Salta&quot;],[&quot;San Juan&quot;,&quot;San Juan&quot;],[&quot;San Luis&quot;,&quot;San Luis&quot;],[&quot;Santa Cruz&quot;,&quot;Santa Cruz&quot;],[&quot;Santa Fe&quot;,&quot;Santa Fe&quot;],[&quot;Santiago Del Estero&quot;,&quot;Santiago del Estero&quot;],[&quot;Tierra Del Fuego&quot;,&quot;Tierra del Fuego&quot;],[&quot;Tucumán&quot;,&quot;Tucumán&quot;]]"
-                      >
+                      <option value="Argentina"
+                        data-provinces="[[&quot;Buenos Aires&quot;,&quot;Buenos Aires (provincia)&quot;],[&quot;Catamarca&quot;,&quot;Catamarca&quot;],[&quot;Chaco&quot;,&quot;Chaco&quot;],[&quot;Chubut&quot;,&quot;Chubut&quot;],[&quot;Ciudad Autónoma de Buenos Aires&quot;,&quot;Ciudad Autónoma de Buenos Aires&quot;],[&quot;Corrientes&quot;,&quot;Corrientes&quot;],[&quot;Córdoba&quot;,&quot;Córdoba&quot;],[&quot;Entre Ríos&quot;,&quot;Entre Ríos&quot;],[&quot;Formosa&quot;,&quot;Formosa&quot;],[&quot;Jujuy&quot;,&quot;Jujuy&quot;],[&quot;La Pampa&quot;,&quot;La Pampa&quot;],[&quot;La Rioja&quot;,&quot;La Rioja&quot;],[&quot;Mendoza&quot;,&quot;Mendoza&quot;],[&quot;Misiones&quot;,&quot;Misiones&quot;],[&quot;Neuquén&quot;,&quot;Neuquén&quot;],[&quot;Río Negro&quot;,&quot;Río Negro&quot;],[&quot;Salta&quot;,&quot;Salta&quot;],[&quot;San Juan&quot;,&quot;San Juan&quot;],[&quot;San Luis&quot;,&quot;San Luis&quot;],[&quot;Santa Cruz&quot;,&quot;Santa Cruz&quot;],[&quot;Santa Fe&quot;,&quot;Santa Fe&quot;],[&quot;Santiago Del Estero&quot;,&quot;Santiago del Estero&quot;],[&quot;Tierra Del Fuego&quot;,&quot;Tierra del Fuego&quot;],[&quot;Tucumán&quot;,&quot;Tucumán&quot;]]">
                         Argentina
                       </option>
                       <option value="Armenia" data-provinces="[]">Armenia</option>
                       <option value="Aruba" data-provinces="[]">Aruba</option>
-                      <option
-                        value="Australia"
-                        data-provinces="[[&quot;Australian Capital Territory&quot;,&quot;Territorio de la Capital Australiana&quot;],[&quot;New South Wales&quot;,&quot;Nueva Gales del Sur&quot;],[&quot;Northern Territory&quot;,&quot;Territorio del Norte&quot;],[&quot;Queensland&quot;,&quot;Queensland&quot;],[&quot;South Australia&quot;,&quot;Australia Meridional&quot;],[&quot;Tasmania&quot;,&quot;Tasmania&quot;],[&quot;Victoria&quot;,&quot;Victoria&quot;],[&quot;Western Australia&quot;,&quot;Australia Occidental&quot;]]"
-                      >
+                      <option value="Australia"
+                        data-provinces="[[&quot;Australian Capital Territory&quot;,&quot;Territorio de la Capital Australiana&quot;],[&quot;New South Wales&quot;,&quot;Nueva Gales del Sur&quot;],[&quot;Northern Territory&quot;,&quot;Territorio del Norte&quot;],[&quot;Queensland&quot;,&quot;Queensland&quot;],[&quot;South Australia&quot;,&quot;Australia Meridional&quot;],[&quot;Tasmania&quot;,&quot;Tasmania&quot;],[&quot;Victoria&quot;,&quot;Victoria&quot;],[&quot;Western Australia&quot;,&quot;Australia Occidental&quot;]]">
                         Australia
                       </option>
                       <option value="Austria" data-provinces="[]">Austria</option>
@@ -225,10 +185,8 @@
                       <option value="Bolivia" data-provinces="[]">Bolivia</option>
                       <option value="Bosnia And Herzegovina" data-provinces="[]">Bosnia y Herzegovina</option>
                       <option value="Botswana" data-provinces="[]">Botsuana</option>
-                      <option
-                        value="Brazil"
-                        data-provinces="[[&quot;Acre&quot;,&quot;Estado de Acre&quot;],[&quot;Alagoas&quot;,&quot;Alagoas&quot;],[&quot;Amapá&quot;,&quot;Amapá&quot;],[&quot;Amazonas&quot;,&quot;Estado de Amazonas&quot;],[&quot;Bahia&quot;,&quot;Estado de Bahía&quot;],[&quot;Ceará&quot;,&quot;Ceará&quot;],[&quot;Distrito Federal&quot;,&quot;Distrito Federal&quot;],[&quot;Espírito Santo&quot;,&quot;Estado de Espírito Santo&quot;],[&quot;Goiás&quot;,&quot;Estado de Goiás&quot;],[&quot;Maranhão&quot;,&quot;Maranhão&quot;],[&quot;Mato Grosso&quot;,&quot;Mato Grosso&quot;],[&quot;Mato Grosso do Sul&quot;,&quot;Mato Grosso del Sur&quot;],[&quot;Minas Gerais&quot;,&quot;Estado de Minas Gerais&quot;],[&quot;Paraná&quot;,&quot;Paraná&quot;],[&quot;Paraíba&quot;,&quot;Paraíba&quot;],[&quot;Pará&quot;,&quot;Pará&quot;],[&quot;Pernambuco&quot;,&quot;Pernambuco&quot;],[&quot;Piauí&quot;,&quot;Piauí&quot;],[&quot;Rio Grande do Norte&quot;,&quot;Río Grande del Norte&quot;],[&quot;Rio Grande do Sul&quot;,&quot;Río Grande del Sur&quot;],[&quot;Rio de Janeiro&quot;,&quot;Estado de Río de Janeiro&quot;],[&quot;Rondônia&quot;,&quot;Rondonia&quot;],[&quot;Roraima&quot;,&quot;Roraima&quot;],[&quot;Santa Catarina&quot;,&quot;Santa Catarina&quot;],[&quot;Sergipe&quot;,&quot;Sergipe&quot;],[&quot;São Paulo&quot;,&quot;São Paulo&quot;],[&quot;Tocantins&quot;,&quot;Tocantins&quot;]]"
-                      >
+                      <option value="Brazil"
+                        data-provinces="[[&quot;Acre&quot;,&quot;Estado de Acre&quot;],[&quot;Alagoas&quot;,&quot;Alagoas&quot;],[&quot;Amapá&quot;,&quot;Amapá&quot;],[&quot;Amazonas&quot;,&quot;Estado de Amazonas&quot;],[&quot;Bahia&quot;,&quot;Estado de Bahía&quot;],[&quot;Ceará&quot;,&quot;Ceará&quot;],[&quot;Distrito Federal&quot;,&quot;Distrito Federal&quot;],[&quot;Espírito Santo&quot;,&quot;Estado de Espírito Santo&quot;],[&quot;Goiás&quot;,&quot;Estado de Goiás&quot;],[&quot;Maranhão&quot;,&quot;Maranhão&quot;],[&quot;Mato Grosso&quot;,&quot;Mato Grosso&quot;],[&quot;Mato Grosso do Sul&quot;,&quot;Mato Grosso del Sur&quot;],[&quot;Minas Gerais&quot;,&quot;Estado de Minas Gerais&quot;],[&quot;Paraná&quot;,&quot;Paraná&quot;],[&quot;Paraíba&quot;,&quot;Paraíba&quot;],[&quot;Pará&quot;,&quot;Pará&quot;],[&quot;Pernambuco&quot;,&quot;Pernambuco&quot;],[&quot;Piauí&quot;,&quot;Piauí&quot;],[&quot;Rio Grande do Norte&quot;,&quot;Río Grande del Norte&quot;],[&quot;Rio Grande do Sul&quot;,&quot;Río Grande del Sur&quot;],[&quot;Rio de Janeiro&quot;,&quot;Estado de Río de Janeiro&quot;],[&quot;Rondônia&quot;,&quot;Rondonia&quot;],[&quot;Roraima&quot;,&quot;Roraima&quot;],[&quot;Santa Catarina&quot;,&quot;Santa Catarina&quot;],[&quot;Sergipe&quot;,&quot;Sergipe&quot;],[&quot;São Paulo&quot;,&quot;São Paulo&quot;],[&quot;Tocantins&quot;,&quot;Tocantins&quot;]]">
                         Brasil
                       </option>
                       <option value="Brunei" data-provinces="[]">Brunéi</option>
@@ -239,48 +197,36 @@
                       <option value="Cape Verde" data-provinces="[]">Cabo Verde</option>
                       <option value="Cambodia" data-provinces="[]">Camboya</option>
                       <option value="Republic of Cameroon" data-provinces="[]">Camerún</option>
-                      <option
-                        value="Canada"
-                        data-provinces="[[&quot;Alberta&quot;,&quot;Alberta&quot;],[&quot;British Columbia&quot;,&quot;Columbia Británica&quot;],[&quot;Manitoba&quot;,&quot;Manitoba&quot;],[&quot;New Brunswick&quot;,&quot;Nuevo Brunswick&quot;],[&quot;Newfoundland and Labrador&quot;,&quot;Terranova y Labrador&quot;],[&quot;Northwest Territories&quot;,&quot;Territorios del Noroeste&quot;],[&quot;Nova Scotia&quot;,&quot;Nueva Escocia&quot;],[&quot;Nunavut&quot;,&quot;Nunavut&quot;],[&quot;Ontario&quot;,&quot;Ontario&quot;],[&quot;Prince Edward Island&quot;,&quot;Isla del Príncipe Eduardo&quot;],[&quot;Quebec&quot;,&quot;Quebec&quot;],[&quot;Saskatchewan&quot;,&quot;Saskatchewan&quot;],[&quot;Yukon&quot;,&quot;Yukón&quot;]]"
-                      >
+                      <option value="Canada"
+                        data-provinces="[[&quot;Alberta&quot;,&quot;Alberta&quot;],[&quot;British Columbia&quot;,&quot;Columbia Británica&quot;],[&quot;Manitoba&quot;,&quot;Manitoba&quot;],[&quot;New Brunswick&quot;,&quot;Nuevo Brunswick&quot;],[&quot;Newfoundland and Labrador&quot;,&quot;Terranova y Labrador&quot;],[&quot;Northwest Territories&quot;,&quot;Territorios del Noroeste&quot;],[&quot;Nova Scotia&quot;,&quot;Nueva Escocia&quot;],[&quot;Nunavut&quot;,&quot;Nunavut&quot;],[&quot;Ontario&quot;,&quot;Ontario&quot;],[&quot;Prince Edward Island&quot;,&quot;Isla del Príncipe Eduardo&quot;],[&quot;Quebec&quot;,&quot;Quebec&quot;],[&quot;Saskatchewan&quot;,&quot;Saskatchewan&quot;],[&quot;Yukon&quot;,&quot;Yukón&quot;]]">
                         Canadá
                       </option>
                       <option value="Caribbean Netherlands" data-provinces="[]">Caribe neerlandés</option>
                       <option value="Qatar" data-provinces="[]">Catar</option>
                       <option value="Chad" data-provinces="[]">Chad</option>
                       <option value="Czech Republic" data-provinces="[]">Chequia</option>
-                      <option
-                        value="Chile"
-                        data-provinces="[[&quot;Antofagasta&quot;,&quot;Antofagasta&quot;],[&quot;Araucanía&quot;,&quot;Araucanía&quot;],[&quot;Arica and Parinacota&quot;,&quot;Arica y Parinacota&quot;],[&quot;Atacama&quot;,&quot;Atacama&quot;],[&quot;Aysén&quot;,&quot;Aysén&quot;],[&quot;Biobío&quot;,&quot;Biobío&quot;],[&quot;Coquimbo&quot;,&quot;Coquimbo&quot;],[&quot;Los Lagos&quot;,&quot;Los Lagos&quot;],[&quot;Los Ríos&quot;,&quot;Los Ríos&quot;],[&quot;Magallanes&quot;,&quot;Magallanes&quot;],[&quot;Maule&quot;,&quot;Maule&quot;],[&quot;O'Higgins&quot;,&quot;O’Higgins&quot;],[&quot;Santiago&quot;,&quot;Santiago&quot;],[&quot;Tarapacá&quot;,&quot;Tarapacá&quot;],[&quot;Valparaíso&quot;,&quot;Valparaíso&quot;],[&quot;Ñuble&quot;,&quot;Ñuble&quot;]]"
-                      >
+                      <option value="Chile"
+                        data-provinces="[[&quot;Antofagasta&quot;,&quot;Antofagasta&quot;],[&quot;Araucanía&quot;,&quot;Araucanía&quot;],[&quot;Arica and Parinacota&quot;,&quot;Arica y Parinacota&quot;],[&quot;Atacama&quot;,&quot;Atacama&quot;],[&quot;Aysén&quot;,&quot;Aysén&quot;],[&quot;Biobío&quot;,&quot;Biobío&quot;],[&quot;Coquimbo&quot;,&quot;Coquimbo&quot;],[&quot;Los Lagos&quot;,&quot;Los Lagos&quot;],[&quot;Los Ríos&quot;,&quot;Los Ríos&quot;],[&quot;Magallanes&quot;,&quot;Magallanes&quot;],[&quot;Maule&quot;,&quot;Maule&quot;],[&quot;O'Higgins&quot;,&quot;O’Higgins&quot;],[&quot;Santiago&quot;,&quot;Santiago&quot;],[&quot;Tarapacá&quot;,&quot;Tarapacá&quot;],[&quot;Valparaíso&quot;,&quot;Valparaíso&quot;],[&quot;Ñuble&quot;,&quot;Ñuble&quot;]]">
                         Chile
                       </option>
-                      <option
-                        value="China"
-                        data-provinces="[[&quot;Anhui&quot;,&quot;Anhui&quot;],[&quot;Beijing&quot;,&quot;Pekín&quot;],[&quot;Chongqing&quot;,&quot;Chongqing&quot;],[&quot;Fujian&quot;,&quot;Fujian&quot;],[&quot;Gansu&quot;,&quot;Gansu&quot;],[&quot;Guangdong&quot;,&quot;Provincia de Cantón&quot;],[&quot;Guangxi&quot;,&quot;Guangxi&quot;],[&quot;Guizhou&quot;,&quot;Guizhou&quot;],[&quot;Hainan&quot;,&quot;Hainan&quot;],[&quot;Hebei&quot;,&quot;Hebei&quot;],[&quot;Heilongjiang&quot;,&quot;Heilongjiang&quot;],[&quot;Henan&quot;,&quot;Henan&quot;],[&quot;Hubei&quot;,&quot;Hubei&quot;],[&quot;Hunan&quot;,&quot;Hunan&quot;],[&quot;Inner Mongolia&quot;,&quot;Mongolia Interior&quot;],[&quot;Jiangsu&quot;,&quot;Jiangsu&quot;],[&quot;Jiangxi&quot;,&quot;Jiangxi&quot;],[&quot;Jilin&quot;,&quot;Jilin&quot;],[&quot;Liaoning&quot;,&quot;Liaoning&quot;],[&quot;Ningxia&quot;,&quot;Ningxia&quot;],[&quot;Qinghai&quot;,&quot;Qinghai&quot;],[&quot;Shaanxi&quot;,&quot;Shaanxi&quot;],[&quot;Shandong&quot;,&quot;Shandong&quot;],[&quot;Shanghai&quot;,&quot;Shanghái&quot;],[&quot;Shanxi&quot;,&quot;Shanxi&quot;],[&quot;Sichuan&quot;,&quot;Sichuan&quot;],[&quot;Tianjin&quot;,&quot;Tianjin&quot;],[&quot;Xinjiang&quot;,&quot;Sinkiang&quot;],[&quot;Xizang&quot;,&quot;Tíbet&quot;],[&quot;Yunnan&quot;,&quot;Yunnan&quot;],[&quot;Zhejiang&quot;,&quot;Zhejiang&quot;]]"
-                      >
+                      <option value="China"
+                        data-provinces="[[&quot;Anhui&quot;,&quot;Anhui&quot;],[&quot;Beijing&quot;,&quot;Pekín&quot;],[&quot;Chongqing&quot;,&quot;Chongqing&quot;],[&quot;Fujian&quot;,&quot;Fujian&quot;],[&quot;Gansu&quot;,&quot;Gansu&quot;],[&quot;Guangdong&quot;,&quot;Provincia de Cantón&quot;],[&quot;Guangxi&quot;,&quot;Guangxi&quot;],[&quot;Guizhou&quot;,&quot;Guizhou&quot;],[&quot;Hainan&quot;,&quot;Hainan&quot;],[&quot;Hebei&quot;,&quot;Hebei&quot;],[&quot;Heilongjiang&quot;,&quot;Heilongjiang&quot;],[&quot;Henan&quot;,&quot;Henan&quot;],[&quot;Hubei&quot;,&quot;Hubei&quot;],[&quot;Hunan&quot;,&quot;Hunan&quot;],[&quot;Inner Mongolia&quot;,&quot;Mongolia Interior&quot;],[&quot;Jiangsu&quot;,&quot;Jiangsu&quot;],[&quot;Jiangxi&quot;,&quot;Jiangxi&quot;],[&quot;Jilin&quot;,&quot;Jilin&quot;],[&quot;Liaoning&quot;,&quot;Liaoning&quot;],[&quot;Ningxia&quot;,&quot;Ningxia&quot;],[&quot;Qinghai&quot;,&quot;Qinghai&quot;],[&quot;Shaanxi&quot;,&quot;Shaanxi&quot;],[&quot;Shandong&quot;,&quot;Shandong&quot;],[&quot;Shanghai&quot;,&quot;Shanghái&quot;],[&quot;Shanxi&quot;,&quot;Shanxi&quot;],[&quot;Sichuan&quot;,&quot;Sichuan&quot;],[&quot;Tianjin&quot;,&quot;Tianjin&quot;],[&quot;Xinjiang&quot;,&quot;Sinkiang&quot;],[&quot;Xizang&quot;,&quot;Tíbet&quot;],[&quot;Yunnan&quot;,&quot;Yunnan&quot;],[&quot;Zhejiang&quot;,&quot;Zhejiang&quot;]]">
                         China
                       </option>
                       <option value="Cyprus" data-provinces="[]">Chipre</option>
                       <option value="Holy See (Vatican City State)" data-provinces="[]">Ciudad del Vaticano</option>
-                      <option
-                        value="Colombia"
-                        data-provinces="[[&quot;Amazonas&quot;,&quot;Amazonas&quot;],[&quot;Antioquia&quot;,&quot;Antioquia&quot;],[&quot;Arauca&quot;,&quot;Arauca&quot;],[&quot;Atlántico&quot;,&quot;Atlántico&quot;],[&quot;Bogotá, D.C.&quot;,&quot;Bogotá&quot;],[&quot;Bolívar&quot;,&quot;Bolívar&quot;],[&quot;Boyacá&quot;,&quot;Boyacá&quot;],[&quot;Caldas&quot;,&quot;Caldas&quot;],[&quot;Caquetá&quot;,&quot;Caquetá&quot;],[&quot;Casanare&quot;,&quot;Casanare&quot;],[&quot;Cauca&quot;,&quot;Cauca&quot;],[&quot;Cesar&quot;,&quot;Cesar&quot;],[&quot;Chocó&quot;,&quot;Chocó&quot;],[&quot;Cundinamarca&quot;,&quot;Cundinamarca&quot;],[&quot;Córdoba&quot;,&quot;Córdoba&quot;],[&quot;Guainía&quot;,&quot;Guainía&quot;],[&quot;Guaviare&quot;,&quot;Guaviare&quot;],[&quot;Huila&quot;,&quot;Huila&quot;],[&quot;La Guajira&quot;,&quot;La Guajira&quot;],[&quot;Magdalena&quot;,&quot;Magdalena&quot;],[&quot;Meta&quot;,&quot;Meta&quot;],[&quot;Nariño&quot;,&quot;Nariño&quot;],[&quot;Norte de Santander&quot;,&quot;Norte de Santander&quot;],[&quot;Putumayo&quot;,&quot;Putumayo&quot;],[&quot;Quindío&quot;,&quot;Quindío&quot;],[&quot;Risaralda&quot;,&quot;Risaralda&quot;],[&quot;San Andrés, Providencia y Santa Catalina&quot;,&quot;Archipiélago de San Andrés, Providencia y Santa Catalina&quot;],[&quot;Santander&quot;,&quot;Santander&quot;],[&quot;Sucre&quot;,&quot;Sucre&quot;],[&quot;Tolima&quot;,&quot;Tolima&quot;],[&quot;Valle del Cauca&quot;,&quot;Valle del Cauca&quot;],[&quot;Vaupés&quot;,&quot;Vaupés&quot;],[&quot;Vichada&quot;,&quot;Vichada&quot;]]"
-                      >
+                      <option value="Colombia"
+                        data-provinces="[[&quot;Amazonas&quot;,&quot;Amazonas&quot;],[&quot;Antioquia&quot;,&quot;Antioquia&quot;],[&quot;Arauca&quot;,&quot;Arauca&quot;],[&quot;Atlántico&quot;,&quot;Atlántico&quot;],[&quot;Bogotá, D.C.&quot;,&quot;Bogotá&quot;],[&quot;Bolívar&quot;,&quot;Bolívar&quot;],[&quot;Boyacá&quot;,&quot;Boyacá&quot;],[&quot;Caldas&quot;,&quot;Caldas&quot;],[&quot;Caquetá&quot;,&quot;Caquetá&quot;],[&quot;Casanare&quot;,&quot;Casanare&quot;],[&quot;Cauca&quot;,&quot;Cauca&quot;],[&quot;Cesar&quot;,&quot;Cesar&quot;],[&quot;Chocó&quot;,&quot;Chocó&quot;],[&quot;Cundinamarca&quot;,&quot;Cundinamarca&quot;],[&quot;Córdoba&quot;,&quot;Córdoba&quot;],[&quot;Guainía&quot;,&quot;Guainía&quot;],[&quot;Guaviare&quot;,&quot;Guaviare&quot;],[&quot;Huila&quot;,&quot;Huila&quot;],[&quot;La Guajira&quot;,&quot;La Guajira&quot;],[&quot;Magdalena&quot;,&quot;Magdalena&quot;],[&quot;Meta&quot;,&quot;Meta&quot;],[&quot;Nariño&quot;,&quot;Nariño&quot;],[&quot;Norte de Santander&quot;,&quot;Norte de Santander&quot;],[&quot;Putumayo&quot;,&quot;Putumayo&quot;],[&quot;Quindío&quot;,&quot;Quindío&quot;],[&quot;Risaralda&quot;,&quot;Risaralda&quot;],[&quot;San Andrés, Providencia y Santa Catalina&quot;,&quot;Archipiélago de San Andrés, Providencia y Santa Catalina&quot;],[&quot;Santander&quot;,&quot;Santander&quot;],[&quot;Sucre&quot;,&quot;Sucre&quot;],[&quot;Tolima&quot;,&quot;Tolima&quot;],[&quot;Valle del Cauca&quot;,&quot;Valle del Cauca&quot;],[&quot;Vaupés&quot;,&quot;Vaupés&quot;],[&quot;Vichada&quot;,&quot;Vichada&quot;]]">
                         Colombia
                       </option>
                       <option value="Comoros" data-provinces="[]">Comoras</option>
                       <option value="Congo" data-provinces="[]">Congo</option>
-                      <option
-                        value="South Korea"
-                        data-provinces="[[&quot;Busan&quot;,&quot;Busan&quot;],[&quot;Chungbuk&quot;,&quot;Chungcheong del Norte&quot;],[&quot;Chungnam&quot;,&quot;Chungcheong del Sur&quot;],[&quot;Daegu&quot;,&quot;Daegu&quot;],[&quot;Daejeon&quot;,&quot;Daejeon&quot;],[&quot;Gangwon&quot;,&quot;Gangwon&quot;],[&quot;Gwangju&quot;,&quot;Gwangju&quot;],[&quot;Gyeongbuk&quot;,&quot;Gyeongsang del Norte&quot;],[&quot;Gyeonggi&quot;,&quot;Gyeonggi&quot;],[&quot;Gyeongnam&quot;,&quot;Gyeongsang del Sur&quot;],[&quot;Incheon&quot;,&quot;Incheon&quot;],[&quot;Jeju&quot;,&quot;Jeju-do&quot;],[&quot;Jeonbuk&quot;,&quot;Jeolla del Norte&quot;],[&quot;Jeonnam&quot;,&quot;Jeolla del Sur&quot;],[&quot;Sejong&quot;,&quot;Sejong&quot;],[&quot;Seoul&quot;,&quot;Seúl&quot;],[&quot;Ulsan&quot;,&quot;Ulsan&quot;]]"
-                      >
+                      <option value="South Korea"
+                        data-provinces="[[&quot;Busan&quot;,&quot;Busan&quot;],[&quot;Chungbuk&quot;,&quot;Chungcheong del Norte&quot;],[&quot;Chungnam&quot;,&quot;Chungcheong del Sur&quot;],[&quot;Daegu&quot;,&quot;Daegu&quot;],[&quot;Daejeon&quot;,&quot;Daejeon&quot;],[&quot;Gangwon&quot;,&quot;Gangwon&quot;],[&quot;Gwangju&quot;,&quot;Gwangju&quot;],[&quot;Gyeongbuk&quot;,&quot;Gyeongsang del Norte&quot;],[&quot;Gyeonggi&quot;,&quot;Gyeonggi&quot;],[&quot;Gyeongnam&quot;,&quot;Gyeongsang del Sur&quot;],[&quot;Incheon&quot;,&quot;Incheon&quot;],[&quot;Jeju&quot;,&quot;Jeju-do&quot;],[&quot;Jeonbuk&quot;,&quot;Jeolla del Norte&quot;],[&quot;Jeonnam&quot;,&quot;Jeolla del Sur&quot;],[&quot;Sejong&quot;,&quot;Sejong&quot;],[&quot;Seoul&quot;,&quot;Seúl&quot;],[&quot;Ulsan&quot;,&quot;Ulsan&quot;]]">
                         Corea del Sur
                       </option>
-                      <option
-                        value="Costa Rica"
-                        data-provinces="[[&quot;Alajuela&quot;,&quot;Provincia de Alajuela&quot;],[&quot;Cartago&quot;,&quot;Provincia de Cartago&quot;],[&quot;Guanacaste&quot;,&quot;Provincia de Guanacaste&quot;],[&quot;Heredia&quot;,&quot;Heredia&quot;],[&quot;Limón&quot;,&quot;Limón&quot;],[&quot;Puntarenas&quot;,&quot;Puntarenas&quot;],[&quot;San José&quot;,&quot;Provincia de San José&quot;]]"
-                      >
+                      <option value="Costa Rica"
+                        data-provinces="[[&quot;Alajuela&quot;,&quot;Provincia de Alajuela&quot;],[&quot;Cartago&quot;,&quot;Provincia de Cartago&quot;],[&quot;Guanacaste&quot;,&quot;Provincia de Guanacaste&quot;],[&quot;Heredia&quot;,&quot;Heredia&quot;],[&quot;Limón&quot;,&quot;Limón&quot;],[&quot;Puntarenas&quot;,&quot;Puntarenas&quot;],[&quot;San José&quot;,&quot;Provincia de San José&quot;]]">
                         Costa Rica
                       </option>
                       <option value="Croatia" data-provinces="[]">Croacia</option>
@@ -289,46 +235,34 @@
                       <option value="Denmark" data-provinces="[]">Dinamarca</option>
                       <option value="Dominica" data-provinces="[]">Dominica</option>
                       <option value="Ecuador" data-provinces="[]">Ecuador</option>
-                      <option
-                        value="Egypt"
-                        data-provinces="[[&quot;6th of October&quot;,&quot;6 de octubre&quot;],[&quot;Al Sharqia&quot;,&quot;Oriental&quot;],[&quot;Alexandria&quot;,&quot;Alejandría&quot;],[&quot;Aswan&quot;,&quot;Asuán&quot;],[&quot;Asyut&quot;,&quot;Asiut&quot;],[&quot;Beheira&quot;,&quot;Behera&quot;],[&quot;Beni Suef&quot;,&quot;Beni Suef&quot;],[&quot;Cairo&quot;,&quot;El Cairo&quot;],[&quot;Dakahlia&quot;,&quot;Dacalia&quot;],[&quot;Damietta&quot;,&quot;Damieta&quot;],[&quot;Faiyum&quot;,&quot;Fayún&quot;],[&quot;Gharbia&quot;,&quot;Occidental&quot;],[&quot;Giza&quot;,&quot;Guiza&quot;],[&quot;Helwan&quot;,&quot;Helwan&quot;],[&quot;Ismailia&quot;,&quot;Ismailia&quot;],[&quot;Kafr el-Sheikh&quot;,&quot;Kafr el Sheij&quot;],[&quot;Luxor&quot;,&quot;Lúxor&quot;],[&quot;Matrouh&quot;,&quot;Matrú&quot;],[&quot;Minya&quot;,&quot;Menia&quot;],[&quot;Monufia&quot;,&quot;Menufia&quot;],[&quot;New Valley&quot;,&quot;Nuevo Valle&quot;],[&quot;North Sinai&quot;,&quot;Sinaí del Norte&quot;],[&quot;Port Said&quot;,&quot;Puerto Saíd&quot;],[&quot;Qalyubia&quot;,&quot;Caliubia&quot;],[&quot;Qena&quot;,&quot;Quena&quot;],[&quot;Red Sea&quot;,&quot;Mar Rojo&quot;],[&quot;Sohag&quot;,&quot;Suhag&quot;],[&quot;South Sinai&quot;,&quot;Sinaí del Sur&quot;],[&quot;Suez&quot;,&quot;Gobernación de Suez&quot;]]"
-                      >
+                      <option value="Egypt"
+                        data-provinces="[[&quot;6th of October&quot;,&quot;6 de octubre&quot;],[&quot;Al Sharqia&quot;,&quot;Oriental&quot;],[&quot;Alexandria&quot;,&quot;Alejandría&quot;],[&quot;Aswan&quot;,&quot;Asuán&quot;],[&quot;Asyut&quot;,&quot;Asiut&quot;],[&quot;Beheira&quot;,&quot;Behera&quot;],[&quot;Beni Suef&quot;,&quot;Beni Suef&quot;],[&quot;Cairo&quot;,&quot;El Cairo&quot;],[&quot;Dakahlia&quot;,&quot;Dacalia&quot;],[&quot;Damietta&quot;,&quot;Damieta&quot;],[&quot;Faiyum&quot;,&quot;Fayún&quot;],[&quot;Gharbia&quot;,&quot;Occidental&quot;],[&quot;Giza&quot;,&quot;Guiza&quot;],[&quot;Helwan&quot;,&quot;Helwan&quot;],[&quot;Ismailia&quot;,&quot;Ismailia&quot;],[&quot;Kafr el-Sheikh&quot;,&quot;Kafr el Sheij&quot;],[&quot;Luxor&quot;,&quot;Lúxor&quot;],[&quot;Matrouh&quot;,&quot;Matrú&quot;],[&quot;Minya&quot;,&quot;Menia&quot;],[&quot;Monufia&quot;,&quot;Menufia&quot;],[&quot;New Valley&quot;,&quot;Nuevo Valle&quot;],[&quot;North Sinai&quot;,&quot;Sinaí del Norte&quot;],[&quot;Port Said&quot;,&quot;Puerto Saíd&quot;],[&quot;Qalyubia&quot;,&quot;Caliubia&quot;],[&quot;Qena&quot;,&quot;Quena&quot;],[&quot;Red Sea&quot;,&quot;Mar Rojo&quot;],[&quot;Sohag&quot;,&quot;Suhag&quot;],[&quot;South Sinai&quot;,&quot;Sinaí del Sur&quot;],[&quot;Suez&quot;,&quot;Gobernación de Suez&quot;]]">
                         Egipto
                       </option>
-                      <option
-                        value="El Salvador"
-                        data-provinces="[[&quot;Ahuachapán&quot;,&quot;Ahuachapán&quot;],[&quot;Cabañas&quot;,&quot;Cabañas&quot;],[&quot;Chalatenango&quot;,&quot;Chalatenango&quot;],[&quot;Cuscatlán&quot;,&quot;Cuscatlán&quot;],[&quot;La Libertad&quot;,&quot;La Libertad&quot;],[&quot;La Paz&quot;,&quot;La Paz&quot;],[&quot;La Unión&quot;,&quot;La Unión&quot;],[&quot;Morazán&quot;,&quot;Morazán&quot;],[&quot;San Miguel&quot;,&quot;San Miguel&quot;],[&quot;San Salvador&quot;,&quot;San Salvador&quot;],[&quot;San Vicente&quot;,&quot;San Vicente&quot;],[&quot;Santa Ana&quot;,&quot;Santa Ana&quot;],[&quot;Sonsonate&quot;,&quot;Sonsonate&quot;],[&quot;Usulután&quot;,&quot;Usulután&quot;]]"
-                      >
+                      <option value="El Salvador"
+                        data-provinces="[[&quot;Ahuachapán&quot;,&quot;Ahuachapán&quot;],[&quot;Cabañas&quot;,&quot;Cabañas&quot;],[&quot;Chalatenango&quot;,&quot;Chalatenango&quot;],[&quot;Cuscatlán&quot;,&quot;Cuscatlán&quot;],[&quot;La Libertad&quot;,&quot;La Libertad&quot;],[&quot;La Paz&quot;,&quot;La Paz&quot;],[&quot;La Unión&quot;,&quot;La Unión&quot;],[&quot;Morazán&quot;,&quot;Morazán&quot;],[&quot;San Miguel&quot;,&quot;San Miguel&quot;],[&quot;San Salvador&quot;,&quot;San Salvador&quot;],[&quot;San Vicente&quot;,&quot;San Vicente&quot;],[&quot;Santa Ana&quot;,&quot;Santa Ana&quot;],[&quot;Sonsonate&quot;,&quot;Sonsonate&quot;],[&quot;Usulután&quot;,&quot;Usulután&quot;]]">
                         El Salvador
                       </option>
-                      <option
-                        value="United Arab Emirates"
-                        data-provinces="[[&quot;Abu Dhabi&quot;,&quot;Abu Dabi&quot;],[&quot;Ajman&quot;,&quot;Ajmán&quot;],[&quot;Dubai&quot;,&quot;Dubái&quot;],[&quot;Fujairah&quot;,&quot;Fuyaira&quot;],[&quot;Ras al-Khaimah&quot;,&quot;Ras al-Jaima&quot;],[&quot;Sharjah&quot;,&quot;Sharjah&quot;],[&quot;Umm al-Quwain&quot;,&quot;Umm al-Qaywayn&quot;]]"
-                      >
+                      <option value="United Arab Emirates"
+                        data-provinces="[[&quot;Abu Dhabi&quot;,&quot;Abu Dabi&quot;],[&quot;Ajman&quot;,&quot;Ajmán&quot;],[&quot;Dubai&quot;,&quot;Dubái&quot;],[&quot;Fujairah&quot;,&quot;Fuyaira&quot;],[&quot;Ras al-Khaimah&quot;,&quot;Ras al-Jaima&quot;],[&quot;Sharjah&quot;,&quot;Sharjah&quot;],[&quot;Umm al-Quwain&quot;,&quot;Umm al-Qaywayn&quot;]]">
                         Emiratos Árabes Unidos
                       </option>
                       <option value="Eritrea" data-provinces="[]">Eritrea</option>
                       <option value="Slovakia" data-provinces="[]">Eslovaquia</option>
                       <option value="Slovenia" data-provinces="[]">Eslovenia</option>
-                      <option
-                        value="Spain"
-                        data-provinces="[[&quot;A Coruña&quot;,&quot;La Coruña&quot;],[&quot;Albacete&quot;,&quot;Albacete&quot;],[&quot;Alicante&quot;,&quot;Alicante&quot;],[&quot;Almería&quot;,&quot;Almería&quot;],[&quot;Asturias&quot;,&quot;Asturias&quot;],[&quot;Badajoz&quot;,&quot;Badajoz&quot;],[&quot;Balears&quot;,&quot;Islas Baleares&quot;],[&quot;Barcelona&quot;,&quot;Barcelona&quot;],[&quot;Burgos&quot;,&quot;Burgos&quot;],[&quot;Cantabria&quot;,&quot;Cantabria&quot;],[&quot;Castellón&quot;,&quot;Castellón&quot;],[&quot;Ceuta&quot;,&quot;Ceuta&quot;],[&quot;Ciudad Real&quot;,&quot;Ciudad Real&quot;],[&quot;Cuenca&quot;,&quot;Cuenca&quot;],[&quot;Cáceres&quot;,&quot;Cáceres&quot;],[&quot;Cádiz&quot;,&quot;Cádiz&quot;],[&quot;Córdoba&quot;,&quot;Córdoba&quot;],[&quot;Girona&quot;,&quot;Gerona&quot;],[&quot;Granada&quot;,&quot;Granada&quot;],[&quot;Guadalajara&quot;,&quot;Guadalajara&quot;],[&quot;Guipúzcoa&quot;,&quot;Guipúzcoa&quot;],[&quot;Huelva&quot;,&quot;Huelva&quot;],[&quot;Huesca&quot;,&quot;Huesca&quot;],[&quot;Jaén&quot;,&quot;Jaén&quot;],[&quot;La Rioja&quot;,&quot;La Rioja&quot;],[&quot;Las Palmas&quot;,&quot;Las Palmas&quot;],[&quot;León&quot;,&quot;León&quot;],[&quot;Lleida&quot;,&quot;Lérida&quot;],[&quot;Lugo&quot;,&quot;Lugo&quot;],[&quot;Madrid&quot;,&quot;Madrid&quot;],[&quot;Melilla&quot;,&quot;Melilla&quot;],[&quot;Murcia&quot;,&quot;Murcia&quot;],[&quot;Málaga&quot;,&quot;Málaga&quot;],[&quot;Navarra&quot;,&quot;Navarra&quot;],[&quot;Ourense&quot;,&quot;Orense&quot;],[&quot;Palencia&quot;,&quot;Palencia&quot;],[&quot;Pontevedra&quot;,&quot;Pontevedra&quot;],[&quot;Salamanca&quot;,&quot;Salamanca&quot;],[&quot;Santa Cruz de Tenerife&quot;,&quot;Santa Cruz de Tenerife&quot;],[&quot;Segovia&quot;,&quot;Segovia&quot;],[&quot;Sevilla&quot;,&quot;Sevilla&quot;],[&quot;Soria&quot;,&quot;Soria&quot;],[&quot;Tarragona&quot;,&quot;Tarragona&quot;],[&quot;Teruel&quot;,&quot;Teruel&quot;],[&quot;Toledo&quot;,&quot;Toledo&quot;],[&quot;Valencia&quot;,&quot;Valencia&quot;],[&quot;Valladolid&quot;,&quot;Valladolid&quot;],[&quot;Vizcaya&quot;,&quot;Vizcaya&quot;],[&quot;Zamora&quot;,&quot;Zamora&quot;],[&quot;Zaragoza&quot;,&quot;Zaragoza&quot;],[&quot;Álava&quot;,&quot;Álava&quot;],[&quot;Ávila&quot;,&quot;Ávila&quot;]]"
-                      >
+                      <option value="Spain"
+                        data-provinces="[[&quot;A Coruña&quot;,&quot;La Coruña&quot;],[&quot;Albacete&quot;,&quot;Albacete&quot;],[&quot;Alicante&quot;,&quot;Alicante&quot;],[&quot;Almería&quot;,&quot;Almería&quot;],[&quot;Asturias&quot;,&quot;Asturias&quot;],[&quot;Badajoz&quot;,&quot;Badajoz&quot;],[&quot;Balears&quot;,&quot;Islas Baleares&quot;],[&quot;Barcelona&quot;,&quot;Barcelona&quot;],[&quot;Burgos&quot;,&quot;Burgos&quot;],[&quot;Cantabria&quot;,&quot;Cantabria&quot;],[&quot;Castellón&quot;,&quot;Castellón&quot;],[&quot;Ceuta&quot;,&quot;Ceuta&quot;],[&quot;Ciudad Real&quot;,&quot;Ciudad Real&quot;],[&quot;Cuenca&quot;,&quot;Cuenca&quot;],[&quot;Cáceres&quot;,&quot;Cáceres&quot;],[&quot;Cádiz&quot;,&quot;Cádiz&quot;],[&quot;Córdoba&quot;,&quot;Córdoba&quot;],[&quot;Girona&quot;,&quot;Gerona&quot;],[&quot;Granada&quot;,&quot;Granada&quot;],[&quot;Guadalajara&quot;,&quot;Guadalajara&quot;],[&quot;Guipúzcoa&quot;,&quot;Guipúzcoa&quot;],[&quot;Huelva&quot;,&quot;Huelva&quot;],[&quot;Huesca&quot;,&quot;Huesca&quot;],[&quot;Jaén&quot;,&quot;Jaén&quot;],[&quot;La Rioja&quot;,&quot;La Rioja&quot;],[&quot;Las Palmas&quot;,&quot;Las Palmas&quot;],[&quot;León&quot;,&quot;León&quot;],[&quot;Lleida&quot;,&quot;Lérida&quot;],[&quot;Lugo&quot;,&quot;Lugo&quot;],[&quot;Madrid&quot;,&quot;Madrid&quot;],[&quot;Melilla&quot;,&quot;Melilla&quot;],[&quot;Murcia&quot;,&quot;Murcia&quot;],[&quot;Málaga&quot;,&quot;Málaga&quot;],[&quot;Navarra&quot;,&quot;Navarra&quot;],[&quot;Ourense&quot;,&quot;Orense&quot;],[&quot;Palencia&quot;,&quot;Palencia&quot;],[&quot;Pontevedra&quot;,&quot;Pontevedra&quot;],[&quot;Salamanca&quot;,&quot;Salamanca&quot;],[&quot;Santa Cruz de Tenerife&quot;,&quot;Santa Cruz de Tenerife&quot;],[&quot;Segovia&quot;,&quot;Segovia&quot;],[&quot;Sevilla&quot;,&quot;Sevilla&quot;],[&quot;Soria&quot;,&quot;Soria&quot;],[&quot;Tarragona&quot;,&quot;Tarragona&quot;],[&quot;Teruel&quot;,&quot;Teruel&quot;],[&quot;Toledo&quot;,&quot;Toledo&quot;],[&quot;Valencia&quot;,&quot;Valencia&quot;],[&quot;Valladolid&quot;,&quot;Valladolid&quot;],[&quot;Vizcaya&quot;,&quot;Vizcaya&quot;],[&quot;Zamora&quot;,&quot;Zamora&quot;],[&quot;Zaragoza&quot;,&quot;Zaragoza&quot;],[&quot;Álava&quot;,&quot;Álava&quot;],[&quot;Ávila&quot;,&quot;Ávila&quot;]]">
                         España
                       </option>
-                      <option
-                        value="United States"
-                        data-provinces="[[&quot;Alabama&quot;,&quot;Alabama&quot;],[&quot;Alaska&quot;,&quot;Alaska&quot;],[&quot;American Samoa&quot;,&quot;Samoa Americana&quot;],[&quot;Arizona&quot;,&quot;Arizona&quot;],[&quot;Arkansas&quot;,&quot;Arkansas&quot;],[&quot;Armed Forces Americas&quot;,&quot;Fuerzas Armadas de las Américas&quot;],[&quot;Armed Forces Europe&quot;,&quot;Fuerzas Armadas de Europa&quot;],[&quot;Armed Forces Pacific&quot;,&quot;Fuerzas Armadas del Pacífico&quot;],[&quot;California&quot;,&quot;California&quot;],[&quot;Colorado&quot;,&quot;Colorado&quot;],[&quot;Connecticut&quot;,&quot;Connecticut&quot;],[&quot;Delaware&quot;,&quot;Delaware&quot;],[&quot;District of Columbia&quot;,&quot;Washington D. C.&quot;],[&quot;Federated States of Micronesia&quot;,&quot;Micronesia&quot;],[&quot;Florida&quot;,&quot;Florida&quot;],[&quot;Georgia&quot;,&quot;Georgia&quot;],[&quot;Guam&quot;,&quot;Guam&quot;],[&quot;Hawaii&quot;,&quot;Hawái&quot;],[&quot;Idaho&quot;,&quot;Idaho&quot;],[&quot;Illinois&quot;,&quot;Illinois&quot;],[&quot;Indiana&quot;,&quot;Indiana&quot;],[&quot;Iowa&quot;,&quot;Iowa&quot;],[&quot;Kansas&quot;,&quot;Kansas&quot;],[&quot;Kentucky&quot;,&quot;Kentucky&quot;],[&quot;Louisiana&quot;,&quot;Luisiana&quot;],[&quot;Maine&quot;,&quot;Maine&quot;],[&quot;Marshall Islands&quot;,&quot;Islas Marshall&quot;],[&quot;Maryland&quot;,&quot;Maryland&quot;],[&quot;Massachusetts&quot;,&quot;Massachusetts&quot;],[&quot;Michigan&quot;,&quot;Míchigan&quot;],[&quot;Minnesota&quot;,&quot;Minnesota&quot;],[&quot;Mississippi&quot;,&quot;Misisipi&quot;],[&quot;Missouri&quot;,&quot;Misuri&quot;],[&quot;Montana&quot;,&quot;Montana&quot;],[&quot;Nebraska&quot;,&quot;Nebraska&quot;],[&quot;Nevada&quot;,&quot;Nevada&quot;],[&quot;New Hampshire&quot;,&quot;Nuevo Hampshire&quot;],[&quot;New Jersey&quot;,&quot;Nueva Jersey&quot;],[&quot;New Mexico&quot;,&quot;Nuevo México&quot;],[&quot;New York&quot;,&quot;Nueva York&quot;],[&quot;North Carolina&quot;,&quot;Carolina del Norte&quot;],[&quot;North Dakota&quot;,&quot;Dakota del Norte&quot;],[&quot;Northern Mariana Islands&quot;,&quot;Islas Marianas del Norte&quot;],[&quot;Ohio&quot;,&quot;Ohio&quot;],[&quot;Oklahoma&quot;,&quot;Oklahoma&quot;],[&quot;Oregon&quot;,&quot;Oregón&quot;],[&quot;Palau&quot;,&quot;Palaos&quot;],[&quot;Pennsylvania&quot;,&quot;Pensilvania&quot;],[&quot;Puerto Rico&quot;,&quot;Puerto Rico&quot;],[&quot;Rhode Island&quot;,&quot;Rhode Island&quot;],[&quot;South Carolina&quot;,&quot;Carolina del Sur&quot;],[&quot;South Dakota&quot;,&quot;Dakota del Sur&quot;],[&quot;Tennessee&quot;,&quot;Tennessee&quot;],[&quot;Texas&quot;,&quot;Texas&quot;],[&quot;Utah&quot;,&quot;Utah&quot;],[&quot;Vermont&quot;,&quot;Vermont&quot;],[&quot;Virgin Islands&quot;,&quot;Islas Vírgenes de EE. UU.&quot;],[&quot;Virginia&quot;,&quot;Virginia&quot;],[&quot;Washington&quot;,&quot;Washington&quot;],[&quot;West Virginia&quot;,&quot;Virginia Occidental&quot;],[&quot;Wisconsin&quot;,&quot;Wisconsin&quot;],[&quot;Wyoming&quot;,&quot;Wyoming&quot;]]"
-                      >
+                      <option value="United States"
+                        data-provinces="[[&quot;Alabama&quot;,&quot;Alabama&quot;],[&quot;Alaska&quot;,&quot;Alaska&quot;],[&quot;American Samoa&quot;,&quot;Samoa Americana&quot;],[&quot;Arizona&quot;,&quot;Arizona&quot;],[&quot;Arkansas&quot;,&quot;Arkansas&quot;],[&quot;Armed Forces Americas&quot;,&quot;Fuerzas Armadas de las Américas&quot;],[&quot;Armed Forces Europe&quot;,&quot;Fuerzas Armadas de Europa&quot;],[&quot;Armed Forces Pacific&quot;,&quot;Fuerzas Armadas del Pacífico&quot;],[&quot;California&quot;,&quot;California&quot;],[&quot;Colorado&quot;,&quot;Colorado&quot;],[&quot;Connecticut&quot;,&quot;Connecticut&quot;],[&quot;Delaware&quot;,&quot;Delaware&quot;],[&quot;District of Columbia&quot;,&quot;Washington D. C.&quot;],[&quot;Federated States of Micronesia&quot;,&quot;Micronesia&quot;],[&quot;Florida&quot;,&quot;Florida&quot;],[&quot;Georgia&quot;,&quot;Georgia&quot;],[&quot;Guam&quot;,&quot;Guam&quot;],[&quot;Hawaii&quot;,&quot;Hawái&quot;],[&quot;Idaho&quot;,&quot;Idaho&quot;],[&quot;Illinois&quot;,&quot;Illinois&quot;],[&quot;Indiana&quot;,&quot;Indiana&quot;],[&quot;Iowa&quot;,&quot;Iowa&quot;],[&quot;Kansas&quot;,&quot;Kansas&quot;],[&quot;Kentucky&quot;,&quot;Kentucky&quot;],[&quot;Louisiana&quot;,&quot;Luisiana&quot;],[&quot;Maine&quot;,&quot;Maine&quot;],[&quot;Marshall Islands&quot;,&quot;Islas Marshall&quot;],[&quot;Maryland&quot;,&quot;Maryland&quot;],[&quot;Massachusetts&quot;,&quot;Massachusetts&quot;],[&quot;Michigan&quot;,&quot;Míchigan&quot;],[&quot;Minnesota&quot;,&quot;Minnesota&quot;],[&quot;Mississippi&quot;,&quot;Misisipi&quot;],[&quot;Missouri&quot;,&quot;Misuri&quot;],[&quot;Montana&quot;,&quot;Montana&quot;],[&quot;Nebraska&quot;,&quot;Nebraska&quot;],[&quot;Nevada&quot;,&quot;Nevada&quot;],[&quot;New Hampshire&quot;,&quot;Nuevo Hampshire&quot;],[&quot;New Jersey&quot;,&quot;Nueva Jersey&quot;],[&quot;New Mexico&quot;,&quot;Nuevo México&quot;],[&quot;New York&quot;,&quot;Nueva York&quot;],[&quot;North Carolina&quot;,&quot;Carolina del Norte&quot;],[&quot;North Dakota&quot;,&quot;Dakota del Norte&quot;],[&quot;Northern Mariana Islands&quot;,&quot;Islas Marianas del Norte&quot;],[&quot;Ohio&quot;,&quot;Ohio&quot;],[&quot;Oklahoma&quot;,&quot;Oklahoma&quot;],[&quot;Oregon&quot;,&quot;Oregón&quot;],[&quot;Palau&quot;,&quot;Palaos&quot;],[&quot;Pennsylvania&quot;,&quot;Pensilvania&quot;],[&quot;Puerto Rico&quot;,&quot;Puerto Rico&quot;],[&quot;Rhode Island&quot;,&quot;Rhode Island&quot;],[&quot;South Carolina&quot;,&quot;Carolina del Sur&quot;],[&quot;South Dakota&quot;,&quot;Dakota del Sur&quot;],[&quot;Tennessee&quot;,&quot;Tennessee&quot;],[&quot;Texas&quot;,&quot;Texas&quot;],[&quot;Utah&quot;,&quot;Utah&quot;],[&quot;Vermont&quot;,&quot;Vermont&quot;],[&quot;Virgin Islands&quot;,&quot;Islas Vírgenes de EE. UU.&quot;],[&quot;Virginia&quot;,&quot;Virginia&quot;],[&quot;Washington&quot;,&quot;Washington&quot;],[&quot;West Virginia&quot;,&quot;Virginia Occidental&quot;],[&quot;Wisconsin&quot;,&quot;Wisconsin&quot;],[&quot;Wyoming&quot;,&quot;Wyoming&quot;]]">
                         Estados Unidos
                       </option>
                       <option value="Estonia" data-provinces="[]">Estonia</option>
                       <option value="Eswatini" data-provinces="[]">Esuatini</option>
                       <option value="Ethiopia" data-provinces="[]">Etiopía</option>
-                      <option
-                        value="Philippines"
-                        data-provinces="[[&quot;Abra&quot;,&quot;Abra&quot;],[&quot;Agusan del Norte&quot;,&quot;Agusan del Norte&quot;],[&quot;Agusan del Sur&quot;,&quot;Agusan del Sur&quot;],[&quot;Aklan&quot;,&quot;Aklan&quot;],[&quot;Albay&quot;,&quot;Albay&quot;],[&quot;Antique&quot;,&quot;Antique&quot;],[&quot;Apayao&quot;,&quot;Apayao&quot;],[&quot;Aurora&quot;,&quot;Aurora&quot;],[&quot;Basilan&quot;,&quot;Basilán&quot;],[&quot;Bataan&quot;,&quot;Bataán&quot;],[&quot;Batanes&quot;,&quot;Batanes&quot;],[&quot;Batangas&quot;,&quot;Batangas&quot;],[&quot;Benguet&quot;,&quot;Benguet&quot;],[&quot;Biliran&quot;,&quot;Bilirán&quot;],[&quot;Bohol&quot;,&quot;Bohol&quot;],[&quot;Bukidnon&quot;,&quot;Bukidnon&quot;],[&quot;Bulacan&quot;,&quot;Bulacán&quot;],[&quot;Cagayan&quot;,&quot;Cagayán&quot;],[&quot;Camarines Norte&quot;,&quot;Camarines Norte&quot;],[&quot;Camarines Sur&quot;,&quot;Camarines Sur&quot;],[&quot;Camiguin&quot;,&quot;Camiguín&quot;],[&quot;Capiz&quot;,&quot;Cápiz&quot;],[&quot;Catanduanes&quot;,&quot;Catanduanes&quot;],[&quot;Cavite&quot;,&quot;Cavite&quot;],[&quot;Cebu&quot;,&quot;Cebú&quot;],[&quot;Cotabato&quot;,&quot;Cotabato&quot;],[&quot;Davao Occidental&quot;,&quot;Dávao Occidental&quot;],[&quot;Davao Oriental&quot;,&quot;Davao Oriental&quot;],[&quot;Davao de Oro&quot;,&quot;Valle de Compostela&quot;],[&quot;Davao del Norte&quot;,&quot;Davao del Norte&quot;],[&quot;Davao del Sur&quot;,&quot;Davao del Sur&quot;],[&quot;Dinagat Islands&quot;,&quot;Islas Dinagat&quot;],[&quot;Eastern Samar&quot;,&quot;Sámar Oriental&quot;],[&quot;Guimaras&quot;,&quot;Guimarás&quot;],[&quot;Ifugao&quot;,&quot;Ifugao&quot;],[&quot;Ilocos Norte&quot;,&quot;Ilocos Norte&quot;],[&quot;Ilocos Sur&quot;,&quot;Ilocos Sur&quot;],[&quot;Iloilo&quot;,&quot;Iloílo&quot;],[&quot;Isabela&quot;,&quot;Isabela&quot;],[&quot;Kalinga&quot;,&quot;Kalinga&quot;],[&quot;La Union&quot;,&quot;La Unión&quot;],[&quot;Laguna&quot;,&quot;La Laguna&quot;],[&quot;Lanao del Norte&quot;,&quot;Lanao del Norte&quot;],[&quot;Lanao del Sur&quot;,&quot;Lanao del Sur&quot;],[&quot;Leyte&quot;,&quot;Leyte&quot;],[&quot;Maguindanao&quot;,&quot;Maguindanao&quot;],[&quot;Marinduque&quot;,&quot;Marinduque&quot;],[&quot;Masbate&quot;,&quot;Masbate&quot;],[&quot;Metro Manila&quot;,&quot;Gran Manila&quot;],[&quot;Misamis Occidental&quot;,&quot;Misamis Occidental&quot;],[&quot;Misamis Oriental&quot;,&quot;Misamis Oriental&quot;],[&quot;Mountain Province&quot;,&quot;La Montaña&quot;],[&quot;Negros Occidental&quot;,&quot;Negros Occidental&quot;],[&quot;Negros Oriental&quot;,&quot;Negros Oriental&quot;],[&quot;Northern Samar&quot;,&quot;Sámar del Norte&quot;],[&quot;Nueva Ecija&quot;,&quot;Nueva Écija&quot;],[&quot;Nueva Vizcaya&quot;,&quot;Nueva Vizcaya&quot;],[&quot;Occidental Mindoro&quot;,&quot;Mindoro Occidental&quot;],[&quot;Oriental Mindoro&quot;,&quot;Mindoro Oriental&quot;],[&quot;Palawan&quot;,&quot;Palawan&quot;],[&quot;Pampanga&quot;,&quot;Pampanga&quot;],[&quot;Pangasinan&quot;,&quot;Pangasinán&quot;],[&quot;Quezon&quot;,&quot;Quezón&quot;],[&quot;Quirino&quot;,&quot;Quirino&quot;],[&quot;Rizal&quot;,&quot;Rizal&quot;],[&quot;Romblon&quot;,&quot;Romblón&quot;],[&quot;Samar&quot;,&quot;Sámar&quot;],[&quot;Sarangani&quot;,&quot;Sarangani&quot;],[&quot;Siquijor&quot;,&quot;Siquijor&quot;],[&quot;Sorsogon&quot;,&quot;Sorsogón&quot;],[&quot;South Cotabato&quot;,&quot;Cotabato del Sur&quot;],[&quot;Southern Leyte&quot;,&quot;Leyte del Sur&quot;],[&quot;Sultan Kudarat&quot;,&quot;Sultán Kudarat&quot;],[&quot;Sulu&quot;,&quot;Sulú&quot;],[&quot;Surigao del Norte&quot;,&quot;Surigao del Norte&quot;],[&quot;Surigao del Sur&quot;,&quot;Surigao del Sur&quot;],[&quot;Tarlac&quot;,&quot;Tarlac&quot;],[&quot;Tawi-Tawi&quot;,&quot;Tawi-Tawi&quot;],[&quot;Zambales&quot;,&quot;Zambales&quot;],[&quot;Zamboanga Sibugay&quot;,&quot;Zamboanga Sibugay&quot;],[&quot;Zamboanga del Norte&quot;,&quot;Zamboanga del Norte&quot;],[&quot;Zamboanga del Sur&quot;,&quot;Zamboanga del Sur&quot;]]"
-                      >
+                      <option value="Philippines"
+                        data-provinces="[[&quot;Abra&quot;,&quot;Abra&quot;],[&quot;Agusan del Norte&quot;,&quot;Agusan del Norte&quot;],[&quot;Agusan del Sur&quot;,&quot;Agusan del Sur&quot;],[&quot;Aklan&quot;,&quot;Aklan&quot;],[&quot;Albay&quot;,&quot;Albay&quot;],[&quot;Antique&quot;,&quot;Antique&quot;],[&quot;Apayao&quot;,&quot;Apayao&quot;],[&quot;Aurora&quot;,&quot;Aurora&quot;],[&quot;Basilan&quot;,&quot;Basilán&quot;],[&quot;Bataan&quot;,&quot;Bataán&quot;],[&quot;Batanes&quot;,&quot;Batanes&quot;],[&quot;Batangas&quot;,&quot;Batangas&quot;],[&quot;Benguet&quot;,&quot;Benguet&quot;],[&quot;Biliran&quot;,&quot;Bilirán&quot;],[&quot;Bohol&quot;,&quot;Bohol&quot;],[&quot;Bukidnon&quot;,&quot;Bukidnon&quot;],[&quot;Bulacan&quot;,&quot;Bulacán&quot;],[&quot;Cagayan&quot;,&quot;Cagayán&quot;],[&quot;Camarines Norte&quot;,&quot;Camarines Norte&quot;],[&quot;Camarines Sur&quot;,&quot;Camarines Sur&quot;],[&quot;Camiguin&quot;,&quot;Camiguín&quot;],[&quot;Capiz&quot;,&quot;Cápiz&quot;],[&quot;Catanduanes&quot;,&quot;Catanduanes&quot;],[&quot;Cavite&quot;,&quot;Cavite&quot;],[&quot;Cebu&quot;,&quot;Cebú&quot;],[&quot;Cotabato&quot;,&quot;Cotabato&quot;],[&quot;Davao Occidental&quot;,&quot;Dávao Occidental&quot;],[&quot;Davao Oriental&quot;,&quot;Davao Oriental&quot;],[&quot;Davao de Oro&quot;,&quot;Valle de Compostela&quot;],[&quot;Davao del Norte&quot;,&quot;Davao del Norte&quot;],[&quot;Davao del Sur&quot;,&quot;Davao del Sur&quot;],[&quot;Dinagat Islands&quot;,&quot;Islas Dinagat&quot;],[&quot;Eastern Samar&quot;,&quot;Sámar Oriental&quot;],[&quot;Guimaras&quot;,&quot;Guimarás&quot;],[&quot;Ifugao&quot;,&quot;Ifugao&quot;],[&quot;Ilocos Norte&quot;,&quot;Ilocos Norte&quot;],[&quot;Ilocos Sur&quot;,&quot;Ilocos Sur&quot;],[&quot;Iloilo&quot;,&quot;Iloílo&quot;],[&quot;Isabela&quot;,&quot;Isabela&quot;],[&quot;Kalinga&quot;,&quot;Kalinga&quot;],[&quot;La Union&quot;,&quot;La Unión&quot;],[&quot;Laguna&quot;,&quot;La Laguna&quot;],[&quot;Lanao del Norte&quot;,&quot;Lanao del Norte&quot;],[&quot;Lanao del Sur&quot;,&quot;Lanao del Sur&quot;],[&quot;Leyte&quot;,&quot;Leyte&quot;],[&quot;Maguindanao&quot;,&quot;Maguindanao&quot;],[&quot;Marinduque&quot;,&quot;Marinduque&quot;],[&quot;Masbate&quot;,&quot;Masbate&quot;],[&quot;Metro Manila&quot;,&quot;Gran Manila&quot;],[&quot;Misamis Occidental&quot;,&quot;Misamis Occidental&quot;],[&quot;Misamis Oriental&quot;,&quot;Misamis Oriental&quot;],[&quot;Mountain Province&quot;,&quot;La Montaña&quot;],[&quot;Negros Occidental&quot;,&quot;Negros Occidental&quot;],[&quot;Negros Oriental&quot;,&quot;Negros Oriental&quot;],[&quot;Northern Samar&quot;,&quot;Sámar del Norte&quot;],[&quot;Nueva Ecija&quot;,&quot;Nueva Écija&quot;],[&quot;Nueva Vizcaya&quot;,&quot;Nueva Vizcaya&quot;],[&quot;Occidental Mindoro&quot;,&quot;Mindoro Occidental&quot;],[&quot;Oriental Mindoro&quot;,&quot;Mindoro Oriental&quot;],[&quot;Palawan&quot;,&quot;Palawan&quot;],[&quot;Pampanga&quot;,&quot;Pampanga&quot;],[&quot;Pangasinan&quot;,&quot;Pangasinán&quot;],[&quot;Quezon&quot;,&quot;Quezón&quot;],[&quot;Quirino&quot;,&quot;Quirino&quot;],[&quot;Rizal&quot;,&quot;Rizal&quot;],[&quot;Romblon&quot;,&quot;Romblón&quot;],[&quot;Samar&quot;,&quot;Sámar&quot;],[&quot;Sarangani&quot;,&quot;Sarangani&quot;],[&quot;Siquijor&quot;,&quot;Siquijor&quot;],[&quot;Sorsogon&quot;,&quot;Sorsogón&quot;],[&quot;South Cotabato&quot;,&quot;Cotabato del Sur&quot;],[&quot;Southern Leyte&quot;,&quot;Leyte del Sur&quot;],[&quot;Sultan Kudarat&quot;,&quot;Sultán Kudarat&quot;],[&quot;Sulu&quot;,&quot;Sulú&quot;],[&quot;Surigao del Norte&quot;,&quot;Surigao del Norte&quot;],[&quot;Surigao del Sur&quot;,&quot;Surigao del Sur&quot;],[&quot;Tarlac&quot;,&quot;Tarlac&quot;],[&quot;Tawi-Tawi&quot;,&quot;Tawi-Tawi&quot;],[&quot;Zambales&quot;,&quot;Zambales&quot;],[&quot;Zamboanga Sibugay&quot;,&quot;Zamboanga Sibugay&quot;],[&quot;Zamboanga del Norte&quot;,&quot;Zamboanga del Norte&quot;],[&quot;Zamboanga del Sur&quot;,&quot;Zamboanga del Sur&quot;]]">
                         Filipinas
                       </option>
                       <option value="Finland" data-provinces="[]">Finlandia</option>
@@ -343,10 +277,8 @@
                       <option value="Greece" data-provinces="[]">Grecia</option>
                       <option value="Greenland" data-provinces="[]">Groenlandia</option>
                       <option value="Guadeloupe" data-provinces="[]">Guadalupe</option>
-                      <option
-                        value="Guatemala"
-                        data-provinces="[[&quot;Alta Verapaz&quot;,&quot;Alta Verapaz&quot;],[&quot;Baja Verapaz&quot;,&quot;Baja Verapaz&quot;],[&quot;Chimaltenango&quot;,&quot;Chimaltenango&quot;],[&quot;Chiquimula&quot;,&quot;Chiquimula&quot;],[&quot;El Progreso&quot;,&quot;El Progreso&quot;],[&quot;Escuintla&quot;,&quot;Escuintla&quot;],[&quot;Guatemala&quot;,&quot;Guatemala&quot;],[&quot;Huehuetenango&quot;,&quot;Huehuetenango&quot;],[&quot;Izabal&quot;,&quot;Izabal&quot;],[&quot;Jalapa&quot;,&quot;Jalapa&quot;],[&quot;Jutiapa&quot;,&quot;Jutiapa&quot;],[&quot;Petén&quot;,&quot;Petén&quot;],[&quot;Quetzaltenango&quot;,&quot;Quetzaltenango&quot;],[&quot;Quiché&quot;,&quot;Quiché&quot;],[&quot;Retalhuleu&quot;,&quot;Retalhuleu&quot;],[&quot;Sacatepéquez&quot;,&quot;Sacatepéquez&quot;],[&quot;San Marcos&quot;,&quot;San Marcos&quot;],[&quot;Santa Rosa&quot;,&quot;Santa Rosa&quot;],[&quot;Sololá&quot;,&quot;Sololá&quot;],[&quot;Suchitepéquez&quot;,&quot;Suchitepéquez&quot;],[&quot;Totonicapán&quot;,&quot;Totonicapán&quot;],[&quot;Zacapa&quot;,&quot;Zacapa&quot;]]"
-                      >
+                      <option value="Guatemala"
+                        data-provinces="[[&quot;Alta Verapaz&quot;,&quot;Alta Verapaz&quot;],[&quot;Baja Verapaz&quot;,&quot;Baja Verapaz&quot;],[&quot;Chimaltenango&quot;,&quot;Chimaltenango&quot;],[&quot;Chiquimula&quot;,&quot;Chiquimula&quot;],[&quot;El Progreso&quot;,&quot;El Progreso&quot;],[&quot;Escuintla&quot;,&quot;Escuintla&quot;],[&quot;Guatemala&quot;,&quot;Guatemala&quot;],[&quot;Huehuetenango&quot;,&quot;Huehuetenango&quot;],[&quot;Izabal&quot;,&quot;Izabal&quot;],[&quot;Jalapa&quot;,&quot;Jalapa&quot;],[&quot;Jutiapa&quot;,&quot;Jutiapa&quot;],[&quot;Petén&quot;,&quot;Petén&quot;],[&quot;Quetzaltenango&quot;,&quot;Quetzaltenango&quot;],[&quot;Quiché&quot;,&quot;Quiché&quot;],[&quot;Retalhuleu&quot;,&quot;Retalhuleu&quot;],[&quot;Sacatepéquez&quot;,&quot;Sacatepéquez&quot;],[&quot;San Marcos&quot;,&quot;San Marcos&quot;],[&quot;Santa Rosa&quot;,&quot;Santa Rosa&quot;],[&quot;Sololá&quot;,&quot;Sololá&quot;],[&quot;Suchitepéquez&quot;,&quot;Suchitepéquez&quot;],[&quot;Totonicapán&quot;,&quot;Totonicapán&quot;],[&quot;Zacapa&quot;,&quot;Zacapa&quot;]]">
                         Guatemala
                       </option>
                       <option value="French Guiana" data-provinces="[]">Guayana Francesa</option>
@@ -358,23 +290,17 @@
                       <option value="Haiti" data-provinces="[]">Haití</option>
                       <option value="Honduras" data-provinces="[]">Honduras</option>
                       <option value="Hungary" data-provinces="[]">Hungría</option>
-                      <option
-                        value="India"
-                        data-provinces="[[&quot;Andaman and Nicobar Islands&quot;,&quot;Islas Andamán y Nicobar&quot;],[&quot;Andhra Pradesh&quot;,&quot;Andhra Pradesh&quot;],[&quot;Arunachal Pradesh&quot;,&quot;Arunachal Pradesh&quot;],[&quot;Assam&quot;,&quot;Assam&quot;],[&quot;Bihar&quot;,&quot;Bihar&quot;],[&quot;Chandigarh&quot;,&quot;Chandigarh&quot;],[&quot;Chhattisgarh&quot;,&quot;Chhattisgarh&quot;],[&quot;Dadra and Nagar Haveli&quot;,&quot;Dadra y Nagar Haveli&quot;],[&quot;Daman and Diu&quot;,&quot;Damán y Diu&quot;],[&quot;Delhi&quot;,&quot;Delhi&quot;],[&quot;Goa&quot;,&quot;Goa&quot;],[&quot;Gujarat&quot;,&quot;Guyarat&quot;],[&quot;Haryana&quot;,&quot;Haryana&quot;],[&quot;Himachal Pradesh&quot;,&quot;Himachal Pradesh&quot;],[&quot;Jammu and Kashmir&quot;,&quot;Jammu y Cachemira&quot;],[&quot;Jharkhand&quot;,&quot;Jharkhand&quot;],[&quot;Karnataka&quot;,&quot;Karnataka&quot;],[&quot;Kerala&quot;,&quot;Kerala&quot;],[&quot;Ladakh&quot;,&quot;Ladakh&quot;],[&quot;Lakshadweep&quot;,&quot;Laquedivas&quot;],[&quot;Madhya Pradesh&quot;,&quot;Madhya Pradesh&quot;],[&quot;Maharashtra&quot;,&quot;Maharastra&quot;],[&quot;Manipur&quot;,&quot;Manipur&quot;],[&quot;Meghalaya&quot;,&quot;Megalaya&quot;],[&quot;Mizoram&quot;,&quot;Mizorán&quot;],[&quot;Nagaland&quot;,&quot;Nagaland&quot;],[&quot;Odisha&quot;,&quot;Odisha&quot;],[&quot;Puducherry&quot;,&quot;Puducherry&quot;],[&quot;Punjab&quot;,&quot;Punyab&quot;],[&quot;Rajasthan&quot;,&quot;Rajastán&quot;],[&quot;Sikkim&quot;,&quot;Sikkim&quot;],[&quot;Tamil Nadu&quot;,&quot;Tamil Nadu&quot;],[&quot;Telangana&quot;,&quot;Telingana&quot;],[&quot;Tripura&quot;,&quot;Tripura&quot;],[&quot;Uttar Pradesh&quot;,&quot;Uttar Pradesh&quot;],[&quot;Uttarakhand&quot;,&quot;Uttarakhand&quot;],[&quot;West Bengal&quot;,&quot;Bengala Occidental&quot;]]"
-                      >
+                      <option value="India"
+                        data-provinces="[[&quot;Andaman and Nicobar Islands&quot;,&quot;Islas Andamán y Nicobar&quot;],[&quot;Andhra Pradesh&quot;,&quot;Andhra Pradesh&quot;],[&quot;Arunachal Pradesh&quot;,&quot;Arunachal Pradesh&quot;],[&quot;Assam&quot;,&quot;Assam&quot;],[&quot;Bihar&quot;,&quot;Bihar&quot;],[&quot;Chandigarh&quot;,&quot;Chandigarh&quot;],[&quot;Chhattisgarh&quot;,&quot;Chhattisgarh&quot;],[&quot;Dadra and Nagar Haveli&quot;,&quot;Dadra y Nagar Haveli&quot;],[&quot;Daman and Diu&quot;,&quot;Damán y Diu&quot;],[&quot;Delhi&quot;,&quot;Delhi&quot;],[&quot;Goa&quot;,&quot;Goa&quot;],[&quot;Gujarat&quot;,&quot;Guyarat&quot;],[&quot;Haryana&quot;,&quot;Haryana&quot;],[&quot;Himachal Pradesh&quot;,&quot;Himachal Pradesh&quot;],[&quot;Jammu and Kashmir&quot;,&quot;Jammu y Cachemira&quot;],[&quot;Jharkhand&quot;,&quot;Jharkhand&quot;],[&quot;Karnataka&quot;,&quot;Karnataka&quot;],[&quot;Kerala&quot;,&quot;Kerala&quot;],[&quot;Ladakh&quot;,&quot;Ladakh&quot;],[&quot;Lakshadweep&quot;,&quot;Laquedivas&quot;],[&quot;Madhya Pradesh&quot;,&quot;Madhya Pradesh&quot;],[&quot;Maharashtra&quot;,&quot;Maharastra&quot;],[&quot;Manipur&quot;,&quot;Manipur&quot;],[&quot;Meghalaya&quot;,&quot;Megalaya&quot;],[&quot;Mizoram&quot;,&quot;Mizorán&quot;],[&quot;Nagaland&quot;,&quot;Nagaland&quot;],[&quot;Odisha&quot;,&quot;Odisha&quot;],[&quot;Puducherry&quot;,&quot;Puducherry&quot;],[&quot;Punjab&quot;,&quot;Punyab&quot;],[&quot;Rajasthan&quot;,&quot;Rajastán&quot;],[&quot;Sikkim&quot;,&quot;Sikkim&quot;],[&quot;Tamil Nadu&quot;,&quot;Tamil Nadu&quot;],[&quot;Telangana&quot;,&quot;Telingana&quot;],[&quot;Tripura&quot;,&quot;Tripura&quot;],[&quot;Uttar Pradesh&quot;,&quot;Uttar Pradesh&quot;],[&quot;Uttarakhand&quot;,&quot;Uttarakhand&quot;],[&quot;West Bengal&quot;,&quot;Bengala Occidental&quot;]]">
                         India
                       </option>
-                      <option
-                        value="Indonesia"
-                        data-provinces="[[&quot;Aceh&quot;,&quot;Aceh&quot;],[&quot;Bali&quot;,&quot;provincia de Bali&quot;],[&quot;Bangka Belitung&quot;,&quot;Bangka-Belitung&quot;],[&quot;Banten&quot;,&quot;Bantén&quot;],[&quot;Bengkulu&quot;,&quot;Bengkulu&quot;],[&quot;Gorontalo&quot;,&quot;Gorontalo&quot;],[&quot;Jakarta&quot;,&quot;Yakarta&quot;],[&quot;Jambi&quot;,&quot;Jambi&quot;],[&quot;Jawa Barat&quot;,&quot;Java Occidental&quot;],[&quot;Jawa Tengah&quot;,&quot;Java Central&quot;],[&quot;Jawa Timur&quot;,&quot;Java Oriental&quot;],[&quot;Kalimantan Barat&quot;,&quot;Borneo Occidental&quot;],[&quot;Kalimantan Selatan&quot;,&quot;Borneo Meridional&quot;],[&quot;Kalimantan Tengah&quot;,&quot;Borneo Central&quot;],[&quot;Kalimantan Timur&quot;,&quot;Kalimantan Oriental&quot;],[&quot;Kalimantan Utara&quot;,&quot;Kalimantán Septentrional&quot;],[&quot;Kepulauan Riau&quot;,&quot;Islas Riau&quot;],[&quot;Lampung&quot;,&quot;Lampung&quot;],[&quot;Maluku&quot;,&quot;Molucas&quot;],[&quot;Maluku Utara&quot;,&quot;Molucas Septentrional&quot;],[&quot;North Sumatra&quot;,&quot;Sumatra Septentrional&quot;],[&quot;Nusa Tenggara Barat&quot;,&quot;Nusatenggara Occidental&quot;],[&quot;Nusa Tenggara Timur&quot;,&quot;Nusatenggara Oriental&quot;],[&quot;Papua&quot;,&quot;Papúa&quot;],[&quot;Papua Barat&quot;,&quot;Papúa Occidental&quot;],[&quot;Riau&quot;,&quot;Riau&quot;],[&quot;South Sumatra&quot;,&quot;Sumatra Meridional&quot;],[&quot;Sulawesi Barat&quot;,&quot;Célebes Occidental&quot;],[&quot;Sulawesi Selatan&quot;,&quot;Célebes Meridional&quot;],[&quot;Sulawesi Tengah&quot;,&quot;Célebes Central&quot;],[&quot;Sulawesi Tenggara&quot;,&quot;Célebes Suroriental&quot;],[&quot;Sulawesi Utara&quot;,&quot;Célebes Septentrional&quot;],[&quot;West Sumatra&quot;,&quot;Sumatra Occidental&quot;],[&quot;Yogyakarta&quot;,&quot;Yogyakarta&quot;]]"
-                      >
+                      <option value="Indonesia"
+                        data-provinces="[[&quot;Aceh&quot;,&quot;Aceh&quot;],[&quot;Bali&quot;,&quot;provincia de Bali&quot;],[&quot;Bangka Belitung&quot;,&quot;Bangka-Belitung&quot;],[&quot;Banten&quot;,&quot;Bantén&quot;],[&quot;Bengkulu&quot;,&quot;Bengkulu&quot;],[&quot;Gorontalo&quot;,&quot;Gorontalo&quot;],[&quot;Jakarta&quot;,&quot;Yakarta&quot;],[&quot;Jambi&quot;,&quot;Jambi&quot;],[&quot;Jawa Barat&quot;,&quot;Java Occidental&quot;],[&quot;Jawa Tengah&quot;,&quot;Java Central&quot;],[&quot;Jawa Timur&quot;,&quot;Java Oriental&quot;],[&quot;Kalimantan Barat&quot;,&quot;Borneo Occidental&quot;],[&quot;Kalimantan Selatan&quot;,&quot;Borneo Meridional&quot;],[&quot;Kalimantan Tengah&quot;,&quot;Borneo Central&quot;],[&quot;Kalimantan Timur&quot;,&quot;Kalimantan Oriental&quot;],[&quot;Kalimantan Utara&quot;,&quot;Kalimantán Septentrional&quot;],[&quot;Kepulauan Riau&quot;,&quot;Islas Riau&quot;],[&quot;Lampung&quot;,&quot;Lampung&quot;],[&quot;Maluku&quot;,&quot;Molucas&quot;],[&quot;Maluku Utara&quot;,&quot;Molucas Septentrional&quot;],[&quot;North Sumatra&quot;,&quot;Sumatra Septentrional&quot;],[&quot;Nusa Tenggara Barat&quot;,&quot;Nusatenggara Occidental&quot;],[&quot;Nusa Tenggara Timur&quot;,&quot;Nusatenggara Oriental&quot;],[&quot;Papua&quot;,&quot;Papúa&quot;],[&quot;Papua Barat&quot;,&quot;Papúa Occidental&quot;],[&quot;Riau&quot;,&quot;Riau&quot;],[&quot;South Sumatra&quot;,&quot;Sumatra Meridional&quot;],[&quot;Sulawesi Barat&quot;,&quot;Célebes Occidental&quot;],[&quot;Sulawesi Selatan&quot;,&quot;Célebes Meridional&quot;],[&quot;Sulawesi Tengah&quot;,&quot;Célebes Central&quot;],[&quot;Sulawesi Tenggara&quot;,&quot;Célebes Suroriental&quot;],[&quot;Sulawesi Utara&quot;,&quot;Célebes Septentrional&quot;],[&quot;West Sumatra&quot;,&quot;Sumatra Occidental&quot;],[&quot;Yogyakarta&quot;,&quot;Yogyakarta&quot;]]">
                         Indonesia
                       </option>
                       <option value="Iraq" data-provinces="[]">Irak</option>
-                      <option
-                        value="Ireland"
-                        data-provinces="[[&quot;Carlow&quot;,&quot;Condado de Carlow&quot;],[&quot;Cavan&quot;,&quot;Condado de Cavan&quot;],[&quot;Clare&quot;,&quot;Condado de Clare&quot;],[&quot;Cork&quot;,&quot;Condado de Cork&quot;],[&quot;Donegal&quot;,&quot;Condado de Donegal&quot;],[&quot;Dublin&quot;,&quot;Condado de Dublín&quot;],[&quot;Galway&quot;,&quot;Condado de Galway&quot;],[&quot;Kerry&quot;,&quot;Condado de Kerry&quot;],[&quot;Kildare&quot;,&quot;Condado de Kildare&quot;],[&quot;Kilkenny&quot;,&quot;Condado de Kilkenny&quot;],[&quot;Laois&quot;,&quot;Condado de Laois&quot;],[&quot;Leitrim&quot;,&quot;Condado de Leitrim&quot;],[&quot;Limerick&quot;,&quot;Condado de Limerick&quot;],[&quot;Longford&quot;,&quot;Condado de Longford&quot;],[&quot;Louth&quot;,&quot;Condado de Louth&quot;],[&quot;Mayo&quot;,&quot;Condado de Mayo&quot;],[&quot;Meath&quot;,&quot;Condado de Meath&quot;],[&quot;Monaghan&quot;,&quot;Condado de Monaghan&quot;],[&quot;Offaly&quot;,&quot;Condado de Offaly&quot;],[&quot;Roscommon&quot;,&quot;Condado de Roscommon&quot;],[&quot;Sligo&quot;,&quot;Condado de Sligo&quot;],[&quot;Tipperary&quot;,&quot;Condado de Tipperary&quot;],[&quot;Waterford&quot;,&quot;Waterford&quot;],[&quot;Westmeath&quot;,&quot;Condado de Westmeath&quot;],[&quot;Wexford&quot;,&quot;Condado de Wexford&quot;],[&quot;Wicklow&quot;,&quot;Condado de Wicklow&quot;]]"
-                      >
+                      <option value="Ireland"
+                        data-provinces="[[&quot;Carlow&quot;,&quot;Condado de Carlow&quot;],[&quot;Cavan&quot;,&quot;Condado de Cavan&quot;],[&quot;Clare&quot;,&quot;Condado de Clare&quot;],[&quot;Cork&quot;,&quot;Condado de Cork&quot;],[&quot;Donegal&quot;,&quot;Condado de Donegal&quot;],[&quot;Dublin&quot;,&quot;Condado de Dublín&quot;],[&quot;Galway&quot;,&quot;Condado de Galway&quot;],[&quot;Kerry&quot;,&quot;Condado de Kerry&quot;],[&quot;Kildare&quot;,&quot;Condado de Kildare&quot;],[&quot;Kilkenny&quot;,&quot;Condado de Kilkenny&quot;],[&quot;Laois&quot;,&quot;Condado de Laois&quot;],[&quot;Leitrim&quot;,&quot;Condado de Leitrim&quot;],[&quot;Limerick&quot;,&quot;Condado de Limerick&quot;],[&quot;Longford&quot;,&quot;Condado de Longford&quot;],[&quot;Louth&quot;,&quot;Condado de Louth&quot;],[&quot;Mayo&quot;,&quot;Condado de Mayo&quot;],[&quot;Meath&quot;,&quot;Condado de Meath&quot;],[&quot;Monaghan&quot;,&quot;Condado de Monaghan&quot;],[&quot;Offaly&quot;,&quot;Condado de Offaly&quot;],[&quot;Roscommon&quot;,&quot;Condado de Roscommon&quot;],[&quot;Sligo&quot;,&quot;Condado de Sligo&quot;],[&quot;Tipperary&quot;,&quot;Condado de Tipperary&quot;],[&quot;Waterford&quot;,&quot;Waterford&quot;],[&quot;Westmeath&quot;,&quot;Condado de Westmeath&quot;],[&quot;Wexford&quot;,&quot;Condado de Wexford&quot;],[&quot;Wicklow&quot;,&quot;Condado de Wicklow&quot;]]">
                         Irlanda
                       </option>
                       <option value="Norfolk Island" data-provinces="[]">Isla Norfolk</option>
@@ -399,17 +325,13 @@
                         Islas menores alejadas de EE. UU.
                       </option>
                       <option value="Israel" data-provinces="[]">Israel</option>
-                      <option
-                        value="Italy"
-                        data-provinces="[[&quot;Agrigento&quot;,&quot;Agrigento&quot;],[&quot;Alessandria&quot;,&quot;Alessandria&quot;],[&quot;Ancona&quot;,&quot;Ancona&quot;],[&quot;Aosta&quot;,&quot;Valle de Aosta&quot;],[&quot;Arezzo&quot;,&quot;Arezzo&quot;],[&quot;Ascoli Piceno&quot;,&quot;Ascoli Piceno&quot;],[&quot;Asti&quot;,&quot;Asti&quot;],[&quot;Avellino&quot;,&quot;Avellino&quot;],[&quot;Bari&quot;,&quot;Bari&quot;],[&quot;Barletta-Andria-Trani&quot;,&quot;Barletta-Andria-Trani&quot;],[&quot;Belluno&quot;,&quot;Belluno&quot;],[&quot;Benevento&quot;,&quot;Benevento&quot;],[&quot;Bergamo&quot;,&quot;Bérgamo&quot;],[&quot;Biella&quot;,&quot;Biella&quot;],[&quot;Bologna&quot;,&quot;Bolonia&quot;],[&quot;Bolzano&quot;,&quot;Bolzano&quot;],[&quot;Brescia&quot;,&quot;Brescia&quot;],[&quot;Brindisi&quot;,&quot;Brindisi&quot;],[&quot;Cagliari&quot;,&quot;Cagliari&quot;],[&quot;Caltanissetta&quot;,&quot;Caltanissetta&quot;],[&quot;Campobasso&quot;,&quot;Campobasso&quot;],[&quot;Carbonia-Iglesias&quot;,&quot;Carbonia-Iglesias&quot;],[&quot;Caserta&quot;,&quot;Caserta&quot;],[&quot;Catania&quot;,&quot;Catania&quot;],[&quot;Catanzaro&quot;,&quot;Catanzaro&quot;],[&quot;Chieti&quot;,&quot;Chieti&quot;],[&quot;Como&quot;,&quot;Como&quot;],[&quot;Cosenza&quot;,&quot;Cosenza&quot;],[&quot;Cremona&quot;,&quot;Cremona&quot;],[&quot;Crotone&quot;,&quot;Crotona&quot;],[&quot;Cuneo&quot;,&quot;Cuneo&quot;],[&quot;Enna&quot;,&quot;Enna&quot;],[&quot;Fermo&quot;,&quot;Fermo&quot;],[&quot;Ferrara&quot;,&quot;Ferrara&quot;],[&quot;Firenze&quot;,&quot;Florencia&quot;],[&quot;Foggia&quot;,&quot;Foggia&quot;],[&quot;Forlì-Cesena&quot;,&quot;Forlì-Cesena&quot;],[&quot;Frosinone&quot;,&quot;Frosinone&quot;],[&quot;Genova&quot;,&quot;Ciudad metropolitana de Génova&quot;],[&quot;Gorizia&quot;,&quot;Gorizia&quot;],[&quot;Grosseto&quot;,&quot;Grosseto&quot;],[&quot;Imperia&quot;,&quot;Imperia&quot;],[&quot;Isernia&quot;,&quot;Isernia&quot;],[&quot;L'Aquila&quot;,&quot;L’Aquila&quot;],[&quot;La Spezia&quot;,&quot;La Spezia&quot;],[&quot;Latina&quot;,&quot;Latina&quot;],[&quot;Lecce&quot;,&quot;Lecce&quot;],[&quot;Lecco&quot;,&quot;Lecco&quot;],[&quot;Livorno&quot;,&quot;Livorno&quot;],[&quot;Lodi&quot;,&quot;Lodi&quot;],[&quot;Lucca&quot;,&quot;Lucca&quot;],[&quot;Macerata&quot;,&quot;Macerata&quot;],[&quot;Mantova&quot;,&quot;Mantua&quot;],[&quot;Massa-Carrara&quot;,&quot;Massa y Carrara&quot;],[&quot;Matera&quot;,&quot;Matera&quot;],[&quot;Medio Campidano&quot;,&quot;Medio Campidano&quot;],[&quot;Messina&quot;,&quot;Mesina&quot;],[&quot;Milano&quot;,&quot;Milán&quot;],[&quot;Modena&quot;,&quot;Módena&quot;],[&quot;Monza e Brianza&quot;,&quot;Monza y Brianza&quot;],[&quot;Napoli&quot;,&quot;Ciudad metropolitana de Nápoles&quot;],[&quot;Novara&quot;,&quot;Novara&quot;],[&quot;Nuoro&quot;,&quot;Nuoro&quot;],[&quot;Ogliastra&quot;,&quot;Ogliastra&quot;],[&quot;Olbia-Tempio&quot;,&quot;Olbia-Tempio&quot;],[&quot;Oristano&quot;,&quot;Oristán&quot;],[&quot;Padova&quot;,&quot;Padua&quot;],[&quot;Palermo&quot;,&quot;Palermo&quot;],[&quot;Parma&quot;,&quot;Parma&quot;],[&quot;Pavia&quot;,&quot;Pavía&quot;],[&quot;Perugia&quot;,&quot;Perugia&quot;],[&quot;Pesaro e Urbino&quot;,&quot;Pesaro y Urbino&quot;],[&quot;Pescara&quot;,&quot;Pescara&quot;],[&quot;Piacenza&quot;,&quot;Piacenza&quot;],[&quot;Pisa&quot;,&quot;Pisa&quot;],[&quot;Pistoia&quot;,&quot;Pistoia&quot;],[&quot;Pordenone&quot;,&quot;Pordenone&quot;],[&quot;Potenza&quot;,&quot;Potenza&quot;],[&quot;Prato&quot;,&quot;Prato&quot;],[&quot;Ragusa&quot;,&quot;Ragusa&quot;],[&quot;Ravenna&quot;,&quot;Rávena&quot;],[&quot;Reggio Calabria&quot;,&quot;Reggio Calabria&quot;],[&quot;Reggio Emilia&quot;,&quot;Reggio Emilia&quot;],[&quot;Rieti&quot;,&quot;Rieti&quot;],[&quot;Rimini&quot;,&quot;Rímini&quot;],[&quot;Roma&quot;,&quot;Roma&quot;],[&quot;Rovigo&quot;,&quot;Rovigo&quot;],[&quot;Salerno&quot;,&quot;Salerno&quot;],[&quot;Sassari&quot;,&quot;Sassari&quot;],[&quot;Savona&quot;,&quot;Savona&quot;],[&quot;Siena&quot;,&quot;Siena&quot;],[&quot;Siracusa&quot;,&quot;Siracusa&quot;],[&quot;Sondrio&quot;,&quot;Sondrio&quot;],[&quot;Taranto&quot;,&quot;Tarento&quot;],[&quot;Teramo&quot;,&quot;Teramo&quot;],[&quot;Terni&quot;,&quot;Terni&quot;],[&quot;Torino&quot;,&quot;Turín&quot;],[&quot;Trapani&quot;,&quot;Trapani&quot;],[&quot;Trento&quot;,&quot;Trento&quot;],[&quot;Treviso&quot;,&quot;Treviso&quot;],[&quot;Trieste&quot;,&quot;Trieste&quot;],[&quot;Udine&quot;,&quot;Udine&quot;],[&quot;Varese&quot;,&quot;Varese&quot;],[&quot;Venezia&quot;,&quot;Venecia&quot;],[&quot;Verbano-Cusio-Ossola&quot;,&quot;Verbano-Cusio-Ossola&quot;],[&quot;Vercelli&quot;,&quot;Vercelli&quot;],[&quot;Verona&quot;,&quot;Verona&quot;],[&quot;Vibo Valentia&quot;,&quot;Vibo Valentia&quot;],[&quot;Vicenza&quot;,&quot;Vicenza&quot;],[&quot;Viterbo&quot;,&quot;Viterbo&quot;]]"
-                      >
+                      <option value="Italy"
+                        data-provinces="[[&quot;Agrigento&quot;,&quot;Agrigento&quot;],[&quot;Alessandria&quot;,&quot;Alessandria&quot;],[&quot;Ancona&quot;,&quot;Ancona&quot;],[&quot;Aosta&quot;,&quot;Valle de Aosta&quot;],[&quot;Arezzo&quot;,&quot;Arezzo&quot;],[&quot;Ascoli Piceno&quot;,&quot;Ascoli Piceno&quot;],[&quot;Asti&quot;,&quot;Asti&quot;],[&quot;Avellino&quot;,&quot;Avellino&quot;],[&quot;Bari&quot;,&quot;Bari&quot;],[&quot;Barletta-Andria-Trani&quot;,&quot;Barletta-Andria-Trani&quot;],[&quot;Belluno&quot;,&quot;Belluno&quot;],[&quot;Benevento&quot;,&quot;Benevento&quot;],[&quot;Bergamo&quot;,&quot;Bérgamo&quot;],[&quot;Biella&quot;,&quot;Biella&quot;],[&quot;Bologna&quot;,&quot;Bolonia&quot;],[&quot;Bolzano&quot;,&quot;Bolzano&quot;],[&quot;Brescia&quot;,&quot;Brescia&quot;],[&quot;Brindisi&quot;,&quot;Brindisi&quot;],[&quot;Cagliari&quot;,&quot;Cagliari&quot;],[&quot;Caltanissetta&quot;,&quot;Caltanissetta&quot;],[&quot;Campobasso&quot;,&quot;Campobasso&quot;],[&quot;Carbonia-Iglesias&quot;,&quot;Carbonia-Iglesias&quot;],[&quot;Caserta&quot;,&quot;Caserta&quot;],[&quot;Catania&quot;,&quot;Catania&quot;],[&quot;Catanzaro&quot;,&quot;Catanzaro&quot;],[&quot;Chieti&quot;,&quot;Chieti&quot;],[&quot;Como&quot;,&quot;Como&quot;],[&quot;Cosenza&quot;,&quot;Cosenza&quot;],[&quot;Cremona&quot;,&quot;Cremona&quot;],[&quot;Crotone&quot;,&quot;Crotona&quot;],[&quot;Cuneo&quot;,&quot;Cuneo&quot;],[&quot;Enna&quot;,&quot;Enna&quot;],[&quot;Fermo&quot;,&quot;Fermo&quot;],[&quot;Ferrara&quot;,&quot;Ferrara&quot;],[&quot;Firenze&quot;,&quot;Florencia&quot;],[&quot;Foggia&quot;,&quot;Foggia&quot;],[&quot;Forlì-Cesena&quot;,&quot;Forlì-Cesena&quot;],[&quot;Frosinone&quot;,&quot;Frosinone&quot;],[&quot;Genova&quot;,&quot;Ciudad metropolitana de Génova&quot;],[&quot;Gorizia&quot;,&quot;Gorizia&quot;],[&quot;Grosseto&quot;,&quot;Grosseto&quot;],[&quot;Imperia&quot;,&quot;Imperia&quot;],[&quot;Isernia&quot;,&quot;Isernia&quot;],[&quot;L'Aquila&quot;,&quot;L’Aquila&quot;],[&quot;La Spezia&quot;,&quot;La Spezia&quot;],[&quot;Latina&quot;,&quot;Latina&quot;],[&quot;Lecce&quot;,&quot;Lecce&quot;],[&quot;Lecco&quot;,&quot;Lecco&quot;],[&quot;Livorno&quot;,&quot;Livorno&quot;],[&quot;Lodi&quot;,&quot;Lodi&quot;],[&quot;Lucca&quot;,&quot;Lucca&quot;],[&quot;Macerata&quot;,&quot;Macerata&quot;],[&quot;Mantova&quot;,&quot;Mantua&quot;],[&quot;Massa-Carrara&quot;,&quot;Massa y Carrara&quot;],[&quot;Matera&quot;,&quot;Matera&quot;],[&quot;Medio Campidano&quot;,&quot;Medio Campidano&quot;],[&quot;Messina&quot;,&quot;Mesina&quot;],[&quot;Milano&quot;,&quot;Milán&quot;],[&quot;Modena&quot;,&quot;Módena&quot;],[&quot;Monza e Brianza&quot;,&quot;Monza y Brianza&quot;],[&quot;Napoli&quot;,&quot;Ciudad metropolitana de Nápoles&quot;],[&quot;Novara&quot;,&quot;Novara&quot;],[&quot;Nuoro&quot;,&quot;Nuoro&quot;],[&quot;Ogliastra&quot;,&quot;Ogliastra&quot;],[&quot;Olbia-Tempio&quot;,&quot;Olbia-Tempio&quot;],[&quot;Oristano&quot;,&quot;Oristán&quot;],[&quot;Padova&quot;,&quot;Padua&quot;],[&quot;Palermo&quot;,&quot;Palermo&quot;],[&quot;Parma&quot;,&quot;Parma&quot;],[&quot;Pavia&quot;,&quot;Pavía&quot;],[&quot;Perugia&quot;,&quot;Perugia&quot;],[&quot;Pesaro e Urbino&quot;,&quot;Pesaro y Urbino&quot;],[&quot;Pescara&quot;,&quot;Pescara&quot;],[&quot;Piacenza&quot;,&quot;Piacenza&quot;],[&quot;Pisa&quot;,&quot;Pisa&quot;],[&quot;Pistoia&quot;,&quot;Pistoia&quot;],[&quot;Pordenone&quot;,&quot;Pordenone&quot;],[&quot;Potenza&quot;,&quot;Potenza&quot;],[&quot;Prato&quot;,&quot;Prato&quot;],[&quot;Ragusa&quot;,&quot;Ragusa&quot;],[&quot;Ravenna&quot;,&quot;Rávena&quot;],[&quot;Reggio Calabria&quot;,&quot;Reggio Calabria&quot;],[&quot;Reggio Emilia&quot;,&quot;Reggio Emilia&quot;],[&quot;Rieti&quot;,&quot;Rieti&quot;],[&quot;Rimini&quot;,&quot;Rímini&quot;],[&quot;Roma&quot;,&quot;Roma&quot;],[&quot;Rovigo&quot;,&quot;Rovigo&quot;],[&quot;Salerno&quot;,&quot;Salerno&quot;],[&quot;Sassari&quot;,&quot;Sassari&quot;],[&quot;Savona&quot;,&quot;Savona&quot;],[&quot;Siena&quot;,&quot;Siena&quot;],[&quot;Siracusa&quot;,&quot;Siracusa&quot;],[&quot;Sondrio&quot;,&quot;Sondrio&quot;],[&quot;Taranto&quot;,&quot;Tarento&quot;],[&quot;Teramo&quot;,&quot;Teramo&quot;],[&quot;Terni&quot;,&quot;Terni&quot;],[&quot;Torino&quot;,&quot;Turín&quot;],[&quot;Trapani&quot;,&quot;Trapani&quot;],[&quot;Trento&quot;,&quot;Trento&quot;],[&quot;Treviso&quot;,&quot;Treviso&quot;],[&quot;Trieste&quot;,&quot;Trieste&quot;],[&quot;Udine&quot;,&quot;Udine&quot;],[&quot;Varese&quot;,&quot;Varese&quot;],[&quot;Venezia&quot;,&quot;Venecia&quot;],[&quot;Verbano-Cusio-Ossola&quot;,&quot;Verbano-Cusio-Ossola&quot;],[&quot;Vercelli&quot;,&quot;Vercelli&quot;],[&quot;Verona&quot;,&quot;Verona&quot;],[&quot;Vibo Valentia&quot;,&quot;Vibo Valentia&quot;],[&quot;Vicenza&quot;,&quot;Vicenza&quot;],[&quot;Viterbo&quot;,&quot;Viterbo&quot;]]">
                         Italia
                       </option>
                       <option value="Jamaica" data-provinces="[]">Jamaica</option>
-                      <option
-                        value="Japan"
-                        data-provinces="[[&quot;Aichi&quot;,&quot;Prefectura de Aichi&quot;],[&quot;Akita&quot;,&quot;Akita&quot;],[&quot;Aomori&quot;,&quot;Prefectura de Aomori&quot;],[&quot;Chiba&quot;,&quot;Chiba&quot;],[&quot;Ehime&quot;,&quot;Prefectura de Ehime&quot;],[&quot;Fukui&quot;,&quot;Prefectura de Fukui&quot;],[&quot;Fukuoka&quot;,&quot;Prefectura de Fukuoka&quot;],[&quot;Fukushima&quot;,&quot;Prefectura de Fukushima&quot;],[&quot;Gifu&quot;,&quot;Prefectura de Gifu&quot;],[&quot;Gunma&quot;,&quot;Prefectura de Gunma&quot;],[&quot;Hiroshima&quot;,&quot;Prefectura de Hiroshima&quot;],[&quot;Hokkaidō&quot;,&quot;Hokkaidō&quot;],[&quot;Hyōgo&quot;,&quot;Prefectura de Hyōgo&quot;],[&quot;Ibaraki&quot;,&quot;Prefectura de Ibaraki&quot;],[&quot;Ishikawa&quot;,&quot;Prefectura de Ishikawa&quot;],[&quot;Iwate&quot;,&quot;Prefectura de Iwate&quot;],[&quot;Kagawa&quot;,&quot;Prefectura de Kagawa&quot;],[&quot;Kagoshima&quot;,&quot;Kagoshima&quot;],[&quot;Kanagawa&quot;,&quot;Prefectura de Kanagawa&quot;],[&quot;Kumamoto&quot;,&quot;Prefectura de Kumamoto&quot;],[&quot;Kyōto&quot;,&quot;Prefectura de Kioto&quot;],[&quot;Kōchi&quot;,&quot;Prefectura de Kōchi&quot;],[&quot;Mie&quot;,&quot;Prefectura de Mie&quot;],[&quot;Miyagi&quot;,&quot;Miyagi&quot;],[&quot;Miyazaki&quot;,&quot;Prefectura de Miyazaki&quot;],[&quot;Nagano&quot;,&quot;Prefectura de Nagano&quot;],[&quot;Nagasaki&quot;,&quot;Prefectura de Nagasaki&quot;],[&quot;Nara&quot;,&quot;Prefectura de Nara&quot;],[&quot;Niigata&quot;,&quot;Prefectura de Niigata&quot;],[&quot;Okayama&quot;,&quot;Prefectura de Okayama&quot;],[&quot;Okinawa&quot;,&quot;Prefectura de Okinawa&quot;],[&quot;Saga&quot;,&quot;Prefectura de Saga&quot;],[&quot;Saitama&quot;,&quot;Prefectura de Saitama&quot;],[&quot;Shiga&quot;,&quot;Prefectura de Shiga&quot;],[&quot;Shimane&quot;,&quot;Prefectura de Shimane&quot;],[&quot;Shizuoka&quot;,&quot;Prefectura de Shizuoka&quot;],[&quot;Tochigi&quot;,&quot;Prefectura de Tochigi&quot;],[&quot;Tokushima&quot;,&quot;Prefectura de Tokushima&quot;],[&quot;Tottori&quot;,&quot;Prefectura de Tottori&quot;],[&quot;Toyama&quot;,&quot;Prefectura de Toyama&quot;],[&quot;Tōkyō&quot;,&quot;Tokio&quot;],[&quot;Wakayama&quot;,&quot;Prefectura de Wakayama&quot;],[&quot;Yamagata&quot;,&quot;Prefectura de Yamagata&quot;],[&quot;Yamaguchi&quot;,&quot;Prefectura de Yamaguchi&quot;],[&quot;Yamanashi&quot;,&quot;Prefectura de Yamanashi&quot;],[&quot;Ōita&quot;,&quot;Prefectura de Ōita&quot;],[&quot;Ōsaka&quot;,&quot;Prefectura de Osaka&quot;]]"
-                      >
+                      <option value="Japan"
+                        data-provinces="[[&quot;Aichi&quot;,&quot;Prefectura de Aichi&quot;],[&quot;Akita&quot;,&quot;Akita&quot;],[&quot;Aomori&quot;,&quot;Prefectura de Aomori&quot;],[&quot;Chiba&quot;,&quot;Chiba&quot;],[&quot;Ehime&quot;,&quot;Prefectura de Ehime&quot;],[&quot;Fukui&quot;,&quot;Prefectura de Fukui&quot;],[&quot;Fukuoka&quot;,&quot;Prefectura de Fukuoka&quot;],[&quot;Fukushima&quot;,&quot;Prefectura de Fukushima&quot;],[&quot;Gifu&quot;,&quot;Prefectura de Gifu&quot;],[&quot;Gunma&quot;,&quot;Prefectura de Gunma&quot;],[&quot;Hiroshima&quot;,&quot;Prefectura de Hiroshima&quot;],[&quot;Hokkaidō&quot;,&quot;Hokkaidō&quot;],[&quot;Hyōgo&quot;,&quot;Prefectura de Hyōgo&quot;],[&quot;Ibaraki&quot;,&quot;Prefectura de Ibaraki&quot;],[&quot;Ishikawa&quot;,&quot;Prefectura de Ishikawa&quot;],[&quot;Iwate&quot;,&quot;Prefectura de Iwate&quot;],[&quot;Kagawa&quot;,&quot;Prefectura de Kagawa&quot;],[&quot;Kagoshima&quot;,&quot;Kagoshima&quot;],[&quot;Kanagawa&quot;,&quot;Prefectura de Kanagawa&quot;],[&quot;Kumamoto&quot;,&quot;Prefectura de Kumamoto&quot;],[&quot;Kyōto&quot;,&quot;Prefectura de Kioto&quot;],[&quot;Kōchi&quot;,&quot;Prefectura de Kōchi&quot;],[&quot;Mie&quot;,&quot;Prefectura de Mie&quot;],[&quot;Miyagi&quot;,&quot;Miyagi&quot;],[&quot;Miyazaki&quot;,&quot;Prefectura de Miyazaki&quot;],[&quot;Nagano&quot;,&quot;Prefectura de Nagano&quot;],[&quot;Nagasaki&quot;,&quot;Prefectura de Nagasaki&quot;],[&quot;Nara&quot;,&quot;Prefectura de Nara&quot;],[&quot;Niigata&quot;,&quot;Prefectura de Niigata&quot;],[&quot;Okayama&quot;,&quot;Prefectura de Okayama&quot;],[&quot;Okinawa&quot;,&quot;Prefectura de Okinawa&quot;],[&quot;Saga&quot;,&quot;Prefectura de Saga&quot;],[&quot;Saitama&quot;,&quot;Prefectura de Saitama&quot;],[&quot;Shiga&quot;,&quot;Prefectura de Shiga&quot;],[&quot;Shimane&quot;,&quot;Prefectura de Shimane&quot;],[&quot;Shizuoka&quot;,&quot;Prefectura de Shizuoka&quot;],[&quot;Tochigi&quot;,&quot;Prefectura de Tochigi&quot;],[&quot;Tokushima&quot;,&quot;Prefectura de Tokushima&quot;],[&quot;Tottori&quot;,&quot;Prefectura de Tottori&quot;],[&quot;Toyama&quot;,&quot;Prefectura de Toyama&quot;],[&quot;Tōkyō&quot;,&quot;Tokio&quot;],[&quot;Wakayama&quot;,&quot;Prefectura de Wakayama&quot;],[&quot;Yamagata&quot;,&quot;Prefectura de Yamagata&quot;],[&quot;Yamaguchi&quot;,&quot;Prefectura de Yamaguchi&quot;],[&quot;Yamanashi&quot;,&quot;Prefectura de Yamanashi&quot;],[&quot;Ōita&quot;,&quot;Prefectura de Ōita&quot;],[&quot;Ōsaka&quot;,&quot;Prefectura de Osaka&quot;]]">
                         Japón
                       </option>
                       <option value="Jersey" data-provinces="[]">Jersey</option>
@@ -419,10 +341,8 @@
                       <option value="Kyrgyzstan" data-provinces="[]">Kirguistán</option>
                       <option value="Kiribati" data-provinces="[]">Kiribati</option>
                       <option value="Kosovo" data-provinces="[]">Kosovo</option>
-                      <option
-                        value="Kuwait"
-                        data-provinces="[[&quot;Al Ahmadi&quot;,&quot;Ahmadí&quot;],[&quot;Al Asimah&quot;,&quot;Capital&quot;],[&quot;Al Farwaniyah&quot;,&quot;Al Farwaniyah&quot;],[&quot;Al Jahra&quot;,&quot;Yahra&quot;],[&quot;Hawalli&quot;,&quot;Hawalli&quot;],[&quot;Mubarak Al-Kabeer&quot;,&quot;Gobernación de Mubarak el Grande&quot;]]"
-                      >
+                      <option value="Kuwait"
+                        data-provinces="[[&quot;Al Ahmadi&quot;,&quot;Ahmadí&quot;],[&quot;Al Asimah&quot;,&quot;Capital&quot;],[&quot;Al Farwaniyah&quot;,&quot;Al Farwaniyah&quot;],[&quot;Al Jahra&quot;,&quot;Yahra&quot;],[&quot;Hawalli&quot;,&quot;Hawalli&quot;],[&quot;Mubarak Al-Kabeer&quot;,&quot;Gobernación de Mubarak el Grande&quot;]]">
                         Kuwait
                       </option>
                       <option value="Lao People's Democratic Republic" data-provinces="[]">Laos</option>
@@ -436,10 +356,8 @@
                       <option value="Luxembourg" data-provinces="[]">Luxemburgo</option>
                       <option value="North Macedonia" data-provinces="[]">Macedonia del Norte</option>
                       <option value="Madagascar" data-provinces="[]">Madagascar</option>
-                      <option
-                        value="Malaysia"
-                        data-provinces="[[&quot;Johor&quot;,&quot;Johor&quot;],[&quot;Kedah&quot;,&quot;Kedah&quot;],[&quot;Kelantan&quot;,&quot;Kelantan&quot;],[&quot;Kuala Lumpur&quot;,&quot;Kuala Lumpur&quot;],[&quot;Labuan&quot;,&quot;Labuan&quot;],[&quot;Melaka&quot;,&quot;Malaca&quot;],[&quot;Negeri Sembilan&quot;,&quot;Negeri Sembilan&quot;],[&quot;Pahang&quot;,&quot;Pahang&quot;],[&quot;Penang&quot;,&quot;Penang&quot;],[&quot;Perak&quot;,&quot;Perak&quot;],[&quot;Perlis&quot;,&quot;Perlis&quot;],[&quot;Putrajaya&quot;,&quot;Putrajaya&quot;],[&quot;Sabah&quot;,&quot;Sabah&quot;],[&quot;Sarawak&quot;,&quot;Sarawak&quot;],[&quot;Selangor&quot;,&quot;Selangor&quot;],[&quot;Terengganu&quot;,&quot;Terengganu&quot;]]"
-                      >
+                      <option value="Malaysia"
+                        data-provinces="[[&quot;Johor&quot;,&quot;Johor&quot;],[&quot;Kedah&quot;,&quot;Kedah&quot;],[&quot;Kelantan&quot;,&quot;Kelantan&quot;],[&quot;Kuala Lumpur&quot;,&quot;Kuala Lumpur&quot;],[&quot;Labuan&quot;,&quot;Labuan&quot;],[&quot;Melaka&quot;,&quot;Malaca&quot;],[&quot;Negeri Sembilan&quot;,&quot;Negeri Sembilan&quot;],[&quot;Pahang&quot;,&quot;Pahang&quot;],[&quot;Penang&quot;,&quot;Penang&quot;],[&quot;Perak&quot;,&quot;Perak&quot;],[&quot;Perlis&quot;,&quot;Perlis&quot;],[&quot;Putrajaya&quot;,&quot;Putrajaya&quot;],[&quot;Sabah&quot;,&quot;Sabah&quot;],[&quot;Sarawak&quot;,&quot;Sarawak&quot;],[&quot;Selangor&quot;,&quot;Selangor&quot;],[&quot;Terengganu&quot;,&quot;Terengganu&quot;]]">
                         Malasia
                       </option>
                       <option value="Malawi" data-provinces="[]">Malaui</option>
@@ -451,10 +369,8 @@
                       <option value="Mauritius" data-provinces="[]">Mauricio</option>
                       <option value="Mauritania" data-provinces="[]">Mauritania</option>
                       <option value="Mayotte" data-provinces="[]">Mayotte</option>
-                      <option
-                        value="Mexico"
-                        data-provinces="[[&quot;Aguascalientes&quot;,&quot;Aguascalientes&quot;],[&quot;Baja California&quot;,&quot;Baja California&quot;],[&quot;Baja California Sur&quot;,&quot;Baja California Sur&quot;],[&quot;Campeche&quot;,&quot;Campeche&quot;],[&quot;Chiapas&quot;,&quot;Chiapas&quot;],[&quot;Chihuahua&quot;,&quot;Chihuahua&quot;],[&quot;Ciudad de México&quot;,&quot;Ciudad de México&quot;],[&quot;Coahuila&quot;,&quot;Coahuila de Zaragoza&quot;],[&quot;Colima&quot;,&quot;Colima&quot;],[&quot;Durango&quot;,&quot;Durango&quot;],[&quot;Guanajuato&quot;,&quot;Guanajuato&quot;],[&quot;Guerrero&quot;,&quot;Estado de Guerrero&quot;],[&quot;Hidalgo&quot;,&quot;Estado de Hidalgo&quot;],[&quot;Jalisco&quot;,&quot;Jalisco&quot;],[&quot;Michoacán&quot;,&quot;Michoacán&quot;],[&quot;Morelos&quot;,&quot;Morelos&quot;],[&quot;México&quot;,&quot;Estado de México&quot;],[&quot;Nayarit&quot;,&quot;Nayarit&quot;],[&quot;Nuevo León&quot;,&quot;Nuevo León&quot;],[&quot;Oaxaca&quot;,&quot;Oaxaca&quot;],[&quot;Puebla&quot;,&quot;Puebla&quot;],[&quot;Querétaro&quot;,&quot;Querétaro&quot;],[&quot;Quintana Roo&quot;,&quot;Quintana Roo&quot;],[&quot;San Luis Potosí&quot;,&quot;San Luis Potosí&quot;],[&quot;Sinaloa&quot;,&quot;Sinaloa&quot;],[&quot;Sonora&quot;,&quot;Sonora&quot;],[&quot;Tabasco&quot;,&quot;Tabasco&quot;],[&quot;Tamaulipas&quot;,&quot;Tamaulipas&quot;],[&quot;Tlaxcala&quot;,&quot;Tlaxcala&quot;],[&quot;Veracruz&quot;,&quot;Veracruz&quot;],[&quot;Yucatán&quot;,&quot;Yucatán&quot;],[&quot;Zacatecas&quot;,&quot;Zacatecas&quot;]]"
-                      >
+                      <option value="Mexico"
+                        data-provinces="[[&quot;Aguascalientes&quot;,&quot;Aguascalientes&quot;],[&quot;Baja California&quot;,&quot;Baja California&quot;],[&quot;Baja California Sur&quot;,&quot;Baja California Sur&quot;],[&quot;Campeche&quot;,&quot;Campeche&quot;],[&quot;Chiapas&quot;,&quot;Chiapas&quot;],[&quot;Chihuahua&quot;,&quot;Chihuahua&quot;],[&quot;Ciudad de México&quot;,&quot;Ciudad de México&quot;],[&quot;Coahuila&quot;,&quot;Coahuila de Zaragoza&quot;],[&quot;Colima&quot;,&quot;Colima&quot;],[&quot;Durango&quot;,&quot;Durango&quot;],[&quot;Guanajuato&quot;,&quot;Guanajuato&quot;],[&quot;Guerrero&quot;,&quot;Estado de Guerrero&quot;],[&quot;Hidalgo&quot;,&quot;Estado de Hidalgo&quot;],[&quot;Jalisco&quot;,&quot;Jalisco&quot;],[&quot;Michoacán&quot;,&quot;Michoacán&quot;],[&quot;Morelos&quot;,&quot;Morelos&quot;],[&quot;México&quot;,&quot;Estado de México&quot;],[&quot;Nayarit&quot;,&quot;Nayarit&quot;],[&quot;Nuevo León&quot;,&quot;Nuevo León&quot;],[&quot;Oaxaca&quot;,&quot;Oaxaca&quot;],[&quot;Puebla&quot;,&quot;Puebla&quot;],[&quot;Querétaro&quot;,&quot;Querétaro&quot;],[&quot;Quintana Roo&quot;,&quot;Quintana Roo&quot;],[&quot;San Luis Potosí&quot;,&quot;San Luis Potosí&quot;],[&quot;Sinaloa&quot;,&quot;Sinaloa&quot;],[&quot;Sonora&quot;,&quot;Sonora&quot;],[&quot;Tabasco&quot;,&quot;Tabasco&quot;],[&quot;Tamaulipas&quot;,&quot;Tamaulipas&quot;],[&quot;Tlaxcala&quot;,&quot;Tlaxcala&quot;],[&quot;Veracruz&quot;,&quot;Veracruz&quot;],[&quot;Yucatán&quot;,&quot;Yucatán&quot;],[&quot;Zacatecas&quot;,&quot;Zacatecas&quot;]]">
                         México
                       </option>
                       <option value="Moldova, Republic of" data-provinces="[]">Moldavia</option>
@@ -469,57 +385,43 @@
                       <option value="Nepal" data-provinces="[]">Nepal</option>
                       <option value="Nicaragua" data-provinces="[]">Nicaragua</option>
                       <option value="Niger" data-provinces="[]">Níger</option>
-                      <option
-                        value="Nigeria"
-                        data-provinces="[[&quot;Abia&quot;,&quot;Abia (estado)&quot;],[&quot;Abuja Federal Capital Territory&quot;,&quot;Territorio de la Capital Federal&quot;],[&quot;Adamawa&quot;,&quot;Adamawa&quot;],[&quot;Akwa Ibom&quot;,&quot;Akwa Ibom&quot;],[&quot;Anambra&quot;,&quot;Anambra&quot;],[&quot;Bauchi&quot;,&quot;Bauchi&quot;],[&quot;Bayelsa&quot;,&quot;Bayelsa&quot;],[&quot;Benue&quot;,&quot;Benue&quot;],[&quot;Borno&quot;,&quot;Borno&quot;],[&quot;Cross River&quot;,&quot;Cross River&quot;],[&quot;Delta&quot;,&quot;Delta&quot;],[&quot;Ebonyi&quot;,&quot;Ebonyi&quot;],[&quot;Edo&quot;,&quot;Edo&quot;],[&quot;Ekiti&quot;,&quot;Ekiti&quot;],[&quot;Enugu&quot;,&quot;Enugu&quot;],[&quot;Gombe&quot;,&quot;Gombe&quot;],[&quot;Imo&quot;,&quot;Imo&quot;],[&quot;Jigawa&quot;,&quot;Jigawa&quot;],[&quot;Kaduna&quot;,&quot;Kaduna&quot;],[&quot;Kano&quot;,&quot;Estado de Kano&quot;],[&quot;Katsina&quot;,&quot;Katsina&quot;],[&quot;Kebbi&quot;,&quot;Kebbi&quot;],[&quot;Kogi&quot;,&quot;Kogi&quot;],[&quot;Kwara&quot;,&quot;Kwara&quot;],[&quot;Lagos&quot;,&quot;Estado de Lagos&quot;],[&quot;Nasarawa&quot;,&quot;Nasarawa&quot;],[&quot;Niger&quot;,&quot;Níger&quot;],[&quot;Ogun&quot;,&quot;Ogun&quot;],[&quot;Ondo&quot;,&quot;Ondo&quot;],[&quot;Osun&quot;,&quot;Osun&quot;],[&quot;Oyo&quot;,&quot;Oyo&quot;],[&quot;Plateau&quot;,&quot;Plateau&quot;],[&quot;Rivers&quot;,&quot;Rivers&quot;],[&quot;Sokoto&quot;,&quot;Sokoto&quot;],[&quot;Taraba&quot;,&quot;Taraba&quot;],[&quot;Yobe&quot;,&quot;Yobe&quot;],[&quot;Zamfara&quot;,&quot;Zamfara&quot;]]"
-                      >
+                      <option value="Nigeria"
+                        data-provinces="[[&quot;Abia&quot;,&quot;Abia (estado)&quot;],[&quot;Abuja Federal Capital Territory&quot;,&quot;Territorio de la Capital Federal&quot;],[&quot;Adamawa&quot;,&quot;Adamawa&quot;],[&quot;Akwa Ibom&quot;,&quot;Akwa Ibom&quot;],[&quot;Anambra&quot;,&quot;Anambra&quot;],[&quot;Bauchi&quot;,&quot;Bauchi&quot;],[&quot;Bayelsa&quot;,&quot;Bayelsa&quot;],[&quot;Benue&quot;,&quot;Benue&quot;],[&quot;Borno&quot;,&quot;Borno&quot;],[&quot;Cross River&quot;,&quot;Cross River&quot;],[&quot;Delta&quot;,&quot;Delta&quot;],[&quot;Ebonyi&quot;,&quot;Ebonyi&quot;],[&quot;Edo&quot;,&quot;Edo&quot;],[&quot;Ekiti&quot;,&quot;Ekiti&quot;],[&quot;Enugu&quot;,&quot;Enugu&quot;],[&quot;Gombe&quot;,&quot;Gombe&quot;],[&quot;Imo&quot;,&quot;Imo&quot;],[&quot;Jigawa&quot;,&quot;Jigawa&quot;],[&quot;Kaduna&quot;,&quot;Kaduna&quot;],[&quot;Kano&quot;,&quot;Estado de Kano&quot;],[&quot;Katsina&quot;,&quot;Katsina&quot;],[&quot;Kebbi&quot;,&quot;Kebbi&quot;],[&quot;Kogi&quot;,&quot;Kogi&quot;],[&quot;Kwara&quot;,&quot;Kwara&quot;],[&quot;Lagos&quot;,&quot;Estado de Lagos&quot;],[&quot;Nasarawa&quot;,&quot;Nasarawa&quot;],[&quot;Niger&quot;,&quot;Níger&quot;],[&quot;Ogun&quot;,&quot;Ogun&quot;],[&quot;Ondo&quot;,&quot;Ondo&quot;],[&quot;Osun&quot;,&quot;Osun&quot;],[&quot;Oyo&quot;,&quot;Oyo&quot;],[&quot;Plateau&quot;,&quot;Plateau&quot;],[&quot;Rivers&quot;,&quot;Rivers&quot;],[&quot;Sokoto&quot;,&quot;Sokoto&quot;],[&quot;Taraba&quot;,&quot;Taraba&quot;],[&quot;Yobe&quot;,&quot;Yobe&quot;],[&quot;Zamfara&quot;,&quot;Zamfara&quot;]]">
                         Nigeria
                       </option>
                       <option value="Niue" data-provinces="[]">Niue</option>
                       <option value="Norway" data-provinces="[]">Noruega</option>
                       <option value="New Caledonia" data-provinces="[]">Nueva Caledonia</option>
-                      <option
-                        value="New Zealand"
-                        data-provinces="[[&quot;Auckland&quot;,&quot;Región de Auckland&quot;],[&quot;Bay of Plenty&quot;,&quot;Bay of Plenty&quot;],[&quot;Canterbury&quot;,&quot;Canterbury&quot;],[&quot;Chatham Islands&quot;,&quot;Islas Chatham&quot;],[&quot;Gisborne&quot;,&quot;Gisborne&quot;],[&quot;Hawke's Bay&quot;,&quot;Hawke’s Bay&quot;],[&quot;Manawatu-Wanganui&quot;,&quot;Manawatu-Wanganui&quot;],[&quot;Marlborough&quot;,&quot;Marlborough&quot;],[&quot;Nelson&quot;,&quot;Nelson&quot;],[&quot;Northland&quot;,&quot;Northland&quot;],[&quot;Otago&quot;,&quot;Otago&quot;],[&quot;Southland&quot;,&quot;Southland&quot;],[&quot;Taranaki&quot;,&quot;Taranaki&quot;],[&quot;Tasman&quot;,&quot;Tasman&quot;],[&quot;Waikato&quot;,&quot;Waikato&quot;],[&quot;Wellington&quot;,&quot;Región de Wellington&quot;],[&quot;West Coast&quot;,&quot;West Coast&quot;]]"
-                      >
+                      <option value="New Zealand"
+                        data-provinces="[[&quot;Auckland&quot;,&quot;Región de Auckland&quot;],[&quot;Bay of Plenty&quot;,&quot;Bay of Plenty&quot;],[&quot;Canterbury&quot;,&quot;Canterbury&quot;],[&quot;Chatham Islands&quot;,&quot;Islas Chatham&quot;],[&quot;Gisborne&quot;,&quot;Gisborne&quot;],[&quot;Hawke's Bay&quot;,&quot;Hawke’s Bay&quot;],[&quot;Manawatu-Wanganui&quot;,&quot;Manawatu-Wanganui&quot;],[&quot;Marlborough&quot;,&quot;Marlborough&quot;],[&quot;Nelson&quot;,&quot;Nelson&quot;],[&quot;Northland&quot;,&quot;Northland&quot;],[&quot;Otago&quot;,&quot;Otago&quot;],[&quot;Southland&quot;,&quot;Southland&quot;],[&quot;Taranaki&quot;,&quot;Taranaki&quot;],[&quot;Tasman&quot;,&quot;Tasman&quot;],[&quot;Waikato&quot;,&quot;Waikato&quot;],[&quot;Wellington&quot;,&quot;Región de Wellington&quot;],[&quot;West Coast&quot;,&quot;West Coast&quot;]]">
                         Nueva Zelanda
                       </option>
                       <option value="Oman" data-provinces="[]">Omán</option>
                       <option value="Netherlands" data-provinces="[]">Países Bajos</option>
                       <option value="Pakistan" data-provinces="[]">Pakistán</option>
-                      <option
-                        value="Panama"
-                        data-provinces="[[&quot;Bocas del Toro&quot;,&quot;Bocas del Toro&quot;],[&quot;Chiriquí&quot;,&quot;Chiriquí&quot;],[&quot;Coclé&quot;,&quot;Coclé&quot;],[&quot;Colón&quot;,&quot;Colón&quot;],[&quot;Darién&quot;,&quot;Darién&quot;],[&quot;Emberá&quot;,&quot;Emberá-Wounaan&quot;],[&quot;Herrera&quot;,&quot;Herrera&quot;],[&quot;Kuna Yala&quot;,&quot;Guna Yala&quot;],[&quot;Los Santos&quot;,&quot;Los Santos&quot;],[&quot;Ngöbe-Buglé&quot;,&quot;Ngäbe-Buglé&quot;],[&quot;Panamá&quot;,&quot;Panamá&quot;],[&quot;Panamá Oeste&quot;,&quot;Panamá Oeste&quot;],[&quot;Veraguas&quot;,&quot;Veraguas&quot;]]"
-                      >
+                      <option value="Panama"
+                        data-provinces="[[&quot;Bocas del Toro&quot;,&quot;Bocas del Toro&quot;],[&quot;Chiriquí&quot;,&quot;Chiriquí&quot;],[&quot;Coclé&quot;,&quot;Coclé&quot;],[&quot;Colón&quot;,&quot;Colón&quot;],[&quot;Darién&quot;,&quot;Darién&quot;],[&quot;Emberá&quot;,&quot;Emberá-Wounaan&quot;],[&quot;Herrera&quot;,&quot;Herrera&quot;],[&quot;Kuna Yala&quot;,&quot;Guna Yala&quot;],[&quot;Los Santos&quot;,&quot;Los Santos&quot;],[&quot;Ngöbe-Buglé&quot;,&quot;Ngäbe-Buglé&quot;],[&quot;Panamá&quot;,&quot;Panamá&quot;],[&quot;Panamá Oeste&quot;,&quot;Panamá Oeste&quot;],[&quot;Veraguas&quot;,&quot;Veraguas&quot;]]">
                         Panamá
                       </option>
                       <option value="Papua New Guinea" data-provinces="[]">Papúa Nueva Guinea</option>
                       <option value="Paraguay" data-provinces="[]">Paraguay</option>
-                      <option
-                        value="Peru"
-                        data-provinces="[[&quot;Amazonas&quot;,&quot;Amazonas&quot;],[&quot;Apurímac&quot;,&quot;Apurímac&quot;],[&quot;Arequipa&quot;,&quot;Arequipa&quot;],[&quot;Ayacucho&quot;,&quot;Ayacucho&quot;],[&quot;Cajamarca&quot;,&quot;Cajamarca&quot;],[&quot;Callao&quot;,&quot;Callao&quot;],[&quot;Cuzco&quot;,&quot;Cuzco&quot;],[&quot;Huancavelica&quot;,&quot;Huancavelica&quot;],[&quot;Huánuco&quot;,&quot;Huánuco&quot;],[&quot;Ica&quot;,&quot;Ica&quot;],[&quot;Junín&quot;,&quot;Junín&quot;],[&quot;La Libertad&quot;,&quot;La Libertad&quot;],[&quot;Lambayeque&quot;,&quot;Lambayeque&quot;],[&quot;Lima (departamento)&quot;,&quot;Lima (Departamento)&quot;],[&quot;Lima (provincia)&quot;,&quot;Lima (Metropolitana)&quot;],[&quot;Loreto&quot;,&quot;Loreto&quot;],[&quot;Madre de Dios&quot;,&quot;Madre de Dios&quot;],[&quot;Moquegua&quot;,&quot;Moquegua&quot;],[&quot;Pasco&quot;,&quot;Pasco&quot;],[&quot;Piura&quot;,&quot;Piura&quot;],[&quot;Puno&quot;,&quot;Puno&quot;],[&quot;San Martín&quot;,&quot;San Martín&quot;],[&quot;Tacna&quot;,&quot;Tacna&quot;],[&quot;Tumbes&quot;,&quot;Tumbes&quot;],[&quot;Ucayali&quot;,&quot;Ucayali&quot;],[&quot;Áncash&quot;,&quot;Áncash&quot;]]"
-                      >
+                      <option value="Peru"
+                        data-provinces="[[&quot;Amazonas&quot;,&quot;Amazonas&quot;],[&quot;Apurímac&quot;,&quot;Apurímac&quot;],[&quot;Arequipa&quot;,&quot;Arequipa&quot;],[&quot;Ayacucho&quot;,&quot;Ayacucho&quot;],[&quot;Cajamarca&quot;,&quot;Cajamarca&quot;],[&quot;Callao&quot;,&quot;Callao&quot;],[&quot;Cuzco&quot;,&quot;Cuzco&quot;],[&quot;Huancavelica&quot;,&quot;Huancavelica&quot;],[&quot;Huánuco&quot;,&quot;Huánuco&quot;],[&quot;Ica&quot;,&quot;Ica&quot;],[&quot;Junín&quot;,&quot;Junín&quot;],[&quot;La Libertad&quot;,&quot;La Libertad&quot;],[&quot;Lambayeque&quot;,&quot;Lambayeque&quot;],[&quot;Lima (departamento)&quot;,&quot;Lima (Departamento)&quot;],[&quot;Lima (provincia)&quot;,&quot;Lima (Metropolitana)&quot;],[&quot;Loreto&quot;,&quot;Loreto&quot;],[&quot;Madre de Dios&quot;,&quot;Madre de Dios&quot;],[&quot;Moquegua&quot;,&quot;Moquegua&quot;],[&quot;Pasco&quot;,&quot;Pasco&quot;],[&quot;Piura&quot;,&quot;Piura&quot;],[&quot;Puno&quot;,&quot;Puno&quot;],[&quot;San Martín&quot;,&quot;San Martín&quot;],[&quot;Tacna&quot;,&quot;Tacna&quot;],[&quot;Tumbes&quot;,&quot;Tumbes&quot;],[&quot;Ucayali&quot;,&quot;Ucayali&quot;],[&quot;Áncash&quot;,&quot;Áncash&quot;]]">
                         Perú
                       </option>
                       <option value="French Polynesia" data-provinces="[]">Polinesia Francesa</option>
                       <option value="Poland" data-provinces="[]">Polonia</option>
-                      <option
-                        value="Portugal"
-                        data-provinces="[[&quot;Aveiro&quot;,&quot;Distrito de Aveiro&quot;],[&quot;Açores&quot;,&quot;Azores&quot;],[&quot;Beja&quot;,&quot;Distrito de Beja&quot;],[&quot;Braga&quot;,&quot;Distrito de Braga&quot;],[&quot;Bragança&quot;,&quot;Braganza&quot;],[&quot;Castelo Branco&quot;,&quot;Distrito de Castelo Branco&quot;],[&quot;Coimbra&quot;,&quot;Distrito de Coímbra&quot;],[&quot;Faro&quot;,&quot;Distrito de Faro&quot;],[&quot;Guarda&quot;,&quot;Distrito de Guarda&quot;],[&quot;Leiria&quot;,&quot;Distrito de Leiria&quot;],[&quot;Lisboa&quot;,&quot;Distrito de Lisboa&quot;],[&quot;Madeira&quot;,&quot;Madeira&quot;],[&quot;Portalegre&quot;,&quot;Distrito de Portalegre&quot;],[&quot;Porto&quot;,&quot;Distrito de Oporto&quot;],[&quot;Santarém&quot;,&quot;Distrito de Santarém&quot;],[&quot;Setúbal&quot;,&quot;Setúbal&quot;],[&quot;Viana do Castelo&quot;,&quot;Distrito de Viana do Castelo&quot;],[&quot;Vila Real&quot;,&quot;Distrito de Vila Real&quot;],[&quot;Viseu&quot;,&quot;Distrito de Viseu&quot;],[&quot;Évora&quot;,&quot;Distrito de Évora&quot;]]"
-                      >
+                      <option value="Portugal"
+                        data-provinces="[[&quot;Aveiro&quot;,&quot;Distrito de Aveiro&quot;],[&quot;Açores&quot;,&quot;Azores&quot;],[&quot;Beja&quot;,&quot;Distrito de Beja&quot;],[&quot;Braga&quot;,&quot;Distrito de Braga&quot;],[&quot;Bragança&quot;,&quot;Braganza&quot;],[&quot;Castelo Branco&quot;,&quot;Distrito de Castelo Branco&quot;],[&quot;Coimbra&quot;,&quot;Distrito de Coímbra&quot;],[&quot;Faro&quot;,&quot;Distrito de Faro&quot;],[&quot;Guarda&quot;,&quot;Distrito de Guarda&quot;],[&quot;Leiria&quot;,&quot;Distrito de Leiria&quot;],[&quot;Lisboa&quot;,&quot;Distrito de Lisboa&quot;],[&quot;Madeira&quot;,&quot;Madeira&quot;],[&quot;Portalegre&quot;,&quot;Distrito de Portalegre&quot;],[&quot;Porto&quot;,&quot;Distrito de Oporto&quot;],[&quot;Santarém&quot;,&quot;Distrito de Santarém&quot;],[&quot;Setúbal&quot;,&quot;Setúbal&quot;],[&quot;Viana do Castelo&quot;,&quot;Distrito de Viana do Castelo&quot;],[&quot;Vila Real&quot;,&quot;Distrito de Vila Real&quot;],[&quot;Viseu&quot;,&quot;Distrito de Viseu&quot;],[&quot;Évora&quot;,&quot;Distrito de Évora&quot;]]">
                         Portugal
                       </option>
-                      <option
-                        value="Hong Kong"
-                        data-provinces="[[&quot;Hong Kong Island&quot;,&quot;La isla de Hong Kong&quot;],[&quot;Kowloon&quot;,&quot;Kowloon&quot;],[&quot;New Territories&quot;,&quot;Nuevos Territorios&quot;]]"
-                      >
+                      <option value="Hong Kong"
+                        data-provinces="[[&quot;Hong Kong Island&quot;,&quot;La isla de Hong Kong&quot;],[&quot;Kowloon&quot;,&quot;Kowloon&quot;],[&quot;New Territories&quot;,&quot;Nuevos Territorios&quot;]]">
                         RAE de Hong Kong (China)
                       </option>
                       <option value="Macao" data-provinces="[]">RAE de Macao (China)</option>
-                      <option
-                        value="United Kingdom"
-                        data-provinces="[[&quot;British Forces&quot;,&quot;Fuerzas Británicas&quot;],[&quot;England&quot;,&quot;Inglaterra&quot;],[&quot;Northern Ireland&quot;,&quot;Irlanda del Norte&quot;],[&quot;Scotland&quot;,&quot;Escocia&quot;],[&quot;Wales&quot;,&quot;Gales&quot;]]"
-                      >
+                      <option value="United Kingdom"
+                        data-provinces="[[&quot;British Forces&quot;,&quot;Fuerzas Británicas&quot;],[&quot;England&quot;,&quot;Inglaterra&quot;],[&quot;Northern Ireland&quot;,&quot;Irlanda del Norte&quot;],[&quot;Scotland&quot;,&quot;Escocia&quot;],[&quot;Wales&quot;,&quot;Gales&quot;]]">
                         Reino Unido
                       </option>
                       <option value="Central African Republic" data-provinces="[]">República Centroafricana</option>
@@ -529,16 +431,12 @@
                       <option value="Dominican Republic" data-provinces="[]">República Dominicana</option>
                       <option value="Reunion" data-provinces="[]">Reunión</option>
                       <option value="Rwanda" data-provinces="[]">Ruanda</option>
-                      <option
-                        value="Romania"
-                        data-provinces="[[&quot;Alba&quot;,&quot;Alba&quot;],[&quot;Arad&quot;,&quot;Arad&quot;],[&quot;Argeș&quot;,&quot;Argeș&quot;],[&quot;Bacău&quot;,&quot;Bacău&quot;],[&quot;Bihor&quot;,&quot;Bihor&quot;],[&quot;Bistrița-Năsăud&quot;,&quot;Bistrița-Năsăud&quot;],[&quot;Botoșani&quot;,&quot;Botoșani&quot;],[&quot;Brașov&quot;,&quot;Brașov&quot;],[&quot;Brăila&quot;,&quot;Brăila&quot;],[&quot;București&quot;,&quot;Bucarest&quot;],[&quot;Buzău&quot;,&quot;Buzău&quot;],[&quot;Caraș-Severin&quot;,&quot;Caraș-Severin&quot;],[&quot;Cluj&quot;,&quot;Cluj&quot;],[&quot;Constanța&quot;,&quot;Constanța&quot;],[&quot;Covasna&quot;,&quot;Covasna&quot;],[&quot;Călărași&quot;,&quot;Călărași&quot;],[&quot;Dolj&quot;,&quot;Dolj&quot;],[&quot;Dâmbovița&quot;,&quot;Dâmbovița&quot;],[&quot;Galați&quot;,&quot;Galați&quot;],[&quot;Giurgiu&quot;,&quot;Giurgiu&quot;],[&quot;Gorj&quot;,&quot;Gorj&quot;],[&quot;Harghita&quot;,&quot;Harghita&quot;],[&quot;Hunedoara&quot;,&quot;Hunedoara&quot;],[&quot;Ialomița&quot;,&quot;Ialomița&quot;],[&quot;Iași&quot;,&quot;Iași&quot;],[&quot;Ilfov&quot;,&quot;Ilfov&quot;],[&quot;Maramureș&quot;,&quot;Maramureș&quot;],[&quot;Mehedinți&quot;,&quot;Mehedinți&quot;],[&quot;Mureș&quot;,&quot;Mureș&quot;],[&quot;Neamț&quot;,&quot;Neamț&quot;],[&quot;Olt&quot;,&quot;Olt&quot;],[&quot;Prahova&quot;,&quot;Prahova&quot;],[&quot;Satu Mare&quot;,&quot;Satu Mare&quot;],[&quot;Sibiu&quot;,&quot;Sibiu&quot;],[&quot;Suceava&quot;,&quot;Suceava&quot;],[&quot;Sălaj&quot;,&quot;Sălaj&quot;],[&quot;Teleorman&quot;,&quot;Teleorman&quot;],[&quot;Timiș&quot;,&quot;Timiș&quot;],[&quot;Tulcea&quot;,&quot;Tulcea&quot;],[&quot;Vaslui&quot;,&quot;Vaslui&quot;],[&quot;Vrancea&quot;,&quot;Vrancea&quot;],[&quot;Vâlcea&quot;,&quot;Vâlcea&quot;]]"
-                      >
+                      <option value="Romania"
+                        data-provinces="[[&quot;Alba&quot;,&quot;Alba&quot;],[&quot;Arad&quot;,&quot;Arad&quot;],[&quot;Argeș&quot;,&quot;Argeș&quot;],[&quot;Bacău&quot;,&quot;Bacău&quot;],[&quot;Bihor&quot;,&quot;Bihor&quot;],[&quot;Bistrița-Năsăud&quot;,&quot;Bistrița-Năsăud&quot;],[&quot;Botoșani&quot;,&quot;Botoșani&quot;],[&quot;Brașov&quot;,&quot;Brașov&quot;],[&quot;Brăila&quot;,&quot;Brăila&quot;],[&quot;București&quot;,&quot;Bucarest&quot;],[&quot;Buzău&quot;,&quot;Buzău&quot;],[&quot;Caraș-Severin&quot;,&quot;Caraș-Severin&quot;],[&quot;Cluj&quot;,&quot;Cluj&quot;],[&quot;Constanța&quot;,&quot;Constanța&quot;],[&quot;Covasna&quot;,&quot;Covasna&quot;],[&quot;Călărași&quot;,&quot;Călărași&quot;],[&quot;Dolj&quot;,&quot;Dolj&quot;],[&quot;Dâmbovița&quot;,&quot;Dâmbovița&quot;],[&quot;Galați&quot;,&quot;Galați&quot;],[&quot;Giurgiu&quot;,&quot;Giurgiu&quot;],[&quot;Gorj&quot;,&quot;Gorj&quot;],[&quot;Harghita&quot;,&quot;Harghita&quot;],[&quot;Hunedoara&quot;,&quot;Hunedoara&quot;],[&quot;Ialomița&quot;,&quot;Ialomița&quot;],[&quot;Iași&quot;,&quot;Iași&quot;],[&quot;Ilfov&quot;,&quot;Ilfov&quot;],[&quot;Maramureș&quot;,&quot;Maramureș&quot;],[&quot;Mehedinți&quot;,&quot;Mehedinți&quot;],[&quot;Mureș&quot;,&quot;Mureș&quot;],[&quot;Neamț&quot;,&quot;Neamț&quot;],[&quot;Olt&quot;,&quot;Olt&quot;],[&quot;Prahova&quot;,&quot;Prahova&quot;],[&quot;Satu Mare&quot;,&quot;Satu Mare&quot;],[&quot;Sibiu&quot;,&quot;Sibiu&quot;],[&quot;Suceava&quot;,&quot;Suceava&quot;],[&quot;Sălaj&quot;,&quot;Sălaj&quot;],[&quot;Teleorman&quot;,&quot;Teleorman&quot;],[&quot;Timiș&quot;,&quot;Timiș&quote;],[&quot;Tulcea&quot;,&quot;Tulcea&quot;],[&quot;Vaslui&quot;,&quot;Vaslui&quot;],[&quot;Vrancea&quot;,&quot;Vrancea&quot;],[&quot;Vâlcea&quot;,&quot;Vâlcea&quot;]]">
                         Rumanía
                       </option>
-                      <option
-                        value="Russia"
-                        data-provinces="[[&quot;Altai Krai&quot;,&quot;Krai de Altái&quot;],[&quot;Altai Republic&quot;,&quot;Altái&quot;],[&quot;Amur Oblast&quot;,&quot;Amur&quot;],[&quot;Arkhangelsk Oblast&quot;,&quot;Óblast de Arjánguelsk&quot;],[&quot;Astrakhan Oblast&quot;,&quot;Astracán&quot;],[&quot;Belgorod Oblast&quot;,&quot;Óblast de Bélgorod&quot;],[&quot;Bryansk Oblast&quot;,&quot;Óblast de Briansk&quot;],[&quot;Chechen Republic&quot;,&quot;Chechenia&quot;],[&quot;Chelyabinsk Oblast&quot;,&quot;Cheliábinsk&quot;],[&quot;Chukotka Autonomous Okrug&quot;,&quot;Chukotka&quot;],[&quot;Chuvash Republic&quot;,&quot;Chuvasia&quot;],[&quot;Irkutsk Oblast&quot;,&quot;Irkutsk&quot;],[&quot;Ivanovo Oblast&quot;,&quot;Óblast de Ivánovo&quot;],[&quot;Jewish Autonomous Oblast&quot;,&quot;Óblast Autónomo Hebreo&quot;],[&quot;Kabardino-Balkarian Republic&quot;,&quot;Kabardia-Balkaria&quot;],[&quot;Kaliningrad Oblast&quot;,&quot;Óblast de Kaliningrado&quot;],[&quot;Kaluga Oblast&quot;,&quot;Kaluga&quot;],[&quot;Kamchatka Krai&quot;,&quot;Kamchatka&quot;],[&quot;Karachay–Cherkess Republic&quot;,&quot;Karacháyevo-Cherkesia&quot;],[&quot;Kemerovo Oblast&quot;,&quot;Kémerovo&quot;],[&quot;Khabarovsk Krai&quot;,&quot;Jabárovsk&quot;],[&quot;Khanty-Mansi Autonomous Okrug&quot;,&quot;Janti-Mansi&quot;],[&quot;Kirov Oblast&quot;,&quot;Kírov&quot;],[&quot;Komi Republic&quot;,&quot;Komi&quot;],[&quot;Kostroma Oblast&quot;,&quot;Óblast de Kostromá&quot;],[&quot;Krasnodar Krai&quot;,&quot;Krai de Krasnodar&quot;],[&quot;Krasnoyarsk Krai&quot;,&quot;Krasnoyarsk&quot;],[&quot;Kurgan Oblast&quot;,&quot;Kurgán&quot;],[&quot;Kursk Oblast&quot;,&quot;óblast de Kursk&quot;],[&quot;Leningrad Oblast&quot;,&quot;Óblast de Leningrado&quot;],[&quot;Lipetsk Oblast&quot;,&quot;Óblast de Lípetsk&quot;],[&quot;Magadan Oblast&quot;,&quot;Magadán&quot;],[&quot;Mari El Republic&quot;,&quot;Mari-El&quot;],[&quot;Moscow&quot;,&quot;Moscú&quot;],[&quot;Moscow Oblast&quot;,&quot;Óblast de Moscú&quot;],[&quot;Murmansk Oblast&quot;,&quot;Óblast de Múrmansk&quot;],[&quot;Nizhny Novgorod Oblast&quot;,&quot;Óblast de Nizhni Nóvgorod&quot;],[&quot;Novgorod Oblast&quot;,&quot;Óblast de Nóvgorod&quot;],[&quot;Novosibirsk Oblast&quot;,&quot;Novosibirsk&quot;],[&quot;Omsk Oblast&quot;,&quot;Omsk&quot;],[&quot;Orenburg Oblast&quot;,&quot;Óblast de Oremburgo&quot;],[&quot;Oryol Oblast&quot;,&quot;Oriol&quot;],[&quot;Penza Oblast&quot;,&quot;Óblast de Penza&quot;],[&quot;Perm Krai&quot;,&quot;Perm&quot;],[&quot;Primorsky Krai&quot;,&quot;Primorie&quot;],[&quot;Pskov Oblast&quot;,&quot;Óblast de Pskov&quot;],[&quot;Republic of Adygeya&quot;,&quot;Adigueya&quot;],[&quot;Republic of Bashkortostan&quot;,&quot;Bashkortostán&quot;],[&quot;Republic of Buryatia&quot;,&quot;Buriatia&quot;],[&quot;Republic of Dagestan&quot;,&quot;Daguestán&quot;],[&quot;Republic of Ingushetia&quot;,&quot;Ingusetia&quot;],[&quot;Republic of Kalmykia&quot;,&quot;Kalmukia&quot;],[&quot;Republic of Karelia&quot;,&quot;República de Carelia&quot;],[&quot;Republic of Khakassia&quot;,&quot;Jakasia&quot;],[&quot;Republic of Mordovia&quot;,&quot;Mordovia&quot;],[&quot;Republic of North Ossetia–Alania&quot;,&quot;Osetia del Norte - Alania&quot;],[&quot;Republic of Tatarstan&quot;,&quot;Tartaristán&quot;],[&quot;Rostov Oblast&quot;,&quot;Rostov&quot;],[&quot;Ryazan Oblast&quot;,&quot;Óblast de Riazán&quot;],[&quot;Saint Petersburg&quot;,&quot;San Petersburgo&quot;],[&quot;Sakha Republic (Yakutia)&quot;,&quot;Sajá&quot;],[&quot;Sakhalin Oblast&quot;,&quot;Sajalín&quot;],[&quot;Samara Oblast&quot;,&quot;Óblast de Samara&quot;],[&quot;Saratov Oblast&quot;,&quot;Óblast de Sarátov&quot;],[&quot;Smolensk Oblast&quot;,&quot;Smolensk&quot;],[&quot;Stavropol Krai&quot;,&quot;Stávropol&quot;],[&quot;Sverdlovsk Oblast&quot;,&quot;Sverdlovsk&quot;],[&quot;Tambov Oblast&quot;,&quot;Tambov&quot;],[&quot;Tomsk Oblast&quot;,&quot;Tomsk&quot;],[&quot;Tula Oblast&quot;,&quot;Óblast de Tula&quot;],[&quot;Tver Oblast&quot;,&quot;Óblast de Tver&quot;],[&quot;Tyumen Oblast&quot;,&quot;Tiumén&quot;],[&quot;Tyva Republic&quot;,&quot;Tuvá&quot;],[&quot;Udmurtia&quot;,&quot;Udmurtia&quot;],[&quot;Ulyanovsk Oblast&quot;,&quot;Uliánovsk&quot;],[&quot;Vladimir Oblast&quot;,&quot;Óblast de Vladímir&quot;],[&quot;Volgograd Oblast&quot;,&quot;Volgogrado&quot;],[&quot;Vologda Oblast&quot;,&quot;Óblast de Vólogda&quot;],[&quot;Voronezh Oblast&quot;,&quot;Óblast de Vorónezh&quot;],[&quot;Yamalo-Nenets Autonomous Okrug&quot;,&quot;Yamalia-Nenetsia&quot;],[&quot;Yaroslavl Oblast&quot;,&quot;Óblast de Yaroslavl&quot;],[&quot;Zabaykalsky Krai&quot;,&quot;Zabaikalie&quot;]]"
-                      >
+                      <option value="Russia"
+                        data-provinces="[[&quot;Altai Krai&quot;,&quot;Krai de Altái&quot;],[&quot;Altai Republic&quot;,&quot;Altái&quot;],[&quot;Amur Oblast&quot;,&quot;Amur&quot;],[&quot;Arkhangelsk Oblast&quot;,&quot;Óblast de Arjánguelsk&quot;],[&quot;Astrakhan Oblast&quot;,&quot;Astracán&quot;],[&quot;Belgorod Oblast&quot;,&quot;Óblast de Bélgorod&quot;],[&quot;Bryansk Oblast&quot;,&quot;Óblast de Briansk&quot;],[&quot;Chechen Republic&quot;,&quot;Chechenia&quot;],[&quot;Chelyabinsk Oblast&quot;,&quot;Cheliábinsk&quot;],[&quot;Chukotka Autonomous Okrug&quot;,&quot;Chukotka&quot;],[&quot;Chuvash Republic&quot;,&quot;Chuvasia&quot;],[&quot;Irkutsk Oblast&quot;,&quot;Irkutsk&quot;],[&quot;Ivanovo Oblast&quot;,&quot;Óblast de Ivánovo&quot;],[&quot;Jewish Autonomous Oblast&quot;,&quot;Óblast Autónomo Hebreo&quot;],[&quot;Kabardino-Balkarian Republic&quot;,&quot;Kabardia-Balkaria&quot;],[&quot;Kaliningrad Oblast&quot;,&quot;Óblast de Kaliningrado&quot;],[&quot;Kaluga Oblast&quot;,&quot;Kaluga&quot;],[&quot;Kamchatka Krai&quot;,&quot;Kamchatka&quot;],[&quot;Karachay–Cherkess Republic&quot;,&quot;Karacháyevo-Cherkesia&quot;],[&quot;Kemerovo Oblast&quot;,&quot;Kémerovo&quot;],[&quot;Khabarovsk Krai&quot;,&quot;Jabárovsk&quot;],[&quot;Khanty-Mansi Autonomous Okrug&quot;,&quot;Janti-Mansi&quot;],[&quot;Kirov Oblast&quot;,&quot;Kírov&quot;],[&quot;Komi Republic&quot;,&quot;Komi&quot;],[&quot;Kostroma Oblast&quot;,&quot;Óblast de Kostromá&quot;],[&quot;Krasnodar Krai&quot;,&quot;Krai de Krasnodar&quot;],[&quot;Krasnoyarsk Krai&quot;,&quot;Krasnoyarsk&quot;],[&quot;Kurgan Oblast&quot;,&quot;Kurgán&quot;],[&quot;Kursk Oblast&quot;,&quot;óblast de Kursk&quot;],[&quot;Leningrad Oblast&quot;,&quot;Óblast de Leningrado&quot;],[&quot;Lipetsk Oblast&quot;,&quot;Óblast de Lípetsk&quot;],[&quot;Magadan Oblast&quot;,&quot;Magadán&quot;],[&quot;Mari El Republic&quot;,&quot;Mari-El&quot;],[&quot;Moscow&quot;,&quot;Moscú&quot;],[&quot;Moscow Oblast&quot;,&quot;Óblast de Moscú&quot;],[&quot;Murmansk Oblast&quot;,&quot;Óblast de Múrmansk&quot;],[&quot;Nizhny Novgorod Oblast&quot;,&quot;Óblast de Nizhni Nóvgorod&quot;],[&quot;Novgorod Oblast&quot;,&quot;Óblast de Nóvgorod&quot;],[&quot;Novosibirsk Oblast&quot;,&quot;Novosibirsk&quot;],[&quot;Omsk Oblast&quot;,&quot;Omsk&quot;],[&quot;Orenburg Oblast&quot;,&quot;Óblast de Oremburgo&quot;],[&quot;Oryol Oblast&quot;,&quot;Oriol&quot;],[&quot;Penza Oblast&quot;,&quot;Óblast de Penza&quot;],[&quot;Perm Krai&quot;,&quot;Perm&quot;],[&quot;Primorsky Krai&quot;,&quot;Primorie&quot;],[&quot;Pskov Oblast&quot;,&quot;Óblast de Pskov&quot;],[&quot;Republic of Adygeya&quot;,&quot;Adigueya&quot;],[&quot;Republic of Bashkortostan&quot;,&quot;Bashkortostán&quot;],[&quot;Republic of Buryatia&quot;,&quot;Buriatia&quot;],[&quot;Republic of Dagestan&quot;,&quot;Daguestán&quot;],[&quot;Republic of Ingushetia&quot;,&quot;Ingusetia&quot;],[&quot;Republic of Kalmykia&quot;,&quot;Kalmukia&quot;],[&quot;Republic of Karelia&quot;,&quot;República de Carelia&quot;],[&quot;Republic of Khakassia&quot;,&quot;Jakasia&quot;],[&quot;Republic of Mordovia&quot;,&quot;Mordovia&quot;],[&quot;Republic of North Ossetia–Alania&quot;,&quot;Osetia del Norte - Alania&quot;],[&quot;Republic of Tatarstan&quot;,&quot;Tartaristán&quot;],[&quot;Rostov Oblast&quot;,&quot;Rostov&quot;],[&quot;Ryazan Oblast&quot;,&quot;Óblast de Riazán&quot;],[&quot;Saint Petersburg&quot;,&quot;San Petersburgo&quot;],[&quot;Sakha Republic (Yakutia)&quot;,&quot;Sajá&quot;],[&quot;Sakhalin Oblast&quot;,&quot;Sajalín&quot;],[&quot;Samara Oblast&quot;,&quot;Óblast de Samara&quot;],[&quot;Saratov Oblast&quot;,&quot;Óblast de Sarátov&quot;],[&quot;Smolensk Oblast&quot;,&quot;Smolensk&quot;],[&quot;Stavropol Krai&quot;,&quot;Stávropol&quot;],[&quot;Sverdlovsk Oblast&quot;,&quot;Sverdlovsk&quot;],[&quot;Tambov Oblast&quot;,&quot;Tambov&quot;],[&quot;Tomsk Oblast&quot;,&quot;Tomsk&quot;],[&quot;Tula Oblast&quot;,&quot;Óblast de Tula&quot;],[&quot;Tver Oblast&quot;,&quot;Óblast de Tver&quot;],[&quot;Tyumen Oblast&quot;,&quot;Tiumén&quot;],[&quot;Tyva Republic&quot;,&quot;Tuvá&quot;],[&quot;Udmurtia&quot;,&quot;Udmurtia&quot;],[&quot;Ulyanovsk Oblast&quot;,&quot;Uliánovsk&quot;],[&quot;Vladimir Oblast&quot;,&quot;Óblast de Vladímir&quot;],[&quot;Volgograd Oblast&quot;,&quot;Volgogrado&quot;],[&quot;Vologda Oblast&quot;,&quot;Óblast de Vólogda&quot;],[&quot;Voronezh Oblast&quot;,&quot;Óblast de Vorónezh&quot;],[&quot;Yamalo-Nenets Autonomous Okrug&quot;,&quot;Yamalia-Nenetsia&quot;],[&quot;Yaroslavl Oblast&quot;,&quot;Óblast de Yaroslavl&quot;],[&quot;Zabaykalsky Krai&quot;,&quot;Zabaikalie&quot;]]">
                         Rusia
                       </option>
                       <option value="Western Sahara" data-provinces="[]">Sáhara Occidental</option>
@@ -560,10 +458,8 @@
                       <option value="Sint Maarten" data-provinces="[]">Sint Maarten</option>
                       <option value="Somalia" data-provinces="[]">Somalia</option>
                       <option value="Sri Lanka" data-provinces="[]">Sri Lanka</option>
-                      <option
-                        value="South Africa"
-                        data-provinces="[[&quot;Eastern Cape&quot;,&quot;Provincia Oriental del Cabo&quot;],[&quot;Free State&quot;,&quot;Provincia del Estado Libre&quot;],[&quot;Gauteng&quot;,&quot;Gauteng&quot;],[&quot;KwaZulu-Natal&quot;,&quot;KwaZulu-Natal&quot;],[&quot;Limpopo&quot;,&quot;Provincia de Limpopo&quot;],[&quot;Mpumalanga&quot;,&quot;Mpumalanga&quot;],[&quot;North West&quot;,&quot;Provincia del Noroeste&quot;],[&quot;Northern Cape&quot;,&quot;Provincia Septentrional del Cabo&quot;],[&quot;Western Cape&quot;,&quot;Provincia Occidental del Cabo&quot;]]"
-                      >
+                      <option value="South Africa"
+                        data-provinces="[[&quot;Eastern Cape&quot;,&quot;Provincia Oriental del Cabo&quot;],[&quot;Free State&quot;,&quot;Provincia del Estado Libre&quot;],[&quot;Gauteng&quot;,&quot;Gauteng&quot;],[&quot;KwaZulu-Natal&quot;,&quot;KwaZulu-Natal&quot;],[&quot;Limpopo&quot;,&quot;Provincia de Limpopo&quot;],[&quot;Mpumalanga&quot;,&quot;Mpumalanga&quot;],[&quot;North West&quot;,&quot;Provincia del Noroeste&quot;],[&quot;Northern Cape&quot;,&quot;Provincia Septentrional del Cabo&quot;],[&quot;Western Cape&quot;,&quot;Provincia Occidental del Cabo&quot;]]">
                         Sudáfrica
                       </option>
                       <option value="Sudan" data-provinces="[]">Sudán</option>
@@ -572,10 +468,8 @@
                       <option value="Switzerland" data-provinces="[]">Suiza</option>
                       <option value="Suriname" data-provinces="[]">Surinam</option>
                       <option value="Svalbard And Jan Mayen" data-provinces="[]">Svalbard y Jan Mayen</option>
-                      <option
-                        value="Thailand"
-                        data-provinces="[[&quot;Amnat Charoen&quot;,&quot;Provincia de Amnat Charoen&quot;],[&quot;Ang Thong&quot;,&quot;Provincia de Ang Thong&quot;],[&quot;Bangkok&quot;,&quot;Bangkok&quot;],[&quot;Bueng Kan&quot;,&quot;Bueng Kan&quot;],[&quot;Buriram&quot;,&quot;Provincia de Buri Ram&quot;],[&quot;Chachoengsao&quot;,&quot;Provincia de Chachoengsao&quot;],[&quot;Chai Nat&quot;,&quot;Provincia de Chainat&quot;],[&quot;Chaiyaphum&quot;,&quot;Provincia de Chaiyaphum&quot;],[&quot;Chanthaburi&quot;,&quot;Provincia de Chanthaburi&quot;],[&quot;Chiang Mai&quot;,&quot;Provincia de Chiang Mai&quot;],[&quot;Chiang Rai&quot;,&quot;Provincia de Chiang Rai&quot;],[&quot;Chon Buri&quot;,&quot;Provincia de Chon Buri&quot;],[&quot;Chumphon&quot;,&quot;Provincia de Chumphon&quot;],[&quot;Kalasin&quot;,&quot;Provincia de Kalasin&quot;],[&quot;Kamphaeng Phet&quot;,&quot;Provincia de Kamphaeng Phet&quot;],[&quot;Kanchanaburi&quot;,&quot;Provincia de Kanchanaburi&quot;],[&quot;Khon Kaen&quot;,&quot;Provincia de Khon Kaen&quot;],[&quot;Krabi&quot;,&quot;Provincia de Krabi&quot;],[&quot;Lampang&quot;,&quot;Provincia de Lampang&quot;],[&quot;Lamphun&quot;,&quot;Provincia de Lamphun&quot;],[&quot;Loei&quot;,&quot;Provincia de Loei&quot;],[&quot;Lopburi&quot;,&quot;Provincia de Lopburi&quot;],[&quot;Mae Hong Son&quot;,&quot;Provincia de Mae Hong Son&quot;],[&quot;Maha Sarakham&quot;,&quot;Provincia de Maha Sarakham&quot;],[&quot;Mukdahan&quot;,&quot;Mukdahan&quot;],[&quot;Nakhon Nayok&quot;,&quot;Provincia de Nakhon Nayok&quot;],[&quot;Nakhon Pathom&quot;,&quot;Nakhon Pathom&quot;],[&quot;Nakhon Phanom&quot;,&quot;Provincia de Nakhon Phanom&quot;],[&quot;Nakhon Ratchasima&quot;,&quot;Provincia de Nakhon Ratchasima&quot;],[&quot;Nakhon Sawan&quot;,&quot;Provincia de Nakhon Sawan&quot;],[&quot;Nakhon Si Thammarat&quot;,&quot;Provincia de Nakhon Si Thammarat&quot;],[&quot;Nan&quot;,&quot;Provincia de Nan&quot;],[&quot;Narathiwat&quot;,&quot;Provincia de Narathiwat&quot;],[&quot;Nong Bua Lam Phu&quot;,&quot;Nongbua Lamphu&quot;],[&quot;Nong Khai&quot;,&quot;Provincia de Nong Khai&quot;],[&quot;Nonthaburi&quot;,&quot;Provincia de Nonthaburi&quot;],[&quot;Pathum Thani&quot;,&quot;Provincia de Pathum Thani&quot;],[&quot;Pattani&quot;,&quot;Provincia de Pattani&quot;],[&quot;Pattaya&quot;,&quot;Pattaya&quot;],[&quot;Phangnga&quot;,&quot;Provincia de Phang Nga&quot;],[&quot;Phatthalung&quot;,&quot;Provincia de Phatthalung&quot;],[&quot;Phayao&quot;,&quot;Provincia de Phayao&quot;],[&quot;Phetchabun&quot;,&quot;Provincia de Phetchabun&quot;],[&quot;Phetchaburi&quot;,&quot;Provincia de Phetchaburi&quot;],[&quot;Phichit&quot;,&quot;Provincia de Phichit&quot;],[&quot;Phitsanulok&quot;,&quot;Provincia de Phitsanulok&quot;],[&quot;Phra Nakhon Si Ayutthaya&quot;,&quot;Provincia de Phra Nakhon Si Ayutthaya&quot;],[&quot;Phrae&quot;,&quot;Provincia de Phrae&quot;],[&quot;Phuket&quot;,&quot;Provincia de Phuket&quot;],[&quot;Prachin Buri&quot;,&quot;Provincia de Prachinburi&quot;],[&quot;Prachuap Khiri Khan&quot;,&quot;Provincia de Prachuap Khiri Khan&quot;],[&quot;Ranong&quot;,&quot;Provincia de Ranong&quot;],[&quot;Ratchaburi&quot;,&quot;Provincia de Ratchaburi&quot;],[&quot;Rayong&quot;,&quot;Rayong&quot;],[&quot;Roi Et&quot;,&quot;Provincia de Roi Et&quot;],[&quot;Sa Kaeo&quot;,&quot;Provincia de Sa Kaeo&quot;],[&quot;Sakon Nakhon&quot;,&quot;Provincia de Sakon Nakhon&quot;],[&quot;Samut Prakan&quot;,&quot;Provincia de Samut Prakan&quot;],[&quot;Samut Sakhon&quot;,&quot;Provincia de Samut Sakhon&quot;],[&quot;Samut Songkhram&quot;,&quot;Provincia de Samut Songkhram&quot;],[&quot;Saraburi&quot;,&quot;Provincia de Saraburi&quot;],[&quot;Satun&quot;,&quot;Provincia de Satun&quot;],[&quot;Sing Buri&quot;,&quot;Provincia de Sing Buri&quot;],[&quot;Sisaket&quot;,&quot;Provincia de Sisaket&quot;],[&quot;Songkhla&quot;,&quot;Provincia de Songkhla&quot;],[&quot;Sukhothai&quot;,&quot;Provincia de Sukhothai&quot;],[&quot;Suphan Buri&quot;,&quot;Provincia de Suphanburi&quot;],[&quot;Surat Thani&quot;,&quot;Provincia de Surat Thani&quot;],[&quot;Surin&quot;,&quot;Surin&quot;],[&quot;Tak&quot;,&quot;Provincia de Tak&quot;],[&quot;Trang&quot;,&quot;Provincia de Trang&quot;],[&quot;Trat&quot;,&quot;Trat&quot;],[&quot;Ubon Ratchathani&quot;,&quot;Provincia de Ubon Ratchathani&quot;],[&quot;Udon Thani&quot;,&quot;Provincia de Udon Thani&quot;],[&quot;Uthai Thani&quot;,&quot;Provincia de Uthai Thani&quot;],[&quot;Uttaradit&quot;,&quot;Provincia de Uttaradit&quot;],[&quot;Yala&quot;,&quot;Provincia de Yala&quot;],[&quot;Yasothon&quot;,&quot;Provincia de Yasothon&quot;]]"
-                      >
+                      <option value="Thailand"
+                        data-provinces="[[&quot;Amnat Charoen&quot;,&quot;Provincia de Amnat Charoen&quot;],[&quot;Ang Thong&quot;,&quot;Provincia de Ang Thong&quot;],[&quot;Bangkok&quot;,&quot;Bangkok&quot;],[&quot;Bueng Kan&quot;,&quot;Bueng Kan&quot;],[&quot;Buriram&quot;,&quot;Provincia de Buri Ram&quot;],[&quot;Chachoengsao&quot;,&quot;Provincia de Chachoengsao&quot;],[&quot;Chai Nat&quot;,&quot;Provincia de Chainat&quot;],[&quot;Chaiyaphum&quot;,&quot;Provincia de Chaiyaphum&quot;],[&quot;Chanthaburi&quot;,&quot;Provincia de Chanthaburi&quot;],[&quot;Chiang Mai&quot;,&quot;Provincia de Chiang Mai&quot;],[&quot;Chiang Rai&quot;,&quot;Provincia de Chiang Rai&quot;],[&quot;Chon Buri&quot;,&quot;Provincia de Chon Buri&quot;],[&quot;Chumphon&quot;,&quot;Provincia de Chumphon&quot;],[&quot;Kalasin&quot;,&quot;Provincia de Kalasin&quot;],[&quot;Kamphaeng Phet&quot;,&quot;Provincia de Kamphaeng Phet&quot;],[&quot;Kanchanaburi&quot;,&quot;Provincia de Kanchanaburi&quot;],[&quot;Khon Kaen&quot;,&quot;Provincia de Khon Kaen&quot;],[&quot;Krabi&quot;,&quot;Provincia de Krabi&quot;],[&quot;Lampang&quot;,&quot;Provincia de Lampang&quot;],[&quot;Lamphun&quot;,&quot;Provincia de Lamphun&quot;],[&quot;Loei&quot;,&quot;Provincia de Loei&quot;],[&quot;Lopburi&quot;,&quot;Provincia de Lopburi&quot;],[&quot;Mae Hong Son&quot;,&quot;Provincia de Mae Hong Son&quot;],[&quot;Maha Sarakham&quot;,&quot;Provincia de Maha Sarakham&quot;],[&quot;Mukdahan&quot;,&quot;Mukdahan&quot;],[&quot;Nakhon Nayok&quot;,&quot;Provincia de Nakhon Nayok&quot;],[&quot;Nakhon Pathom&quot;,&quot;Nakhon Pathom&quot;],[&quot;Nakhon Phanom&quot;,&quot;Provincia de Nakhon Phanom&quot;],[&quot;Nakhon Ratchasima&quot;,&quot;Provincia de Nakhon Ratchasima&quot;],[&quot;Nakhon Sawan&quot;,&quot;Provincia de Nakhon Sawan&quot;],[&quot;Nakhon Si Thammarat&quot;,&quot;Provincia de Nakhon Si Thammarat&quot;],[&quot;Nan&quot;,&quot;Provincia de Nan&quot;],[&quot;Narathiwat&quot;,&quot;Provincia de Narathiwat&quot;],[&quot;Nong Bua Lam Phu&quot;,&quot;Nongbua Lamphu&quot;],[&quot;Nong Khai&quot;,&quot;Provincia de Nong Khai&quot;],[&quot;Nonthaburi&quot;,&quot;Provincia de Nonthaburi&quot;],[&quot;Pathum Thani&quot;,&quot;Provincia de Pathum Thani&quot;],[&quot;Pattani&quot;,&quot;Provincia de Pattani&quot;],[&quot;Pattaya&quot;,&quot;Pattaya&quot;],[&quot;Phangnga&quot;,&quot;Provincia de Phang Nga&quot;],[&quot;Phatthalung&quot;,&quot;Provincia de Phatthalung&quot;],[&quot;Phayao&quot;,&quot;Provincia de Phayao&quot;],[&quot;Phetchabun&quot;,&quot;Provincia de Phetchabun&quot;],[&quot;Phetchaburi&quot;,&quot;Provincia de Phetchaburi&quot;],[&quot;Phichit&quot;,&quot;Provincia de Phichit&quot;],[&quot;Phitsanulok&quot;,&quot;Provincia de Phitsanulok&quot;],[&quot;Phra Nakhon Si Ayutthaya&quot;,&quot;Provincia de Phra Nakhon Si Ayutthaya&quot;],[&quot;Phrae&quot;,&quot;Provincia de Phrae&quot;],[&quot;Phuket&quot;,&quot;Provincia de Phuket&quot;],[&quot;Prachin Buri&quot;,&quot;Provincia de Prachinburi&quot;],[&quot;Prachuap Khiri Khan&quot;,&quot;Provincia de Prachuap Khiri Khan&quot;],[&quot;Ranong&quot;,&quot;Provincia de Ranong&quot;],[&quot;Ratchaburi&quot;,&quot;Provincia de Ratchaburi&quot;],[&quot;Rayong&quot;,&quot;Rayong&quot;],[&quot;Roi Et&quot;,&quot;Provincia de Roi Et&quot;],[&quot;Sa Kaeo&quot;,&quot;Provincia de Sa Kaeo&quot;],[&quot;Sakon Nakhon&quot;,&quot;Provincia de Sakon Nakhon&quot;],[&quot;Samut Prakan&quot;,&quot;Provincia de Samut Prakan&quot;],[&quot;Samut Sakhon&quot;,&quot;Provincia de Samut Sakhon&quot;],[&quot;Samut Songkhram&quot;,&quot;Provincia de Samut Songkhram&quot;],[&quot;Saraburi&quot;,&quot;Provincia de Saraburi&quot;],[&quot;Satun&quot;,&quot;Provincia de Satun&quot;],[&quot;Sing Buri&quot;,&quot;Provincia de Sing Buri&quot;],[&quot;Sisaket&quot;,&quot;Provincia de Sisaket&quot;],[&quot;Songkhla&quot;,&quot;Provincia de Songkhla&quot;],[&quot;Sukhothai&quot;,&quot;Provincia de Sukhothai&quot;],[&quot;Suphan Buri&quot;,&quot;Provincia de Suphanburi&quot;],[&quot;Surat Thani&quot;,&quot;Provincia de Surat Thani&quot;],[&quot;Surin&quot;,&quot;Surin&quot;],[&quot;Tak&quot;,&quot;Provincia de Tak&quot;],[&quot;Trang&quot;,&quot;Provincia de Trang&quot;],[&quot;Trat&quot;,&quot;Trat&quot;],[&quot;Ubon Ratchathani&quot;,&quot;Provincia de Ubon Ratchathani&quot;],[&quot;Udon Thani&quot;,&quot;Provincia de Udon Thani&quot;],[&quot;Uthai Thani&quot;,&quot;Provincia de Uthai Thani&quot;],[&quot;Uttaradit&quot;,&quot;Provincia de Uttaradit&quot;],[&quot;Yala&quot;,&quot;Provincia de Yala&quot;],[&quot;Yasothon&quot;,&quot;Provincia de Yasothon&quot;]]">
                         Tailandia
                       </option>
                       <option value="Taiwan" data-provinces="[]">Taiwán</option>
@@ -602,18 +496,14 @@
                       <option value="Tuvalu" data-provinces="[]">Tuvalu</option>
                       <option value="Ukraine" data-provinces="[]">Ucrania</option>
                       <option value="Uganda" data-provinces="[]">Uganda</option>
-                      <option
-                        value="Uruguay"
-                        data-provinces="[[&quot;Artigas&quot;,&quot;Departamento de Artigas&quot;],[&quot;Canelones&quot;,&quot;Departamento de Canelones&quot;],[&quot;Cerro Largo&quot;,&quot;Departamento de Cerro Largo&quot;],[&quot;Colonia&quot;,&quot;Departamento de Colonia&quot;],[&quot;Durazno&quot;,&quot;Departamento de Durazno&quot;],[&quot;Flores&quot;,&quot;Departamento de Flores&quot;],[&quot;Florida&quot;,&quot;Departamento de Florida&quot;],[&quot;Lavalleja&quot;,&quot;Departamento de Lavalleja&quot;],[&quot;Maldonado&quot;,&quot;Departamento de Maldonado&quot;],[&quot;Montevideo&quot;,&quot;Departamento de Montevideo&quot;],[&quot;Paysandú&quot;,&quot;Departamento de Paysandú&quot;],[&quot;Rivera&quot;,&quot;Departamento de Rivera&quot;],[&quot;Rocha&quot;,&quot;Departamento de Rocha&quot;],[&quot;Río Negro&quot;,&quot;Departamento de Río Negro&quot;],[&quot;Salto&quot;,&quot;Departamento de Salto&quot;],[&quot;San José&quot;,&quot;Departamento de San José&quot;],[&quot;Soriano&quot;,&quot;Departamento de Soriano&quot;],[&quot;Tacuarembó&quot;,&quot;Departamento de Tacuarembó&quot;],[&quot;Treinta y Tres&quot;,&quot;Departamento de Treinta y Tres&quot;]]"
-                      >
+                      <option value="Uruguay"
+                        data-provinces="[[&quot;Artigas&quot;,&quot;Departamento de Artigas&quot;],[&quot;Canelones&quot;,&quot;Departamento de Canelones&quot;],[&quot;Cerro Largo&quot;,&quot;Departamento de Cerro Largo&quot;],[&quot;Colonia&quot;,&quot;Departamento de Colonia&quot;],[&quot;Durazno&quot;,&quot;Departamento de Durazno&quot;],[&quot;Flores&quot;,&quot;Departamento de Flores&quot;],[&quot;Florida&quot;,&quot;Departamento de Florida&quot;],[&quot;Lavalleja&quot;,&quot;Departamento de Lavalleja&quot;],[&quot;Maldonado&quot;,&quot;Departamento de Maldonado&quot;],[&quot;Montevideo&quot;,&quot;Departamento de Montevideo&quot;],[&quot;Paysandú&quot;,&quot;Departamento de Paysandú&quot;],[&quot;Rivera&quot;,&quot;Departamento de Rivera&quot;],[&quot;Rocha&quot;,&quot;Departamento de Rocha&quot;],[&quot;Río Negro&quot;,&quot;Departamento de Río Negro&quot;],[&quot;Salto&quot;,&quot;Departamento de Salto&quot;],[&quot;San José&quot;,&quot;Departamento de San José&quot;],[&quot;Soriano&quot;,&quot;Departamento de Soriano&quot;],[&quot;Tacuarembó&quot;,&quot;Departamento de Tacuarembó&quot;],[&quot;Treinta y Tres&quot;,&quot;Departamento de Treinta y Tres&quot;]]">
                         Uruguay
                       </option>
                       <option value="Uzbekistan" data-provinces="[]">Uzbekistán</option>
                       <option value="Vanuatu" data-provinces="[]">Vanuatu</option>
-                      <option
-                        value="Venezuela"
-                        data-provinces="[[&quot;Amazonas&quot;,&quot;Amazonas&quot;],[&quot;Anzoátegui&quot;,&quot;Anzoátegui&quot;],[&quot;Apure&quot;,&quot;Apure&quot;],[&quot;Aragua&quot;,&quot;Aragua&quot;],[&quot;Barinas&quot;,&quot;Barinas&quot;],[&quot;Bolívar&quot;,&quot;Bolívar&quot;],[&quot;Carabobo&quot;,&quot;Carabobo&quot;],[&quot;Cojedes&quot;,&quot;Cojedes&quot;],[&quot;Delta Amacuro&quot;,&quot;Delta Amacuro&quot;],[&quot;Dependencias Federales&quot;,&quot;Dependencias Federales Venezolanas&quot;],[&quot;Distrito Capital&quot;,&quot;Distrito Capital&quot;],[&quot;Falcón&quot;,&quot;Falcón&quot;],[&quot;Guárico&quot;,&quot;Guárico&quot;],[&quot;La Guaira&quot;,&quot;Vargas&quot;],[&quot;Lara&quot;,&quot;Lara&quot;],[&quot;Miranda&quot;,&quot;Miranda&quot;],[&quot;Monagas&quot;,&quot;Monagas&quot;],[&quot;Mérida&quot;,&quot;Mérida&quot;],[&quot;Nueva Esparta&quot;,&quot;Nueva Esparta&quot;],[&quot;Portuguesa&quot;,&quot;Portuguesa&quot;],[&quot;Sucre&quot;,&quot;Sucre&quot;],[&quot;Trujillo&quot;,&quot;Trujillo&quot;],[&quot;Táchira&quot;,&quot;Táchira&quot;],[&quot;Yaracuy&quot;,&quot;Yaracuy&quot;],[&quot;Zulia&quot;,&quot;Zulia&quot;]]"
-                      >
+                      <option value="Venezuela"
+                        data-provinces="[[&quot;Amazonas&quot;,&quot;Amazonas&quot;],[&quot;Anzoátegui&quot;,&quot;Anzoátegui&quot;],[&quot;Apure&quot;,&quot;Apure&quot;],[&quot;Aragua&quot;,&quot;Aragua&quot;],[&quot;Barinas&quot;,&quot;Barinas&quot;],[&quot;Bolívar&quot;,&quot;Bolívar&quot;],[&quot;Carabobo&quot;,&quot;Carabobo&quot;],[&quot;Cojedes&quot;,&quot;Cojedes&quot;],[&quot;Delta Amacuro&quot;,&quot;Delta Amacuro&quot;],[&quot;Dependencias Federales&quot;,&quot;Dependencias Federales Venezolanas&quot;],[&quot;Distrito Capital&quot;,&quot;Distrito Capital&quot;],[&quot;Falcón&quot;,&quot;Falcón&quot;],[&quot;Guárico&quot;,&quot;Guárico&quot;],[&quot;La Guaira&quot;,&quot;Vargas&quot;],[&quot;Lara&quot;,&quot;Lara&quot;],[&quot;Miranda&quot;,&quot;Miranda&quot;],[&quot;Monagas&quot;,&quot;Monagas&quot;],[&quot;Mérida&quot;,&quot;Mérida&quot;],[&quot;Nueva Esparta&quot;,&quot;Nueva Esparta&quot;],[&quot;Portuguesa&quot;,&quot;Portuguesa&quot;],[&quot;Sucre&quot;,&quot;Sucre&quot;],[&quot;Trujillo&quot;,&quot;Trujillo&quot;],[&quot;Táchira&quot;,&quot;Táchira&quot;],[&quot;Yaracuy&quot;,&quot;Yaracuy&quot;],[&quot;Zulia&quot;,&quot;Zulia&quot;]]">
                         Venezuela
                       </option>
                       <option value="Vietnam" data-provinces="[]">Vietnam</option>
@@ -623,29 +513,15 @@
                       <option value="Zambia" data-provinces="[]">Zambia</option>
                       <option value="Zimbabwe" data-provinces="[]">Zimbabue</option>
                     </select>
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      fill="none"
-                      width="10"
-                      class="icon icon-dropdown-chevron"
-                      viewBox="0 0 10 6"
-                    >
+                    <svg aria-hidden="true" focusable="false" fill="none" width="10" class="icon icon-dropdown-chevron"
+                      viewBox="0 0 10 6">
                       <path d="m1 1 4 4 4-4" stroke="currentColor" stroke-linecap="square"></path>
                     </svg>
-                    <label
-                      for="address-country"
-                      class="floating-label text-xs"
-                      >País
+                    <label for="address-country" class="floating-label text-xs">País
                     </label>
                   </div>
                   <div class="form-control">
-                    <select
-                      id="address-province"
-                      class="select"
-                      name="address[province]"
-                      autocomplete="address-level1"
-                    >
+                    <select id="address-province" class="select" name="address[province]" autocomplete="address-level1">
                       <option value="Aguascalientes">Aguascalientes</option>
                       <option value="Baja California">Baja California</option>
                       <option value="Baja California Sur">Baja California Sur</option>
@@ -679,38 +555,29 @@
                       <option value="Yucatán">Yucatán</option>
                       <option value="Zacatecas">Zacatecas</option>
                     </select>
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      fill="none"
-                      width="10"
-                      class="icon icon-dropdown-chevron"
-                      viewBox="0 0 10 6"
-                    >
+                    <svg aria-hidden="true" focusable="false" fill="none" width="10" class="icon icon-dropdown-chevron"
+                      viewBox="0 0 10 6">
                       <path d="m1 1 4 4 4-4" stroke="currentColor" stroke-linecap="square"></path>
                     </svg>
-                    <label
-                      for="address-province"
-                      class="floating-label text-xs"
-                      >Provincia
+                    <label for="address-province" class="floating-label text-xs">Provincia
                     </label>
                   </div>
                 </country-selector>
                 <!--
-                  <div class="checkbox-control">
-                    <input id="address-default" class="checkbox" type="checkbox"  value="1">
-                    <label for="address-default">Establecer como dirección predeterminada</label>
-                  </div>
-                -->
+                        <div class="checkbox-control">
+                          <input id="address-default" class="checkbox" type="checkbox"  value="1">
+                          <label for="address-default">Establecer como dirección predeterminada</label>
+                        </div>
+                      -->
               </div>
               <button type="submit" name="address[default]" class="button button-xl">Guardar dirección</button>
             </form>
           </div>
         </div>
       </div>
-
+    
       <style>
-        .section-map-address-description{
+        .section-map-address-description {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           grid-template-rows: repeat(1, auto);
@@ -718,160 +585,183 @@
           justify-items: center;
           align-items: center;
         }
-        .section-map-address{
+    
+        .section-map-address {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           grid-template-rows: repeat(1, 25rem);
           gap: 8px;
+          padding-bottom: 40px;
         }
-        .container-address{
-          display:flex;
-          flex-direction:column;
-          gap:1rem;
+    
+        .container-address {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+    
+        }
+    
+        .search-control {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+    
+        .container-address .address-input {
+          padding: 10px;
+          width: 300px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+        }
+    
+        .container-address button {
+          padding: 8px 12px;
+          cursor: pointer;
+          border-radius: 4px;
+          border: 1px solid #ddd;
+        }
+    
+        .container-address button {
+          padding: 8px 12px;
+          cursor: pointer;
+          border-radius: 4px;
+          border: 1px solid #ddd;
+        }
+        .magecomp-round-btns{
+          display:none;
+        }
+        @media (max-width: 767px){
 
-        }
-        .search-control{
-          position:relative;
-          display:flex;
-          flex-direction:row;
-          flex-wrap:wrap;
-          gap:8px;
-        }
-        .container-address .address-input{
-            padding: 10px;
-            width: 300px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .container-address button{
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-        .container-address button{
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-            border: 1px solid #ddd;
+          .section-map-address{
+            grid-template-columns:none;
+            grid-template-rows: repeat(1, 20rem);
+          }
+          .section-map-address-description p{
+            font-size:12px;
+          }
+          
         }
       </style>
       <script>
-      let map;
-      let markers = [];
-      let geocoder;
-      let autocomplete;
-      let lastMarker = null; // Para mantener referencia al último marcador añadido
-      
-      function initMap() {
+        let map;
+        let markers = [];
+        let geocoder;
+        let autocomplete;
+        let lastMarker = null; // Para mantener referencia al último marcador añadido
+
+
+    
+        function initMap() {
           // Mapa inicial
           map = new google.maps.Map(document.getElementById("map"), {
-              zoom: 6,
-              center: { lat: 23.6345, lng: -102.5528 },
+            zoom: 6,
+            center: { lat: 23.6345, lng: -102.5528 },
           });
-      
+    
           geocoder = new google.maps.Geocoder();
-      
+    
           // Configurar autocompletado
           const input = document.getElementById("address-input");
           autocomplete = new google.maps.places.Autocomplete(input, {
-              types: ['geocode'],
-              componentRestrictions: {country: 'mx'},
-              fields: ['address_components', 'geometry', 'formatted_address']
+            types: ['geocode'],
+            componentRestrictions: { country: 'mx' },
+            fields: ['address_components', 'geometry', 'formatted_address']
           });
-      
+    
           // Cuando se selecciona una opción del autocompletado
           autocomplete.addListener('place_changed', () => {
-              const place = autocomplete.getPlace();
-              if (!place.geometry) {
-                  alert("No se encontraron detalles para: '" + place.name + "'");
-                  return;
-              }
-              
-              // Crear marcador para la ubicación seleccionada
-              const marker = new google.maps.Marker({
-                  position: place.geometry.location,
-                  map: map,
-                  title: place.formatted_address
-              });
-      
-              markers.push(marker);
-              lastMarker = marker;
-              map.setCenter(place.geometry.location);
-              map.setZoom(15);
-      
-              // Extraer y mostrar los componentes de la dirección
-              extractAddressComponents(place);
+            const place = autocomplete.getPlace();
+            if (!place.geometry) {
+              alert("No se encontraron detalles para: '" + place.name + "'");
+              return;
+            }
+    
+            // Crear marcador para la ubicación seleccionada
+            const marker = new google.maps.Marker({
+              position: place.geometry.location,
+              map: map,
+              title: place.formatted_address
+            });
+    
+            markers.push(marker);
+            lastMarker = marker;
+            map.setCenter(place.geometry.location);
+            map.setZoom(15);
+    
+            // Extraer y mostrar los componentes de la dirección
+            extractAddressComponents(place);
           });
-      
+    
           // Buscar dirección al hacer clic en el botón
           document.getElementById("btnBuscar").addEventListener("click", () => {
-              const address = document.getElementById("address-input").value;
-              if (address) {
-                  geocodeAddress(address);
-              } else {
-                  alert("Por favor, escribe una dirección.");
-              }
+            const address = document.getElementById("address-input").value;
+            if (address) {
+              geocodeAddress(address);
+            } else {
+              alert("Por favor, escribe una dirección.");
+            }
           });
-      
+    
           // Geolocalización del dispositivo
           document.getElementById("btnMarcador").addEventListener("click", addCurrentLocationMarker);
-      
+    
           // Limpiar marcadores
           document.getElementById("btnLimpiar").addEventListener("click", clearMarkers);
-          
+    
           // Escuchar clics en el mapa para agregar marcadores
           map.addListener("click", (event) => {
-              addMarkerAtPosition(event.latLng);
+            addMarkerAtPosition(event.latLng);
           });
-      }
-      
-      // Función para extraer componentes de dirección
-      function extractAddressComponents(place) {
+        }
+    
+        // Función para extraer componentes de dirección
+        function extractAddressComponents(place) {
           let addressComponents = {
-              street: '',
-              street_number: '',
-              neighborhood: '',
-              postal_code: '',
-              city: '',
-              state: '',
-              country: '',
-              formatted_address: place.formatted_address,
-              latitude: place.geometry.location.lat(),
-              longitude: place.geometry.location.lng()
+            street: '',
+            street_number: '',
+            neighborhood: '',
+            postal_code: '',
+            city: '',
+            state: '',
+            country: '',
+            formatted_address: place.formatted_address,
+            latitude: place.geometry.location.lat(),
+            longitude: place.geometry.location.lng()
           };
-      
+    
           // Analizar los componentes de la dirección
           place.address_components.forEach(component => {
-              const types = component.types;
-              
-              if (types.includes('route')) {
-                  addressComponents.street = component.long_name;
-              }
-              if (types.includes('street_number')) {
-                  addressComponents.street_number = component.long_name;
-              }
-              if (types.includes('neighborhood') || types.includes('sublocality')) {
-                  addressComponents.neighborhood = component.long_name;
-              }
-              if (types.includes('postal_code')) {
-                  addressComponents.postal_code = component.long_name;
-              }
-              if (types.includes('locality')) {
-                  addressComponents.city = component.long_name;
-              }
-              if (types.includes('administrative_area_level_1')) {
-                  addressComponents.state = component.long_name;
-              }
-              if (types.includes('country')) {
-                  addressComponents.country = component.long_name;
-              }
+            const types = component.types;
+    
+            if (types.includes('route')) {
+              addressComponents.street = component.long_name;
+            }
+            if (types.includes('street_number')) {
+              addressComponents.street_number = component.long_name;
+            }
+            if (types.includes('neighborhood') || types.includes('sublocality')) {
+              addressComponents.neighborhood = component.long_name;
+            }
+            if (types.includes('postal_code')) {
+              addressComponents.postal_code = component.long_name;
+            }
+            if (types.includes('locality')) {
+              addressComponents.city = component.long_name;
+            }
+            if (types.includes('administrative_area_level_1')) {
+              addressComponents.state = component.long_name;
+            }
+            if (types.includes('country')) {
+              addressComponents.country = component.long_name;
+            }
           });
-      
+    
           // Mostrar los datos en la consola (puedes usarlos como necesites)
           console.log("Componentes de dirección:", addressComponents);
-          
+    
           // También puedes mostrarlos en el InfoWindow
           let infoContent = `<strong>Dirección completa:</strong> ${addressComponents.formatted_address}<br>`;
           infoContent += `<strong>Calle:</strong> ${addressComponents.street} ${addressComponents.street_number}<br>`;
@@ -880,9 +770,9 @@
           infoContent += `<strong>Ciudad:</strong> ${addressComponents.city}<br>`;
           infoContent += `<strong>Estado:</strong> ${addressComponents.state}<br>`;
           infoContent += `<strong>Coordenadas:</strong> ${addressComponents.latitude.toFixed(6)}, ${addressComponents.longitude.toFixed(6)}`;
-      
+    
           new google.maps.InfoWindow({
-              content: infoContent
+            content: infoContent
           }).open(map, lastMarker);
     
           // Llenar campos del formulario
@@ -893,142 +783,203 @@
           // País (select)
           const countrySelect = document.getElementById('address-country');
           if (countrySelect) {
-              let found = false;
-              for (let i = 0; i < countrySelect.options.length; i++) {
-                  if (
-                      countrySelect.options[i].text.trim().toLowerCase() === addressComponents.country.trim().toLowerCase() ||
-                      countrySelect.options[i].value.trim().toLowerCase() === addressComponents.country.trim().toLowerCase()
-                  ) {
-                      countrySelect.selectedIndex = i;
-                      found = true;
-                      break;
-                  }
-              }    
+            let found = false;
+            for (let i = 0; i < countrySelect.options.length; i++) {
+              if (
+                countrySelect.options[i].text.trim().toLowerCase() === addressComponents.country.trim().toLowerCase() ||
+                countrySelect.options[i].value.trim().toLowerCase() === addressComponents.country.trim().toLowerCase()
+              ) {
+                countrySelect.selectedIndex = i;
+                found = true;
+                break;
+              }
+            }
           }
     
           // Provincia/Estado (select)
           const provinceSelect = document.getElementById('address-province');
           if (provinceSelect) {
-              let found = false;
-              for (let i = 0; i < provinceSelect.options.length; i++) {
-                  if (
-                      provinceSelect.options[i].text.trim().toLowerCase() === addressComponents.state.trim().toLowerCase() ||
-                      provinceSelect.options[i].value.trim().toLowerCase() === addressComponents.state.trim().toLowerCase()
-                  ) {
-                      provinceSelect.selectedIndex = i;
-                      found = true;
-                      break;
-                  }
-              }     
+            let found = false;
+            for (let i = 0; i < provinceSelect.options.length; i++) {
+              if (
+                provinceSelect.options[i].text.trim().toLowerCase() === addressComponents.state.trim().toLowerCase() ||
+                provinceSelect.options[i].value.trim().toLowerCase() === addressComponents.state.trim().toLowerCase()
+              ) {
+                provinceSelect.selectedIndex = i;
+                found = true;
+                break;
+              }
+            }
           }
           return addressComponents;
-      }
-      
-      // Geocodificación: Convertir dirección en coordenadas
-      function geocodeAddress(address) {
+        }
+    
+        // Geocodificación: Convertir dirección en coordenadas
+        function geocodeAddress(address) {
           geocoder.geocode({ address: address }, (results, status) => {
-              if (status === "OK") {
-                  const location = results[0].geometry.location;
-                  const place = results[0]; // Objeto PlaceResult
-                  
-                  // Crear marcador
-                  const marker = new google.maps.Marker({
-                      position: location,
-                      map: map,
-                      title: address,
-                  });
-      
-                  markers.push(marker);
-                  lastMarker = marker;
-                  map.setCenter(location);
-                  map.setZoom(15);
-      
-                  // Extraer y mostrar los componentes de la dirección
-                  extractAddressComponents(place);
-              } else {
-                  alert("No se encontró la dirección: " + status);
-              }
+            if (status === "OK") {
+              const location = results[0].geometry.location;
+              const place = results[0]; // Objeto PlaceResult
+    
+              // Crear marcador
+              const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: address,
+              });
+    
+              markers.push(marker);
+              lastMarker = marker;
+              map.setCenter(location);
+              map.setZoom(15);
+    
+              // Extraer y mostrar los componentes de la dirección
+              extractAddressComponents(place);
+            } else {
+              alert("No se encontró la dirección: " + status);
+            }
           });
-      }
-      
-      // Agregar marcador en una posición específica
-      function addMarkerAtPosition(position) {
+        }
+    
+        // Agregar marcador en una posición específica
+        function addMarkerAtPosition(position) {
           // Realizar geocodificación inversa para obtener la dirección
           geocoder.geocode({ location: position }, (results, status) => {
-              if (status === "OK") {
-                  if (results[0]) {
-                      const marker = new google.maps.Marker({
-                          position: position,
-                          map: map,
-                          title: results[0].formatted_address
-                      });
-      
-                      markers.push(marker);
-                      lastMarker = marker;
-                      map.setCenter(position);
-                      map.setZoom(15);
-      
-                      // Extraer y mostrar los componentes de la dirección
-                      extractAddressComponents(results[0]);
-                  }
-              } else {
-                  alert("Error en geocodificación inversa: " + status);
+            if (status === "OK") {
+              if (results[0]) {
+                const marker = new google.maps.Marker({
+                  position: position,
+                  map: map,
+                  title: results[0].formatted_address
+                });
+    
+                markers.push(marker);
+                lastMarker = marker;
+                map.setCenter(position);
+                map.setZoom(15);
+    
+                // Extraer y mostrar los componentes de la dirección
+                extractAddressComponents(results[0]);
               }
+            } else {
+              alert("Error en geocodificación inversa: " + status);
+            }
           });
-      }
-      
-      // Agregar marcador en la ubicación actual
-      function addCurrentLocationMarker() {
+        }
+    
+        // Agregar marcador en la ubicación actual
+        function addCurrentLocationMarker() {
           if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(
-                  (position) => {
-                      const pos = {
-                          lat: position.coords.latitude,
-                          lng: position.coords.longitude,
-                      };
-      
-                      // Realizar geocodificación inversa para obtener la dirección
-                      geocoder.geocode({ location: pos }, (results, status) => {
-                          if (status === "OK" && results[0]) {
-                              const marker = new google.maps.Marker({
-                                  position: pos,
-                                  map: map,
-                                  title: results[0].formatted_address,
-                              });
-      
-                              markers.push(marker);
-                              lastMarker = marker;
-                              map.setCenter(pos);
-                              map.setZoom(15);
-      
-                              // Extraer y mostrar los componentes de la dirección
-                              extractAddressComponents(results[0]);
-                          }
-                      });
-                  },
-                  (error) => {
-                      alert("Error: " + error.message);
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                };
+    
+                // Realizar geocodificación inversa para obtener la dirección
+                geocoder.geocode({ location: pos }, (results, status) => {
+                  if (status === "OK" && results[0]) {
+                    const marker = new google.maps.Marker({
+                      position: pos,
+                      map: map,
+                      title: results[0].formatted_address,
+                    });
+    
+                    markers.push(marker);
+                    lastMarker = marker;
+                    map.setCenter(pos);
+                    map.setZoom(15);
+    
+                    // Extraer y mostrar los componentes de la dirección
+                    extractAddressComponents(results[0]);
                   }
-              );
+                });
+              },
+              (error) => {
+                alert("Error: " + error.message);
+              }
+            );
           } else {
-              alert("Tu navegador no soporta geolocalización. Escribela en el buscador.");
+            alert("Tu navegador no soporta geolocalización. Escribela en el buscador.");
           }
-      }
-      
-      // Limpiar todos los marcadores
-      function clearMarkers() {
+        }
+    
+        // Limpiar todos los marcadores
+        function clearMarkers() {
           markers.forEach(marker => marker.setMap(null));
           markers = [];
           lastMarker = null;
-      }
+        }
       </script>
       <!-- Cargar la API de Google Maps con tu clave -->
-      <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDElCwUcsmkV4T72lsT-h2CWPCqqjUOkEs&libraries=places&callback=initMap"
-        async
-        defer
-      ></script>
+      <script>
+        function loadGoogleMaps() {
+          if (!window.google || !window.google.maps) {
+            var script = document.createElement('script');
+            script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDElCwUcsmkV4T72lsT-h2CWPCqqjUOkEs&libraries=places&callback=initMap";
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+          } else {
+            initMap();
+          }
+        }
+        document.addEventListener('DOMContentLoaded', loadGoogleMaps);
+      </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          //Eliminar iconos de inicio de sesion rapido en el form de direcciones
+          const iconsSesion = document.querySelector('.magecomp-round-btns');
+          if (iconsSesion) {
+              iconsSesion.remove(); 
+          }
 
+          var addressForm = document.getElementById('address-form');
+          var checkoutBtn = document.getElementById('checkout-btn-cart');
+          var warningBtn = document.getElementById('checkout-warning-btn');
+          var warningDiv = document.getElementById('checkout-warning');
+          
+          // Mostrar u ocultar botones según si hay dirección guardada
+          function actualizarBotonesCheckout() {
+            if (localStorage.getItem('address_saved') === '1') {
+              
+              checkoutBtn.style.display = '';
+              warningBtn.style.display = 'none';
+              warningDiv.style.display = 'none';
+            } else {
+              checkoutBtn.style.display = 'none';
+              warningBtn.style.display = '';
+              warningDiv.style.display = 'none';
+            }
+          }
+
+          actualizarBotonesCheckout();
+
+          // Evento al guardar dirección
+          if (addressForm) {
+            addressForm.addEventListener('submit', function () {
+              localStorage.setItem('address_saved', '1');
+              actualizarBotonesCheckout();
+            });
+          }
+
+          // Lógica para el botón de advertencia
+          localStorage.removeItem('address_saved');
+          let advertenciaMostrada = false;
+          if (warningBtn) {
+            warningBtn.addEventListener('click', function () {
+              if (!advertenciaMostrada) {
+                warningDiv.textContent = 'Si no guardas tu dirección ahora, podrás hacerlo más adelante, pero podrías equivocarte. ¿Deseas continuar? Presiona de nuevo "Finalizar compra" para continuar.';
+                warningDiv.style.display = 'block';
+                advertenciaMostrada = true;
+                warningBtn.style.display = 'none';
+                checkoutBtn.style.display = '';
+              } 
+            });
+          }
+        });
+      </script>
       <div class="section-stack">
         <div class="section-header justify-self-center text-center">
           <div class="v-stack gap-4">
@@ -1190,10 +1141,9 @@
                 </noscript>
 
                 {%- assign checkout_button = 'cart.general.checkout' | t -%}
-                {% comment %}
-                {%- render 'button', type: 'submit', content: checkout_button, name: 'checkout', id: 'checkout-btn', disabled: true -%}
-                {% endcomment %}
-                <button id="checkout-btn-cart" type="submit" class="button" name="checkout" >Finalizar compra</button>
+                <button type="button" id="checkout-warning-btn" class="button" style="margin-top: 16px;">Finalizar compra</button>
+                <button type="submit" id="checkout-btn-cart" class="button" name="checkout" style="display:none;">Finalizar compra</button>
+                <div id="checkout-warning" style="color: #b91c1c; margin-top: 8px; display: none;"></div>
               </div>
             </div>
           </div>
@@ -1231,29 +1181,6 @@
       updateCartStockLimits();
   });
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var addressForm = document.getElementById('address-form');
-  var checkoutBtn = document.getElementById('checkout-btn-cart');
-  if (checkoutBtn) {
-    checkoutBtn.disabled = true;
-  }
-
-  if (addressForm && checkoutBtn) {
-    addressForm.addEventListener('submit', function(e) {
-      // Espera a que el formulario se envíe y recargue la página
-      localStorage.setItem('address_saved', '1');
-    });
-
-    // Al cargar la página, si ya se guardó la dirección, habilita el botón
-    if (localStorage.getItem('address_saved') === '1') {
-      checkoutBtn.disabled = false;
-      localStorage.removeItem('address_saved');
-    }
-  }
-});
-</script>
-
 
 {% schema %}
 {
