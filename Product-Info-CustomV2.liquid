@@ -171,6 +171,11 @@
       <div class="medidas-container" id="seccionesMedidasBordado"></div>
       <div class="bordado-info">
         {% render 'bordados-info' %}
+        <label for="confirmImg">
+              <input type= "checkbox" id="confirmImg" name="propiedadIntelectual" required aria-required="true"> Acepto
+          
+        </label>
+
       </div>
       <div class="btnsSection">
         <button class="btnModuloBordado button" id="btnNextSelection">Agrega otro bordado por $25</button>
@@ -438,7 +443,7 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   `;
   uploadContainer.appendChild(section);
-
+    
     // Vincular el input a handleFileUpload
     const fileInput = section.querySelector(`#subirArchivoBordado-${id}`);
     fileInput.addEventListener("change", function(){
@@ -799,6 +804,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const colorOptions     = document.querySelectorAll(".color-item");
   const sizeOptions      = document.querySelectorAll(".size-item");
   const sizeInputs       = document.querySelectorAll(".size-option");
+ 
 
   // ID del producto BORDADO
   const bordadoId = 40551847821470;
@@ -807,6 +813,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Para contar archivos subidos
   let archivosSubidos  = 0;
   let cantidadBordado  = 0;
+
+
   
   // 2.4) Función para contar archivos subidos
   function contarArchivosSubidos() {
@@ -1035,10 +1043,13 @@ document.addEventListener("DOMContentLoaded", function () {
             // Recuperar URL
             let prevDiv = document.getElementById(`vistaPreviaBordado-${pos}`);
             let linkEl  = prevDiv.querySelector("img");
-            if (linkEl) {
+            if(confirmImg.checked && linkEl){
               item.properties[`Bordado ${pos}`] = linkEl.src;
               // AGREGAR LAS MEDIDAS DE CADA AREA ESPECIFICA
               item.properties[`Medidas ${pos}`] = `Ancho: ${medidasPorArea[pos].ancho} cm Alto: ${medidasPorArea[pos].alto} cm`;
+              
+            }
+            if (linkEl) {
             }
             
           }
