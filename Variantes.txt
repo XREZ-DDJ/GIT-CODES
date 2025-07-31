@@ -1,0 +1,86 @@
+Codigo liquid:
+<!-- Lista de variantes del producto -->
+<ul>
+  {% for variant in product.variants %}
+    <li>
+      ID: {{ variant.id }} |
+      Opción 1: {{ variant.option1 }} |
+      Opción 2: {{ variant.option2 }} |
+      Opción 3: {{ variant.option3 }} |
+      Stock: {{ variant.inventory_quantity }}
+    </li>
+  {% endfor %}
+</ul>
+Salida:
+ID: 40292731519134 | Opción 1: XCH | Opción 2: XCH | Opción 3: Dama | Stock: 7
+ID: 40292733091998 | Opción 1: XCH | Opción 2: XCH | Opción 3: Caballero | Stock: 6
+ID: 40292731584670 | Opción 1: XCH | Opción 2: CH | Opción 3: Dama | Stock: 6
+ID: 40292733157534 | Opción 1: XCH | Opción 2: CH | Opción 3: Caballero | Stock: 11
+ID: 40292731650206 | Opción 1: XCH | Opción 2: M | Opción 3: Dama | Stock: 7
+ID: 40292733223070 | Opción 1: XCH | Opción 2: M | Opción 3: Caballero | Stock: 7
+ID: 40292731682974 | Opción 1: XCH | Opción 2: G | Opción 3: Dama | Stock: 7
+ID: 40292733255838 | Opción 1: XCH | Opción 2: G | Opción 3: Caballero | Stock: 4
+ID: 40292731715742 | Opción 1: XCH | Opción 2: XG | Opción 3: Dama | Stock: 7
+ID: 40292733288606 | Opción 1: XCH | Opción 2: XG | Opción 3: Caballero | Stock: 4
+ID: 40292731748510 | Opción 1: XCH | Opción 2: 2X | Opción 3: Dama | Stock: 7
+ID: 40292733321374 | Opción 1: XCH | Opción 2: 2X | Opción 3: Caballero | Stock: 8
+ID: 40292731781278 | Opción 1: CH | Opción 2: XCH | Opción 3: Dama | Stock: 0
+ID: 40292733354142 | Opción 1: CH | Opción 2: XCH | Opción 3: Caballero | Stock: 6
+ID: 40292731846814 | Opción 1: CH | Opción 2: CH | Opción 3: Dama | Stock: 0
+ID: 40292733419678 | Opción 1: CH | Opción 2: CH | Opción 3: Caballero | Stock: 9
+ID: 40292731912350 | Opción 1: CH | Opción 2: M | Opción 3: Dama | Stock: 0
+ID: 40292733485214 | Opción 1: CH | Opción 2: M | Opción 3: Caballero | Stock: 7
+ID: 40292731945118 | Opción 1: CH | Opción 2: G | Opción 3: Dama | Stock: 0
+ID: 40292733517982 | Opción 1: CH | Opción 2: G | Opción 3: Caballero | Stock: 4
+ID: 40292731977886 | Opción 1: CH | Opción 2: XG | Opción 3: Dama | Stock: 0
+ID: 40292733550750 | Opción 1: CH | Opción 2: XG | Opción 3: Caballero | Stock: 4
+ID: 40292732010654 | Opción 1: CH | Opción 2: 2X | Opción 3: Dama | Stock: 0
+ID: 40292733583518 | Opción 1: CH | Opción 2: 2X | Opción 3: Caballero | Stock: 8
+ID: 40292732043422 | Opción 1: M | Opción 2: XCH | Opción 3: Dama | Stock: 6
+ID: 40292733616286 | Opción 1: M | Opción 2: XCH | Opción 3: Caballero | Stock: 0
+ID: 40292732108958 | Opción 1: M | Opción 2: CH | Opción 3: Dama | Stock: 6
+ID: 40292733681822 | Opción 1: M | Opción 2: CH | Opción 3: Caballero | Stock: 0
+ID: 40292732174494 | Opción 1: M | Opción 2: M | Opción 3: Dama | Stock: 6
+ID: 40292733747358 | Opción 1: M | Opción 2: M | Opción 3: Caballero | Stock: 0
+ID: 40292732207262 | Opción 1: M | Opción 2: G | Opción 3: Dama | Stock: 6
+ID: 40292733780126 | Opción 1: M | Opción 2: G | Opción 3: Caballero | Stock: 0
+ID: 40292732240030 | Opción 1: M | Opción 2: XG | Opción 3: Dama | Stock: 6
+ID: 40292733812894 | Opción 1: M | Opción 2: XG | Opción 3: Caballero | Stock: 0
+ID: 40292732272798 | Opción 1: M | Opción 2: 2X | Opción 3: Dama | Stock: 6
+ID: 40292733845662 | Opción 1: M | Opción 2: 2X | Opción 3: Caballero | Stock: 0
+ID: 40292732305566 | Opción 1: G | Opción 2: XCH | Opción 3: Dama | Stock: 8
+ID: 40292733878430 | Opción 1: G | Opción 2: XCH | Opción 3: Caballero | Stock: 6
+ID: 40292732371102 | Opción 1: G | Opción 2: CH | Opción 3: Dama | Stock: 6
+ID: 40292733943966 | Opción 1: G | Opción 2: CH | Opción 3: Caballero | Stock: 7
+ID: 40292732436638 | Opción 1: G | Opción 2: M | Opción 3: Dama | Stock: 8
+ID: 40292734009502 | Opción 1: G | Opción 2: M | Opción 3: Caballero | Stock: 7
+ID: 40292732469406 | Opción 1: G | Opción 2: G | Opción 3: Dama | Stock: 8
+ID: 40292734042270 | Opción 1: G | Opción 2: G | Opción 3: Caballero | Stock: 4
+ID: 40292732502174 | Opción 1: G | Opción 2: XG | Opción 3: Dama | Stock: 8
+ID: 40292734075038 | Opción 1: G | Opción 2: XG | Opción 3: Caballero | Stock: 4
+ID: 40292732534942 | Opción 1: G | Opción 2: 2X | Opción 3: Dama | Stock: 8
+ID: 40292734107806 | Opción 1: G | Opción 2: 2X | Opción 3: Caballero | Stock: 7
+ID: 40292732567710 | Opción 1: XG | Opción 2: XCH | Opción 3: Dama | Stock: 10
+ID: 40292734140574 | Opción 1: XG | Opción 2: XCH | Opción 3: Caballero | Stock: 5
+ID: 40292732633246 | Opción 1: XG | Opción 2: CH | Opción 3: Dama | Stock: 6
+ID: 40292734206110 | Opción 1: XG | Opción 2: CH | Opción 3: Caballero | Stock: 5
+ID: 40292732698782 | Opción 1: XG | Opción 2: M | Opción 3: Dama | Stock: 9
+ID: 40292734271646 | Opción 1: XG | Opción 2: M | Opción 3: Caballero | Stock: 5
+ID: 40292732731550 | Opción 1: XG | Opción 2: G | Opción 3: Dama | Stock: 8
+ID: 40292734304414 | Opción 1: XG | Opción 2: G | Opción 3: Caballero | Stock: 4
+ID: 40292732764318 | Opción 1: XG | Opción 2: XG | Opción 3: Dama | Stock: 12
+ID: 40292734337182 | Opción 1: XG | Opción 2: XG | Opción 3: Caballero | Stock: 4
+ID: 40292732797086 | Opción 1: XG | Opción 2: 2X | Opción 3: Dama | Stock: 11
+ID: 40292734369950 | Opción 1: XG | Opción 2: 2X | Opción 3: Caballero | Stock: 5
+ID: 40292732829854 | Opción 1: 2X | Opción 2: XCH | Opción 3: Dama | Stock: 10
+ID: 40292734402718 | Opción 1: 2X | Opción 2: XCH | Opción 3: Caballero | Stock: 6
+ID: 40292732895390 | Opción 1: 2X | Opción 2: CH | Opción 3: Dama | Stock: 6
+ID: 40292734468254 | Opción 1: 2X | Opción 2: CH | Opción 3: Caballero | Stock: 11
+ID: 40292732960926 | Opción 1: 2X | Opción 2: M | Opción 3: Dama | Stock: 9
+ID: 40292734533790 | Opción 1: 2X | Opción 2: M | Opción 3: Caballero | Stock: 7
+ID: 40292732993694 | Opción 1: 2X | Opción 2: G | Opción 3: Dama | Stock: 8
+ID: 40292734566558 | Opción 1: 2X | Opción 2: G | Opción 3: Caballero | Stock: 4
+ID: 40292733026462 | Opción 1: 2X | Opción 2: XG | Opción 3: Dama | Stock: 11
+ID: 40292734599326 | Opción 1: 2X | Opción 2: XG | Opción 3: Caballero | Stock: 4
+ID: 40292733059230 | Opción 1: 2X | Opción 2: 2X | Opción 3: Dama | Stock: 11
+ID: 40292734632094 | Opción 1: 2X | Opción 2: 2X | Opción 3: Caballero | Stock: -2
