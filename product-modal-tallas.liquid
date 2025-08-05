@@ -50,8 +50,8 @@
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
-    z-index:100;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 100;
+    transition: opacity 0.5s cubic-bezier(0.77,0,0.175,1), visibility 0.5s cubic-bezier(0.77,0,0.175,1);
   }
   
   .overlayGuiaTallas.active {
@@ -59,8 +59,15 @@
     visibility: visible;
   }
   
+  .moduloGuiaTallas {
+    /* ...otras reglas... */
+    transform: translateY(-50px) scale(0.8) rotateX(-30deg);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.77,0,0.175,1), opacity 0.6s cubic-bezier(0.77,0,0.175,1);
+  }
   .overlayGuiaTallas.active .moduloGuiaTallas {
-    transform: scale(1);
+    transform: translateY(0) scale(1) rotateX(0deg);
+    opacity: 1;
   }
   
 
@@ -74,8 +81,7 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transform: scale(0.8);
-    transition: transform 0.3s ease;
+    /* Animación inicial, ahora controlada por .overlayGuiaTallas.active */
     top: 50px;
     overflow: overlay;
   }
