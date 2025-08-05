@@ -1,0 +1,119 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- Botón para abrir el modal -->
+<p id="btnGuiaTallas" class="btnGuiaTallas">
+  ¿Dudas con la talla? Haz clic aquí y asegúrate de elegir bien
+  <i class="fas fa-ruler-horizontal size-icon"></i>
+</p>
+
+<!-- Modal -->
+<div class="overlayGuiaTallas" id="overlayGuiaTallas" >
+  <div class="moduloGuiaTallas">
+    {% render 'product-tallas' %}
+    <span id="closeModalTallas"class="close">&times;</span>
+  </div>
+</div>
+
+<style>
+  .btnGuiaTallas {
+    color: black;
+    cursor: pointer;
+    text-align: center;
+  }
+  @media (max-width: 767px){
+    .btnGuiaTallas{
+      display:inline;
+    }
+  }
+  
+  .btnGuiaTallas:hover {
+    color: red;
+    text-decoration: underline;
+  }
+  
+  /* Icono de referencia de tallas */
+  .size-icon {
+    font-size: 18px;
+    color: gray;
+  }
+  
+  .overlayGuiaTallas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    z-index:100;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .overlayGuiaTallas.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .overlayGuiaTallas.active .moduloGuiaTallas {
+    transform: scale(1);
+  }
+  
+
+  
+  .moduloGuiaTallas {
+    position: relative;
+    display: grid;
+    background: white;
+    width: 90%;
+    height: 80%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    top: 50px;
+    overflow: overlay;
+  }
+
+  
+  .close {
+    position: absolute;
+    top: 0%;
+    right: 1%;
+    font-size: 40px;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: red;
+  }
+
+    @media (max-width:768px ){
+  .moduloGuiaTallas {         
+        height: 86%;
+        top: 30px;
+    }
+}
+</style>
+
+
+<script>
+  const openModalTallas = document.getElementById("btnGuiaTallas");
+  const closeModalTallas = document.getElementById("closeModalTallas");
+  const modalOverlayTallas = document.getElementById("overlayGuiaTallas");
+  
+  openModalTallas.addEventListener("click", () => {
+      modalOverlayTallas.classList.add("active");
+      document.body.style.overflow = "hidden"; // Evita el scroll
+  });
+  
+  closeModalTallas.addEventListener("click", () => {
+      modalOverlayTallas.classList.remove("active");
+      document.body.style.overflow = ""; // Restaura el scroll
+  });
+</script>

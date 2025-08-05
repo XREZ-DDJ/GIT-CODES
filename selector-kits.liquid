@@ -1,46 +1,49 @@
-<!-- Selector de Género -->
-<p class="h6">Género:</p>
-<div class="kit-genero" id="generos" style="margin-top:10px; margin-bottom:20px;">
-  {% assign generos = product.variants | map: 'option3' | uniq %}
-  {% for genero in generos %}
-    <button type="button" class="genero-btn" data-genero="{{ genero }}"{% if genero == 'Dama' %} data-default="true"{% endif %}>{{ genero }}</button>
-  {% endfor %}
-</div>
 
-<!-- Selector de Prenda Superior -->
-<p class="h6">Prenda superior:</p>
-<div class="kit-superiores" id="superiores" style="margin-top:10px;">
-  {% assign superiores = product.variants | map: 'option1' | uniq %}
-  {% for superior in superiores %}
-    <div class="superior-btn-wrapper" style="display:inline-block;text-align:center;">
-      <button type="button" class="superior-btn" data-superior="{{ superior }}">{{ superior }}</button>
-      <div class="superior-stock" data-superior-stock="{{ superior }}"></div>
-    </div>
-  {% endfor %}
-</div>
+<div class="selector-kits-container">
+  <!-- Selector de Género -->
+  <p class="h6">Género:</p>
+  <div class="kit-genero" id="generos" style="margin-top:10px; margin-bottom:20px;">
+    {% assign generos = product.variants | map: 'option3' | uniq %}
+    {% for genero in generos %}
+      <button type="button" class="genero-btn" data-genero="{{ genero }}"{% if genero == 'Dama' %} data-default="true"{% endif %}>{{ genero }}</button>
+    {% endfor %}
+  </div>
 
-<!-- Selector de Prenda Inferior -->
-<p class="h6">Prenda inferior:</p>
-<div class="kit-inferiores" id="inferiores" style="margin-top:10px;  margin-bottom:20px;">
-  {% assign inferiores = product.variants | map: 'option2' | uniq %}
-  {% for inferior in inferiores %}
-    <div class="inferior-btn-wrapper" style="display:inline-block;text-align:center;">
-      <button type="button" class="inferior-btn" data-inferior="{{ inferior }}">{{ inferior }}</button>
-      <div class="inferior-stock" data-inferior-stock="{{ inferior }}"></div>
-    </div>
-  {% endfor %}
-</div>
+  <!-- Selector de Prenda Superior -->
+  <p class="h6">Prenda superior:</p>
+  <div class="kit-superiores" id="superiores"  style="margin-top:10px;">
+    {% assign superiores = product.variants | map: 'option1' | uniq %}
+    {% for superior in superiores %}
+      <div class="superior-btn-wrapper" style="display:inline-block;text-align:center;">
+        <button type="button" class="superior-btn" data-superior="{{ superior }}">{{ superior }}</button>
+        <div class="superior-stock" data-superior-stock="{{ superior }}"></div>
+      </div>
+    {% endfor %}
+  </div>
 
-<!-- Selector de Cantidad -->
-<p class="h6">Cantidad</p class="h6">
-<div class="quantity-selector quantity-selector--sm" style="margin-top:10px;">  
-  <button type="button" id="quantity-decrease" class="quantity-selector__button qty-btn-horizontal">-</button>
-  <input type="number" id="kit-quantity" min="1" value="1" class="quantity-selector__input text-sm">   
-  <button type="button" id="quantity-increase" class="quantity-selector__button qty-btn-horizontal">+</button>
-</div>
+  <!-- Selector de Prenda Inferior -->
+  <p class="h6">Prenda inferior:</p>
+  <div class="kit-inferiores" id="inferiores" style="margin-top:10px;  margin-bottom:20px;">
+    {% assign inferiores = product.variants | map: 'option2' | uniq %}
+    {% for inferior in inferiores %}
+      <div class="inferior-btn-wrapper" style="display:inline-block;text-align:center;">
+        <button type="button" class="inferior-btn" data-inferior="{{ inferior }}">{{ inferior }}</button>
+        <div class="inferior-stock" data-inferior-stock="{{ inferior }}"></div>
+      </div>
+    {% endfor %}
+  </div>
 
-<!-- Botón Agregar al Carrito -->
-<button id="add-to-cart-btn-kit" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+  <!-- Selector de Cantidad -->
+  <p class="h6">Cantidad</p>
+  <div class="quantity-selector quantity-selector--sm" style="margin-top:10px;">  
+    <button type="button" id="quantity-decrease" class="quantity-selector__button qty-btn-horizontal">-</button>
+    <input type="number" id="kit-quantity" min="1" value="1" class="quantity-selector__input text-sm">   
+    <button type="button" id="quantity-increase" class="quantity-selector__button qty-btn-horizontal">+</button>
+  </div>
+
+  <!-- Botón Agregar al Carrito -->
+  <button id="add-to-cart-btn-kit" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+</div>
 
 <script>
   var variantes = [
@@ -154,7 +157,7 @@
       v.stock > 0
     );
     addToCartButton.disabled = !(generoSeleccionado && superiorSeleccionado && inferiorSeleccionado && variante);
-    actualizarLimiteCantidad(); // <-- Actualiza el límite de cantidad
+    actualizarLimiteCantidad(); 
   }
 
   generoBtns.forEach(function(btn) {
@@ -192,7 +195,7 @@
       this.classList.add('active');
       actualizarInferiores();
       validarSeleccion();
-      actualizarLimiteCantidad(); // <-- Actualiza el límite de cantidad
+      actualizarLimiteCantidad(); 
     });
   });
 
@@ -204,7 +207,7 @@
       this.classList.add('active');
       actualizarSuperiores();
       validarSeleccion();
-      actualizarLimiteCantidad(); // <-- Actualiza el límite de cantidad
+      actualizarLimiteCantidad(); 
     });
   });
 
@@ -224,7 +227,17 @@
     }
   });
 
-  // Lógica para agregar la variante seleccionada al carrito
+  quantityInput.addEventListener('input', function() {
+    var max = parseInt(quantityInput.max, 10) || 1;
+    var value = parseInt(quantityInput.value, 10) || 1;
+    if (value > max) {
+      quantityInput.value = max;
+    } else if (value < 1) {
+      quantityInput.value = 1;
+    }
+  });
+
+  // Lógica para agregar al carrito
   addToCartButton.addEventListener("click", function () {
     var variante = variantes.find(v =>
       v.option3 === generoSeleccionado &&
@@ -240,8 +253,9 @@
     var quantity = parseInt(quantityInput.value, 10);
 
     // OBTENER ID DEL METACAMPO
+    {% comment %}
     {% assign giftkit = product.metafields.custom.giftkit.value %};
-
+    {% endcomment %}
     var itemsToAdd = [
       {
         id: variante.id,
@@ -253,7 +267,7 @@
         }
       }
     ];
-
+    {% comment %}
     // Agregar regalo si existe
     {% if giftkit and giftkit.id %}
     itemsToAdd.push({
@@ -262,7 +276,7 @@
       properties: {}
     });
     {% endif %}
-
+    {% endcomment %}
     fetch("/cart/add.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -294,46 +308,48 @@
 </script>
 
 <style>
-  button.active {
+  /* Solo afecta a los botones dentro de selector-kits-container */
+  .selector-kits-container button.active {
     background: #ff0000;
     color: #fff;
   }
-  button {
+  .selector-kits-container button {
     margin: 2px 4px;
     padding: 6px 12px;
     border-radius: 4px;
     border: 1px solid #ccc;
     cursor: pointer;
   }
-  button[disabled] {
+  .selector-kits-container button[disabled] {
     cursor: not-allowed;
   }
-  .inferior-stock, .superior-stock {
+  .selector-kits-container .inferior-stock, 
+  .selector-kits-container .superior-stock {
     min-height: 18px;
     font-size: 12px;
     color: #555;
   }
 
-  .quantity-wrapper {
+  .selector-kits-container .quantity-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
   }
 
-  .qty-btn-horizontal {
+  .selector-kits-container .qty-btn-horizontal {
     border: 1px solid #ffffff00;
     transition: background 0.2s;
   }
-  .qty-btn-horizontal:active {
+  .selector-kits-container .qty-btn-horizontal:active {
     background: #ccc;
   }
-  .qty-btn-horizontal[disabled] {
+  .selector-kits-container .qty-btn-horizontal[disabled] {
     cursor: not-allowed;
     background: #eee;
     color: #aaa;
   }
-  .add-to-cart-btn {
+  .selector-kits-container .add-to-cart-btn {
     background-color: #ff0000;
     color: white;
     border: none;
@@ -344,11 +360,11 @@
     width: 100%;
     margin-top: 10px;
   }
-  .add-to-cart-btn:disabled {
+  .selector-kits-container .add-to-cart-btn:disabled {
     background-color: gray;
     cursor: not-allowed;
   }
-  .add-to-cart-btn:hover:not(:disabled) {
+  .selector-kits-container .add-to-cart-btn:hover:not(:disabled) {
     background-color: #333;
   }
 </style>
