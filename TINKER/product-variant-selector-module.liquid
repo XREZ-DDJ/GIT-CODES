@@ -1,0 +1,370 @@
+
+<div class="selector-kits-container">
+  <!-- Selector de Género -->
+  <p class="h6">Género:</p>
+  <div class="kit-genero" id="generos" style="margin-top:10px; margin-bottom:20px;">
+    {% assign generos = product.variants | map: 'option3' | uniq %}
+    {% for genero in generos %}
+      <button type="button" class="genero-btn" data-genero="{{ genero }}"{% if genero == 'Dama' %} data-default="true"{% endif %}>{{ genero }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- Selector de Prenda Superior -->
+  <p class="h6">Prenda superior:</p>
+  <div class="kit-superiores" id="superiores"  style="margin-top:10px;">
+    {% assign superiores = product.variants | map: 'option1' | uniq %}
+    {% for superior in superiores %}
+      <div class="superior-btn-wrapper" style="display:inline-block;text-align:center;">
+        <button type="button" class="superior-btn" data-superior="{{ superior }}">{{ superior }}</button>
+        <div class="superior-stock" data-superior-stock="{{ superior }}"></div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Selector de Prenda Inferior -->
+  <p class="h6">Prenda inferior:</p>
+  <div class="kit-inferiores" id="inferiores" style="margin-top:10px;  margin-bottom:20px;">
+    {% assign inferiores = product.variants | map: 'option2' | uniq %}
+    {% for inferior in inferiores %}
+      <div class="inferior-btn-wrapper" style="display:inline-block;text-align:center;">
+        <button type="button" class="inferior-btn" data-inferior="{{ inferior }}">{{ inferior }}</button>
+        <div class="inferior-stock" data-inferior-stock="{{ inferior }}"></div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Selector de Cantidad -->
+  <p class="h6">Cantidad</p>
+  <div class="quantity-selector quantity-selector--sm" style="margin-top:10px;">  
+    <button type="button" id="quantity-decrease" class="quantity-selector__button qty-btn-horizontal">-</button>
+    <input type="number" id="kit-quantity" min="1" value="1" class="quantity-selector__input text-sm">   
+    <button type="button" id="quantity-increase" class="quantity-selector__button qty-btn-horizontal">+</button>
+  </div>
+
+  <!-- Botón Agregar al Carrito -->
+  <button id="add-to-cart-btn-kit" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+</div>
+
+<script>
+  var variantes = [
+    {% for variant in product.variants %}
+      {
+        id: {{ variant.id }},
+        option1: "{{ variant.option1 }}",
+        option2: "{{ variant.option2 }}",
+        option3: "{{ variant.option3 }}",
+        stock: {{ variant.inventory_quantity }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  var generoBtns = document.querySelectorAll('.genero-btn');
+  var superioresBtns = document.querySelectorAll('.superior-btn');
+  var inferioresBtns = document.querySelectorAll('.inferior-btn');
+  var addToCartButton = document.getElementById("add-to-cart-btn-kit");
+  var quantityInput = document.getElementById("kit-quantity");
+  var quantityDecrease = document.getElementById("quantity-decrease");
+  var quantityIncrease = document.getElementById("quantity-increase");
+
+  var generoSeleccionado = null;
+  var superiorSeleccionado = null;
+  var inferiorSeleccionado = null;
+
+  function actualizarInferiores() {
+    inferioresBtns.forEach(function(btn) {
+      var inferior = btn.dataset.inferior;
+      var stockDiv = document.querySelector('.inferior-stock[data-inferior-stock="' + inferior + '"]');
+      var variante = variantes.find(v =>
+        v.option3 === generoSeleccionado &&
+        v.option1 === superiorSeleccionado &&
+        v.option2 === inferior
+      );
+      if (superiorSeleccionado) {
+        if (variante && variante.stock > 0) {
+          btn.disabled = false;
+          btn.style.opacity = 1;
+          btn.innerHTML = `${inferior}`;
+          if(stockDiv) stockDiv.innerHTML = `<small>Stock: ${variante.stock}</small>`;
+        } else {
+          btn.disabled = true;
+          btn.style.opacity = 0.5;
+          btn.innerHTML = `${inferior}`;
+          if(stockDiv) stockDiv.innerHTML = `<small>Sin stock</small>`;
+        }
+      } else {
+        btn.disabled = false;
+        btn.style.opacity = 1;
+        btn.innerHTML = `${inferior}`;
+        if(stockDiv) stockDiv.innerHTML = '';
+      }
+    });
+  }
+
+  function actualizarSuperiores() {
+    superioresBtns.forEach(function(btn) {
+      var superior = btn.dataset.superior;
+      var stockDiv = document.querySelector('.superior-stock[data-superior-stock="' + superior + '"]');
+      var variante = variantes.find(v =>
+        v.option3 === generoSeleccionado &&
+        v.option1 === superior &&
+        v.option2 === inferiorSeleccionado
+      );
+      if (inferiorSeleccionado) {
+        if (variante && variante.stock > 0) {
+          btn.disabled = false;
+          btn.style.opacity = 1;
+          btn.innerHTML = `${superior}`;
+          if(stockDiv) stockDiv.innerHTML = `<small>Stock: ${variante.stock}</small>`;
+        } else {
+          btn.disabled = true;
+          btn.style.opacity = 0.5;
+          btn.innerHTML = `${superior}`;
+          if(stockDiv) stockDiv.innerHTML = `<small>Sin stock</small>`;
+        }
+      } else {
+        btn.disabled = false;
+        btn.style.opacity = 1;
+        btn.innerHTML = `${superior}`;
+        if(stockDiv) stockDiv.innerHTML = '';
+      }
+    });
+  }
+
+  function actualizarLimiteCantidad() {
+    // Busca la variante seleccionada
+    var variante = variantes.find(v =>
+      v.option3 === generoSeleccionado &&
+      v.option1 === superiorSeleccionado &&
+      v.option2 === inferiorSeleccionado
+    );
+    if (variante && variante.stock > 0) {
+      quantityInput.max = variante.stock;
+      if (parseInt(quantityInput.value, 10) > variante.stock) {
+        quantityInput.value = variante.stock;
+      }
+    } else {
+      quantityInput.max = 1;
+      quantityInput.value = 1;
+    }
+  }
+
+  function validarSeleccion() {
+    // Habilita el botón solo si hay género, superior e inferior seleccionados y la variante existe y tiene stock
+    var variante = variantes.find(v =>
+      v.option3 === generoSeleccionado &&
+      v.option1 === superiorSeleccionado &&
+      v.option2 === inferiorSeleccionado &&
+      v.stock > 0
+    );
+    addToCartButton.disabled = !(generoSeleccionado && superiorSeleccionado && inferiorSeleccionado && variante);
+    actualizarLimiteCantidad(); 
+  }
+
+  generoBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      generoSeleccionado = this.dataset.genero;
+      generoBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      // Limpiar stocks
+      document.querySelectorAll('.superior-stock').forEach(div => div.innerHTML = '');
+      document.querySelectorAll('.inferior-stock').forEach(div => div.innerHTML = '');
+      // Habilitar todos los botones y limpiar selección
+      superioresBtns.forEach(b => {
+        b.classList.remove('active');
+        b.disabled = false;
+        b.style.opacity = 1;
+        b.innerHTML = `${b.dataset.superior}`;
+      });
+      inferioresBtns.forEach(b => {
+        b.classList.remove('active');
+        b.disabled = false;
+        b.style.opacity = 1;
+        b.innerHTML = `${b.dataset.inferior}`;
+      });
+      superiorSeleccionado = null;
+      inferiorSeleccionado = null;
+      validarSeleccion();
+    });
+  });
+
+  superioresBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (!generoSeleccionado) return;
+      superiorSeleccionado = this.dataset.superior;
+      superioresBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      actualizarInferiores();
+      validarSeleccion();
+      actualizarLimiteCantidad(); 
+    });
+  });
+
+  inferioresBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (btn.disabled) return;
+      inferiorSeleccionado = this.dataset.inferior;
+      inferioresBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      actualizarSuperiores();
+      validarSeleccion();
+      actualizarLimiteCantidad(); 
+    });
+  });
+
+  // Manejar el incremento y decremento de la cantidad
+  quantityIncrease.addEventListener("click", () => {
+    var max = parseInt(quantityInput.max, 10) || 1;
+    var value = parseInt(quantityInput.value, 10);
+    if (value < max) {
+      quantityInput.value = value + 1;
+    }
+  });
+
+  quantityDecrease.addEventListener("click", () => {
+    var value = parseInt(quantityInput.value, 10);
+    if (value > 1) {
+      quantityInput.value = value - 1;
+    }
+  });
+
+  quantityInput.addEventListener('input', function() {
+    var max = parseInt(quantityInput.max, 10) || 1;
+    var value = parseInt(quantityInput.value, 10) || 1;
+    if (value > max) {
+      quantityInput.value = max;
+    } else if (value < 1) {
+      quantityInput.value = 1;
+    }
+  });
+
+  // Lógica para agregar al carrito
+  addToCartButton.addEventListener("click", function () {
+    var variante = variantes.find(v =>
+      v.option3 === generoSeleccionado &&
+      v.option1 === superiorSeleccionado &&
+      v.option2 === inferiorSeleccionado
+    );
+
+    if (!variante) {
+      alert("La combinación seleccionada no está disponible. Intenta con otra combinación.");
+      return;
+    }
+
+    var quantity = parseInt(quantityInput.value, 10);
+
+    // OBTENER ID DEL METACAMPO
+    {% comment %}
+    {% assign giftkit = product.metafields.custom.giftkit.value %};
+    {% endcomment %}
+    var itemsToAdd = [
+      {
+        id: variante.id,
+        quantity: quantity,
+        properties: {
+          "Género": generoSeleccionado,
+          "Prenda superior": superiorSeleccionado,
+          "Prenda inferior": inferiorSeleccionado
+        }
+      }
+    ];
+    {% comment %}
+    // Agregar regalo si existe
+    {% if giftkit and giftkit.id %}
+    itemsToAdd.push({
+      id: {{ giftkit.id }},
+      quantity: quantity,
+      properties: {}
+    });
+    {% endif %}
+    {% endcomment %}
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: itemsToAdd }),
+    })
+      .then(response => {
+        if (!response.ok) throw new Error("Error al agregar al carrito");
+        return response.json();
+      })
+      .then(resp => {
+        window.location.href = window.location.pathname + '?openCartDrawer=true';
+      })
+      .catch(err => {
+        alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
+      });
+  });
+
+  // Manejo openCartDrawer
+  document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('openCartDrawer') === 'true') {
+      const cartDrawer = document.getElementById('cart-drawer');
+      if (cartDrawer) {
+        cartDrawer.setAttribute('open', '');
+      }
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  });
+</script>
+
+<style>
+  /* Solo afecta a los botones dentro de selector-kits-container */
+  .selector-kits-container button.active {
+    background: #ff0000;
+    color: #fff;
+  }
+  .selector-kits-container button {
+    margin: 2px 4px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .selector-kits-container button[disabled] {
+    cursor: not-allowed;
+  }
+  .selector-kits-container .inferior-stock, 
+  .selector-kits-container .superior-stock {
+    min-height: 18px;
+    font-size: 12px;
+    color: #555;
+  }
+
+  .selector-kits-container .quantity-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .selector-kits-container .qty-btn-horizontal {
+    border: 1px solid #ffffff00;
+    transition: background 0.2s;
+  }
+  .selector-kits-container .qty-btn-horizontal:active {
+    background: #ccc;
+  }
+  .selector-kits-container .qty-btn-horizontal[disabled] {
+    cursor: not-allowed;
+    background: #eee;
+    color: #aaa;
+  }
+  .selector-kits-container .add-to-cart-btn {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .selector-kits-container .add-to-cart-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+  .selector-kits-container .add-to-cart-btn:hover:not(:disabled) {
+    background-color: #333;
+  }
+</style>
