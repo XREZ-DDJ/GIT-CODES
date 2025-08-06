@@ -1,355 +1,260 @@
+<!-- Selector de Variantes Agrupados para Productos KIT -->
+<p style="font-weight: bold; font-family: 'work sans';">Selecciona las opciones de tu KIT</p>
 
-<div class="selector-kits-container">
-  <!-- Selector de Género -->
-  <p class="h6">Género:</p>
-  <div class="kit-genero" id="generos" style="margin-top:10px; margin-bottom:20px;">
-    {% assign generos = product.variants | map: 'option3' | uniq %}
-    {% for genero in generos %}
-      <button type="button" class="genero-btn" data-genero="{{ genero }}"{% if genero == 'Dama' %} data-default="true"{% endif %}>{{ genero }}</button>
-    {% endfor %}
-  </div>
-
-  <!-- Selector de Prenda Superior -->
-  <p class="h6">Prenda superior:</p>
-  <div class="kit-superiores" id="superiores"  style="margin-top:10px;">
-    {% assign superiores = product.variants | map: 'option1' | uniq %}
-    {% for superior in superiores %}
-      <div class="superior-btn-wrapper" style="display:inline-block;text-align:center;">
-        <button type="button" class="superior-btn" data-superior="{{ superior }}">{{ superior }}</button>
-        <div class="superior-stock" data-superior-stock="{{ superior }}"></div>
-      </div>
-    {% endfor %}
-  </div>
-
-  <!-- Selector de Prenda Inferior -->
-  <p class="h6">Prenda inferior:</p>
-  <div class="kit-inferiores" id="inferiores" style="margin-top:10px;  margin-bottom:20px;">
-    {% assign inferiores = product.variants | map: 'option2' | uniq %}
-    {% for inferior in inferiores %}
-      <div class="inferior-btn-wrapper" style="display:inline-block;text-align:center;">
-        <button type="button" class="inferior-btn" data-inferior="{{ inferior }}">{{ inferior }}</button>
-        <div class="inferior-stock" data-inferior-stock="{{ inferior }}"></div>
-      </div>
-    {% endfor %}
-  </div>
-
-  <!-- Selector de Cantidad -->
-  <p class="h6">Cantidad</p>
-  <div class="quantity-selector quantity-selector--sm" style="margin-top:10px;">  
-    <button type="button" id="quantity-decrease" class="quantity-selector__button qty-btn-horizontal">-</button>
-    <input type="number" id="kit-quantity" min="1" value="1" class="quantity-selector__input text-sm">   
-    <button type="button" id="quantity-increase" class="quantity-selector__button qty-btn-horizontal">+</button>
-  </div>
-
-  <!-- Botón Agregar al Carrito -->
-  <button id="add-to-cart-btn-kit" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+<!-- Selector de Género -->
+<p style="font-weight: bold;">Género</p>
+<div id="kit-gender" class="kit-options-group">
+  {% for option in product.options_with_values[2].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
+  {% endfor %}
 </div>
 
+<!-- Selector de Talla Superior -->
+<p style="font-weight: bold;">Talla Superior</p>
+<div id="kit-top-size" class="kit-options-group">
+  {% for option in product.options_with_values[0].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
+  {% endfor %}
+</div>
+
+<!-- Selector de Talla Inferior -->
+<p style="font-weight: bold;">Talla Inferior</p>
+<div id="kit-bottom-size" class="kit-options-group">
+  {% for option in product.options_with_values[1].values %}
+    <button type="button" class="kit-option-btn" data-value="{{ option }}">{{ option }}</button>
+  {% endfor %}
+</div>
+
+
+<!-- Selector de Cantidad -->
+<label class="size-label">
+  <p class="size-name">Cantidad</p>
+  <div class="quantity-wrapper">  
+    <button type="button" id="quantity-increase" class="qty-btn up">▲</button>
+    <input type="number" id="kit-quantity" min="1" value="1" class="size-option">   
+    <button type="button" id="quantity-decrease" class="qty-btn down">▼</button>
+  </div>
+</label>
+
+<!-- Botón Agregar al Carrito -->
+<button id="add-to-cart-btn-kit" class="add-to-cart-btn" disabled>Agregar al carrito</button>
+
 <script>
-  var variantes = [
-    {% for variant in product.variants %}
-      {
-        id: {{ variant.id }},
-        option1: "{{ variant.option1 }}",
-        option2: "{{ variant.option2 }}",
-        option3: "{{ variant.option3 }}",
-        stock: {{ variant.inventory_quantity }}
-      }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
+  document.addEventListener("DOMContentLoaded", function () {
+    const addToCartButton = document.getElementById("add-to-cart-btn-kit");
+    const selectors = document.querySelectorAll(".kit-option-btn");
+    const quantityInput = document.getElementById("kit-quantity");
+    const quantityDecrease = document.getElementById("quantity-decrease");
+    const quantityIncrease = document.getElementById("quantity-increase");
+
+    const selections = {
+      topSize: null,
+      bottomSize: null,
+      gender: null,
+    };
+
+    // Función para actualizar la selección activa
+    function updateSelection(groupId, value) {
+      const group = document.getElementById(groupId);
+      Array.from(group.children).forEach(button => button.classList.remove("selected"));
+      const selectedButton = Array.from(group.children).find(button => button.dataset.value === value);
+      if (selectedButton) selectedButton.classList.add("selected");
+
+      // Actualizar el objeto de selección
+      if (groupId === "kit-top-size") selections.topSize = value;
+      if (groupId === "kit-bottom-size") selections.bottomSize = value;
+      if (groupId === "kit-gender") selections.gender = value;
+
+      // Habilitar el botón "Agregar al carrito" si todas las opciones están seleccionadas
+      const allSelected = Object.values(selections).every(selection => selection !== null);
+      addToCartButton.disabled = !allSelected;
+    }
+
+    // Manejar clics en botones de opciones
+    selectors.forEach(button => {
+      button.addEventListener("click", function () {
+        const groupId = this.parentElement.id;
+        const value = this.dataset.value;
+        updateSelection(groupId, value);
+      });
+    });
+
+    // Manejar el incremento y decremento de la cantidad
+    quantityIncrease.addEventListener("click", () => {
+      quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+    });
+
+    quantityDecrease.addEventListener("click", () => {
+      const currentValue = parseInt(quantityInput.value, 10);
+      if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+      }
+    });
+
+    // Lógica para agregar la variante seleccionada al carrito
+    addToCartButton.addEventListener("click", function () {
+  console.log("🟢 'Agregar al carrito' clickeado para KIT");
+
+  const selectedVariant = Array.from({{ product.variants | json }}).find(variant =>
+    variant.option1 === selections.topSize &&
+    variant.option2 === selections.bottomSize &&
+    variant.option3 === selections.gender
+  );
+
+  if (!selectedVariant) {
+    alert("La combinación seleccionada no está disponible. Intenta con otra combinación.");
+    return;
+  }
+
+  const quantity = parseInt(quantityInput.value, 10);
+
+  // OBTENER ID DEL METACAMPO
+  {% assign giftkit = product.metafields.custom.giftkit.value %};
+
+  const itemsToAdd = [
+    {
+      id: selectedVariant.id,
+      quantity: quantity,
+      properties: {
+        "Género": selections.gender,
+        "Talla Superior": selections.topSize,
+        "Talla Inferior": selections.bottomSize
+      }
+    }
   ];
 
-  var generoBtns = document.querySelectorAll('.genero-btn');
-  var superioresBtns = document.querySelectorAll('.superior-btn');
-  var inferioresBtns = document.querySelectorAll('.inferior-btn');
-  var addToCartButton = document.getElementById("add-to-cart-btn-kit");
-  var quantityInput = document.getElementById("kit-quantity");
-  var quantityDecrease = document.getElementById("quantity-decrease");
-  var quantityIncrease = document.getElementById("quantity-increase");
 
-  var generoSeleccionado = null;
-  var superiorSeleccionado = null;
-  var inferiorSeleccionado = null;
-
-  function actualizarInferiores() {
-    inferioresBtns.forEach(function(btn) {
-      var inferior = btn.dataset.inferior;
-      var stockDiv = document.querySelector('.inferior-stock[data-inferior-stock="' + inferior + '"]');
-      var variante = variantes.find(v =>
-        v.option3 === generoSeleccionado &&
-        v.option1 === superiorSeleccionado &&
-        v.option2 === inferior
-      );
-      if (superiorSeleccionado) {
-        if (variante && variante.stock > 0) {
-          btn.disabled = false;
-          btn.style.opacity = 1;
-          btn.innerHTML = `${inferior}`;
-          if(stockDiv) stockDiv.innerHTML = `<small>Stock: ${variante.stock}</small>`;
-        } else {
-          btn.disabled = true;
-          btn.style.opacity = 0.5;
-          btn.innerHTML = `${inferior}`;
-          if(stockDiv) stockDiv.innerHTML = `<small>Sin stock</small>`;
-        }
-      } else {
-        btn.disabled = false;
-        btn.style.opacity = 1;
-        btn.innerHTML = `${inferior}`;
-        if(stockDiv) stockDiv.innerHTML = '';
-      }
-    });
-  }
-
-  function actualizarSuperiores() {
-    superioresBtns.forEach(function(btn) {
-      var superior = btn.dataset.superior;
-      var stockDiv = document.querySelector('.superior-stock[data-superior-stock="' + superior + '"]');
-      var variante = variantes.find(v =>
-        v.option3 === generoSeleccionado &&
-        v.option1 === superior &&
-        v.option2 === inferiorSeleccionado
-      );
-      if (inferiorSeleccionado) {
-        if (variante && variante.stock > 0) {
-          btn.disabled = false;
-          btn.style.opacity = 1;
-          btn.innerHTML = `${superior}`;
-          if(stockDiv) stockDiv.innerHTML = `<small>Stock: ${variante.stock}</small>`;
-        } else {
-          btn.disabled = true;
-          btn.style.opacity = 0.5;
-          btn.innerHTML = `${superior}`;
-          if(stockDiv) stockDiv.innerHTML = `<small>Sin stock</small>`;
-        }
-      } else {
-        btn.disabled = false;
-        btn.style.opacity = 1;
-        btn.innerHTML = `${superior}`;
-        if(stockDiv) stockDiv.innerHTML = '';
-      }
-    });
-  }
-
-  function actualizarLimiteCantidad() {
-    // Busca la variante seleccionada
-    var variante = variantes.find(v =>
-      v.option3 === generoSeleccionado &&
-      v.option1 === superiorSeleccionado &&
-      v.option2 === inferiorSeleccionado
-    );
-    if (variante && variante.stock > 0) {
-      quantityInput.max = variante.stock;
-      if (parseInt(quantityInput.value, 10) > variante.stock) {
-        quantityInput.value = variante.stock;
-      }
-    } else {
-      quantityInput.max = 1;
-      quantityInput.value = 1;
-    }
-  }
-
-  function validarSeleccion() {
-    // Habilita el botón solo si hay género, superior e inferior seleccionados y la variante existe y tiene stock
-    var variante = variantes.find(v =>
-      v.option3 === generoSeleccionado &&
-      v.option1 === superiorSeleccionado &&
-      v.option2 === inferiorSeleccionado &&
-      v.stock > 0
-    );
-    addToCartButton.disabled = !(generoSeleccionado && superiorSeleccionado && inferiorSeleccionado && variante);
-    actualizarLimiteCantidad(); 
-  }
-
-  generoBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      generoSeleccionado = this.dataset.genero;
-      generoBtns.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      // Limpiar stocks
-      document.querySelectorAll('.superior-stock').forEach(div => div.innerHTML = '');
-      document.querySelectorAll('.inferior-stock').forEach(div => div.innerHTML = '');
-      // Habilitar todos los botones y limpiar selección
-      superioresBtns.forEach(b => {
-        b.classList.remove('active');
-        b.disabled = false;
-        b.style.opacity = 1;
-        b.innerHTML = `${b.dataset.superior}`;
-      });
-      inferioresBtns.forEach(b => {
-        b.classList.remove('active');
-        b.disabled = false;
-        b.style.opacity = 1;
-        b.innerHTML = `${b.dataset.inferior}`;
-      });
-      superiorSeleccionado = null;
-      inferiorSeleccionado = null;
-      validarSeleccion();
-    });
-  });
-
-  superioresBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      if (!generoSeleccionado) return;
-      superiorSeleccionado = this.dataset.superior;
-      superioresBtns.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      actualizarInferiores();
-      validarSeleccion();
-      actualizarLimiteCantidad(); 
-    });
-  });
-
-  inferioresBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      if (btn.disabled) return;
-      inferiorSeleccionado = this.dataset.inferior;
-      inferioresBtns.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      actualizarSuperiores();
-      validarSeleccion();
-      actualizarLimiteCantidad(); 
-    });
-  });
-
-  // Manejar el incremento y decremento de la cantidad
-  quantityIncrease.addEventListener("click", () => {
-    var max = parseInt(quantityInput.max, 10) || 1;
-    var value = parseInt(quantityInput.value, 10);
-    if (value < max) {
-      quantityInput.value = value + 1;
+  console.log("🎁 Agregando regalo con variant_id:", {{giftkit.id}});
+  //42155914526954
+  itemsToAdd.push({
+    id: {{ giftkit.id }},
+    quantity: quantity, // o 1, depende de tu regla
+    properties: {
     }
   });
 
-  quantityDecrease.addEventListener("click", () => {
-    var value = parseInt(quantityInput.value, 10);
-    if (value > 1) {
-      quantityInput.value = value - 1;
-    }
-  });
+  console.log("🛍 Agregando al carrito...", itemsToAdd);
 
-  quantityInput.addEventListener('input', function() {
-    var max = parseInt(quantityInput.max, 10) || 1;
-    var value = parseInt(quantityInput.value, 10) || 1;
-    if (value > max) {
-      quantityInput.value = max;
-    } else if (value < 1) {
-      quantityInput.value = 1;
-    }
-  });
-
-  // Lógica para agregar al carrito
-  addToCartButton.addEventListener("click", function () {
-    var variante = variantes.find(v =>
-      v.option3 === generoSeleccionado &&
-      v.option1 === superiorSeleccionado &&
-      v.option2 === inferiorSeleccionado
-    );
-
-    if (!variante) {
-      alert("La combinación seleccionada no está disponible. Intenta con otra combinación.");
-      return;
-    }
-
-    var quantity = parseInt(quantityInput.value, 10);
-
-    // OBTENER ID DEL METACAMPO
-    {% comment %}
-    {% assign giftkit = product.metafields.custom.giftkit.value %};
-    {% endcomment %}
-    var itemsToAdd = [
-      {
-        id: variante.id,
-        quantity: quantity,
-        properties: {
-          "Género": generoSeleccionado,
-          "Prenda superior": superiorSeleccionado,
-          "Prenda inferior": inferiorSeleccionado
-        }
-      }
-    ];
-    {% comment %}
-    // Agregar regalo si existe
-    {% if giftkit and giftkit.id %}
-    itemsToAdd.push({
-      id: {{ giftkit.id }},
-      quantity: quantity,
-      properties: {}
-    });
-    {% endif %}
-    {% endcomment %}
-    fetch("/cart/add.js", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: itemsToAdd }),
+  fetch("/cart/add.js", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ items: itemsToAdd }),
+  })
+    .then(response => {
+      if (!response.ok) throw new Error("Error al agregar al carrito");
+      return response.json();
     })
-      .then(response => {
-        if (!response.ok) throw new Error("Error al agregar al carrito");
-        return response.json();
-      })
-      .then(resp => {
-        window.location.href = window.location.pathname + '?openCartDrawer=true';
-      })
-      .catch(err => {
-        alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
-      });
-  });
+    .then(resp => {
+      console.log("✅ Variantes agregadas con éxito", resp);
+      window.location.href = window.location.pathname + '?openCartDrawer=true';
+    })
+    .catch(err => {
+      console.error("❌ Error al agregar al carrito", err);
+      alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
+    });
+});
 
-  // Manejo openCartDrawer
-  document.addEventListener("DOMContentLoaded", function () {
+
+    //  Manejo openCartDrawer
     const params = new URLSearchParams(window.location.search);
     if (params.get('openCartDrawer') === 'true') {
       const cartDrawer = document.getElementById('cart-drawer');
       if (cartDrawer) {
         cartDrawer.setAttribute('open', '');
       }
+      // Limpia el parámetro de la URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   });
 </script>
 
 <style>
-  /* Solo afecta a los botones dentro de selector-kits-container */
-  .selector-kits-container button.active {
-    background: #ff0000;
-    color: #fff;
-  }
-  .selector-kits-container button {
-    margin: 2px 4px;
-    padding: 6px 12px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  }
-  .selector-kits-container button[disabled] {
-    cursor: not-allowed;
-  }
-  .selector-kits-container .inferior-stock, 
-  .selector-kits-container .superior-stock {
-    min-height: 18px;
-    font-size: 12px;
-    color: #555;
+  .kit-options-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
   }
 
-  .selector-kits-container .quantity-wrapper {
+  .kit-option-btn {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-width: 55px;
+  }
+
+  .kit-option-btn.selected {
+    background-color: red;
+    color: white;
+    border-color: black;
+  }
+
+  .kit-option-btn:hover:not(.selected) {
+    background-color: #f0f0f0;
+  }
+
+  .size-label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 5px;
+    padding: 5px;
+    width: 75px;
+    color: #333;
+  }
+  
+  .quantity-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
   }
+  .size-name{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
 
-  .selector-kits-container .qty-btn-horizontal {
-    border: 1px solid #ffffff00;
-    transition: background 0.2s;
+  .qty-btn {
+    width: 100%;
+    height: 15px;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
   }
-  .selector-kits-container .qty-btn-horizontal:active {
-    background: #ccc;
+  .qty-btn.down{
+    border-radius: 0 0 4px 4px;
   }
-  .selector-kits-container .qty-btn-horizontal[disabled] {
-    cursor: not-allowed;
-    background: #eee;
-    color: #aaa;
+  .qty-btn.up{
+    border-radius: 4px 4px 0 0;
   }
-  .selector-kits-container .add-to-cart-btn {
+  .size-option{
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .size-option::-webkit-inner-spin-button,
+  .size-option::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  .add-to-cart-btn {
     background-color: #ff0000;
     color: white;
     border: none;
@@ -358,13 +263,14 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 100%;
-    margin-top: 10px;
   }
-  .selector-kits-container .add-to-cart-btn:disabled {
+
+  .add-to-cart-btn:disabled {
     background-color: gray;
     cursor: not-allowed;
   }
-  .selector-kits-container .add-to-cart-btn:hover:not(:disabled) {
+
+  .add-to-cart-btn:hover:not(:disabled) {
     background-color: #333;
   }
 </style>
