@@ -3,14 +3,14 @@
 
 <!-- Botón para abrir el modal -->
 <p id="btnGuiaTallas" class="btnGuiaTallas">
-  ¿Dudas con la talla? Haz clic aquí y asegúrate de elegir bien
+  Guia de tallas
   <i class="fas fa-ruler-horizontal size-icon"></i>
 </p>
 
 <!-- Modal -->
 <div class="overlayGuiaTallas" id="overlayGuiaTallas" >
   <div class="moduloGuiaTallas">
-    {% render 'product-tallas' %}
+    {% render 'product-modal-tallas-content' %}
     <span id="closeModalTallas"class="close">&times;</span>
   </div>
 </div>
@@ -79,11 +79,11 @@
     width: 90%;
     height: 80%;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    /* Animación inicial, ahora controlada por .overlayGuiaTallas.active */
+    border-radius: 3px;
+    box-shadow: -5px -5px 20px 0px rgba(0, 0, 0, 0.3);
     top: 50px;
     overflow: overlay;
+    /* Animación inicial, ahora controlada por .overlayGuiaTallas.active */
   }
 
   

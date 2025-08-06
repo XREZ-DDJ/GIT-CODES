@@ -1,0 +1,46 @@
+{%- assign tabla_medidas = product.metafields.custom.medidas.value -%}
+
+{% if tabla_medidas %}
+  <div class="tabla-medidas">
+    <h3>{{ tabla_medidas.titulo }}</h3>
+    <table>
+      <thead>
+        <tr>
+          {% for encabezado in tabla_medidas.encabezados %}
+            <th>{{ encabezado }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in tabla_medidas.filas %}
+          <tr>
+            {% for dato in fila %}
+              <td>{{ dato }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+
+<style>
+    .tabla-medidas {
+    margin: 20px 0;
+    }
+
+    .tabla-medidas table {
+    width: 100%;
+    border-collapse: collapse;
+    }
+
+    .tabla-medidas th, .tabla-medidas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    }
+
+    .tabla-medidas th {
+    background-color: #f2f2f2;
+    }
+</style>
