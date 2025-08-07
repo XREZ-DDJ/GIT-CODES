@@ -137,25 +137,12 @@
         })
         .then(resp => {
           console.log("✅ Variantes agregadas con éxito", resp);
-          window.location.href = window.location.pathname + '?openCartDrawer=true';
         })
         .catch(err => {
           console.error("❌ Error al agregar al carrito", err);
           alert("Hubo un problema al agregar la variante. Inténtalo de nuevo.");
         });
     });
-
-
-    //  Manejo openCartDrawer
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('openCartDrawer') === 'true') {
-      const cartDrawer = document.getElementById('cart-drawer');
-      if (cartDrawer) {
-        cartDrawer.setAttribute('open', '');
-      }
-      // Limpia el parámetro de la URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
   });
 </script>
 
