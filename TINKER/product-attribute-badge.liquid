@@ -1,0 +1,206 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+
+<div class="atributos">
+  {% if product.tags contains 'fluidos' %}
+    <div class="items-atributos fluidos">
+      <span class="material-icons icon-at-prod"> format_color_reset </span><legend>ANTI-FLUIDOS</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'reducida' %}
+    <div class="items-atributos reducida">
+      <span class="material-icons icon-at-prod" style="transform: rotate(90deg);"> compress </span><legend>TALLA REDUCIDA</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'recto' %}
+    <div class="items-atributos recto">
+      <span class="material-icons icon-at-prod" style="transform: rotate(90deg);"> view_stream </span><legend>CORTE RECTO</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'pelusa' %}
+    <div class="items-atributos pelusa"><span class="material-icons icon-at-prod"> grain </span><legend>ANTI-PELUSA</legend></div>
+  {% endif %}
+  {% if product.tags contains 'algodon' %}
+    <div class="items-atributos algodon">
+      <span class="material-icons icon-at-prod"> local_florist </span><legend>100% ALGODÓN</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'arrugas' %}
+    <div class="items-atributos arrugas">
+      <span class="material-icons icon-at-prod"> water </span><legend>ANTI-ARRUGAS</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'color' %}
+    <div class="items-atributos color">
+      <span class="material-icons icon-at-prod"> color_lens </span><legend>COLOR DURADERO</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'amplio' %}
+    <div class="items-atributos amplio">
+      <span class="material-icons icon-at-prod" style="transform: rotate(90deg);"> expand </span><legend>CORTE AMPLIO</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'antibacterial' %}
+    <div class="items-atributos antibacterial">
+      <span class="material-symbols-outlined icon-at-prod">coronavirus</span><legend>ANTIBACTERIAL</legend>
+    </div>
+  {% endif %}
+
+  {% if product.tags contains 'premium' %}
+    <div class="items-atributos premium">
+      <span class="material-icons icon-at-prod"> workspace_premium </span><legend>PREMIUM</legend>
+    </div>
+  {% endif %}
+
+  {% if product.tags contains 'ecologica' %}
+    <div class="items-atributos ecologica">
+      <span class="material-icons icon-at-prod"> compost </span><legend>SUSTENTABLE</legend>
+    </div>
+  {% endif %}
+
+  {% if product.tags contains 'dryfit' %}
+    <div class="items-atributos dryfit"><span class="material-icons icon-at-prod"> water_drop </span><legend>DRYFIT</legend></div>
+  {% endif %}
+
+  {% if product.tags contains 'slim' %}
+    <div class="items-atributos slim">
+      <span class="material-icons icon-at-prod" style="transform: rotate(90deg);"> airline_stops </span><legend>SLIM FIT</legend>
+    </div>
+  {% endif %}
+
+  {% if product.tags contains 'strech' %}
+    <div class="items-atributos strech">
+      <span class="material-icons icon-at-prod" style="transform: rotate(90deg);"> swipe </span><legend>STRETCH</legend>
+    </div>
+  {% endif %}
+
+  {% if product.tags contains 'rudo' %}
+    <div class="items-atributos rudo">
+      <span class="material-icons icon-at-prod"> construction </span><legend>USO RUDO</legend>
+    </div>
+  {% endif %}
+
+  {% if product.tags contains 'poliester' %}
+    <div class="items-atributos poliester">
+      <span class="material-symbols-outlined icon-at-prod">gesture</span><legend>POLIESTER</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'basic' %}
+    <div class="items-atributos basic">
+      <span class="material-symbols-outlined icon-at-prod">apparel</span><legend>BASIC</legend>
+    </div>
+  {% endif %}
+
+  {% if product.tags contains 'proteccionUV' %}
+    <div class="items-atributos proteccionUV">
+      <span class="material-symbols-outlined icon-at-prod">shield</span><legend>PROTECCION UV</legend>
+    </div>
+  {% endif %}
+
+    {% if product.tags contains 'comfort' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">sports_gymnastics</span>
+        <legend>COMFORT</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'chiefs' %}
+  <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">chef_hat</span>
+        <legend>CHIEFS</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'caliente' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">skillet</span>
+        <legend>COCINA CALIENTE</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'respiradores' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">air</span>
+        <legend>RESPIRADORES</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'doble' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">filter_2</span>
+        <legend>DOBLE FRENTE</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'detergente' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod"> salinity</span>
+        <legend>RESISTENTE A DETERGENTE</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'durabilidad' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">update</span>
+        <legend>DURABILIDAD</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'fresco' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">ac_unit</span>
+        <legend>FRESCO</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'manchas' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">dirty_lens</span>
+        <legend>SOPORTA MANCHAS</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'retardante' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">humidity_percentage</span>
+        <legend>SUDOR RETARDANTE</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'reforzada' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">wounds_injuries</span>
+        <legend>COSTURA REFORZADA</legend>
+    </div>
+  {% endif %}
+    {% if product.tags contains 'italiano' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">stroke_full</span>
+        <legend>BOTÓN ITALIANO</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'broche' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">settings_input_svideo</span>
+        <legend>BOTÓN BROCHE</legend>
+    </div>
+  {% endif %}
+  {% if product.tags contains 'bragueta' %}
+    <div class="items-atributos ">
+        <span class="material-symbols-outlined icon-at-prod">kebab_dining</span>
+        <legend>BOTÓN BRAGUETA</legend>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .atributos{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+    gap: 10px;
+  }
+  .items-atributos{
+    display: flex;
+    background-color: #f7f7f7;
+    padding: 5px 0px 5px 0px;
+    border-radius: 10px;
+    align-items: center;
+    flex-direction: column;
+    font-size: 14px;
+  }
+  .items-atributos span{
+    font-size:20px;
+  
+  }
+</style>
