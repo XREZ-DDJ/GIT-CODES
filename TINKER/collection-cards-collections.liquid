@@ -1,0 +1,98 @@
+<style>
+  .collection-categories-wrapper {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 10px;
+  }
+
+  .collection-categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .category-card {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    text-align: center;
+  }
+
+  .category-card a {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-wrapper {
+    width: 100px;
+    height: 130px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid transparent;
+    transition: border 0.6s ease;
+    transition: transform .2s ease-out;
+    transform: scale(1);
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .category-card:hover .image-wrapper {
+    border-color: rgb(32 32 32 / 1.0);
+    transform: scale(1.05);
+  }
+
+  .category-card p {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #1c1c1c;
+  }
+
+  @media (max-width: 768px) {
+    .collection-categories-wrapper {
+      justify-content: flex-start; /* Align items to the start on mobile */
+    }
+
+    .collection-categories {
+      gap: 10px; /* Reduce gap between cards on mobile */
+      justify-content: flex-start;
+    }
+
+    .image-wrapper {
+      width: 100px;
+      height: 130px;
+    }
+
+    .category-card p {
+      font-size: 8px; /* Adjust font size for mobile */
+    }
+  }
+</style>
+
+{% if collection.metafields.custom.collections %}
+  <div class="collection-categories-wrapper">
+    <div class="collection-categories">
+      {% for collection in collection.metafields.custom.collections.value %}
+        <div class="category-card">
+          <a href="{{ collection.url }}">
+            <div class="image-wrapper">
+              <img src="{{ collection.image | image_url: width: 300 }}" alt="{{ collection.title }}" width="120" height="120">
+
+            </div>
+            <p>{{ collection.title }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
