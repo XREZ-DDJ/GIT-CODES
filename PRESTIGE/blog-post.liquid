@@ -1,0 +1,228 @@
+  <div class="custom-blog-section">
+    <div class="custom-blog-container">
+      <div class="custom-blog-stack">
+        <p class="custom-blog-title">BLOG-POSTS-CUSTOM</p>
+
+        {%- render 'section-header', 
+          subheading: section.settings.subheading, 
+          heading: section.settings.title, 
+          content: section.settings.content, 
+          text_alignment: 'center' 
+        -%}
+
+        <div class="custom-blog-grid">
+          {%- for article in section.settings.blog.articles limit: section.settings.posts_count -%}
+            <div class="custom-blog-item">
+              {%- render 'blog-post-card', 
+                article: article, 
+                blog: section.settings.blog, 
+                show_category: section.settings.show_category, 
+                show_date: section.settings.show_date, 
+                show_excerpt: section.settings.show_excerpt, 
+                show_read_more: section.settings.show_read_more, 
+                position: forloop.index 
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.button_text != blank -%}
+          <div class="custom-blog-button-wrapper">
+            {%- assign button_link = section.settings.button_link | default: section.settings.blog.url -%}
+            {%- render 'button', href: button_link, content: section.settings.button_text -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .custom-blog-section {
+      padding: 3rem 0;
+      background-color: #fff;
+    }
+
+    .custom-blog-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .custom-blog-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+
+    .custom-blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      grid-auto-rows: minmax(200px, auto);
+    }
+
+    /* Primer elemento: grande, 2 columnas */
+    .custom-blog-item:nth-child(1) {
+      grid-column: 1 / span 2;
+      grid-row: 1;
+    }
+
+    /* Segundo elemento: en la tercera columna */
+    .custom-blog-item:nth-child(2) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    /* Resto de elementos sigue flujo normal */
+    .custom-blog-item:nth-child(n+3) {
+      grid-column: span 1;
+    }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      .custom-blog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .custom-blog-item:nth-child(1) {
+        grid-column: span 2;
+      }
+      .custom-blog-item:nth-child(2) {
+        grid-column: span 2;
+      }
+    }
+
+    /* Móvil */
+    @media (max-width: 600px) {
+      .custom-blog-grid {
+        grid-template-columns: 1fr;
+      }
+        .custom-blog-item {
+          grid-column: 1;
+        }
+        /* Eliminar reglas especiales para el primer y segundo elemento en mobile */
+        .custom-blog-item:nth-child(1),
+        .custom-blog-item:nth-child(2) {
+          grid-column: 1;
+          grid-row: auto;
+        }
+    }
+
+    .custom-blog-button-wrapper {
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+
+
+
+
+
+  {% schema %}
+  {
+    "name": "t:sections.blog_posts.name",
+    "class": "shopify-section--blog-posts",
+    "tag": "section",
+    "disabled_on": {
+      "groups": ["header", "custom.overlay"]
+    },
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:global.colors.scheme",
+        "default": "scheme-1"
+      },
+      {
+        "type": "checkbox",
+        "id": "separate_section_with_border",
+        "label": "t:global.section.separate_section_with_border",
+        "default": true
+      },
+      {
+        "type": "blog",
+        "id": "blog",
+        "label": "t:sections.blog_posts.blocks.blog.blog"
+      },
+      {
+        "type": "range",
+        "id": "posts_count",
+        "min": 2,
+        "max": 9,
+        "label": "t:sections.blog_posts.blocks.blog.posts_count",
+        "default": 3
+      },
+      {
+        "type": "checkbox",
+        "id": "stack_on_mobile",
+        "label": "t:sections.blog_posts.stack_on_mobile",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_category",
+        "label": "t:global.blog.show_category",
+        "info": "t:global.blog.show_category_info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_date",
+        "label": "t:global.blog.show_date",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_excerpt",
+        "label": "t:global.blog.show_excerpt",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_read_more",
+        "label": "t:global.blog.show_read_more",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:global.section.header_category"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "subheading",
+        "label": "t:global.text.subheading"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "title",
+        "label": "t:global.text.heading",
+        "default": "Blog posts"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "t:global.text.content"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "t:global.text.button_link",
+        "info": "t:sections.blog_posts.button_link_info"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "t:global.text.button_text",
+        "default": "View all"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.blog_posts.presets.blog_posts.name",
+        "settings": {
+          "blog": "news"
+        }
+      }
+    ]
+  }
+  {% endschema %}

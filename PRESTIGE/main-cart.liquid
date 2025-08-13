@@ -584,7 +584,7 @@
           .containerCart{
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(1, 1fr);
+            grid-template-rows: repeat(1, 48rem);
             gap: 10px;
             height:auto;
           }
@@ -602,7 +602,7 @@
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             grid-template-rows: repeat(2, 23rem);
-            gap: 8px;
+            gap: 1rem;
           }
       
           .container-address {
@@ -643,6 +643,11 @@
           }
           .magecomp-round-btns{
             display:none;
+          }
+
+          
+          .form {
+              row-gap: 0;       
           }
           @media (max-width: 767px){
             .containerCart {
@@ -1004,7 +1009,7 @@
             }
           });
         </script>
-        <div class="section-stack">
+        <div class="section-stack" style="overflow-y:scroll;">
           <div class="section-header justify-self-center text-center">
             <div class="v-stack gap-4">
               <h1 class="h2">{{ 'cart.general.title' | t }}</h1>
@@ -1165,9 +1170,9 @@
                   </noscript>
   
                   {%- assign checkout_button = 'cart.general.checkout' | t -%}
+                  <div id="checkout-warning" style="color:rgb(0, 0, 0); margin-top: 8px; display: none;"></div>
                   <button type="button" id="checkout-warning-btn" class="button" style="margin-top: 16px;">Finalizar compra</button>
                   <button type="submit" id="checkout-btn-cart" class="button" name="checkout" style="display:none;">Finalizar compra</button>
-                  <div id="checkout-warning" style="color:rgb(0, 0, 0); margin-top: 8px; display: none;"></div>
                 </div>
               </div>
             </div>
