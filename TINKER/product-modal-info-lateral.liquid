@@ -1,0 +1,279 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- Botón para abrir el modal lateral -->
+<p id="btnInfoLateral" class="btnInfoLateral">
+  Más Información
+  <i class="fas fa-info-circle info-icon"></i>
+</p>
+
+<!-- Modal Lateral -->
+<div class="overlayInfoLateral" id="overlayInfoLateral">
+  <div class="moduloInfoLateral">
+    {%- comment -%}
+      Puedes reemplazar este metafield con el que necesites para mostrar tu contenido.
+      Ejemplo: product.metafields.custom.especificaciones.value
+    {%- endcomment -%}
+    {%- assign tabla_info = product.metafields.custom.medidas.value -%}
+
+    {% if tabla_info %}
+      <div class="info-modal-header">
+        <h2 class="info-modal-title">{{ tabla_info.titulo | default: "Información Adicional" }}</h2>
+        <button class="info-close-btn" id="closeModalInfoLateral">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="info-modal-body">
+        <div class="info-table-container">
+          <table>
+            <thead>
+              <tr>
+                {% for encabezado in tabla_info.encabezados %}
+                  <th>{{ encabezado }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for fila in tabla_info.filas %}
+                <tr>
+                  {% for dato in fila %}
+                    <td>{{ dato }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% else %}
+      <div class="info-modal-header">
+        <h2 class="info-modal-title">Información</h2>
+        <button class="info-close-btn" id="closeModalInfoLateral-fallback">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="info-modal-body">
+        <p style="padding: 24px 32px;">No hay información disponible.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  /* Botón para abrir modal */
+  .btnInfoLateral {
+    color: black;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .btnInfoLateral:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  
+  /* Icono de información */
+  .info-icon {
+    font-size: 16px;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+  
+  .btnInfoLateral:hover .info-icon {
+    color: #333;
+  }
+  
+  /* Overlay del modal */
+  .overlayInfoLateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: flex-end; /* Posicionado a la derecha */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001; /* Un z-index mayor por si coexiste con el otro modal */
+    padding: 20px;
+  }
+  
+  .overlayInfoLateral.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Modal principal */
+  .moduloInfoLateral {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 380px; /* Más pequeño */
+    width: 100%;
+    max-height: 85vh;
+    overflow: hidden;
+    transform: scale(0.9) translateX(50px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .overlayInfoLateral.active .moduloInfoLateral {
+    transform: scale(1) translateX(0);
+  }
+
+  /* Header del modal */
+  .info-modal-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+
+  .info-modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .info-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #666;
+  }
+
+  .info-close-btn:hover {
+    background: #e5e5e5;
+    transform: rotate(90deg);
+  }
+
+  /* Cuerpo del modal */
+  .info-modal-body {
+    padding: 0;
+    overflow-y: auto;
+    max-height: calc(85vh - 70px); /* Ajustar al tamaño del header */
+  }
+
+  .info-table-container {
+    padding: 20px 24px 24px;
+  }
+
+  /* Estilos de la tabla */
+  .moduloInfoLateral table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .moduloInfoLateral th, .moduloInfoLateral td {
+    padding: 14px 10px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .moduloInfoLateral th {
+    background: #fafafa;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .moduloInfoLateral td {
+    color: #555;
+  }
+
+  .moduloInfoLateral tr:hover {
+    background: #fafafa;
+  }
+</style>
+
+<script>
+  class InfoLateralModal {
+    constructor() {
+      this.openBtn = document.getElementById("btnInfoLateral");
+      this.closeBtn = document.getElementById("closeModalInfoLateral");
+      this.closeBtnFallback = document.getElementById("closeModalInfoLateral-fallback");
+      this.overlay = document.getElementById("overlayInfoLateral");
+      
+      if (!this.openBtn || !this.overlay) return;
+      
+      this.init();
+    }
+
+    init() {
+      this.openBtn.addEventListener("click", () => this.open());
+      if (this.closeBtn) this.closeBtn.addEventListener("click", () => this.close());
+      if (this.closeBtnFallback) this.closeBtnFallback.addEventListener("click", () => this.close());
+      
+      this.overlay.addEventListener("click", (e) => {
+        if (e.target === this.overlay) {
+          this.close();
+        }
+      });
+      
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && this.overlay.classList.contains("active")) {
+          this.close();
+        }
+      });
+    }
+
+    open() {
+      this.overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+      
+      const focusableBtn = this.closeBtn || this.closeBtnFallback;
+      if (focusableBtn) {
+        setTimeout(() => {
+          focusableBtn.focus();
+        }, 100);
+      }
+    }
+
+    close() {
+      this.overlay.classList.remove("active");
+      document.body.style.overflow = "";
+      
+      setTimeout(() => {
+        this.openBtn.focus();
+      }, 400);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    new InfoLateralModal();
+  });
+</script>

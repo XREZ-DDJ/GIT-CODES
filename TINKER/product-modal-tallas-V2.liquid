@@ -1,0 +1,342 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- Botón para abrir el modal -->
+<p id="btnGuiaTallas" class="btnGuiaTallas">
+  Guia de tallas
+  <i class="fas fa-ruler-horizontal size-icon"></i>
+</p>
+
+<!-- Modal -->
+<div class="overlayGuiaTallas" id="overlayGuiaTallas">
+  <div class="moduloGuiaTallas">
+    {%- assign tabla_medidas = product.metafields.custom.medidas.value -%}
+
+    {% if tabla_medidas %}
+      <div class="modal-header">
+        <h2 class="modal-title">{{ tabla_medidas.titulo }}</h2>
+        <button class="close-btn" id="closeModalTallas">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                {% for encabezado in tabla_medidas.encabezados %}
+                  <th>{{ encabezado }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for fila in tabla_medidas.filas %}
+                <tr>
+                  {% for dato in fila %}
+                    <td>{{ dato }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  /* Botón para abrir modal */
+  .btnGuiaTallas {
+    color: black;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  @media (max-width: 767px) {
+    .btnGuiaTallas {
+      display: inline-flex;
+    }
+  }
+  
+  .btnGuiaTallas:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  
+  /* Icono de referencia de tallas */
+  .size-icon {
+    font-size: 16px;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+  
+  .btnGuiaTallas:hover .size-icon {
+    color: #333;
+  }
+  
+  /* Overlay del modal */
+  .overlayGuiaTallas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .overlayGuiaTallas.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Modal principal */
+  .moduloGuiaTallas {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    max-width: 450px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    transform: scale(0.9) translateX(50px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .overlayGuiaTallas.active .moduloGuiaTallas {
+    transform: scale(1) translateX(0);
+  }
+
+  /* Header del modal */
+  .modal-header {
+    padding: 24px 32px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #666;
+  }
+
+  .close-btn:hover {
+    background: #e5e5e5;
+    transform: rotate(90deg);
+  }
+
+  /* Cuerpo del modal */
+  .modal-body {
+    padding: 0;
+    overflow-y: auto;
+    max-height: calc(90vh - 80px);
+  }
+
+  .table-container {
+    padding: 24px 32px 32px;
+  }
+
+  /* Estilos de la tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 16px 12px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  th {
+    background: #fafafa;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  td {
+    color: #555;
+  }
+
+  tr:hover {
+    background: #fafafa;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Animación de entrada para las filas */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .overlayGuiaTallas.active tbody tr {
+    animation: fadeInUp 0.3s ease forwards;
+    position: relative;
+    z-index: 1;
+  }
+
+  .overlayGuiaTallas.active tbody tr:nth-child(1) { animation-delay: 0.1s; }
+  .overlayGuiaTallas.active tbody tr:nth-child(2) { animation-delay: 0.15s; }
+  .overlayGuiaTallas.active tbody tr:nth-child(3) { animation-delay: 0.2s; }
+  .overlayGuiaTallas.active tbody tr:nth-child(4) { animation-delay: 0.25s; }
+  .overlayGuiaTallas.active tbody tr:nth-child(5) { animation-delay: 0.3s; }
+  .overlayGuiaTallas.active tbody tr:nth-child(6) { animation-delay: 0.35s; }
+  .overlayGuiaTallas.active tbody tr:nth-child(7) { animation-delay: 0.4s; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .moduloGuiaTallas {
+      max-height: 85vh;
+      margin: 10px;
+      border-radius: 15px;
+    }
+    
+    .modal-header {
+      padding: 20px 24px 16px;
+    }
+    
+    .modal-title {
+      font-size: 20px;
+    }
+    
+    .close-btn {
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+    }
+    
+    .table-container {
+      padding: 16px 20px 24px;
+    }
+    
+    th, td {
+      padding: 12px 8px;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .overlayGuiaTallas {
+      padding: 15px;
+    }
+    
+    .moduloGuiaTallas {
+      border-radius: 12px;
+    }
+    
+    th, td {
+      padding: 10px 6px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+<script>
+  class GuiaTallasModal {
+    constructor() {
+      this.openBtn = document.getElementById("btnGuiaTallas");
+      this.closeBtn = document.getElementById("closeModalTallas");
+      this.overlay = document.getElementById("overlayGuiaTallas");
+      this.init();
+    }
+
+    init() {
+      this.openBtn.addEventListener("click", () => this.open());
+      this.closeBtn.addEventListener("click", () => this.close());
+      
+      // Cerrar haciendo clic en el overlay
+      this.overlay.addEventListener("click", (e) => {
+        if (e.target === this.overlay) {
+          this.close();
+        }
+      });
+      
+      // Cerrar con tecla Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && this.overlay.classList.contains("active")) {
+          this.close();
+        }
+      });
+    }
+
+    open() {
+      this.overlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+      
+      // Focus en el botón de cerrar para accesibilidad
+      setTimeout(() => {
+        this.closeBtn.focus();
+      }, 100);
+    }
+
+    close() {
+      this.overlay.classList.remove("active");
+      document.body.style.overflow = "";
+      
+      // Devolver el focus al botón de abrir
+      setTimeout(() => {
+        this.openBtn.focus();
+      }, 400);
+    }
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener("DOMContentLoaded", () => {
+    new GuiaTallasModal();
+  });
+</script>
