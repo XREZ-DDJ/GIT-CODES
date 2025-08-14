@@ -23,25 +23,37 @@
       </div>
       
       <div class="modal-body">
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                {% for encabezado in tabla_medidas.encabezados %}
-                  <th>{{ encabezado }}</th>
-                {% endfor %}
-              </tr>
-            </thead>
-            <tbody>
-              {% for fila in tabla_medidas.filas %}
-                <tr>
-                  {% for dato in fila %}
-                    <td>{{ dato }}</td>
+        <div class="modal-content-wrapper">
+          <div class="modal-main-content">
+            {%- if tabla_medidas.descripcion -%}
+              <p class="modal-description">{{ tabla_medidas.descripcion }}</p>
+            {%- endif -%}
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    {% for encabezado in tabla_medidas.encabezados %}
+                      <th>{{ encabezado }}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for fila in tabla_medidas.filas %}
+                    <tr>
+                      {% for dato in fila %}
+                        <td>{{ dato }}</td>
+                      {% endfor %}
+                    </tr>
                   {% endfor %}
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {%- if tabla_medidas.imagen_guia -%}
+            <div class="modal-image-wrapper">
+              <img src="{{ tabla_medidas.imagen_guia }}" alt="Guía de tallas: {{ tabla_medidas.titulo | escape }}" class="modal-guide-image">
+            </div>
+          {%- endif -%}
         </div>
       </div>
     {% endif %}
@@ -173,9 +185,40 @@
     overflow-y: auto;
     max-height: calc(90vh - 80px);
   }
-
-  .table-container {
+  
+  .modal-content-wrapper {
+    display: flex;
+    gap: 32px;
     padding: 24px 32px 32px;
+  }
+
+  .modal-main-content {
+    flex: 2;
+    min-width: 0;
+  }
+
+  .modal-description {
+    font-size: 15px;
+    color: #555;
+    margin: 0 0 20px;
+    line-height: 1.6;
+  }
+
+  .modal-image-wrapper {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .modal-guide-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .table-container {
+    padding: 0;
   }
 
   /* Estilos de la tabla */
@@ -259,11 +302,17 @@
       width: 36px;
       height: 36px;
     }
-    
-    .table-container {
+
+    .modal-content-wrapper {
+      flex-direction: column;
+      gap: 24px;
       padding: 16px 20px 24px;
     }
-    
+
+    .table-container {
+      padding: 0;
+    }
+
     th, td {
       padding: 12px 8px;
       font-size: 13px;
