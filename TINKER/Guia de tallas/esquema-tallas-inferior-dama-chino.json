@@ -1,0 +1,43 @@
+{
+  "titulo": "Medidas de Cuerpo (cm)",
+  "etiqueta": "inferior dama chino",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_DAMA.png?v=1738344602",
+  "descripcion": "\"El corte es ligeramente ajustado. Te recomendamos pedir una talla más a la habitual.\"\n\nPara elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura.\n\nMide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado. Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.",
+  "encabezados": [
+    "Ancho de cintura",
+    "Longitud de pierna",
+    "Eres talla..."
+  ],
+  "filas": [
+    [
+      "Hasta 74 cms",
+      "Hasta 93 cms",
+      "CH"
+    ],
+    [
+      "Hasta 78 cms",
+      "Hasta 95 cms",
+      "MD"
+    ],
+    [
+      "Hasta 82 cms",
+      "Hasta 96 cms",
+      "GD"
+    ],
+    [
+      "Hasta 86 cms",
+      "Hasta 98 cms",
+      "XG"
+    ],
+    [
+      "Hasta 90 cms",
+      "Hasta 99 cms",
+      "2X"
+    ],
+    [
+      "Hasta 94 cms",
+      "Hasta 101 cms",
+      "3X"
+    ]
+  ]
+}
