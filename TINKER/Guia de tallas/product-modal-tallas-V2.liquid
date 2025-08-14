@@ -100,7 +100,7 @@
     -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -118,17 +118,17 @@
     background: white;
     border-radius: 20px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-    max-width: 450px;
+    max-width: 800px;
     width: 100%;
     max-height: 90vh;
     overflow: hidden;
-    transform: scale(0.9) translateX(50px);
+    transform: scale(0.8) translateY(50px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
   }
 
   .overlayGuiaTallas.active .moduloGuiaTallas {
-    transform: scale(1) translateX(0);
+    transform: scale(1) translateY(0);
   }
 
   /* Header del modal */

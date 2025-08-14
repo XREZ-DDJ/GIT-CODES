@@ -1,0 +1,30 @@
+{
+  "titulo": "Tabla de Medidas",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0589/2421/1494/files/guia-de-tallas-medidas-de-anillos-para-imprimir-mi-joya-desde-casa.jpg?v=1712859032",
+  "encabezados": [
+    "Talla",
+    "Largo (cm)",
+    "Ancho (cm)",
+    "Altura (cm)"
+  ],
+  "filas": [
+    [
+      "S",
+      "50",
+      "40",
+      "30"
+    ],
+    [
+      "M",
+      "55",
+      "45",
+      "35"
+    ],
+    [
+      "L",
+      "60",
+      "50",
+      "40"
+    ]
+  ]
+}
