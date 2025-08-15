@@ -1,0 +1,53 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "toronto caballero",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_CABALLERO.png?v=1738344602",
+  "descripcion": "\"El corte es recto. Te recomendamos medir correctamente tus medidas.\"\n\nPara elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura\n\nMide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado. Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.",
+  "encabezados": [
+    "Ancho de cintura",
+    "Longitud de pierna",
+    "Eres talla..."
+  ],
+  "filas": [
+    [
+      "Hasta 71 cms",
+      "Hasta 83 cms",
+      "28"
+    ],
+    [
+      "Hasta 76 cms",
+      "Hasta 83 cms",
+      "30"
+    ],
+    [
+      "Hasta 81 cms",
+      "Hasta 83 cms",
+      "32"
+    ],
+    [
+      "Hasta 86 cms",
+      "Hasta 83 cms",
+      "34"
+    ],
+    [
+      "Hasta 91 cms",
+      "Hasta 83 cms",
+      "36"
+    ],
+    [
+      "Hasta 97 cms",
+      "Hasta 83 cms",
+      "38"
+    ],
+    [
+      "Hasta 102 cms",
+      "Hasta 83 cms",
+      "40"
+    ],
+    [
+      "Hasta 107 cms",
+      "Hasta 83 cms",
+      "42"
+    ]
+  ]
+}

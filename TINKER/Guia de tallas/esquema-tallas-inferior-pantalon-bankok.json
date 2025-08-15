@@ -1,0 +1,64 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "inferior pantalon bankok",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_CABALLERO.png?v=1738344602",
+  "descripcion": "Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado. Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.",
+  "encabezados": [
+    "Contorno cintura",
+    "Eres talla..."
+  ],
+  "filas": [
+    [
+      "66 cms",
+      "26"
+    ],
+    [
+      "71 cms",
+      "28"
+    ],
+    [
+      "76 cms",
+      "30"
+    ],
+    [
+      "81 cms",
+      "32"
+    ],
+    [
+      "86 cms",
+      "34"
+    ],
+    [
+      "91 cms",
+      "36"
+    ],
+    [
+      "97 cms",
+      "38"
+    ],
+    [
+      "102 cms",
+      "40"
+    ],
+    [
+      "107 cms",
+      "42"
+    ],
+    [
+      "112 cms",
+      "44"
+    ],
+    [
+      "117 cms",
+      "46"
+    ],
+    [
+      "122 cms",
+      "48"
+    ],
+    [
+      "127 cms",
+      "50"
+    ]
+  ]
+}

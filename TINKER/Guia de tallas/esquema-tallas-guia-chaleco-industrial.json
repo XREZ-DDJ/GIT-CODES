@@ -1,0 +1,24 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "guia chaleco industrial",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/3_6dd7487a-11d9-4159-bc66-95232d1bad7e.png?v=1741887721",
+  "descripcion": "",
+  "encabezados": [
+    "Concepto",
+    "Medida"
+  ],
+  "filas": [
+    [
+      "Largo espalda",
+      "69.85 cm"
+    ],
+    [
+      "Control pecho",
+      "125 cm"
+    ],
+    [
+      "Bolsa inferior",
+      "Ancho 19.05 x Largo 20.955 cm"
+    ]
+  ]
+}

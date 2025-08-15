@@ -1,0 +1,40 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "turin caballero",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Hombre.png?v=1730411813",
+  "descripcion": "La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.",
+  "encabezados": [
+    "Contorno pecho",
+    "Eres talla..."
+  ],
+  "filas": [
+    [
+      "100 Cm",
+      "XCH"
+    ],
+    [
+      "104 Cm",
+      "CH"
+    ],
+    [
+      "108 Cm",
+      "MD"
+    ],
+    [
+      "112 Cm",
+      "GD"
+    ],
+    [
+      "117 Cm",
+      "XG"
+    ],
+    [
+      "122 Cm",
+      "2X"
+    ],
+    [
+      "127 Cm",
+      "3X"
+    ]
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "guia overol",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Hombre.png?v=1730411813",
+  "descripcion": "",
+  "encabezados": [
+    "Si tu pecho mide...",
+    "Eres talla..."
+  ],
+  "filas": [
+    [
+      "Hasta 108 cm",
+      "XCH"
+    ],
+    [
+      "Hasta 113 cms",
+      "CH"
+    ],
+    [
+      "Hasta 108 cm",
+      "MD"
+    ],
+    [
+      "Hasta 123 cm",
+      "GD"
+    ],
+    [
+      "Hasta 128 cm",
+      "XG"
+    ],
+    [
+      "Hasta 136 cms",
+      "2X"
+    ],
+    [
+      "Hasta 141 cm",
+      "3X"
+    ]
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "guia gorro",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/1_a1a6945a-be8a-4628-9b0d-2c2a874ccd6f.png?v=1741887721",
+  "descripcion": "",
+  "encabezados": [
+    "Concepto",
+    "Medida"
+  ],
+  "filas": [
+    [
+      "Alto Toque",
+      "18 cm"
+    ],
+    [
+      "Ancho Toque",
+      "62 cm"
+    ]
+  ]
+}

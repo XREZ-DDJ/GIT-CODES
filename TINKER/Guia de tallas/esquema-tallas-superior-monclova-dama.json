@@ -1,0 +1,40 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "superior monclova dama",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/Mujer.png?v=1731079446",
+  "descripcion": "La medida del pecho corresponde a la medida de la circunferencia de éste. Para conocer tu talla, toma una cinta métrica y rodea tu pecho; la cinta debe quedar debajo de tus axilas. Donde la cinta se toque, esa es la medida de tu pecho. Es importante que antes de medirte, tomes aire con tus pulmones para que tu pecho esté en su máxima circunferencia.",
+  "encabezados": [
+    "Si tu pecho mide...",
+    "Eres talla..."
+  ],
+  "filas": [
+    [
+      "Hasta 91 cms",
+      "XC"
+    ],
+    [
+      "Hasta 95 cms",
+      "CH"
+    ],
+    [
+      "Hasta 99 cms",
+      "MD"
+    ],
+    [
+      "Hasta 103 cms",
+      "GD"
+    ],
+    [
+      "Hasta 108 cms",
+      "XG"
+    ],
+    [
+      "Hasta 113 cms",
+      "2X"
+    ],
+    [
+      "Hasta 118 cms",
+      "3X"
+    ]
+  ]
+}

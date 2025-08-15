@@ -1,0 +1,40 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "seul caballero",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_CABALLERO.png?v=1738344602",
+  "descripcion": "Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado. Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura..",
+  "encabezados": [
+    "Contorno cintura",
+    "Eres talla..."
+  ],
+  "filas": [
+    [
+      "62 Cm",
+      "XCH"
+    ],
+    [
+      "65 Cm",
+      "CH"
+    ],
+    [
+      "67 Cm",
+      "MD"
+    ],
+    [
+      "70 Cm",
+      "GD"
+    ],
+    [
+      "72 Cm",
+      "XG"
+    ],
+    [
+      "75 Cm",
+      "2X"
+    ],
+    [
+      "78 Cm",
+      "3X"
+    ]
+  ]
+}

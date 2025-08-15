@@ -1,0 +1,43 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "guia bata",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/4_598fad51-a15a-424e-b41a-f5438c9a5e8f.png?v=1741887721",
+  "descripcion": "",
+  "encabezados": [
+    "Contorno Pecho",
+    "Largo Espalda",
+    "Eres talla."
+  ],
+  "filas": [
+    [
+      "Hasta 104 cm",
+      "Hasta 90 cm",
+      "XCH"
+    ],
+    [
+      "Hasta 109 cm",
+      "Hasta 91 cm",
+      "CH"
+    ],
+    [
+      "Hasta 114 cms",
+      "Hasta 92 cms",
+      "MD"
+    ],
+    [
+      "Hasta 119 cm",
+      "Hasta 93 cm",
+      "GD"
+    ],
+    [
+      "Hasta 124 cm",
+      "Hasta 94 cm",
+      "XG"
+    ],
+    [
+      "Hasta 129 cms",
+      "Hasta 95 cms",
+      "2X"
+    ]
+  ]
+}

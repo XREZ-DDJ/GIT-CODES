@@ -1,0 +1,22 @@
+{
+  "titulo": "MEDIDAS DE CUERPO (cm)",
+  "etiqueta": "inferior loreto dama",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/INFERIOR_DAMA.png?v=1738344602",
+  "descripcion": "Para elegir la talla correcta de tus prendas inferiores, es importante tomar en cuenta la medida de tu cintura. Mide alrededor de tu cintura natural, que es la parte más estrecha de tu torso. Asegúrate de que la cinta métrica quede ajustada pero sin apretar demasiado. Consulta nuestra tabla de tallas y compara tus medidas con las referencias indicadas para encontrar la opción que mejor se adapte a ti. Si estás entre dos tallas, te recomendamos elegir según el ajuste que prefieras: una talla más pequeña para un ajuste más ceñido o una más grande para mayor holgura.",
+  "encabezados": [
+    "Contorno de cintura",
+    "Sugerencia de talla numerica",
+    "Eres talla..."
+  ],
+  "filas": [
+    [ "Hasta 75 cms", "Talla 26-28", "XC" ],
+    [ "Hasta 79 cms", "Talla 28-30", "CH" ],
+    [ "Hasta 84 cms", "Talla 32", "MD" ],
+    [ "Hasta 89 cms", "Talla 34", "GD" ],
+    [ "Hasta 94 cms", "Talla 36", "XG" ],
+    [ "Hasta 99 cms", "Talla 38", "2X" ],
+    [ "Hasta 104 cms", "Talla 40", "3X" ],
+    [ "Hasta 109 cms", "Talla 42", "4X" ],
+    [ "Hasta 114 cms", "Talla 44", "5X" ]
+  ]
+}
