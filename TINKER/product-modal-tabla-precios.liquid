@@ -1,0 +1,407 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- Botón para abrir el modal -->
+<p id="btnTablaDescuentos" class="btnTablaDescuentos">
+  Mas información
+  <i class="fas fa-info-circle info-icon"></i>
+</p>
+
+<!-- Modal -->
+<div class="overlayTablaDescuentos" id="overlayTablaDescuentos">
+  <div class="moduloTablaDescuentos">
+    <div class="discount-header">
+      <h2 class="discount-title">Tabla de Descuentos</h2>
+      <button class="discount-close-btn" id="closeModalDescuentos">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="discount-body">
+      <div class="discount-content-wrapper">
+        <div class="discount-main-content">
+          <div class="discount-table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nivel</th>
+                  <th>% Descuento</th>
+                  <th>DE</th>
+                  <th>HASTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Booster</td>
+                  <td>5%</td>
+                  <td>$-</td>
+                  <td>$5,000</td>
+                </tr>
+                <tr>
+                  <td>Basic</td>
+                  <td>10%</td>
+                  <td>$5,001</td>
+                  <td>$24,990</td>
+                </tr>
+                <tr>
+                  <td>Plus</td>
+                  <td>15%</td>
+                  <td>$25,000</td>
+                  <td>$49,990</td>
+                </tr>
+                <tr>
+                  <td>Silver</td>
+                  <td>20%</td>
+                  <td>$50,000</td>
+                  <td>$249,000</td>
+                </tr>
+                <tr>
+                  <td>Gold</td>
+                  <td>25%</td>
+                  <td>$250,000</td>
+                  <td>$1,000,000</td>
+                </tr>
+                <tr>
+                  <td>Premium</td>
+                  <td>30%</td>
+                  <td>$1,000,001</td>
+                  <td>$2,000,000</td>
+                </tr>
+                <tr>
+                  <td>VIP</td>
+                  <td>35%</td>
+                  <td>$2,000,001</td>
+                  <td>EN ADELANTE</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Botón para abrir modal */
+  .btnTablaDescuentos {
+    color: black;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    
+  }
+  
+  @media (max-width: 767px) {
+    .btnTablaDescuentos {
+      display: inline-flex;
+    }
+  }
+  
+  .btnTablaDescuentos:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  
+  /* Icono de referencia de descuentos */
+  .discount-icon {
+    font-size: 16px;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+  
+  .btnTablaDescuentos:hover .discount-icon {
+    color: #333;
+  }
+  
+  /* Overlay del modal */
+  .overlayTablaDescuentos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px); /* Estándar */
+    -webkit-backdrop-filter: blur(8px); /* Safari */
+    display: none; /* Ocultar por defecto para evitar FOUC */
+    align-items: center;
+    justify-content: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    padding: 20px;
+    padding-right: 40px;
+  }
+  
+  .overlayTablaDescuentos.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Modal principal - tamaño reducido y posicionado a la derecha */
+  .moduloTablaDescuentos {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    max-width: 450px;
+    width: 100%;
+    max-height: 70vh;
+    overflow: hidden;
+    transform: translateX(50px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .overlayTablaDescuentos.active .moduloTablaDescuentos {
+    transform: translateX(0) scale(1);
+  }
+
+  /* Header del modal */
+  .discount-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+
+  .discount-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .discount-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #666;
+  }
+
+  .discount-close-btn:hover {
+    background: #e5e5e5;
+    transform: rotate(90deg);
+  }
+
+  /* Cuerpo del modal */
+  .discount-body {
+    padding: 0;
+    overflow-y: auto;
+    max-height: calc(70vh - 70px);
+    scrollbar-width: none;
+  }
+  
+  .discount-content-wrapper {
+    padding: 16px 24px 24px;
+  }
+
+  .discount-main-content {
+    width: 100%;
+  }
+  
+  .discount-table-container {
+    padding: 0;
+  }
+
+  /* Estilos de la tabla */
+  .moduloTablaDescuentos table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .moduloTablaDescuentos th, .moduloTablaDescuentos td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .moduloTablaDescuentos th {
+    background: #dc2626;
+    color: white;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .moduloTablaDescuentos td {
+    color: #555;
+    background: white;
+  }
+
+  .moduloTablaDescuentos tr:nth-child(even) td {
+    background: #f9f9f9;
+  }
+
+  .moduloTablaDescuentos tr:hover td {
+    background: #f0f0f0;
+  }
+
+  /* Animación de entrada para las filas */
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .overlayTablaDescuentos.active tbody tr {
+    animation: fadeInRight 0.3s ease forwards;
+  }
+
+  .overlayTablaDescuentos.active tbody tr:nth-child(1) { animation-delay: 0.1s; }
+  .overlayTablaDescuentos.active tbody tr:nth-child(2) { animation-delay: 0.15s; }
+  .overlayTablaDescuentos.active tbody tr:nth-child(3) { animation-delay: 0.2s; }
+  .overlayTablaDescuentos.active tbody tr:nth-child(4) { animation-delay: 0.25s; }
+  .overlayTablaDescuentos.active tbody tr:nth-child(5) { animation-delay: 0.3s; }
+  .overlayTablaDescuentos.active tbody tr:nth-child(6) { animation-delay: 0.35s; }
+  .overlayTablaDescuentos.active tbody tr:nth-child(7) { animation-delay: 0.4s; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .overlayTablaDescuentos {
+      justify-content: center;
+      padding: 15px;
+    }
+    
+    .moduloTablaDescuentos {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 12px;
+      transform: translateY(50px) scale(0.9);
+    }
+    
+    .overlayTablaDescuentos.active .moduloTablaDescuentos {
+      transform: translateY(0) scale(1);
+    }
+    
+    .discount-header {
+      padding: 16px 20px 12px;
+    }
+    
+    .discount-title {
+      font-size: 18px;
+    }
+    
+    .discount-close-btn {
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .discount-content-wrapper {
+      padding: 12px 16px 20px;
+    }
+
+    .moduloTablaDescuentos th, .moduloTablaDescuentos td {
+      padding: 10px 6px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .overlayTablaDescuentos {
+      padding: 10px;
+    }
+    
+    .moduloTablaDescuentos th, .moduloTablaDescuentos td {
+      padding: 8px 4px;
+      font-size: 11px;
+    }
+  }
+</style>
+
+<script>
+  class TablaDescuentosModal {
+    constructor() {
+      this.openBtn = document.getElementById("btnTablaDescuentos");
+      this.closeBtn = document.getElementById("closeModalDescuentos");
+      this.overlay = document.getElementById("overlayTablaDescuentos");
+      this.init();
+    }
+
+    init() {
+      this.openBtn.addEventListener("click", () => this.open());
+      this.closeBtn.addEventListener("click", () => this.close());
+      
+      // Cerrar haciendo clic en el overlay
+      this.overlay.addEventListener("click", (e) => {
+        if (e.target === this.overlay) {
+          this.close();
+        }
+      });
+      
+      // Cerrar con tecla Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && this.overlay.classList.contains("active")) {
+          this.close();
+        }
+      });
+    }
+
+    open() {
+      // Hacemos que el elemento sea parte del layout pero aún invisible
+      this.overlay.style.display = "flex";
+
+      // Forzamos un pequeño delay para que el navegador procese el cambio de display
+      // antes de iniciar la animación de transición.
+      setTimeout(() => {
+        this.overlay.classList.add("active");
+      }, 10);
+
+      document.body.style.overflow = "hidden";
+      
+      // Focus en el botón de cerrar para accesibilidad
+      setTimeout(() => {
+        this.closeBtn.focus();
+      }, 100); // Un delay mayor para el focus está bien
+    }
+
+    close() {
+      // Inicia la animación de cierre al quitar la clase
+      this.overlay.classList.remove("active");
+      document.body.style.overflow = "";
+      
+      // Al finalizar la animación (400ms), lo ocultamos completamente
+      // y devolvemos el focus al botón que lo abrió.
+      setTimeout(() => {
+        this.overlay.style.display = "none";
+        this.openBtn.focus();
+      }, 400); // Debe coincidir con la duración de la transición en CSS
+    }
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener("DOMContentLoaded", () => {
+    new TablaDescuentosModal();
+  });
+</script>
