@@ -1,0 +1,16 @@
+{
+  "titulo": "GUIA DE TALLA MANDILES",
+  "etiqueta": "guia montevideo",
+  "imagen_guia": "https://cdn.shopify.com/s/files/1/0481/0273/6030/files/TALLA.png?v=1756926695",
+  "descripcion": "Consulta las medidas de tu cuerpo y selecciona la talla adecuada.",
+  "encabezados": [
+    "Largo Mandil",
+    "Largo cinta de amarre"
+  ],
+  "filas": [
+    [
+      "73 cm",
+      "81 cm"
+    ]
+  ]
+}
