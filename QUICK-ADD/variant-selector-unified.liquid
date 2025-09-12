@@ -1,0 +1,671 @@
+{%- doc -%}
+  Unified variant selector module for Shopify products with size, color, and quantity selection.
+  Integrates with existing cart drawer and product form components.
+
+  @param {object} product - The product object
+  @param {string} [section_id] - The section ID for cart updates
+  @param {boolean} [show_quantity] - Whether to show quantity selector (default: true)
+  @param {string} [button_style] - Button style class (default: 'button')
+{%- enddoc -%}
+
+{%- liquid
+  assign product = product | default: closest.product
+  assign section_id = section_id | default: section.id
+  assign show_quantity = show_quantity | default: true
+  assign button_style = button_style | default: 'button'
+  
+  if product == blank
+    assign product = collections.all.products.first
+  endif
+  
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'VariantSelector-ProductForm-' | append: product.id
+-%}
+
+<variant-selector-unified
+  class="variant-selector-unified"
+  data-product-id="{{ product.id }}"
+  data-product-url="{{ product.url }}"
+  data-section-id="{{ section_id }}"
+>
+  <product-form-component
+    data-section-id="{{ section_id }}"
+    data-product-id="{{ product.id }}"
+    data-product-url="{{ product.url }}"
+    on:submit="/handleSubmit"
+    data-quantity-default="{% if current_variant.quantity_rule.min %}{{ current_variant.quantity_rule.min }}{% else %}1{% endif %}"
+  >
+    <div
+      class="visually-hidden"
+      aria-live="assertive"
+      role="status"
+      aria-atomic="true"
+      ref="liveRegion"
+    ></div>
+    
+    {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input
+        type="hidden"
+        name="id"
+        ref="variantId"
+        value="{{ current_variant.id }}"
+        data-current-variant-id="{{ current_variant.id }}"
+      >
+
+      <div class="variant-selector-unified__options">
+        {%- for option in product.options_with_values -%}
+          {%- assign option_index = forloop.index0 -%}
+          {%- assign option_name = option.name | downcase -%}
+          
+          <div class="variant-option-group" data-option-index="{{ option_index }}">
+            <label class="variant-option-label">
+              <span class="variant-option-name">{{ option.name }}</span>
+              {%- if option.name == 'Color' or option.name == 'colour' -%}
+                <span class="variant-option-selected" data-selected-text>{{ option.selected_value | default: option.values.first }}</span>
+              {%- endif -%}
+            </label>
+            
+            <div class="variant-option-buttons" data-option-name="{{ option_name }}">
+              {%- for value in option.values -%}
+                {%- assign is_selected = false -%}
+                {%- if current_variant -%}
+                  {%- case option_index -%}
+                    {%- when 0 -%}
+                      {%- if current_variant.option1 == value -%}
+                        {%- assign is_selected = true -%}
+                      {%- endif -%}
+                    {%- when 1 -%}
+                      {%- if current_variant.option2 == value -%}
+                        {%- assign is_selected = true -%}
+                      {%- endif -%}
+                    {%- when 2 -%}
+                      {%- if current_variant.option3 == value -%}
+                        {%- assign is_selected = true -%}
+                      {%- endif -%}
+                  {%- endcase -%}
+                {%- elsif forloop.first -%}
+                  {%- assign is_selected = true -%}
+                {%- endif -%}
+                
+                <button
+                  type="button"
+                  class="variant-option-btn{% if is_selected %} selected{% endif %}"
+                  data-value="{{ value }}"
+                  data-option-index="{{ option_index }}"
+                  aria-pressed="{% if is_selected %}true{% else %}false{% endif %}"
+                >
+                  {{ value }}
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+
+        {%- if show_quantity -%}
+          <div class="variant-option-group">
+            <label class="variant-option-label">
+              <span class="variant-option-name">{{ 'products.product.quantity.label' | t | default: 'Cantidad' }}</span>
+            </label>
+            <div class="quantity-selector">
+              <button type="button" class="quantity-btn quantity-btn--minus" data-quantity-change="-1" aria-label="{{ 'products.product.quantity.decrease' | t | default: 'Disminuir cantidad' }}">
+                <span class="svg-wrapper">
+                  {{- 'icon-minus.svg' | inline_asset_content | default: '−' -}}
+                </span>
+              </button>
+              <input
+                type="number"
+                name="quantity"
+                id="Quantity-{{ product.id }}"
+                class="quantity-input"
+                value="{% if current_variant.quantity_rule.min %}{{ current_variant.quantity_rule.min }}{% else %}1{% endif %}"
+                min="{% if current_variant.quantity_rule.min %}{{ current_variant.quantity_rule.min }}{% else %}1{% endif %}"
+                {% if current_variant.quantity_rule.max %}max="{{ current_variant.quantity_rule.max }}"{% endif %}
+                step="{% if current_variant.quantity_rule.increment %}{{ current_variant.quantity_rule.increment }}{% else %}1{% endif %}"
+                aria-label="{{ 'products.product.quantity.input_label' | t | default: 'Cantidad para' }} {{ product.title | escape }}"
+              >
+              <button type="button" class="quantity-btn quantity-btn--plus" data-quantity-change="1" aria-label="{{ 'products.product.quantity.increase' | t | default: 'Aumentar cantidad' }}">
+                <span class="svg-wrapper">
+                  {{- 'icon-plus.svg' | inline_asset_content | default: '+' -}}
+                </span>
+              </button>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="variant-selector-unified__actions">
+        <add-to-cart-component
+          ref="addToCartButtonContainer"
+          data-product-variant-media="{% if current_variant.featured_media %}{{ current_variant.featured_media.preview_image | image_url: width: 100 }}{% elsif product.featured_media %}{{ product.featured_media.preview_image | image_url: width: 100 }}{% endif %}"
+        >
+          <button
+            type="submit"
+            name="add"
+            ref="addToCartButton"
+            on:click="/handleClick"
+            class="{{ button_style }} variant-selector-unified__add-to-cart"
+            {% unless current_variant.available %}disabled{% endunless %}
+          >
+            <span class="add-to-cart-text">
+              {% if current_variant.available %}
+                <span class="svg-wrapper add-to-cart-icon">
+                  {{- 'icon-add-to-cart.svg' | inline_asset_content | default: '+' -}}
+                </span>
+              {% endif %}
+              <span class="add-to-cart-text__content">
+                {%- if current_variant.available -%}
+                  {{ 'products.product.add_to_cart' | t | default: 'Agregar al carrito' }}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t | default: 'Agotado' }}
+                {%- endif -%}
+              </span>
+            </span>
+            <span aria-hidden="true" class="add-to-cart-text--added">
+              <span class="svg-wrapper add-to-cart-icon--added">
+                {{- 'icon-checkmark.svg' | inline_asset_content | default: '✓' -}}
+              </span>
+              <span>{{ 'actions.added' | t | default: 'Agregado' }}</span>
+            </span>
+          </button>
+        </add-to-cart-component>
+
+        <div class="variant-selector-unified__error hidden" ref="addToCartTextError">
+          <span class="svg-wrapper product-form-icon--error">
+            {{- 'icon-error.svg' | inline_asset_content | default: '!' -}}
+          </span>
+          <span class="error-message"></span>
+        </div>
+      </div>
+    {%- endform -%}
+  </product-form-component>
+</variant-selector-unified>
+
+<script type="module">
+  class VariantSelectorUnified extends HTMLElement {
+    constructor() {
+      super();
+      this.productData = null;
+      this.currentVariant = null;
+      this.selectedOptions = {};
+      this.init();
+    }
+
+    connectedCallback() {
+      this.setupEventListeners();
+      this.loadProductData();
+    }
+
+    init() {
+      // Initialize selected options from current variant
+      const variantIdInput = this.querySelector('[ref="variantId"]');
+      if (variantIdInput) {
+        const currentVariantId = variantIdInput.dataset.currentVariantId;
+        this.initializeFromVariant(currentVariantId);
+      }
+    }
+
+    async loadProductData() {
+      try {
+        const productUrl = this.dataset.productUrl;
+        const response = await fetch(`${productUrl}.js`);
+        this.productData = await response.json();
+        this.updateAvailableOptions();
+      } catch (error) {
+        console.error('Error loading product data:', error);
+      }
+    }
+
+    initializeFromVariant(variantId) {
+      if (!variantId || !this.productData) return;
+      
+      const variant = this.productData.variants.find(v => v.id.toString() === variantId);
+      if (variant) {
+        this.selectedOptions = {
+          0: variant.option1,
+          1: variant.option2,
+          2: variant.option3
+        };
+        this.currentVariant = variant;
+      }
+    }
+
+    setupEventListeners() {
+      // Option selection
+      this.addEventListener('click', (e) => {
+        if (e.target.matches('.variant-option-btn')) {
+          this.handleOptionSelect(e);
+        }
+        if (e.target.matches('.quantity-btn') || e.target.closest('.quantity-btn')) {
+          this.handleQuantityChange(e);
+        }
+      });
+
+      // Quantity input change
+      this.addEventListener('input', (e) => {
+        if (e.target.matches('.quantity-input')) {
+          this.handleQuantityInput(e);
+        }
+      });
+    }
+
+    handleOptionSelect(e) {
+      const button = e.target;
+      const value = button.dataset.value;
+      const optionIndex = parseInt(button.dataset.optionIndex);
+      
+      // Update selected options
+      this.selectedOptions[optionIndex] = value;
+      
+      // Update UI
+      this.updateOptionButtons(button);
+      this.updateSelectedVariant();
+      this.updateColorText(optionIndex, value);
+    }
+
+    updateOptionButtons(selectedButton) {
+      const group = selectedButton.closest('.variant-option-buttons');
+      
+      // Remove selected class from all buttons in group
+      group.querySelectorAll('.variant-option-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      
+      // Add selected class to clicked button
+      selectedButton.classList.add('selected');
+      selectedButton.setAttribute('aria-pressed', 'true');
+    }
+
+    updateColorText(optionIndex, value) {
+      const optionGroup = this.querySelector(`[data-option-index="${optionIndex}"]`);
+      const selectedText = optionGroup?.querySelector('[data-selected-text]');
+      if (selectedText && optionGroup.querySelector('[data-option-name*="color"]')) {
+        selectedText.textContent = value;
+      }
+    }
+
+    updateSelectedVariant() {
+      if (!this.productData) return;
+
+      // Find matching variant
+      const matchingVariant = this.productData.variants.find(variant => {
+        return variant.option1 === this.selectedOptions[0] &&
+               variant.option2 === this.selectedOptions[1] &&
+               variant.option3 === this.selectedOptions[2];
+      });
+
+      if (matchingVariant) {
+        this.currentVariant = matchingVariant;
+        this.updateVariantId(matchingVariant.id);
+        this.updateAddToCartButton(matchingVariant);
+        this.updateQuantityRules(matchingVariant);
+        this.updateVariantImage(matchingVariant);
+        this.dispatchVariantUpdate(matchingVariant);
+      }
+    }
+
+    updateVariantId(variantId) {
+      const variantIdInput = this.querySelector('[ref="variantId"]');
+      if (variantIdInput) {
+        variantIdInput.value = variantId;
+      }
+    }
+
+    updateAddToCartButton(variant) {
+      const addToCartButton = this.querySelector('[ref="addToCartButton"]');
+      const buttonText = addToCartButton?.querySelector('.add-to-cart-text__content');
+      const addToCartIcon = addToCartButton?.querySelector('.add-to-cart-icon');
+      
+      if (!addToCartButton || !buttonText) return;
+
+      if (variant.available) {
+        addToCartButton.disabled = false;
+        addToCartButton.removeAttribute('disabled');
+        buttonText.textContent = this.getTranslation('add_to_cart', 'Agregar al carrito');
+        if (addToCartIcon) addToCartIcon.style.display = '';
+      } else {
+        addToCartButton.disabled = true;
+        addToCartButton.setAttribute('disabled', 'true');
+        buttonText.textContent = this.getTranslation('sold_out', 'Agotado');
+        if (addToCartIcon) addToCartIcon.style.display = 'none';
+      }
+    }
+
+    updateQuantityRules(variant) {
+      const quantityInput = this.querySelector('.quantity-input');
+      if (!quantityInput) return;
+
+      const min = variant.quantity_rule?.min || 1;
+      const max = variant.quantity_rule?.max;
+      const step = variant.quantity_rule?.increment || 1;
+
+      quantityInput.min = min;
+      quantityInput.step = step;
+      if (max) quantityInput.max = max;
+
+      // Update current value if needed
+      const currentValue = parseInt(quantityInput.value);
+      if (currentValue < min) {
+        quantityInput.value = min;
+      } else if (max && currentValue > max) {
+        quantityInput.value = max;
+      }
+    }
+
+    updateVariantImage(variant) {
+      const addToCartComponent = this.querySelector('add-to-cart-component');
+      if (variant.featured_media?.preview_image?.src) {
+        const imageUrl = variant.featured_media.preview_image.src + '&width=100';
+        addToCartComponent?.setAttribute('data-product-variant-media', imageUrl);
+      }
+    }
+
+    handleQuantityChange(e) {
+      const button = e.target.closest('.quantity-btn');
+      const change = parseInt(button.dataset.quantityChange);
+      const quantityInput = this.querySelector('.quantity-input');
+      
+      if (!quantityInput) return;
+
+      const currentValue = parseInt(quantityInput.value) || 1;
+      const min = parseInt(quantityInput.min) || 1;
+      const max = parseInt(quantityInput.max) || Infinity;
+      const step = parseInt(quantityInput.step) || 1;
+
+      let newValue = currentValue + (change * step);
+      newValue = Math.max(min, Math.min(max, newValue));
+      
+      quantityInput.value = newValue;
+    }
+
+    handleQuantityInput(e) {
+      const input = e.target;
+      const min = parseInt(input.min) || 1;
+      const max = parseInt(input.max) || Infinity;
+      let value = parseInt(input.value) || min;
+
+      value = Math.max(min, Math.min(max, value));
+      input.value = value;
+    }
+
+    updateAvailableOptions() {
+      // This could be enhanced to disable unavailable option combinations
+      // For now, all options remain enabled
+    }
+
+    dispatchVariantUpdate(variant) {
+      // Dispatch event for other components that might need to know about variant changes
+      this.dispatchEvent(new CustomEvent('variant:update', {
+        detail: { variant },
+        bubbles: true
+      }));
+    }
+
+    getTranslation(key, fallback) {
+      return window.Theme?.translations?.[key] || fallback;
+    }
+  }
+
+  if (!customElements.get('variant-selector-unified')) {
+    customElements.define('variant-selector-unified', VariantSelectorUnified);
+  }
+</script>
+
+{% stylesheet %}
+  .variant-selector-unified {
+    width: 100%;
+  }
+
+  .variant-selector-unified__options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .variant-option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .variant-option-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .variant-option-name {
+    color: var(--color-foreground, #333);
+  }
+
+  .variant-option-selected {
+    font-weight: normal;
+    color: var(--color-accent, #666);
+  }
+
+  .variant-option-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .variant-option-btn {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border, #ccc);
+    border-radius: var(--border-radius, 4px);
+    background-color: var(--color-background, white);
+    color: var(--color-foreground, black);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  .variant-option-btn:hover:not(.selected) {
+    background-color: var(--color-background-hover, #f5f5f5);
+    border-color: var(--color-border-hover, #999);
+  }
+
+  .variant-option-btn.selected {
+    background-color: var(--color-primary, #000);
+    color: var(--color-primary-text, white);
+    border-color: var(--color-primary, #000);
+  }
+
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    border: 1px solid var(--color-border, #ccc);
+    border-radius: var(--border-radius, 4px);
+    overflow: hidden;
+  }
+
+  .quantity-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: var(--color-background, white);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .quantity-btn:hover {
+    background-color: var(--color-background-hover, #f5f5f5);
+  }
+
+  .quantity-btn svg,
+  .quantity-btn .svg-wrapper {
+    width: 16px;
+    height: 16px;
+  }
+
+  .quantity-input {
+    width: 60px;
+    height: 44px;
+    border: none;
+    border-left: 1px solid var(--color-border, #ccc);
+    border-right: 1px solid var(--color-border, #ccc);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--color-background, white);
+  }
+
+  .quantity-input::-webkit-outer-spin-button,
+  .quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .quantity-input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .variant-selector-unified__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .variant-selector-unified__add-to-cart {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--border-radius, 4px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-primary, #000);
+    color: var(--color-primary-text, white);
+  }
+
+  .variant-selector-unified__add-to-cart:hover:not(:disabled) {
+    background-color: var(--color-primary-hover, #333);
+  }
+
+  .variant-selector-unified__add-to-cart:disabled {
+    background-color: var(--color-disabled, #ccc);
+    color: var(--color-disabled-text, #666);
+    cursor: not-allowed;
+  }
+
+  .add-to-cart-text {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    animation-duration: var(--animation-speed, 200ms);
+    animation-timing-function: var(--animation-easing, ease);
+    animation-fill-mode: forwards;
+    transition: opacity var(--animation-speed, 200ms) var(--animation-easing, ease);
+  }
+
+  .atc-added .add-to-cart-text {
+    animation-name: atc-slide-out;
+  }
+
+  .add-to-cart-text--added {
+    position: absolute;
+    inset: 0;
+    animation-duration: var(--animation-speed, 200ms);
+    animation-timing-function: var(--animation-easing, ease);
+    animation-fill-mode: forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity var(--animation-speed, 200ms) var(--animation-easing, ease);
+  }
+
+  .atc-added .add-to-cart-text--added {
+    animation-name: atc-slide-in;
+  }
+
+  .variant-selector-unified__error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--color-error-background, #fee);
+    color: var(--color-error, #c53030);
+    border: 1px solid var(--color-error, #c53030);
+    border-radius: var(--border-radius, 4px);
+    font-size: 0.9rem;
+  }
+
+  .variant-selector-unified__error.hidden {
+    display: none;
+  }
+
+  .svg-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @keyframes atc-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.5em);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes atc-slide-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-1em);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 749px) {
+    .variant-option-buttons {
+      justify-content: flex-start;
+    }
+    
+    .variant-option-btn {
+      flex: 0 0 auto;
+      min-width: 45px;
+      padding: 0.625rem 0.875rem;
+      font-size: 0.85rem;
+    }
+    
+    .quantity-selector {
+      align-self: flex-start;
+    }
+  }
+{% endstylesheet %}
