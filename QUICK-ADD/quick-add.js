@@ -128,29 +128,50 @@ export class QuickAddComponent extends Component {
 
     if (!productGrid || !modalContent) return;
 
+    // Get the pre-rendered variant selector from the component itself
+    const unifiedSelectorTemplate = this.querySelector('variant-selector-unified');
+
     if (isMobileBreakpoint()) {
       const productDetails = productGrid.querySelector('.product-details');
-      if (!productDetails) return;
+      if (productDetails) productDetails.remove();
+
+      // Remove any placeholder form elements from the fetched HTML
       const productFormComponent = productGrid.querySelector('product-form-component');
+      if (productFormComponent) productFormComponent.remove();
       const variantPicker = productGrid.querySelector('variant-picker');
+      if (variantPicker) variantPicker.remove();
+
+      // Re-create the header as in the original code
       const productPrice = productGrid.querySelector('product-price');
       const productTitle = document.createElement('a');
       productTitle.textContent = this.dataset.productTitle || '';
-
-      // Make product title as a link to the product page
       productTitle.href = this.productPageUrl;
-
-      if (!productFormComponent || !variantPicker || !productPrice || !productTitle) return;
 
       const productHeader = document.createElement('div');
       productHeader.classList.add('product-header');
 
       productHeader.appendChild(productTitle);
-      productHeader.appendChild(productPrice);
+      if (productPrice) productHeader.appendChild(productPrice);
       productGrid.appendChild(productHeader);
-      productGrid.appendChild(variantPicker);
-      productGrid.appendChild(productFormComponent);
-      productDetails.remove();
+
+      // Append the new unified selector if it exists
+      if (unifiedSelectorTemplate) {
+        productGrid.appendChild(unifiedSelectorTemplate.cloneNode(true));
+      }
+    } else {
+      // Desktop
+      const productDetails = productGrid.querySelector('.product-details');
+      if (productDetails && unifiedSelectorTemplate) {
+        // Find the container for the form elements, default to productDetails if not found
+        const formContainer = productDetails.querySelector('.group-block-content') || productDetails;
+
+        // Remove old/placeholder form elements from the fetched HTML
+        const oldFormElements = formContainer.querySelectorAll('variant-picker, .buy-buttons-block, product-form-component');
+        oldFormElements.forEach((el) => el.remove());
+
+        // Append the new unified selector
+        formContainer.appendChild(unifiedSelectorTemplate.cloneNode(true));
+      }
     }
 
     morph(modalContent, productGrid);
