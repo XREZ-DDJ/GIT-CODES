@@ -22,6 +22,37 @@
   assign product_form_id = 'VariantSelector-ProductForm-' | append: product.id
 -%}
 
+{%- comment -%}
+  Mapa de colores para los swatches.
+  Copiado de product-info-custom-V2.liquid
+{%- endcomment -%}
+{% assign color_map = '
+  Negro:#000000|
+  Azul:#005BD3|
+  Blanco:#FFFFFF|
+  Gris:#808080|
+  Gris Oxford:#5B5D5F|
+  Oro rosa:#B76E79|
+  Púrpura:#A54DCF|
+  Amarillo:#FFE500|
+  Naranja:#FF8A00|
+  Rosa:#FFC0CB|
+  Cafe:#A67907|
+  AZUL CIELO: #099399|
+  Azul Celeste: #6fafc8|
+  Azul Jaspe: #7793bb|
+  Beige:#EAD8AB|
+  Azul marino:#295780|
+  Azul Mezclilla:#405374|
+  Café:#E49C66|
+  Verde:#05AA3D|
+  Verde Oliva: #443e1e|
+  Marrón:#9A5630|
+  Vino:#440122|
+  Rojo:#F61F1F
+  ' | strip
+%}
+
 <variant-selector-unified
   class="variant-selector-unified"
   data-product-id="{{ product.id }}"
@@ -59,7 +90,7 @@
           
           <div class="variant-option-group" data-option-index="{{ option_index }}">
             <label class="variant-option-label">
-              <span class="variant-option-name">{{ option.name }}</span>
+              <span class="variant-option-name">{{ option.name }}:</span>
               {%- if option.name == 'Color' or option.name == 'colour' -%}
                 <span class="variant-option-selected" data-selected-text>{{ option.selected_value | default: option.values.first }}</span>
               {%- endif -%}
@@ -87,14 +118,37 @@
                   {%- assign is_selected = true -%}
                 {%- endif -%}
                 
+                {%- comment -%} Lógica para obtener el color del mapa de colores {%- endcomment -%}
+                {%- assign is_color_option = false -%}
+                {%- if option_name contains 'color' -%}
+                  {%- assign is_color_option = true -%}
+                  {%- assign color_value_downcased = value | downcase -%}
+                  {%- assign color_hex = '#f2f2f2' -%}
+                  {%- assign pairs = color_map | split: '|' -%}
+                  {%- for pair in pairs -%}
+                    {%- assign parts = pair | split: ':' -%}
+                    {%- assign map_color_name = parts[0] | strip | downcase -%}
+                    {%- if map_color_name == color_value_downcased -%}
+                      {%- assign color_hex = parts[1] | strip -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+
                 <button
                   type="button"
-                  class="variant-option-btn{% if is_selected %} selected{% endif %}"
+                  class="variant-option-btn{% if is_selected %} selected {% endif %}{% if is_color_option %} variant-option-btn--color selected-color{% endif %}"
                   data-value="{{ value }}"
                   data-option-index="{{ option_index }}"
                   aria-pressed="{% if is_selected %}true{% else %}false{% endif %}"
+                  title="{{ value }}"
+                  
                 >
-                  {{ value }}
+                  {%- if is_color_option -%}
+                    <span class="color-swatch" style="background: {{ color_hex }};"></span>
+                  {%- else -%}
+                    {{ value }}
+                  {%- endif -%}
                 </button>
               {%- endfor -%}
             </div>
@@ -102,12 +156,12 @@
         {%- endfor -%}
 
         {%- if show_quantity -%}
-          <div class="variant-option-group">
+          <div class="variant-option-group" style="flex-direction: row;">
             <label class="variant-option-label">
-              <span class="variant-option-name">{{ 'products.product.quantity.label' | t | default: 'Cantidad' }}</span>
+              <span class="variant-option-name">Cantidad</span>
             </label>
             <div class="quantity-selector">
-              <button type="button" class="quantity-btn quantity-btn--minus" data-quantity-change="-1" aria-label="{{ 'products.product.quantity.decrease' | t | default: 'Disminuir cantidad' }}">
+              <button type="button" class="quantity-btn quantity-btn--minus" data-quantity-change="-1" aria-label="Disminuir cantidad">
                 <span class="svg-wrapper">
                   {{- 'icon-minus.svg' | inline_asset_content | default: '−' -}}
                 </span>
@@ -121,9 +175,9 @@
                 min="{% if current_variant.quantity_rule.min %}{{ current_variant.quantity_rule.min }}{% else %}1{% endif %}"
                 {% if current_variant.quantity_rule.max %}max="{{ current_variant.quantity_rule.max }}"{% endif %}
                 step="{% if current_variant.quantity_rule.increment %}{{ current_variant.quantity_rule.increment }}{% else %}1{% endif %}"
-                aria-label="{{ 'products.product.quantity.input_label' | t | default: 'Cantidad para' }} {{ product.title | escape }}"
+                aria-label="Cantidad para"
               >
-              <button type="button" class="quantity-btn quantity-btn--plus" data-quantity-change="1" aria-label="{{ 'products.product.quantity.increase' | t | default: 'Aumentar cantidad' }}">
+              <button type="button" class="quantity-btn quantity-btn--plus" data-quantity-change="1" aria-label="Aumentar cantidad">
                 <span class="svg-wrapper">
                   {{- 'icon-plus.svg' | inline_asset_content | default: '+' -}}
                 </span>
@@ -202,12 +256,7 @@
     }
 
     init() {
-      // Initialize selected options from current variant
-      const variantIdInput = this.querySelector('[ref="variantId"]');
-      if (variantIdInput) {
-        const currentVariantId = variantIdInput.dataset.currentVariantId;
-        this.initializeFromVariant(currentVariantId);
-      }
+      // Initialization is now handled in loadProductData after data is fetched.
     }
 
     async loadProductData() {
@@ -215,6 +264,14 @@
         const productUrl = this.dataset.productUrl;
         const response = await fetch(`${productUrl}.js`);
         this.productData = await response.json();
+
+        // Initialize state from the current variant now that we have the data
+        const variantIdInput = this.querySelector('[ref="variantId"]');
+        if (variantIdInput) {
+          const currentVariantId = variantIdInput.dataset.currentVariantId;
+          this.initializeFromVariant(currentVariantId);
+        }
+
         this.updateAvailableOptions();
       } catch (error) {
         console.error('Error loading product data:', error);
@@ -226,11 +283,9 @@
       
       const variant = this.productData.variants.find(v => v.id.toString() === variantId);
       if (variant) {
-        this.selectedOptions = {
-          0: variant.option1,
-          1: variant.option2,
-          2: variant.option3
-        };
+        variant.options.forEach((optionValue, index) => {
+          this.selectedOptions[index] = optionValue;
+        });
         this.currentVariant = variant;
       }
     }
@@ -244,8 +299,9 @@
 
       // Option selection
       this.addEventListener('click', (e) => {
-        if (e.target.matches('.variant-option-btn')) {
-          this.handleOptionSelect(e);
+        const optionBtn = e.target.closest('.variant-option-btn');
+        if (optionBtn) {
+          this.handleOptionSelect(optionBtn);
         }
         if (e.target.matches('.quantity-btn') || e.target.closest('.quantity-btn')) {
           this.handleQuantityChange(e);
@@ -260,18 +316,25 @@
       }, { signal });
     }
 
-    handleOptionSelect(e) {
-      const button = e.target;
+    handleOptionSelect(button) {
       const value = button.dataset.value;
       const optionIndex = parseInt(button.dataset.optionIndex);
+      const optionGroup = button.closest('.variant-option-group');
+      const isColorOption = optionGroup.querySelector('[data-option-name*="color"]');
       
       // Update selected options
       this.selectedOptions[optionIndex] = value;
       
       // Update UI
       this.updateOptionButtons(button);
-      this.updateSelectedVariant();
       this.updateColorText(optionIndex, value);
+      this.updateSelectedVariant();
+
+      // Si es una opción de color, filtramos la galería
+      if (isColorOption) {
+        this.filterGalleryByColor(value);
+        this.filterThumbnailsByColor(value);
+      }
     }
 
     updateOptionButtons(selectedButton) {
@@ -300,11 +363,11 @@
       if (!this.productData) return;
 
       // Find matching variant
-      const matchingVariant = this.productData.variants.find(variant => {
-        return variant.option1 === this.selectedOptions[0] &&
-               variant.option2 === this.selectedOptions[1] &&
-               variant.option3 === this.selectedOptions[2];
-      });
+      const matchingVariant = this.productData.variants.find(variant =>
+        variant.options.every((optionValue, index) => {
+          return this.selectedOptions[index] === optionValue;
+        })
+      );
 
       if (matchingVariant) {
         this.currentVariant = matchingVariant;
@@ -313,6 +376,9 @@
         this.updateQuantityRules(matchingVariant);
         this.updateVariantImage(matchingVariant);
         this.dispatchVariantUpdate(matchingVariant);
+      } else {
+        // If no matching variant is found, disable the add to cart button
+        this.updateAddToCartButton({ available: false });
       }
     }
 
@@ -400,6 +466,66 @@
       input.value = value;
     }
 
+    /**
+     * Finds the correct scope for DOM queries.
+     * Searches within the closest quick-add modal if available, otherwise defaults to the document.
+     * @returns {HTMLElement | Document} The scope to search within.
+     */
+    getSearchScope() {
+      // Busca el contenedor del modal más cercano. Si no lo encuentra (p. ej. en una página de producto normal),
+      // usará 'document' como ámbito de búsqueda por defecto.
+      const quickAddModal = this.closest('#quick-add-dialog');
+      return quickAddModal || document;
+    }
+
+    /**
+     * Filtra la galería principal de imágenes del producto.
+     * @param {string} selectedColor - El color seleccionado.
+     */
+    filterGalleryByColor(selectedColor) {
+      const scope = this.getSearchScope();
+      const mediaItems = scope.querySelectorAll('.product-media-container');
+
+      mediaItems.forEach((media) => {
+        const imgOrVideo = media.querySelector('img');
+        if (!imgOrVideo) {
+          media.hidden = false;
+          return;
+        }
+
+        const altText = imgOrVideo.getAttribute('alt') || '';
+
+        if (!altText.includes('#Color_')) {
+          media.hidden = false;
+          return;
+        }
+
+        const splitted = altText.split('#Color_');
+        let altColor = splitted[1] ? splitted[1].trim() : '';
+
+        if (altColor.toLowerCase() === selectedColor.toLowerCase()) {
+          media.hidden = false;
+        } else {
+          media.hidden = true;
+        }
+      });
+    }
+
+    /**
+     * Filtra las miniaturas (thumbnails) de la galería.
+     * @param {string} selectedColor - El color seleccionado.
+     */
+    filterThumbnailsByColor(selectedColor) {
+      const scope = this.getSearchScope();
+      selectedColor = selectedColor.toLowerCase();
+      scope.querySelectorAll('.slideshow-controls_thumbnail').forEach(btn => {
+        const img = btn.querySelector('img');
+        if (!img) return;
+        const alt = (img.alt || '').toLowerCase();
+        btn.hidden = !alt.includes('#color_' + selectedColor);
+      });
+    }
+
     updateAvailableOptions() {
       // This could be enhanced to disable unavailable option combinations
       // For now, all options remain enabled
@@ -478,6 +604,29 @@
     min-width: 50px;
     text-align: center;
   }
+  
+  .variant-option-btn--color {
+    padding: 0.25rem;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border-width: 1px;
+  }
+
+  .variant-option-btn--color.selected {
+    border-width: 2px;
+    border-color: var(--color-primary, #000);
+    box-shadow: 0 0 0 1px white; /* Para contraste sobre fondos oscuros */
+  }
+
+  .color-swatch {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
 
   .variant-option-btn:hover:not(.selected) {
     background-color: var(--color-background-hover, #f5f5f5);
@@ -485,9 +634,14 @@
   }
 
   .variant-option-btn.selected {
-    background-color: var(--color-primary, #000);
+    background-color: #ed0a0a;
     color: var(--color-primary-text, white);
-    border-color: var(--color-primary, #000);
+    border-color: #ed0a0a;
+  }
+    .variant-option-btn.selected-color {
+    background-color: transparent;
+    color: var(--color-primary-text, white);
+    border-color: black;
   }
 
   .quantity-selector {
@@ -560,12 +714,12 @@
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
-    background-color: var(--color-primary, #000);
+    background-color: #ed0a0a;
     color: var(--color-primary-text, white);
   }
 
   .variant-selector-unified__add-to-cart:hover:not(:disabled) {
-    background-color: var(--color-primary-hover, #333);
+    background-color: var(--color-primary-hover, #a70000);
   }
 
   .variant-selector-unified__add-to-cart:disabled {
