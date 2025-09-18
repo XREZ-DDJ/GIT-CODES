@@ -132,6 +132,7 @@ export class QuickAddComponent extends Component {
     const unifiedSelectorTemplate = this.querySelector('variant-selector-unified');
 
     if (isMobileBreakpoint()) {
+      const productPrice = productGrid.querySelector('product-price');
       const productDetails = productGrid.querySelector('.product-details');
       if (productDetails) productDetails.remove();
 
@@ -142,7 +143,6 @@ export class QuickAddComponent extends Component {
       if (variantPicker) variantPicker.remove();
 
       // Re-create the header as in the original code
-      const productPrice = productGrid.querySelector('product-price');
       const productTitle = document.createElement('a');
       productTitle.textContent = this.dataset.productTitle || '';
       productTitle.href = this.productPageUrl;
