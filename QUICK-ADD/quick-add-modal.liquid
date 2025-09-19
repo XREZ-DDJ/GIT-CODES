@@ -382,8 +382,15 @@
     transition: opacity 0.3s var(--animation-easing);
   }
 
+/*
   .quick-add-modal__content .product-information__media slideshow-slide[aria-hidden='true'] {
     @media screen and (max-width: 750px) {
+      display: none;
+    }
+  }
+  */
+  @media screen and (max-width: 750px) {
+    .quick-add-modal__content .product-information__media slideshow-slide:not(:first-child) {
       display: none;
     }
   }
