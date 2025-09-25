@@ -175,6 +175,16 @@ export class QuickAddComponent extends Component {
     }
 
     morph(modalContent, productGrid);
+
+    if (isMobileBreakpoint()) {
+      const slides = modalContent.querySelectorAll('slideshow-slide');
+      if (slides.length > 0) {
+        // On mobile, ensure only one slide is visible initially.
+        // The filterGalleryByColor function will handle changes.
+        slides.forEach((slide) => slide.classList.remove('is-visible'));
+        slides[0].classList.add('is-visible');
+      }
+    }
   }
 }
 

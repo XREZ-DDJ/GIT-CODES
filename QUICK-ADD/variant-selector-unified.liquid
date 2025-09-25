@@ -245,6 +245,18 @@
       this.init();
     }
 
+    static get observedAttributes() {
+      return ['data-product-url'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+      // When the product URL changes (e.g., in quick add modal), re-initialize the component.
+      // The `oldValue` check ensures this doesn't run on initial setup.
+      if (name === 'data-product-url' && oldValue && oldValue !== newValue) {
+        this.loadProductData();
+      }
+    }
+
     connectedCallback() {
       this.setupEventListeners();
       this.loadProductData();
@@ -261,6 +273,11 @@
 
     async loadProductData() {
       try {
+        // Reset state for a clean load, crucial for re-use in quick-add modal.
+        this.productData = null;
+        this.currentVariant = null;
+        this.selectedOptions = {};
+
         const productUrl = this.dataset.productUrl;
         const response = await fetch(`${productUrl}.js`);
         this.productData = await response.json();
@@ -268,7 +285,8 @@
         // Initialize state from the current variant now that we have the data
         const variantIdInput = this.querySelector('[ref="variantId"]');
         if (variantIdInput) {
-          const currentVariantId = variantIdInput.dataset.currentVariantId;
+          // Use the input's value as the source of truth, as it's reliably updated by morphdom.
+          const currentVariantId = variantIdInput.value;
           this.initializeFromVariant(currentVariantId);
         }
 
@@ -484,31 +502,52 @@
      */
     filterGalleryByColor(selectedColor) {
       const scope = this.getSearchScope();
-      const mediaItems = scope.querySelectorAll('.product-media-container');
+      const mediaSlides = scope.querySelectorAll('.product-information__media slideshow-slide');
+      const isMobile = window.matchMedia('(max-width: 749px)').matches;
 
-      mediaItems.forEach((media) => {
-        const imgOrVideo = media.querySelector('img');
-        if (!imgOrVideo) {
-          media.hidden = false;
-          return;
+      if (isMobile) {
+        let firstMatchFound = false;
+        mediaSlides.forEach(slide => slide.classList.remove('is-visible'));
+
+        for (const slide of mediaSlides) {
+          const img = slide.querySelector('img');
+          if (img) {
+            const altText = img.getAttribute('alt') || '';
+            if (altText.includes('#Color_')) {
+              const splitted = altText.split('#Color_');
+              const altColor = splitted[1] ? splitted[1].trim().toLowerCase() : '';
+              if (altColor === selectedColor.toLowerCase()) {
+                slide.classList.add('is-visible');
+                firstMatchFound = true;
+                break; 
+              }
+            }
+          }
         }
 
-        const altText = imgOrVideo.getAttribute('alt') || '';
-
-        if (!altText.includes('#Color_')) {
-          media.hidden = false;
-          return;
+        if (!firstMatchFound && mediaSlides.length > 0) {
+          mediaSlides[0].classList.add('is-visible');
         }
+      } else { // Desktop logic
+        mediaSlides.forEach((slide) => {
+          const img = slide.querySelector('img');
+          if (!img) {
+            slide.hidden = false;
+            return;
+          }
 
-        const splitted = altText.split('#Color_');
-        let altColor = splitted[1] ? splitted[1].trim() : '';
-
-        if (altColor.toLowerCase() === selectedColor.toLowerCase()) {
-          media.hidden = false;
-        } else {
-          media.hidden = true;
-        }
-      });
+          const altText = img.getAttribute('alt') || '';
+          if (!altText.includes('#Color_')) {
+            slide.hidden = false;
+            return;
+          }
+          
+          const splitted = altText.split('#Color_');
+          const altColor = splitted[1] ? splitted[1].trim().toLowerCase() : '';
+          
+          slide.hidden = altColor !== selectedColor.toLowerCase();
+        });
+      }
     }
 
     /**
@@ -822,14 +861,14 @@
     .variant-option-buttons {
       justify-content: flex-start;
     }
-    
+    /*
     .variant-option-btn {
       flex: 0 0 auto;
       min-width: 45px;
       padding: 0.625rem 0.875rem;
       font-size: 0.85rem;
     }
-    
+    */
     .quantity-selector {
       align-self: flex-start;
     }
